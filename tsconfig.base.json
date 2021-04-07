@@ -1,0 +1,27 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2017", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "types": ["libs/styles/theme/src/types/mui.override.d.ts"],
+    "paths": {
+      "@hessed/styles/theme": ["libs/styles/theme/src/index.ts"],
+      "@hessed/apollo-next": ["libs/apollo-next/src/index.ts"],
+      "@hessed/storybook/lite": ["libs/storybook/lite/src/index.ts"],
+      "@hessed/shared/assets": ["libs/shared/assets/src/index.ts"]
+    }
+  },
+  "files": ["libs/styles/theme/src/types/mui.override.d.ts"],
+  "exclude": ["node_modules", "tmp"]
+}

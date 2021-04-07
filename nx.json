@@ -1,0 +1,57 @@
+{
+  "implicitDependencies": {
+    "workspace.json": "*",
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
+    "tsconfig.base.json": "*",
+    "tslint.json": "*",
+    ".eslintrc.json": "*",
+    "nx.json": "*"
+  },
+  "affected": {
+    "defaultBase": "master"
+  },
+  "npmScope": "hessed",
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/nx-cloud",
+      "options": {
+        "cacheableOperations": ["build", "lint", "test", "e2e"],
+        "canTrackAnalytics": false,
+        "showUsageWarnings": true
+      }
+    }
+  },
+  "projects": {
+    "mobile-spark": {
+      "tags": []
+    },
+    "styles-theme": {
+      "tags": []
+    },
+    "apollo-next": {
+      "tags": []
+    },
+    "storybook-lite": {
+      "tags": []
+    },
+    "shared-assets": {
+      "tags": []
+    },
+    "mobile-demo-7": {
+      "tags": []
+    },
+    "client-demo-7": {
+      "tags": []
+    },
+    "client-demo-7-e2e": {
+      "tags": [],
+      "implicitDependencies": ["client-demo-7"]
+    },
+    "api-demo-7-srv": {
+      "tags": []
+    }
+  }
+}

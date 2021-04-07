@@ -1,0 +1,393 @@
+{
+  "version": 2,
+  "cli": {
+    "defaultCollection": "@nrwl/next"
+  },
+  "defaultProject": "client-demo-7",
+  "generators": {
+    "@nrwl/react": {
+      "application": {
+        "babel": true
+      },
+      "lib": {
+        "style": "styled-components"
+      }
+    },
+    "@nrwl/next": {
+      "application": {
+        "style": "styled-components",
+        "linter": "eslint"
+      }
+    }
+  },
+  "projects": {
+    "mobile-spark": {
+      "root": "apps/mobile/spark",
+      "sourceRoot": "apps/mobile/spark/src",
+      "projectType": "application",
+      "generators": {},
+      "targets": {
+        "start": {
+          "executor": "@nrwl/react-native:start",
+          "options": {
+            "port": 8081
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "nx start spark"
+          }
+        },
+        "run-ios": {
+          "executor": "@nrwl/react-native:run-ios",
+          "options": {}
+        },
+        "bundle-ios": {
+          "executor": "@nrwl/react-native:bundle",
+          "outputs": ["apps/mobile/spark/build"],
+          "options": {
+            "entryFile": "apps/mobile/spark/src/main.tsx",
+            "platform": "ios",
+            "bundleOutput": "dist/apps/mobile/spark/ios/main.bundle"
+          }
+        },
+        "run-android": {
+          "executor": "@nrwl/react-native:run-android",
+          "options": {}
+        },
+        "build-android": {
+          "executor": "@nrwl/react-native:build-android",
+          "outputs": [
+            "apps/mobile/spark/android/app/build/outputs/bundle",
+            "apps/mobile/spark/android/app/build/outputs/apk"
+          ],
+          "options": {}
+        },
+        "bundle-android": {
+          "executor": "@nrwl/react-native:bundle",
+          "options": {
+            "entryFile": "apps/mobile/spark/src/main.tsx",
+            "platform": "android",
+            "bundleOutput": "dist/apps/mobile/spark/android/main.bundle"
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/mobile/spark/**/*.{js,ts,tsx}"]
+          }
+        },
+        "sync-deps": {
+          "executor": "@nrwl/react-native:sync-deps",
+          "options": {}
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/mobile/spark"],
+          "options": {
+            "jestConfig": "apps/mobile/spark/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "styles-theme": {
+      "root": "libs/styles/theme",
+      "sourceRoot": "libs/styles/theme/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/styles/theme/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/styles/theme"],
+          "options": {
+            "jestConfig": "libs/styles/theme/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "apollo-next": {
+      "root": "libs/apollo-next",
+      "sourceRoot": "libs/apollo-next/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/apollo-next/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/apollo-next"],
+          "options": {
+            "jestConfig": "libs/apollo-next/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "storybook-lite": {
+      "root": "libs/storybook/lite",
+      "sourceRoot": "libs/storybook/lite/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/storybook/lite/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/storybook/lite"],
+          "options": {
+            "jestConfig": "libs/storybook/lite/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "storybook": {
+          "executor": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/react",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/storybook/lite/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "executor": "@nrwl/storybook:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "uiFramework": "@storybook/react",
+            "outputPath": "dist/storybook/storybook-lite",
+            "config": {
+              "configFolder": "libs/storybook/lite/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        }
+      }
+    },
+    "shared-assets": {
+      "root": "libs/shared/assets",
+      "sourceRoot": "libs/shared/assets/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/shared/assets/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/assets"],
+          "options": {
+            "jestConfig": "libs/shared/assets/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "mobile-demo-7": {
+      "root": "apps/mobile/demo-7",
+      "sourceRoot": "apps/mobile/demo-7/src",
+      "projectType": "application",
+      "generators": {},
+      "targets": {
+        "bundle": {
+          "executor": "nx-react-native-expo:bundle",
+          "options": {}
+        },
+        "start": {
+          "executor": "nx-react-native-expo:start",
+          "options": {}
+        },
+        "run-ios": {
+          "executor": "nx-react-native-expo:run-ios",
+          "options": {}
+        },
+        "run-android": {
+          "executor": "nx-react-native-expo:run-android",
+          "options": {}
+        },
+        "run-web": {
+          "executor": "nx-react-native-expo:run-web",
+          "options": {}
+        },
+        "publish": {
+          "executor": "nx-react-native-expo:publish",
+          "options": {}
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/mobile/demo-7/**/*.{js,ts,tsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/mobile/demo-7"],
+          "options": {
+            "jestConfig": "apps/mobile/demo-7/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "client-demo-7": {
+      "root": "apps/client/demo-7",
+      "sourceRoot": "apps/client/demo-7",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/next:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "root": "apps/client/demo-7",
+            "outputPath": "dist/apps/client/demo-7",
+            "assets": [
+              {
+                "input": "libs/shared/assets/img",
+                "glob": "*.jpg",
+                "output": "./public/static"
+              }
+            ]
+          },
+          "configurations": {
+            "production": {}
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/next:server",
+          "options": {
+            "buildTarget": "client-demo-7:build",
+            "dev": true,
+            "proxyConfig": "apps/client/demo-7/proxy.conf.json"
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "client-demo-7:build:production",
+              "dev": false
+            }
+          }
+        },
+        "export": {
+          "executor": "@nrwl/next:export",
+          "options": {
+            "buildTarget": "client-demo-7:build:production"
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/client/demo-7"],
+          "options": {
+            "jestConfig": "apps/client/demo-7/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/client/demo-7/**/*.{ts,tsx,js,jsx}"]
+          }
+        }
+      }
+    },
+    "client-demo-7-e2e": {
+      "root": "apps/client/demo-7-e2e",
+      "sourceRoot": "apps/client/demo-7-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/client/demo-7-e2e/cypress.json",
+            "tsConfig": "apps/client/demo-7-e2e/tsconfig.e2e.json",
+            "devServerTarget": "lite:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "lite:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/client/demo-7-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
+    "api-demo-7-srv": {
+      "root": "apps/api/demo-7-srv",
+      "sourceRoot": "apps/api/demo-7-srv/src",
+      "projectType": "application",
+      "prefix": "api-lite-srv",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/api/demo-7-srv",
+            "main": "apps/api/demo-7-srv/src/main.ts",
+            "tsConfig": "apps/api/demo-7-srv/tsconfig.app.json",
+            "assets": ["apps/api/demo-7-srv/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/api/demo-7-srv/src/environments/environment.ts",
+                  "with": "apps/api/demo-7-srv/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "api-demo-7-srv:build"
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/api/demo-7-srv/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/api/demo-7-srv"],
+          "options": {
+            "jestConfig": "apps/api/demo-7-srv/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    }
+  }
+}
