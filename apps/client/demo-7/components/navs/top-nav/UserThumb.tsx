@@ -6,13 +6,18 @@ import { Avatar, Typography } from '@material-ui/core';
 import { Typo } from '../../typos/Typo';
 import { UserDetail } from '../../../model/user-detail';
 
+interface UserThumbProps extends UserDetail {
+  onThumbClick: (e: React.MouseEvent<HTMLElement>) => void;
+}
+
 export const UserThumb = ({
   photoURL,
   localLang,
   learningLang,
   email,
   displayName,
-}: UserDetail) => {
+  onThumbClick,
+}: UserThumbProps) => {
   return (
     <Root>
       <div className="flex flex-col items-center justify-center px-1 pb-2">
@@ -25,7 +30,10 @@ export const UserThumb = ({
           <NationFlag nation={learningLang[0]} />
         </div>
       )}
-      <div className="w-full h-full flex items-center justify-center mr-3">
+      <div
+        className="w-full h-full flex items-center justify-center mr-3"
+        onClick={onThumbClick}
+      >
         <Avatar src={photoURL}>
           {photoURL ? undefined : email ? email[0] : ''}
         </Avatar>

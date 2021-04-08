@@ -2,17 +2,17 @@ import firebase from 'firebase/app';
 import { useRouter } from 'next/router';
 import { auth } from '../lib/firebase-init';
 import { UserDetail } from '../model/user-detail';
-import { useAuthStore } from './authStore';
 import { getUserDetail, shouldRedirect } from './initAuth';
 import { UserCollection } from '../model/user-detail';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { useAuthStore } from '../store/auth.store';
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface AddDetailInfo
   extends Pick<UserDetail, 'localLang' | 'learningLang' | 'uid'> {}
 
 interface InitUser {
   loginUser: () => void;
-  logout: (cb: () => void) => void;
+  logout: (cb?: () => void) => void;
   addDetail: (info: AddDetailInfo) => void;
   user: UserDetail | null;
 }
@@ -36,7 +36,7 @@ export function useAuth(): InitUser {
         return;
       }
 
-      const { email, displayName, photoURL } = _user;
+      const { email, displayName, photoURL } = existing;
       setUser({ ...existing, email, displayName, photoURL });
     } else {
       throw new Error('User not loged In');
@@ -47,6 +47,7 @@ export function useAuth(): InitUser {
     await firebase.auth().signOut();
     setUser(null);
     cb && cb();
+    router.push('/');
   };
 
   const addDetail = async (infos: AddDetailInfo) => {

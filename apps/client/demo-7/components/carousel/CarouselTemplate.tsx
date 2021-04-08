@@ -1,40 +1,59 @@
 import { IconButton, Typography } from '@material-ui/core';
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import Carousel from 'nuka-carousel';
 import { GrPrevious, GrNext } from 'react-icons/gr';
 interface Props {
   title: string;
-  children: React.ReactNode;
+  children: React.ReactNode | React.ReactNode[];
+  noList?: string;
 }
 
-function CarouselTemplate({ title, children }: Props) {
+function CarouselTemplate({ title, children, noList }: Props) {
+  const childrenCount = useRef(0);
+
+  // FORCE RERENDER
+  const [rerenderKey, setrerenderKey] = useState(0);
+  useEffect(() => {
+    if (Array.isArray(children) && children.length !== childrenCount.current) {
+      childrenCount.current = children.length;
+      setrerenderKey(Math.random());
+    }
+  }, [children]);
+
   return (
     <Root>
       <Title>{title}</Title>
-      <Carousel
-        slidesToShow={3}
-        cellSpacing={10}
-        renderBottomCenterControls={null}
-        renderCenterLeftControls={({ previousSlide }) => (
-          <IconButton
-            onClick={previousSlide}
-            style={{ transform: 'translateX(-50px)' }}
-          >
-            <GrPrevious />
-          </IconButton>
-        )}
-        renderCenterRightControls={({ nextSlide }) => (
-          <IconButton
-            onClick={nextSlide}
-            style={{ transform: 'translateX(50px)' }}
-          >
-            <GrNext />
-          </IconButton>
-        )}
-      >
-        {children}
-      </Carousel>
+      {noList ? (
+        <div className="flex justify-center items-center h-40">
+          <Typography>{noList}</Typography>
+        </div>
+      ) : (
+        <Carousel
+          slidesToShow={3}
+          cellSpacing={10}
+          key={rerenderKey}
+          renderBottomCenterControls={null}
+          renderCenterLeftControls={({ previousSlide }) => (
+            <IconButton
+              onClick={previousSlide}
+              style={{ transform: 'translateX(-50px)' }}
+            >
+              <GrPrevious />
+            </IconButton>
+          )}
+          renderCenterRightControls={({ nextSlide }) => (
+            <IconButton
+              onClick={nextSlide}
+              style={{ transform: 'translateX(50px)' }}
+            >
+              <GrNext />
+            </IconButton>
+          )}
+        >
+          {children}
+        </Carousel>
+      )}
     </Root>
   );
 }

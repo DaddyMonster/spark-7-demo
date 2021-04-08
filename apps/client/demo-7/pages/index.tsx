@@ -1,7 +1,6 @@
 import {
   alpha,
   Box,
-  Button,
   Container,
   Grid,
   Paper,
@@ -9,19 +8,17 @@ import {
 } from '@material-ui/core';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import React from 'react';
 import styled from 'styled-components';
-import { JUMBO_ONE_HEIGHT, JUMBO_TWO_HEIGHT } from '../constants/layout-sizes';
-import { CustomPageType } from '../types/custom-page';
-import { useInitAuth } from '../hooks/initAuth';
-import { useRouter } from 'next/router';
 import { GoogleBtn } from '../components/atoms/button/GoogleBtn';
+import { JUMBO_ONE_HEIGHT, JUMBO_TWO_HEIGHT } from '../constants/layout-sizes';
 import { useAuth } from '../hooks/auth';
+import { CustomPageType } from '../types/custom-page';
 const texts = ['7분간 기적이 일어남', '시간 순삭', '등등 효과가 좋다'];
 
 export const Index: CustomPageType = () => {
-  const router = useRouter();
-  const [user] = useInitAuth({ router });
+  const { user } = useAuth();
   const { loginUser, logout } = useAuth();
   return (
     <>

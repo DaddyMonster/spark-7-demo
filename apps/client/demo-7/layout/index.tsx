@@ -2,6 +2,7 @@
 import { SevenRenderer } from '../components/side-renderer/SevenRenderer';
 import AppLayout from './app-layout';
 import { IndexPageLayout } from './index-page-base';
+import LiveRoomLayout from './live-room-layout';
 import { NoLayout } from './NoLayout';
 import { LayoutWithSidebar } from './with-sidebar';
 
@@ -17,6 +18,9 @@ const AppLayouts = {
     <LayoutWithSidebar SidebarContent={SevenRenderer} {...props}>
       {children}
     </LayoutWithSidebar>
+  ),
+  LIVE_ROOM_LAYOUT: ({ children, ...props }: any) => (
+    <LiveRoomLayout {...props}>{children}</LiveRoomLayout>
   ),
 };
 

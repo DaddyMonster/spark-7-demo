@@ -1,9 +1,9 @@
 import { UserCollection, UserDetail } from '../model/user-detail';
-import { useAuthStore } from './authStore';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../lib/firebase-init';
 import { useEffect, useRef } from 'react';
 import { NextRouter } from 'next/router';
+import { useAuthStore } from '../store/auth.store';
 
 export const getUserDetail = async (uid: string) => {
   const user = await UserCollection.doc(uid).get();
@@ -22,7 +22,6 @@ interface InitAuthProps {
 
 export function useInitAuth({ router }: InitAuthProps): [UserDetail] {
   const [_user, loading] = useAuthState(auth);
-
   const { user, setUser } = useAuthStore((state) => ({
     user: state.userDetail,
     setUser: state.setUserDetail,

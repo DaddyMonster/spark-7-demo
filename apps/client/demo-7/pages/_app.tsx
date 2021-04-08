@@ -10,6 +10,8 @@ import { getLayoutComponent } from '../layout/get-layout';
 import { NextComponentType, NextPageContext } from 'next';
 import { CustomPageType } from '../types/custom-page';
 import { useRouter } from 'next/router';
+import { useInitAuth } from '../hooks/initAuth';
+import { useInitChat } from '../hooks/initChat';
 
 /* ;
 import { useCollectionData } from 'react-firebase-hooks/firestore'; */
@@ -22,6 +24,8 @@ interface CustomAppProps extends AppProps {
 function CustomApp({ Component, pageProps }: CustomAppProps) {
   const apolloClient = useApollo(pageProps);
   const router = useRouter();
+  const [user] = useInitAuth({ router });
+  useInitChat(user);
 
   React.useEffect(() => {
     const jssStyles = document.querySelector('#jss-server-side');

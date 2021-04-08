@@ -2,9 +2,11 @@ import dy from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import { useRouter } from 'next/router';
 import * as yup from 'yup';
-import { ChatMetaCollection, ChatMetaInput } from '../model/chat-meta';
+import { ChatMetaCollection, ChatMeta } from '../model/chat-meta';
 import { Nation } from '../types/nation';
 import { useAuth } from './auth';
+import { nanoid } from 'nanoid';
+import firebase from 'firebase';
 dy.extend(utc);
 
 export interface CreateChatMetaInput {
@@ -46,16 +48,20 @@ export function useCreateChatMeta() {
     lang,
   }: CreateChatMetaInput) => {
     const startTime = dy().utc().add(_startTime, 'minute').toDate();
-    const meta: ChatMetaInput = {
-      createdAt: dy().utc().toDate(),
+    const id = nanoid();
+    const meta: ChatMeta = {
+      createdAt: firebase.firestore.Timestamp.fromDate(dy().utc().toDate()),
       description,
       hostId: user.uid,
       lang,
-      startTime,
+      startTime: firebase.firestore.Timestamp.fromDate(startTime),
       topic,
+      host: user,
+      reserved: [],
+      id,
     };
-    await ChatMetaCollection.add(meta);
-    router.push('/seven/my-reservations');
+    await ChatMetaCollection.doc(id).set(meta);
+    router.push('/app/seven/my-reservations');
   };
   return { onSubmit };
 }

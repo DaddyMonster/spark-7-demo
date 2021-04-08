@@ -4,13 +4,13 @@ import dy from 'dayjs';
 import rl from 'dayjs/plugin/relativeTime';
 import React from 'react';
 import styled from 'styled-components';
-import { ChatMetaJoined } from '../../model/chat-meta';
+import { ChatMeta } from '../../model/chat-meta';
 import { NationFlag } from '../flag/NationFlag';
 import StackedAvatars from '../icons/StackedAvatars';
 
 dy.extend(rl);
 
-interface Props extends ChatMetaJoined {
+interface Props extends ChatMeta {
   onClick: (id: string) => void;
 }
 
@@ -23,22 +23,26 @@ const ChatMetaCard = ({
   id,
   host,
   createdAt,
-  fresh,
   startTime,
 }: Props) => {
   return (
     <Root onClick={() => onClick(id)}>
-      <div className="w-full mt-2 flex">
+      <div className="w-full flex" style={{ height: 80 }}>
         <Typography
           fontSize="1rem"
           className="text-bold p-3 font-guide font-bold"
+          textOverflow="ellipsis"
+          height={80}
+          whiteSpace="normal"
+          lineHeight="1.4"
+          overflow="hidden"
         >
           {topic}
         </Typography>
         <div className="flex items-center py-1 ml-auto">
           <Avatar src={host.photoURL} />
           <div className="flex flex-col justify-center px-2">
-            <Typography>{host.displayName}</Typography>
+            <Typography fontSize="0.9rem">{host.displayName}</Typography>
             <Typography fontSize="0.7rem" className="ml-1" color={grey[600]}>
               trusted
             </Typography>
@@ -50,12 +54,13 @@ const ChatMetaCard = ({
       <Divider />
       <Grid container>
         <Grid item xs={6}>
-          <div className="flex items-center">
+          <div className="flex h-full items-center pt-1 px-2">
             <NationFlag nation={lang} sizes={25} shadow />
           </div>
         </Grid>
         <Grid item xs={6}>
           <StackedAvatars
+            overlay
             urls={Array(30).fill(
               'https://material-ui.com/static/images/avatar/1.jpg'
             )}
@@ -76,7 +81,6 @@ export default ChatMetaCard;
 
 const Root = styled(Paper)(({ theme }) => ({
   width: '100%',
-  height: 120,
   borderRadius: 5,
   boxShadow: '3px 3px 0px 0px rgba(0,0,0,0.8)',
   position: 'relative',

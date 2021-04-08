@@ -13,6 +13,6 @@ export const Root = styled.div<{ transparental?: boolean }>(
     top: 0,
     left: 0,
     width: '100%',
-    zIndex: 2000,
+    zIndex: 1000,
   })
 );
