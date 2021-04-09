@@ -12,7 +12,7 @@ import { CustomPageType } from '../types/custom-page';
 import { useRouter } from 'next/router';
 import { useInitAuth } from '../hooks/initAuth';
 import { useInitChat } from '../hooks/initChat';
-
+import "react-perfect-scrollbar/dist/css/styles.css"
 /* ;
 import { useCollectionData } from 'react-firebase-hooks/firestore'; */
 interface CustomAppProps extends AppProps {

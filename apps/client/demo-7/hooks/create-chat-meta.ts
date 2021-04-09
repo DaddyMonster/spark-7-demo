@@ -54,10 +54,13 @@ export function useCreateChatMeta() {
       description,
       hostId: user.uid,
       lang,
-      startTime: firebase.firestore.Timestamp.fromDate(startTime),
+      startTime: firebase.firestore.Timestamp.fromDate(
+        dy().toDate() /* startTime */
+      ),
       topic,
       host: user,
       reserved: [],
+      liveUsers: [],
       id,
     };
     await ChatMetaCollection.doc(id).set(meta);

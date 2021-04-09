@@ -19,7 +19,8 @@
       "@hessed/styles/theme": ["libs/styles/theme/src/index.ts"],
       "@hessed/apollo-next": ["libs/apollo-next/src/index.ts"],
       "@hessed/storybook/lite": ["libs/storybook/lite/src/index.ts"],
-      "@hessed/shared/assets": ["libs/shared/assets/src/index.ts"]
+      "@hessed/shared/assets": ["libs/shared/assets/src/index.ts"],
+      "@hessed/service-lib/agora": ["libs/service-lib/agora/src/index.ts"]
     }
   },
   "files": ["libs/styles/theme/src/types/mui.override.d.ts"],

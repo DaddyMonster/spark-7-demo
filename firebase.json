@@ -4,11 +4,11 @@
       "port": 9099
     },
     "firestore": {
-      "port": 8888
+      "port": 8887
     },
     "ui": {
       "enabled": true,
-      "port": 8989
+      "port": 8988
     }
   }
 }

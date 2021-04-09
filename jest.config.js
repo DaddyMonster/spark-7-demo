@@ -8,5 +8,6 @@ module.exports = {
     '<rootDir>/libs/storybook/lite',
     '<rootDir>/libs/shared/assets',
     '<rootDir>/apps/mobile/demo-7',
+    '<rootDir>/libs/service-lib/agora',
   ],
 };

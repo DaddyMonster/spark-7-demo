@@ -1,5 +1,4 @@
 import firebase from 'firebase/app';
-import { AiOutlineConsoleSql } from 'react-icons/ai';
 import { ChatMeta, ChatMetaCollection } from '../model/chat-meta';
 import { useChatStore, useReservedStore } from '../store/chat.store';
 import { useAuth } from './auth';
@@ -37,10 +36,11 @@ export function useReservedChat(): UseReservedChat {
     console.log('HOOK META', meta);
 
     const { id } = meta;
-    const { uid } = user;
+    const { uid, localLang, photoURL, displayName } = user;
+    const reserveMe = { uid, localLang, photoURL, displayName };
     setReserved([...reserved, meta]);
     await ChatMetaCollection.doc(id).update({
-      reserved: firebase.firestore.FieldValue.arrayUnion(uid),
+      reserved: firebase.firestore.FieldValue.arrayUnion(reserveMe),
     });
   };
   const removeReserved = async (id: string) => {
