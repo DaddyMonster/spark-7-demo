@@ -9,6 +9,7 @@ export interface UserDetail {
   displayName: string;
   email: string;
   photoURL: string;
+  chatBag: string[];
 }
 
 export const UserCollection = firestore.collection('user-detail');

@@ -15,6 +15,7 @@ interface RTC {
 interface ConnectionOptions {
   channelId: string;
   initialRole: ClientRole;
+  liveUid: number;
 }
 
 export interface AudIndicator {
@@ -82,25 +83,22 @@ export class Agora {
       client: AgoraRTC.createClient({ mode: 'live', codec: 'vp8' }),
       localAud: await AgoraRTC.createMicrophoneAudioTrack(),
     };
-    const { channelId, initialRole } = ops;
-    const tempUid = parseInt((Math.random() * Math.pow(10, 5)).toString());
+    const { channelId, initialRole, liveUid } = ops;
     const body: AgoraTokenGenDto = {
       channelName: channelId,
-      uid: tempUid,
+      uid: liveUid,
     };
-    console.log('BODY', body);
     const token = await fetchToken(body);
-    console.log('SERVER TOKEN', token);
     const agoraClientUid = await rtc.client.join(
       appId,
       channelId,
       token,
-      tempUid
+      liveUid
     );
     return new Agora({
       rtc,
       agoraClientUid,
-      agoraClientRawUid: tempUid,
+      agoraClientRawUid: liveUid,
       channelId,
       token,
       initialRole,
@@ -143,6 +141,7 @@ export class Agora {
   private async resetToken() {
     console.log('RESET TOKEN FIRED');
     const { _agoraClientRawUid, _channelId } = this;
+    console.log('CHANNEL ID ', _channelId);
     const token = await fetchToken({
       channelName: _channelId,
       uid: _agoraClientRawUid,

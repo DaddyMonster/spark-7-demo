@@ -2,6 +2,7 @@ import { firestore } from '../lib/firebase-init';
 import { Nation } from '../types/nation';
 import { UserDetail } from './user-detail';
 import firebase from 'firebase';
+import { ClientRole } from 'agora-rtc-sdk-ng';
 
 export interface ChatUser {
   photoURL: string | null;
@@ -16,7 +17,8 @@ export interface LiveJoinedUser {
   photoURL: string;
   isIn: boolean;
   nation: Nation;
-  micOn: boolean;
+  role: ClientRole;
+  liveUid: number;
 }
 
 export interface ChatMeta {

@@ -1,7 +1,7 @@
-API endpoint: http://localhost:8887
+API endpoint: http://localhost:8888
 If you are using a library that supports the FIRESTORE_EMULATOR_HOST environment variable, run:
 
-   export FIRESTORE_EMULATOR_HOST=localhost:8887
+   export FIRESTORE_EMULATOR_HOST=localhost:8888
 
 Dev App Server is now running.
 

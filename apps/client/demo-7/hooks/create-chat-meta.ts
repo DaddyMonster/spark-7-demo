@@ -42,12 +42,12 @@ export function useCreateChatMeta() {
   const router = useRouter();
 
   const onSubmit = async ({
-    startTime: _startTime,
+    /* startTime: _startTime, */
     description,
     topic,
     lang,
   }: CreateChatMetaInput) => {
-    const startTime = dy().utc().add(_startTime, 'minute').toDate();
+    /* const startTime = dy().utc().add(_startTime, 'minute').toDate(); */
     const id = nanoid();
     const meta: ChatMeta = {
       createdAt: firebase.firestore.Timestamp.fromDate(dy().utc().toDate()),

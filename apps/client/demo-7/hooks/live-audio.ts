@@ -5,6 +5,7 @@ interface UseLiveAudioProps {
   chatMetaId: string;
   isHost: boolean;
   ready: boolean;
+  liveUid: number;
 }
 type UidMap = Map<UID, number>;
 
@@ -17,12 +18,13 @@ export function useLiveAudio({
   chatMetaId,
   isHost,
   ready,
+  liveUid,
 }: UseLiveAudioProps): UseLiveAudioReturn {
   const [userVolumeMap, setvolumeMap] = useState<UidMap>(new Map());
   const agoraRef = useRef<Agora>(null);
 
   useEffect(() => {
-    if (!chatMetaId || !ready) {
+    if (!chatMetaId || !ready || liveUid < 0) {
       return;
     }
 
@@ -33,7 +35,7 @@ export function useLiveAudio({
         agoraRef.current = null;
       }
     };
-  }, [chatMetaId, ready]);
+  }, [chatMetaId, ready, liveUid]);
 
   const onVolumeUpdate = (audIndicators: AudIndicator[]) => {
     const newMap = new Map(userVolumeMap);
@@ -48,6 +50,7 @@ export function useLiveAudio({
       {
         channelId,
         initialRole: isHost ? 'host' : 'audience',
+        liveUid,
       },
       onVolumeUpdate
     );

@@ -32,6 +32,8 @@
       "implicitDependencies": ["client-demo-7"]
     },
     "api-demo-7-srv": { "tags": [] },
-    "service-lib-agora": { "tags": [] }
+    "service-lib-agora": { "tags": [] },
+    "service-lib-lemma": { "tags": [] },
+    "service-lib-translator": { "tags": [] }
   }
 }

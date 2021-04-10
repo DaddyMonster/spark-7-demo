@@ -63,7 +63,7 @@ export const Index: CustomPageType = () => {
         </Container>
       </Jumbo>
 
-      <div className="p-14 overflow-hidden">
+      {/* <div className="p-14 overflow-hidden">
         <Jumbo2>
           <Grid container>
             <Grid item xs={7}>
@@ -108,7 +108,7 @@ export const Index: CustomPageType = () => {
             </Grid>
           </Grid>
         </Jumbo2>
-      </div>
+      </div> */}
     </>
   );
 };
@@ -121,6 +121,7 @@ const Jumbo = styled.div(({ theme }) => ({
   background: theme.palette.black.main,
   height: JUMBO_ONE_HEIGHT,
   width: '100%',
+  height: '100vh',
   overflow: 'hidden',
   display: 'flex',
 }));

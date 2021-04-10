@@ -56,8 +56,8 @@ export function useAuth(): InitUser {
       router.push('/');
     }
     const detailInfos = { ...infos, registered: true };
-    await UserCollection.doc(infos.uid).set(detailInfos);
-    setUser({ ..._user, ...detailInfos });
+    await UserCollection.doc(infos.uid).set({ ...detailInfos, chatBag: [] });
+    setUser({ ..._user, ...detailInfos, chatBag: [] });
     router.push('/app');
   };
 

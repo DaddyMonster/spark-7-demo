@@ -35,17 +35,14 @@ export const NationFlag = ({
   );
 };
 
-const FlagAvatar = styled(Avatar)<{
+const FlagAvatar = styled(Avatar).attrs({ variant: 'rounded' })<{
   size: number;
   $shadow: boolean;
   disabled: boolean;
 }>(({ theme, size, $shadow: shadow, disabled }) => ({
-  width: size,
+  width: size * 1.2,
   height: size,
-  border: 'none',
+  border: `2px solid ${theme.palette.secondary.main}`,
   opacity: disabled ? 0.5 : 1,
-  '&:hover': {
-    border: `2px solid ${theme.palette.secondary.main}`,
-  },
   boxShadow: shadow ? '1.5px 1.5px 0px 0px rgba(0,0,0,0.8)' : 'none',
 }));

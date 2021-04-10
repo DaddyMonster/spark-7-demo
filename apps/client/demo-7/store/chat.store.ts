@@ -14,7 +14,7 @@ type TopicStore = {
 
 export const filterChatList = (list: ChatMeta[]) =>
   list.filter(({ startTime }) => {
-    const diff = dy().diff(startTime, 'minutes');
+    const diff = dy().diff(startTime.toDate(), 'minutes');
     return diff < 4;
   });
 

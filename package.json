@@ -23,7 +23,8 @@
     "update": "nx migrate latest",
     "workspace-generator": "nx workspace-generator",
     "dep-graph": "nx dep-graph",
-    "help": "nx help"
+    "help": "nx help",
+    "start:demo": "concurrently \"firebase emulators:start\"  \"nx run-many --target=serve --projects=client-demo-7,api-demo-7-srv --parallel\""
   },
   "private": true,
   "dependencies": {
@@ -110,7 +111,7 @@
     "@react-native-community/cli-platform-ios": "4.13.0",
     "@storybook/addon-knobs": "^6.1.11",
     "@storybook/react": "^6.1.11",
-    "@svgr/webpack": "^5.4.0",
+    "@svgr/webpack": "^5.5.0",
     "@testing-library/jest-native": "3.4.3",
     "@testing-library/react": "11.1.2",
     "@testing-library/react-native": "7.1.0",
@@ -130,6 +131,7 @@
     "babel-jest": "26.2.2",
     "babel-loader": "8.1.0",
     "babel-plugin-styled-components": "1.10.7",
+    "concurrently": "^6.0.1",
     "cypress": "^6.0.1",
     "dotenv": "6.2.0",
     "eslint": "7.10.0",

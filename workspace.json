@@ -457,6 +457,56 @@
           }
         }
       }
+    },
+    "service-lib-lemma": {
+      "root": "libs/service-lib/lemma",
+      "sourceRoot": "libs/service-lib/lemma/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/service-lib/lemma/**/*.ts"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/service-lib/lemma"
+          ],
+          "options": {
+            "jestConfig": "libs/service-lib/lemma/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "service-lib-translator": {
+      "root": "libs/service-lib/translator",
+      "sourceRoot": "libs/service-lib/translator/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/service-lib/translator/**/*.ts"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/service-lib/translator"
+          ],
+          "options": {
+            "jestConfig": "libs/service-lib/translator/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   }
 }

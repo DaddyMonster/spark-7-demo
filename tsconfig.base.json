@@ -20,7 +20,11 @@
       "@hessed/apollo-next": ["libs/apollo-next/src/index.ts"],
       "@hessed/storybook/lite": ["libs/storybook/lite/src/index.ts"],
       "@hessed/shared/assets": ["libs/shared/assets/src/index.ts"],
-      "@hessed/service-lib/agora": ["libs/service-lib/agora/src/index.ts"]
+      "@hessed/service-lib/agora": ["libs/service-lib/agora/src/index.ts"],
+      "@hessed/service-lib/lemma": ["libs/service-lib/lemma/src/index.ts"],
+      "@hessed/service-lib/translator": [
+        "libs/service-lib/translator/src/index.ts"
+      ]
     }
   },
   "files": ["libs/styles/theme/src/types/mui.override.d.ts"],
