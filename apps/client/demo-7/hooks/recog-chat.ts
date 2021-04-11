@@ -4,10 +4,7 @@ import firebase from 'firebase/app';
 import { nanoid } from 'nanoid';
 import { useEffect, useRef, useState } from 'react';
 import { Recognition } from '../lib/regocnition';
-import {
-  addRecogChatToCollection,
-  updateChatMessage,
-} from '../model/chat-message';
+import { ChatRef, createChatRef } from '../model/chat-message';
 import { UserDetail } from '../model/user-detail';
 import { Nation } from '../types/nation';
 dy.extend(utc);
@@ -37,48 +34,50 @@ export function useRecogChat({
   user,
 }: UseRecogChatArgs): UseRecogChatReturn {
   const [msgStatus, setmsgStatus] = useState<MsgStatus>('pending');
-  const [currentChatId, setcurrentChatId] = useState<string | null>(null);
   const [recogOn, setRecogOn] = useState(false);
   const recogRef = useRef<Recognition>(null);
+  const chatRef = useRef<ChatRef | null>(null);
 
   useEffect(() => {
     return () => stopRecognition();
   }, []);
 
-  const handleSpeechEnd = async (result: SpeechRecognitionResult) => {
-    const { transcript } = result.item(0);
-    if (!currentChatId) {
+  const handleSpeechEnd = async (transcript: string) => {
+    if (!chatRef.current) {
+      console.log('NO CHAT REF!', chatRef.current);
       setmsgStatus('pending');
       return;
     }
     setmsgStatus('sending');
-    await updateChatMessage(currentChatId, transcript);
+    await chatRef.current.update({ transcript });
     setmsgStatus('pending');
-    setcurrentChatId(null);
+    chatRef.current = null;
   };
 
-  const onEnd = (e: SpeechRecognitionEvent) => {
-    if (e.results?.item(0)) {
-      handleSpeechEnd(e.results.item(0));
+  const onEnd = () => {
+    const transcript = recogRef.current.currentTranscript;
+    console.log('ON END TRANSCRIPT', transcript);
+
+    if (transcript && chatRef.current) {
+      handleSpeechEnd(transcript);
     }
+    if (!transcript) {
+      chatRef?.current?.delete();
+      chatRef.current = null;
+    }
+    recogRef.current.resetTranscript();
     recogRef.current.recognizer.start();
   };
 
   const onSpeechStart = async () => {
-    console.log('SPEECH STARTED');
-    await sleep(2);
-    if (!recogRef.current.currentTranscript) {
-      console.log('NO WORDS HAS BEEN RECOGNIZED, MESSAGE NOT SENT');
-      return;
-    }
     setmsgStatus('recognizing');
     const chatId = nanoid();
-    setcurrentChatId(chatId);
+    chatRef.current = await createChatRef(chatId);
     const { displayName, localLang, photoURL, uid } = user;
-    await addRecogChatToCollection(metaId, {
+    await chatRef.current.collection(metaId).add({
       createdAt: firebase.firestore.Timestamp.fromDate(dy().toDate()),
       id: chatId,
-      message: '',
+      message: '...',
       roomId: metaId,
       speaking: true,
       user: { displayName, photoURL: photoURL ?? '', uid, nation: localLang },

@@ -7,7 +7,7 @@ import { GoogleBtn } from '../../atoms/button/GoogleBtn';
 import { NavRoute } from './NavRoute';
 import { Root } from './Root';
 import { UserThumb } from './UserThumb';
-import Spark7 from '../../svg/spark-7.svg';
+/* import Spark7 from '../../svg/spark-7.svg'; */
 
 interface TopNavProps {
   transparental?: boolean;
@@ -23,8 +23,8 @@ export const TopNav = ({ transparental = false }: TopNavProps) => {
         <Grid container spacing={0}>
           <Grid item xs={3}>
             <div className="flex items-center">
-              <Spark7 width="160px" height="50px" />
-              {/*  <Image src="/spark-7.svg" width="160px" height="50px" /> */}
+              {/* <Spark7 width="160px" height="50px" /> */}
+               <Image src="/spark-7.svg" width="160px" height="50px" />
             </div>
           </Grid>
           <Grid item xs={6}>

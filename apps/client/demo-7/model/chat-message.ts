@@ -1,6 +1,6 @@
 import firebase from 'firebase/app';
 import { firestore } from '../lib/firebase-init';
-import { ChatUser } from './chat-meta';
+import { ChatMetaCollection, ChatUser } from './chat-meta';
 
 export interface ChatMessage {
   message: string;
@@ -30,6 +30,11 @@ export const addRecogChatToCollection = async (
 
 export const updateChatMessage = async (chatId: string, message: string) => {
   await ChatMessageCollection.doc(chatId).update({ message, speaking: false });
+};
+
+export type ChatRef = firebase.firestore.DocumentReference<firebase.firestore.DocumentData>;
+export const createChatRef = async (chatId: string): Promise<ChatRef> => {
+  return ChatMessageCollection.doc(chatId);
 };
 
 export const chatQuery = (metaId: string) => {

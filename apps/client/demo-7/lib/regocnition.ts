@@ -3,7 +3,7 @@ import { Nation } from '../types/nation';
 export class Recognition {
   public recognizer: SpeechRecognition;
 
-  private transcript: string;
+  private transcript: string = null;
 
   constructor(private lang: Nation) {
     const SpeechRecognition =
@@ -13,8 +13,10 @@ export class Recognition {
     this.recognizer.lang = lang === 'en' ? 'en-US' : 'ko-KR';
     this.recognizer.interimResults = true;
     this.recognizer.maxAlternatives = 5;
-    this.recognizer.onresult = (e) =>
-      void (this.transcript = e.results[0][0].transcript);
+    this.recognizer.onresult = (e) => {
+      this.transcript = e.results[0][0].transcript;
+      console.log('RECOG CLASS RESULT', this.transcript);
+    };
   }
 
   public get getRecogLang() {
@@ -27,5 +29,9 @@ export class Recognition {
 
   public get currentTranscript() {
     return this.transcript;
+  }
+
+  public resetTranscript() {
+    this.transcript = null;
   }
 }
