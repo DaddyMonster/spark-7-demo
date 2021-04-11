@@ -28,7 +28,6 @@ const DetailViewModal = ({ chatMeta, onClose }: DetailViewModalProps) => {
   }, [chatMeta, reserved]);
 
   useEffect(() => {
-    console.log(chatMeta.startTime.toDate());
     const secToLive = dy().diff(chatMeta.startTime.toDate(), 'minutes');
     setliveStatus(getLiveStatus);
     const liveTimeout =
@@ -52,17 +51,14 @@ const DetailViewModal = ({ chatMeta, onClose }: DetailViewModalProps) => {
 
   const getLiveStatus = useCallback((): LiveStatus => {
     const { startTime } = chatMeta;
-    console.log(startTime.toDate());
     const diff = dy().diff(startTime.toDate(), 'seconds');
     const min = diff / 60;
-    console.log('MIN', min);
     if (min < 0) return 'not-started';
     else if (min > 0 && min < 7) return 'live';
     return 'hasPast';
   }, [chatMeta]);
 
   const reserveHandler = () => {
-    console.log('MODAL CHAT META', chatMeta);
     if (isReservedChat) {
       removeReserved(chatMeta.id);
     } else {

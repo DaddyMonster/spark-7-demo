@@ -40,7 +40,9 @@ export function useLiveAudio({
   const onVolumeUpdate = (audIndicators: AudIndicator[]) => {
     const newMap = new Map(userVolumeMap);
     audIndicators.forEach(({ uid, level }) => {
-      newMap.set(uid, level);
+      if (level > 5) {
+        newMap.set(uid, level);
+      }
     });
     setvolumeMap(newMap);
   };

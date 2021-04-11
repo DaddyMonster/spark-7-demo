@@ -33,8 +33,6 @@ export function useReservedChat(): UseReservedChat {
       return;
     }
 
-    console.log('HOOK META', meta);
-
     const { id } = meta;
     const { uid, localLang, photoURL, displayName } = user;
     const reserveMe = { uid, localLang, photoURL, displayName };

@@ -135,8 +135,6 @@ export function useLive(): useLiveReturn {
     }
     const { allUsers, me } = unloadRef.current;
     const self = allUsers.find((x) => x.uid === me.uid);
-    console.log('ME LEAVING', self);
-    alert(JSON.stringify(self));
     RemoveLiveUser(roomId, self);
   };
 

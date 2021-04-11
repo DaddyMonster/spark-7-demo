@@ -1,6 +1,6 @@
 import firebase from 'firebase/app';
 import { firestore } from '../lib/firebase-init';
-import { ChatMetaCollection, ChatUser } from './chat-meta';
+import { ChatUser } from './chat-meta';
 
 export interface ChatMessage {
   message: string;
@@ -18,23 +18,11 @@ export const ChatMessageCollection = firestore.collection('chat-message');
 export const ChatMsgGroup = (metaId: string) =>
   firestore.collectionGroup(chatSubCollectionPrefix + metaId);
 
-export const addRecogChatToCollection = async (
-  metaId: string,
-  // TMEP!!!!
-  chatMsg: Omit<ChatMessage, 'cloudVoice'>
-) => {
-  await ChatMessageCollection.doc(chatMsg.id)
-    .collection(chatSubCollectionPrefix + metaId)
-    .add({ ...chatMsg, cloudVoice: '' });
-};
-
-export const updateChatMessage = async (chatId: string, message: string) => {
-  await ChatMessageCollection.doc(chatId).update({ message, speaking: false });
-};
-
 export type ChatRef = firebase.firestore.DocumentReference<firebase.firestore.DocumentData>;
-export const createChatRef = async (chatId: string): Promise<ChatRef> => {
-  return ChatMessageCollection.doc(chatId);
+export const createChatRef = (chatId: string, metaId: string): ChatRef => {
+  return ChatMessageCollection.doc(chatId)
+    .collection(chatSubCollectionPrefix + metaId)
+    .doc();
 };
 
 export const chatQuery = (metaId: string) => {

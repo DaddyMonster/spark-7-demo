@@ -46,16 +46,6 @@ export function useInitChat(user: UserDetail) {
       fetchLocal(localLang),
       fetchReserved(user.uid),
     ]);
-    console.log(
-      'CHAT LISTS ',
-      'LEARNING ',
-      learning,
-      'LOCAL',
-      local,
-      'RESERVED',
-      reserved
-    );
-
     setLearningLangs(learning);
     setMyLang(local);
     setReserved(reserved);

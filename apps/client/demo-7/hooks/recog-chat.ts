@@ -23,12 +23,6 @@ interface UseRecogChatReturn {
   stopRecognition: () => void;
 }
 
-const sleep = (timeInSec: number) => {
-  return new Promise((res) => {
-    setTimeout(() => res({}), timeInSec * 1000);
-  });
-};
-
 export function useRecogChat({
   metaId,
   user,
@@ -46,10 +40,11 @@ export function useRecogChat({
     if (!chatRef.current) {
       console.log('NO CHAT REF!', chatRef.current);
       setmsgStatus('pending');
+      await chatRef.current.delete();
       return;
     }
     setmsgStatus('sending');
-    await chatRef.current.update({ transcript });
+    await chatRef.current.update({ message: transcript });
     setmsgStatus('pending');
     chatRef.current = null;
   };
@@ -72,9 +67,9 @@ export function useRecogChat({
   const onSpeechStart = async () => {
     setmsgStatus('recognizing');
     const chatId = nanoid();
-    chatRef.current = await createChatRef(chatId);
+    chatRef.current = createChatRef(chatId, metaId);
     const { displayName, localLang, photoURL, uid } = user;
-    await chatRef.current.collection(metaId).add({
+    await chatRef.current.set({
       createdAt: firebase.firestore.Timestamp.fromDate(dy().toDate()),
       id: chatId,
       message: '...',

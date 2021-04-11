@@ -20,7 +20,6 @@ export class AgoraTokenService {
         role,
         privilegeExpireTime
       );
-      console.log('TOKEN', token, appId, certificate);
       return token;
     } catch (err) {
       console.log(err);

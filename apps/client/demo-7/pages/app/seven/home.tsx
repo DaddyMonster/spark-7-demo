@@ -15,13 +15,11 @@ const SevenHome: CustomPageType = () => {
   const { learningLists, localLists } = useChatList();
 
   const onItemClick = (id: string, listType: 'learning' | 'local') => {
-    console.log(id);
     const list = listType === 'learning' ? learningLists : localLists;
     const item = list.find((x) => x.id === id);
     if (!item) return;
     setselectedChatMeta(item);
   };
-  console.log(learningLists, localLists);
   const onModalClose = () => setselectedChatMeta(null);
 
   return (

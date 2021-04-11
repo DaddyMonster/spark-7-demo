@@ -114,7 +114,6 @@ export class Agora {
     initialRole,
     onVolumeUpdate,
   }: AgoraConstructor) {
-    console.log(initialRole);
     this.rtc = rtc;
     this._agoraClientUid = agoraClientUid;
     this._channelId = channelId;
@@ -133,15 +132,12 @@ export class Agora {
     });
     this.client.on('token-privilege-will-expire', this.resetToken);
     this.client.on('volume-indicator', (result) => {
-      console.log(result);
       this.onVolumeUpdate(result);
     });
   }
 
   private async resetToken() {
-    console.log('RESET TOKEN FIRED');
     const { _agoraClientRawUid, _channelId } = this;
-    console.log('CHANNEL ID ', _channelId);
     const token = await fetchToken({
       channelName: _channelId,
       uid: _agoraClientRawUid,

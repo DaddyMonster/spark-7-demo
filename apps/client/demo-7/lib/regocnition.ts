@@ -15,7 +15,7 @@ export class Recognition {
     this.recognizer.maxAlternatives = 5;
     this.recognizer.onresult = (e) => {
       this.transcript = e.results[0][0].transcript;
-      console.log('RECOG CLASS RESULT', this.transcript);
+      console.log('RECOG INTERIM RESULT', this.transcript);
     };
   }
 

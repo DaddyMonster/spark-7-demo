@@ -8,7 +8,6 @@ export class AgoraTokenController {
 
   @Post()
   async generateToken(@Body() tkDto: AgoraTokenGenDto) {
-    console.log(tkDto);
     return this.tk_srv.generateToken(tkDto);
   }
 }
