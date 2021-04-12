@@ -261,9 +261,7 @@
         "prod-build": {
           "executor": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": [
-              "bash ci/scripts/client-demo-7.ci.sh {args.dep_branch}"
-            ]
+            "commands": ["bash ci/script/client-demo-7.ci.sh {args.dep_branch}"]
           }
         },
         "build": {
@@ -355,9 +353,7 @@
         "prod-build": {
           "executor": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": [
-              "bash ci/scripts/api-demo-7.ci.sh {args.dep_branch}"
-            ]
+            "commands": ["bash ci/script/api-demo-7.ci.sh {args.dep_branch}"]
           }
         },
         "build": {
@@ -374,6 +370,7 @@
               "optimization": true,
               "extractLicenses": true,
               "inspect": false,
+              "generatePackageJson": true,
               "fileReplacements": [
                 {
                   "replace": "apps/api/demo-7-srv/src/environments/environment.ts",

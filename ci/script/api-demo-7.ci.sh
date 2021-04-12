@@ -3,8 +3,8 @@
 nx run api-demo-7-srv:build --prod
 
 cd dist/apps/api/demo-7-srv
-npx add-dependencies reflect-metadata @nestjs/core @nestjs/platform-express rxjs
-
+#npx add-dependencies reflect-metadata @nestjs/core @nestjs/platform-express rxjs
+echo $(ls)
 #ENVS
 BRANCH=$1
 CONTAINER_NAME=api-demo-7-srv-$BRANCH
