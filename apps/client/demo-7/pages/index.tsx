@@ -110,11 +110,10 @@ export default Index;
 
 const Jumbo = styled.div(({ theme }) => ({
   background: theme.palette.black.main,
-  /* height: JUMBO_ONE_HEIGHT, */
   width: '100%',
   height: '100vh',
   overflow: 'hidden',
-  display: 'flex',
+  display: 'flex', 
 }));
 
 const Jumbo2 = styled(Paper)(({ theme }) => ({
