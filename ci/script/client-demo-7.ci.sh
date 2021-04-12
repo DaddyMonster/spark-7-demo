@@ -1,6 +1,6 @@
 #!/bin/sh
 
-yarn add -D tailwindcss@latest postcss@latest autoprefixer@latest rxjs
+yarn add -D tailwindcss@latest postcss@latest autoprefixer@latest rxjs scroll-into-view-if-needed
 nx run client-demo-7:build --prod
 cd dist/apps/client/demo-7
 npx add-dependencies graphql @emotion/react @emotion/styled scroll-into-view-if-needed
