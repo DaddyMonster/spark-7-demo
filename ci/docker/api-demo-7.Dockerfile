@@ -4,7 +4,7 @@ ARG NODE_ENV
 ARG BUILD_FLAG
 WORKDIR /app/cache
 COPY package.json .
-
+RUN npx add-dependencies reflect-metadata @nestjs/core @nestjs/platform-express rxjs
 
 #--- DEPENDENCIES
 

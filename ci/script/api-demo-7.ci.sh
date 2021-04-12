@@ -3,7 +3,7 @@
 nx run api-demo-7-srv:build --prod
 
 cd dist/apps/api/demo-7-srv
-#npx add-dependencies reflect-metadata @nestjs/core @nestjs/platform-express rxjs
+npx add-dependencies reflect-metadata @nestjs/core @nestjs/platform-express rxjs
 echo $(ls)
 #ENVS
 BRANCH=$1
@@ -18,10 +18,10 @@ docker tag $CONTAINER_NAME $GCR_PATH
 
 docker push $GCR_PATH
 gcloud components install beta --quiet
-gcloud run deploy $CONTAINER_NAME\ 
+gcloud run deploy "$CONTAINER_NAME\ 
 --image $GCR_PATH\ 
 --project $GC_PROJECT_ID\ 
 --platform managed\ 
 --region $REGION\ 
 --allow-unauthenticated\ 
---update-env-vars $API_DEMO_7_ENV
+--update-env-vars $API_DEMO_7_ENV"

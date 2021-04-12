@@ -6,7 +6,7 @@ ARG BUILD_FLAG
 WORKDIR /app/cache
 COPY package.json ./
 #MAY NEED BELOW LATER
-RUN npx add-dependencies @emotion/react @emotion/styled
+RUN npx add-dependencies @emotion/react @emotion/styled scroll-into-view-if-needed
 
 #--- DEPENDENCIES
 
