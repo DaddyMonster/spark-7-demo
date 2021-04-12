@@ -28,5 +28,5 @@
     }
   },
   "files": ["libs/styles/theme/src/types/mui.override.d.ts"],
-  "exclude": ["node_modules", "tmp"]
+  "exclude": ["node_modules", "tmp", "assets"]
 }

@@ -34,6 +34,11 @@ const ChatUtilModalBase = ({
               />
             </>
           ))}
+        {popState === 'tools' && (
+          <div className="w-full p-2 mb-3 justify-center">
+            <Typography>Will be available soon enough!</Typography>
+          </div>
+        )}
       </div>
     </Dialog>
   );

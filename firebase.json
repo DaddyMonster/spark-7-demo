@@ -10,5 +10,49 @@
       "enabled": true,
       "port": 8988
     }
-  }
+  },
+  "hosting": [
+    {
+      "public": "firebase",
+      "target": "demo-7-dev",
+      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+      "rewrites": [
+        {
+          "source": "/api{,/**}",
+          "run": {
+            "serviceId": "api-demo-7-srv-dev",
+            "region": "asia-northeast3"
+          }
+        },
+        {
+          "source": "**",
+          "run": {
+            "serviceId": "client-demo-7-dev",
+            "region": "asia-northeast3"
+          }
+        }
+      ]
+    },
+    {
+      "public": "firebase",
+      "target": "demo-7-master",
+      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+      "rewrites": [
+        {
+          "source": "/api{,/**}",
+          "run": {
+            "serviceId": "api-demo-7-srv-master",
+            "region": "asia-northeast3"
+          }
+        },
+        {
+          "source": "**",
+          "run": {
+            "serviceId": "client-demo-7-master",
+            "region": "asia-northeast3"
+          }
+        }
+      ]
+    }
+  ]
 }
