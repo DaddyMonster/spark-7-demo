@@ -18,10 +18,4 @@ docker tag $CONTAINER_NAME $GCR_PATH
 
 docker push $GCR_PATH
 gcloud components install beta --quiet
-gcloud run deploy "$CONTAINER_NAME\ 
---image=$GCR_PATH\ 
---project=$GC_PROJECT_ID\ 
---platform=managed\ 
---region=$REGION\ 
---allow-unauthenticated\ 
---update-env-vars=$API_DEMO_7_ENV"
+gcloud run deploy $CONTAINER_NAME --image=$GCR_PATH --project=$GC_PROJECT_ID --platform=managed --region=$REGION --allow-unauthenticated --update-env-vars=$API_DEMO_7_ENV
