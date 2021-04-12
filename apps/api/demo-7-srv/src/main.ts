@@ -8,7 +8,7 @@ async function bootstrap() {
   app.setGlobalPrefix(GLOBAL_PREFIX);
   const port = process.env.PORT || 3556;
   await app.listen(port, () => {
-    Logger.log('Listening at http://localhost: ' + port + '/' + GLOBAL_PREFIX);
+    Logger.log('Listening at http://localhost:' + port + '/' + GLOBAL_PREFIX);
   });
 }
 

@@ -22,9 +22,9 @@ docker push $GCR_PATH
 echo "NEXT CLINT DOCKER IMAGE PUSHED TO REPO"
 gcloud components install beta --quiet
 gcloud beta run deploy "$CONTAINER_NAME\ 
---image $GCR_PATH\ 
---project $GC_PROJECT_ID\ 
---platform managed\ 
---region $REGION\ 
+--image=$GCR_PATH\ 
+--project=$GC_PROJECT_ID\ 
+--platform=managed\ 
+--region=$REGION\ 
 --allow-unauthenticated\ 
 --update-env-vars=$CLIENT_DEMO_7_ENV"
