@@ -50,7 +50,7 @@ export function useRecogChat({
   };
 
   const onEnd = () => {
-    const transcript = recogRef.current.currentTranscript;
+    const transcript = recogRef?.current?.currentTranscript;
     console.log('ON END TRANSCRIPT', transcript);
 
     if (transcript && chatRef.current) {
@@ -60,8 +60,8 @@ export function useRecogChat({
       chatRef?.current?.delete();
       chatRef.current = null;
     }
-    recogRef.current.resetTranscript();
-    recogRef.current.recognizer.start();
+    recogRef?.current?.resetTranscript();
+    recogRef?.current?.recognizer.start();
   };
 
   const onSpeechStart = async () => {

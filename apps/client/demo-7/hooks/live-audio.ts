@@ -7,11 +7,12 @@ interface UseLiveAudioProps {
   ready: boolean;
   liveUid: number;
 }
-type UidMap = Map<UID, number>;
+export type UidMap = Map<UID, number>;
 
 interface UseLiveAudioReturn {
   switchRole: (role: ClientRole) => void;
   userVolumeMap: UidMap;
+  setOverallVolume: (val: number) => void;
 }
 
 export function useLiveAudio({
@@ -47,6 +48,10 @@ export function useLiveAudio({
     setvolumeMap(newMap);
   };
 
+  const setOverallVolume = (val: number) => {
+    agoraRef.current.localAud.setVolume(val);
+  };
+
   const initAgora = async (channelId: string) => {
     agoraRef.current = await Agora.initRTC(
       {
@@ -60,5 +65,5 @@ export function useLiveAudio({
 
   const switchRole = (role: ClientRole) => agoraRef.current.switchRole(role);
 
-  return { switchRole, userVolumeMap };
+  return { switchRole, userVolumeMap, setOverallVolume };
 }

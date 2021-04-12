@@ -1,4 +1,4 @@
-import { Button } from '@material-ui/core';
+import { Button, useMediaQuery, Theme } from '@material-ui/core';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { FcGoogle } from 'react-icons/fc';
@@ -10,6 +10,7 @@ interface Props {
   redirectTo: string;
   px?: number;
   showLogout?: boolean;
+  className?: string;
 }
 
 export const GoogleBtn = ({
@@ -19,6 +20,7 @@ export const GoogleBtn = ({
   px = 6,
   onLogout,
   showLogout = false,
+  className,
 }: Props) => {
   const router = useRouter();
   const onClick = () => {
@@ -28,16 +30,19 @@ export const GoogleBtn = ({
       onLogin();
     }
   };
+  const smDown = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));
+  const googleLoginMsg = smDown ? 'Login' : 'Start with Google';
+  const goAppMsg = smDown ? 'Start' : 'Start talking';
   return (
     <>
       <Button
         variant="contained"
-        className={`px-${px}`}
+        className={`px-${px} ${className ?? ''}`}
         sx={{ fontSize: '0.8rem' }}
         onClick={onClick}
         startIcon={isLogged ? <IoIosPaperPlane /> : <FcGoogle />}
       >
-        {isLogged ? "Let's Talk" : 'Start with Google'}
+        {isLogged ? goAppMsg : googleLoginMsg}
       </Button>
       {isLogged && showLogout && (
         <Button

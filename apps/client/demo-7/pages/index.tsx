@@ -1,18 +1,9 @@
-import {
-  alpha,
-  Box,
-  Container,
-  Grid,
-  Paper,
-  Typography,
-} from '@material-ui/core';
-import { motion } from 'framer-motion';
+import { alpha, Container, Grid, Paper, Typography } from '@material-ui/core';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
 import React from 'react';
 import styled from 'styled-components';
 import { GoogleBtn } from '../components/atoms/button/GoogleBtn';
-import { JUMBO_ONE_HEIGHT, JUMBO_TWO_HEIGHT } from '../constants/layout-sizes';
+import { JUMBO_TWO_HEIGHT } from '../constants/layout-sizes';
 import { useAuth } from '../hooks/auth';
 import { CustomPageType } from '../types/custom-page';
 const texts = ['7분간 기적이 일어남', '시간 순삭', '등등 효과가 좋다'];
@@ -38,17 +29,17 @@ export const Index: CustomPageType = () => {
               <div className="flex-1 relative flex flex-col h-full items-center justify-center">
                 <Typography
                   className="w-full my-3"
-                  sx={{ color: '#fff', fontSize: '2.3rem' }}
+                  sx={{
+                    color: '#fff',
+                    fontSize: '2.3rem',
+                    lineHeight: '3rem',
+                  }}
                 >
-                  전 세계의 사람들과 7분간의 편안한 대화
-                </Typography>
-                <Typography
-                  className="w-full"
-                  sx={{ color: '#fff', fontSize: '2.3rem' }}
-                >
+                  전 세계의 사람들과 7분간의 편안한 대화 <br />
                   지금 시작하세요
                 </Typography>
-                <div className="w-full py-5">
+
+                <div className="w-full py-5 lg:ml-auto">
                   <GoogleBtn
                     onLogin={loginUser}
                     isLogged={Boolean(user)}
@@ -119,7 +110,7 @@ export default Index;
 
 const Jumbo = styled.div(({ theme }) => ({
   background: theme.palette.black.main,
-  height: JUMBO_ONE_HEIGHT,
+  /* height: JUMBO_ONE_HEIGHT, */
   width: '100%',
   height: '100vh',
   overflow: 'hidden',

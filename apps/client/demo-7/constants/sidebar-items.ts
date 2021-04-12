@@ -2,6 +2,7 @@ import { IconType } from 'react-icons';
 import { AiOutlineSchedule, AiOutlineHistory } from 'react-icons/ai';
 import { IoPeopleCircleOutline } from 'react-icons/io5';
 import { BsFilePlus } from 'react-icons/bs';
+import { BiHome } from 'react-icons/bi';
 export interface RenderItem {
   label: string;
   route: string;
@@ -11,7 +12,7 @@ export interface RenderItem {
 export const SevenItems: RenderItem[] = [
   {
     label: 'Home',
-    Icon: AiOutlineSchedule,
+    Icon: BiHome,
     route: '/app/seven/home',
   },
   {

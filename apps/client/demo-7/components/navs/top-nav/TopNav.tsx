@@ -1,8 +1,12 @@
-import { Grid, Menu, MenuItem } from '@material-ui/core';
+import { Grid, Hidden, IconButton, Menu, MenuItem } from '@material-ui/core';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
+import { HiMenuAlt2 } from 'react-icons/hi';
 import { useAuth } from '../../../hooks/auth';
+import {
+  LeftSidebarSizeEnum, useLeftSideStore
+} from '../../../layout/left-side-bar/useLeftSideStore';
 import { GoogleBtn } from '../../atoms/button/GoogleBtn';
 import { NavRoute } from './NavRoute';
 import { Root } from './Root';
@@ -17,23 +21,48 @@ export const TopNav = ({ transparental = false }: TopNavProps) => {
   const { loginUser, logout, user } = useAuth();
   const router = useRouter();
   const [menuAnchor, setmenuAnchor] = useState<HTMLElement | null>(null);
+  const [{ size }, setLeftSize] = useLeftSideStore();
+  const handleSideSize = () => {
+    setLeftSize(
+      size !== LeftSidebarSizeEnum.Hidden
+        ? LeftSidebarSizeEnum.Hidden
+        : LeftSidebarSizeEnum.Normal
+    );
+  };
+
+  const handleLogoClick = () => {
+    router.push('/');
+  };
+
   return (
     <>
       <Root transparental={transparental}>
         <Grid container spacing={0}>
-          <Grid item xs={3}>
-            <div className="flex items-center">
-              {/* <Spark7 width="160px" height="50px" /> */}
-               <Image src="/spark-7.svg" width="160px" height="50px" />
-            </div>
-          </Grid>
-          <Grid item xs={6}>
-            <div className="w-full h-full">
-              <NavRoute hidden={!user} />
-            </div>
-          </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={6} md={3}>
             <div className="flex h-full items-center">
+              <Hidden mdUp>
+                <IconButton onClick={handleSideSize}>
+                  <HiMenuAlt2 />
+                </IconButton>
+              </Hidden>
+              {/* <Spark7 width="160px" height="50px" /> */}
+              <Image
+                src="/spark-7.svg"
+                width="160px"
+                height="50px"
+                onClick={handleLogoClick}
+              />
+            </div>
+          </Grid>
+          <Hidden mdDown>
+            <Grid item md={6}>
+              <div className="w-full h-full">
+                <NavRoute hidden={!user} />
+              </div>
+            </Grid>
+          </Hidden>
+          <Grid item md={3} xs={6}>
+            <div className="flex w-full h-full items-center justify-end">
               {user && router.asPath !== '/' ? (
                 <UserThumb
                   {...user}
@@ -46,6 +75,7 @@ export const TopNav = ({ transparental = false }: TopNavProps) => {
                   onLogin={loginUser}
                   redirectTo="/app/seven/home"
                   showLogout
+                  className="ml-auto"
                 />
               )}
             </div>

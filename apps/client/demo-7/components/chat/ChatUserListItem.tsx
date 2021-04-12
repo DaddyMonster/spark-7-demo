@@ -36,7 +36,7 @@ const ChatUserListItem = ({
             <Mic micOn={role === 'host'} vol={volume * 100} />
           </div>
         </Grid>
-        <Grid item xs={7}>
+        <Grid item xs={10}>
           <div className="h-full w-full flex items-center px-2">
             <UserAvatar
               photoURL={photoURL}
@@ -44,12 +44,10 @@ const ChatUserListItem = ({
               volume={volume}
             />
             <Typography>{displayName}</Typography>
+            <Button variant="text" sx={{ fontSize: '0.8rem' }} className="ml-auto">
+              Follow
+            </Button>
           </div>
-        </Grid>
-        <Grid item xs={3}>
-          <Button variant="text" sx={{ fontSize: '0.8rem' }}>
-            Follow
-          </Button>
         </Grid>
       </Grid>
     </Paper>

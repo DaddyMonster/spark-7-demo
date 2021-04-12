@@ -1,20 +1,24 @@
 import React from 'react';
 import styled from 'styled-components';
-import { SidebarSizeMap, useLeftSideStore } from './useLeftSideStore';
+import {
+  SidebarSizeMap,
+  useLeftSideStore,
+  LeftSidebarSizeEnum,
+} from './useLeftSideStore';
 
 export interface LeftSidebarRootProps {
   children: React.ReactNode;
   sidebarSizeMap?: SidebarSizeMap;
   paddingTop: number;
+  width: number;
 }
 
 export const LeftSidebarRoot = ({
   children,
   sidebarSizeMap,
   paddingTop,
+  width,
 }: LeftSidebarRootProps) => {
-  const [{ width }] = useLeftSideStore(sidebarSizeMap);
-
   return (
     <Root width={width} paddingTop={paddingTop}>
       {children}
@@ -23,11 +27,13 @@ export const LeftSidebarRoot = ({
 };
 
 const Root = styled.div<{ width: number; paddingTop: number }>(
-  ({ width, paddingTop }) => ({
+  ({ width, paddingTop, theme }) => ({
     height: '100vh',
     position: 'fixed',
     width,
     paddingTop,
     transition: 'all 300ms ease',
+    background: theme.palette.default.main,
+    zIndex: 800,
   })
 );

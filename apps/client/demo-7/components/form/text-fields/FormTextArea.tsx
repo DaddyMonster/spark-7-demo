@@ -4,6 +4,7 @@ import React, { useRef, useEffect } from 'react';
 import { FormFieldRoot } from './FormTextField';
 import styled from 'styled-components';
 import { useField } from 'formik';
+import { FormTypoLabel } from './FormTypoLabel';
 interface Props {
   label: string;
   rows?: number;
@@ -37,10 +38,10 @@ const FormTextArea = ({
 
   return (
     <FormFieldRoot>
-      <Typography fontSize="1rem" className="mb-1" color={grey[500]}>
+      <FormTypoLabel fontSize="1rem" className="mb-1" color={grey[500]}>
         {label}
-      </Typography>
-      <Box px={2} display="flex">
+      </FormTypoLabel>
+      <Box display="flex">
         <TextArea
           name="description"
           rows={rows}

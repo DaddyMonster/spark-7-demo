@@ -2,6 +2,7 @@ import { InputBase, InputBaseProps, Typography } from '@material-ui/core';
 import { grey } from '@material-ui/core/colors';
 import React from 'react';
 import styled from 'styled-components';
+import { FormTypoLabel } from './FormTypoLabel';
 interface Props extends InputBaseProps {
   label: string;
 }
@@ -9,9 +10,7 @@ interface Props extends InputBaseProps {
 const BaseFormTextField = ({ label, ...props }: Props) => {
   return (
     <div className="flex-1 mb-4">
-      <Typography fontSize="1rem" color={grey[500]}>
-        {label}
-      </Typography>
+      <FormTypoLabel>{label}</FormTypoLabel>
       <Root>
         <Input {...props} />
       </Root>
@@ -22,7 +21,7 @@ const BaseFormTextField = ({ label, ...props }: Props) => {
 export default BaseFormTextField;
 
 const Root = styled.div(({ theme }) => ({
-  padding: theme.spacing(0.5, 2),
+  padding: theme.spacing(0.5, 0),
   display: 'flex',
 }));
 

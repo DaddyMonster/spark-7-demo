@@ -29,13 +29,13 @@ export function useChatSelection({
 
   const [translation, settranslation] = useState('');
 
-  useEffect(() => {
+/*   useEffect(() => {
     if (selectedChatMsg?.message && me) {
       getTranslated();
     }
   }, [selectedChatMsg?.message]);
-
-  const getTranslated = async () => {
+ */
+/*   const getTranslated = async () => {
     const { message } = selectedChatMsg;
     const { localLang } = me;
     if (localLang === roomLang) {
@@ -47,9 +47,12 @@ export function useChatSelection({
       text: [message],
     };
     const fetched = await axios.post('/api/tranlate', body);
-    const result = fetched.data as Translation;
-    settranslation(result.translations[0].text);
-  };
+    if (fetched.data) {
+      const result = fetched.data as Translation;
+      console.log('TRANSLATION RESULT', result);
+      settranslation(result?.translations?[0] ? result.translations[0].text : '');
+    }
+  }; */
 
   const addChatToBag = async () => {
     if (!selectedChatMsg) {

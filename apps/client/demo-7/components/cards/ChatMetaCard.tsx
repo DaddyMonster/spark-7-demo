@@ -39,15 +39,19 @@ const ChatMetaCard = ({
         >
           {topic}
         </Typography>
-        <div className="flex items-center py-1 ml-auto">
-          <Avatar src={host.photoURL} />
+        <div className="flex items-center py-1 ml-auto relative">
+          <div className="relative mr-2">
+            <Avatar src={host.photoURL} />
+            <FlagWrap>
+              <NationFlag nation={host.localLang} sizes={15} />
+            </FlagWrap>
+          </div>
           <div className="flex flex-col justify-center px-2">
-            <Typography fontSize="0.9rem">{host.displayName}</Typography>
-            <Typography fontSize="0.7rem" className="ml-1" color={grey[600]}>
+            <Typography fontSize="0.7rem">{host.displayName}</Typography>
+            <Typography fontSize="0.5rem" className="ml-1" color={grey[600]}>
               trusted
             </Typography>
           </div>
-          <NationFlag nation={host.localLang} />
         </div>
       </div>
 
@@ -71,12 +75,6 @@ const ChatMetaCard = ({
   );
 };
 
-/* <BorderedBox>
-          <Typography color="#fff" className="mx-2 text-center">
-            Starts {startTime.toNow()}
-          </Typography>
-        </BorderedBox> */
-
 export default ChatMetaCard;
 
 const Root = styled(Paper)(({ theme }) => ({
@@ -88,13 +86,8 @@ const Root = styled(Paper)(({ theme }) => ({
   overflow: 'hidden',
 }));
 
-const BorderedBox = styled.div(({ theme }) => ({
-  flex: '1 0 auto',
-  background: theme.palette.black.main,
-  height: '100%',
-  border: `2px solid ${theme.palette.primary.main}`,
-  boxShadow: '1.5px 1.5px 0px 0px rgba(0,0,0,0.8)',
-  padding: theme.spacing(0.7, 0),
-  margin: theme.spacing(0, 2),
-  borderRadius: 5,
+const FlagWrap = styled.div(({ theme }) => ({
+  position: 'absolute',
+  bottom: -7,
+  right: -7,
 }));

@@ -1,4 +1,9 @@
-import { IconButton, Typography } from '@material-ui/core';
+import {
+  IconButton,
+  Theme,
+  Typography,
+  useMediaQuery,
+} from '@material-ui/core';
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import Carousel from 'nuka-carousel';
@@ -11,6 +16,10 @@ interface Props {
 
 function CarouselTemplate({ title, children, noList }: Props) {
   const childrenCount = useRef(0);
+  const smDown = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));
+  const mdDown = useMediaQuery((theme: Theme) =>
+    theme.breakpoints.between('sm', 'lg')
+  );
 
   // FORCE RERENDER
   const [rerenderKey, setrerenderKey] = useState(0);
@@ -30,7 +39,7 @@ function CarouselTemplate({ title, children, noList }: Props) {
         </div>
       ) : (
         <Carousel
-          slidesToShow={3}
+          slidesToShow={smDown ? 1 : mdDown ? 2 : 3}
           cellSpacing={10}
           key={rerenderKey}
           renderBottomCenterControls={null}
