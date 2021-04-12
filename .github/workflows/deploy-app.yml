@@ -18,6 +18,7 @@ env:
   GC_SERVICE_ACCOUNT_EMAIL: ${{ secrets.GC_SERVICE_ACCOUNT_EMAIL }}
   CLIENT_DEMO_7_ENV: ${{ secrets.CLIENT_DEMO_7_ENV }}
   API_DEMO_7_ENV: ${{ secrets.API_DEMO_7_ENV }}
+  NX_CLOUD_AUTH_TOKEN: ${{ secrets.NX_CLOUD_AUTH_TOKEN }}
   # gcr.io 리포 이름
 
 jobs:
