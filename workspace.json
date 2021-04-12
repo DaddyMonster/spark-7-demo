@@ -280,7 +280,8 @@
           },
           "configurations": {
             "production": {
-              "generatePackageJson": true
+              "generatePackageJson": true,
+              "dev": false
             }
           }
         },
