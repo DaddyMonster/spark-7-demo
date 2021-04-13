@@ -9,7 +9,7 @@ import { CustomPageType } from '../types/custom-page';
 const texts = ['7분간 기적 일어남!', '시간 순삭', '등등 효과가 좋다'];
 
 export const Index: CustomPageType = () => {
-  const { user  } = useAuth();
+  const { user } = useAuth();
   const { loginUser, logout } = useAuth();
   return (
     <>
@@ -35,7 +35,8 @@ export const Index: CustomPageType = () => {
                     lineHeight: '3rem',
                   }}
                 >
-                  전 세계의 사람들과 7분간의 편안한 대화<br />
+                  전 세계의 사람들과 7분간의 편안한 대화
+                  <br />
                   지금 시작하세요
                 </Typography>
 
@@ -113,7 +114,7 @@ const Jumbo = styled.div(({ theme }) => ({
   width: '100%',
   height: '100vh',
   overflow: 'hidden',
-  display: 'flex', 
+  display: 'flex',
 }));
 
 const Jumbo2 = styled(Paper)(({ theme }) => ({
