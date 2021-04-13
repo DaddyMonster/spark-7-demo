@@ -1,5 +1,3 @@
-import { ApolloProvider } from '@apollo/client';
-import useApollo from '@hessed/apollo-next';
 import { ClientTypes, SparkThemeProvider } from '@hessed/styles/theme';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
@@ -12,7 +10,7 @@ import { CustomPageType } from '../types/custom-page';
 import { useRouter } from 'next/router';
 import { useInitAuth } from '../hooks/initAuth';
 import { useInitChat } from '../hooks/initChat';
-import "react-perfect-scrollbar/dist/css/styles.css"
+import 'react-perfect-scrollbar/dist/css/styles.css';
 /* ;
 import { useCollectionData } from 'react-firebase-hooks/firestore'; */
 interface CustomAppProps extends AppProps {
@@ -22,7 +20,6 @@ interface CustomAppProps extends AppProps {
 }
 
 function CustomApp({ Component, pageProps }: CustomAppProps) {
-  const apolloClient = useApollo(pageProps);
   const router = useRouter();
   const [user] = useInitAuth({ router });
   useInitChat(user);
@@ -39,15 +36,13 @@ function CustomApp({ Component, pageProps }: CustomAppProps) {
   return (
     <>
       <Head>
-        <title>SparkLite</title>
+        <title>Spark-7</title>
       </Head>
       <SparkThemeProvider clientType={ClientTypes.Seven}>
-        <ApolloProvider client={apolloClient}>
-          {LayoutComponent({
-            children: <Component {...pageProps} key={router.asPath} />,
-            router,
-          })}
-        </ApolloProvider>
+        {LayoutComponent({
+          children: <Component {...pageProps} key={router.asPath} />,
+          router,
+        })}
       </SparkThemeProvider>
     </>
   );
