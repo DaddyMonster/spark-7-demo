@@ -1,4 +1,4 @@
-name: App Tree Deployment CI
+name: App Deployment
 on:
   push:
     branches:
