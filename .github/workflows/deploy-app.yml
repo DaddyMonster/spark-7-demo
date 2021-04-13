@@ -59,10 +59,19 @@ jobs:
       - run: git fetch origin master
 
       # 디펜던시 캐싱
-      # ---- 잠시 이동
+      - name: Cache node modules
+        id: node-cache
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
       # Install
       - name: Install Dependencies
-        #if: steps.node-cache.outputs.cache-hit != 'true'
+        if: steps.node-cache.outputs.cache-hit != 'true'
         run: yarn install
 
       # Next Cache
