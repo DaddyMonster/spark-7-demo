@@ -12,11 +12,7 @@ export interface ChatMessage {
   cloudVoice: string;
 }
 
-/* const chatSubCollectionPrefix = 'chat-'; */
 export const ChatMessageCollection = firestore.collection('chat-message');
-
-/* export const ChatMsgGroup = (metaId: string) =>
-  firestore.collectionGroup(chatSubCollectionPrefix + metaId); */
 
 export type ChatRef = firebase.firestore.DocumentReference<firebase.firestore.DocumentData>;
 export const createChatRef = (chatId: string): ChatRef => {
