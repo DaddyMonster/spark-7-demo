@@ -19,6 +19,7 @@ export const Index: CustomPageType = () => {
             <Grid item xs={12} lg={5}>
               <div className="flex h-full justify-center items-center">
                 <Image
+                  alt="girls on phone"
                   src="/svg/girls-over-phone.svg"
                   width="500vw"
                   height={400}
