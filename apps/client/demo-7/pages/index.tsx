@@ -6,10 +6,10 @@ import { GoogleBtn } from '../components/atoms/button/GoogleBtn';
 import { JUMBO_TWO_HEIGHT } from '../constants/layout-sizes';
 import { useAuth } from '../hooks/auth';
 import { CustomPageType } from '../types/custom-page';
-const texts = ['7분간 기적 일어남!', '시간 순삭', '등등 효과가 좋다'];
+const texts = ['7분간 기적 일어남!!', '시간 순삭', '등등 효과가 좋다'];
 
 export const Index: CustomPageType = () => {
-  const { user  } = useAuth();
+  const { user } = useAuth();
   const { loginUser, logout } = useAuth();
   return (
     <>
@@ -113,7 +113,7 @@ const Jumbo = styled.div(({ theme }) => ({
   width: '100%',
   height: '100vh',
   overflow: 'hidden',
-  display: 'flex', 
+  display: 'flex',
 }));
 
 const Jumbo2 = styled(Paper)(({ theme }) => ({
