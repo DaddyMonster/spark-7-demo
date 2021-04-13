@@ -1,6 +1,5 @@
 import dy from 'dayjs';
 import utc from 'dayjs/plugin/utc';
-import firebase from 'firebase/app';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useCollection, useDocument } from 'react-firebase-hooks/firestore';
@@ -114,19 +113,6 @@ export function useLive(): useLiveReturn {
       liveUid: newLiveUid,
     });
   };
-
-  /*   const addMessage = async (msg: string) => {
-    const { displayName, uid, localLang, photoURL } = user;
-    const createdAt = firebase.firestore.Timestamp.fromDate(
-      dy().utc().toDate()
-    );
-    addChatToCollection(roomId, {
-      createdAt,
-      message: msg,
-      roomId,
-      user: { displayName, uid, nation: localLang, photoURL: photoURL ?? '' },
-    });
-  }; */
 
   const leave = () => {
     if (!unloadRef.current) {

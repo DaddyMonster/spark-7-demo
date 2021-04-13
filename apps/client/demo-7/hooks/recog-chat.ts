@@ -67,7 +67,7 @@ export function useRecogChat({
   const onSpeechStart = async () => {
     setmsgStatus('recognizing');
     const chatId = nanoid();
-    chatRef.current = createChatRef(chatId, metaId);
+    chatRef.current = createChatRef(chatId);
     const { displayName, localLang, photoURL, uid } = user;
     await chatRef.current.set({
       createdAt: firebase.firestore.Timestamp.fromDate(dy().toDate()),
