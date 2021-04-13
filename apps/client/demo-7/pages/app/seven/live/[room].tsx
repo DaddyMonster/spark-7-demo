@@ -180,23 +180,40 @@ const LiveRoom: CustomPageType = () => {
               </Hidden>
             </LeftHeader>
 
-            <Scrollbar style={{ height: 'min-content' }} className="px-3">
-              {messages.map((msg, index) => {
-                const { message, id, user } = msg;
-                return (
-                  <ChatMessage
-                    message={message}
-                    clientUid={me.uid}
-                    isSpeaking={false}
-                    messageId={id}
-                    key={id}
-                    {...user}
-                    onClick={() => setSelectedChatMsg(msg)}
-                    prevUid={index > 0 ? messages[index - 1].user.uid : null}
-                  />
-                );
-              })}
-
+            <Scrollbar
+              style={{
+                display: 'flex',
+                position: 'relative',
+                minHeight: 400,
+              }}
+              className="px-3"
+            >
+              <div
+                style={{
+                  position: 'absolute',
+                  width: '100%',
+                  top: 0,
+                  left: 0,
+                  bottom: 0,
+                  right: 0,
+                }}
+              >
+                {messages.map((msg, index) => {
+                  const { message, id, user } = msg;
+                  return (
+                    <ChatMessage
+                      message={message}
+                      clientUid={me.uid}
+                      isSpeaking={false}
+                      messageId={id}
+                      key={id}
+                      {...user}
+                      onClick={() => setSelectedChatMsg(msg)}
+                      prevUid={index > 0 ? messages[index - 1].user.uid : null}
+                    />
+                  );
+                })}
+              </div>
               <div ref={bottomRef} />
             </Scrollbar>
             <div className="mt-auto">

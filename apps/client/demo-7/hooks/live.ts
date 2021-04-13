@@ -34,6 +34,7 @@ export function useLive(): useLiveReturn {
   const { query } = useRouter();
   const { user } = useAuth();
   const roomId = query.room as string;
+  
   const [msgSnap, msgLoading, msgError] = useCollection(chatQuery(roomId));
   const [chatMetaSnap, chatMetaLoading, chatMetaError] = useDocument<ChatMeta>(
     ChatMetaCollection.doc(roomId)

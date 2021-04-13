@@ -5,3 +5,174 @@ If you are using a library that supports the FIRESTORE_EMULATOR_HOST environment
 
 Dev App Server is now running.
 
+Apr 14, 2021 3:52:01 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Apr 14, 2021 3:52:01 AM com.google.net.webchannel.server.common.CorsFilter populateCustomHeaders
+WARNING: Invalid $httpHeaders: X-Goog-Api-Client:gl-js/ fire/8.3.2
+X-Firebase-GMPID:1:427061924743:web:efcb71917b03af383fb922
+Content-Type:text/plain
+
+Apr 14, 2021 3:52:02 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Apr 14, 2021 3:52:03 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Apr 14, 2021 3:52:03 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Apr 14, 2021 3:52:15 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Apr 14, 2021 3:52:15 AM com.google.net.webchannel.server.common.CorsFilter populateCustomHeaders
+WARNING: Invalid $httpHeaders: X-Goog-Api-Client:gl-js/ fire/8.3.2
+X-Firebase-GMPID:1:427061924743:web:efcb71917b03af383fb922
+Content-Type:text/plain
+Authorization:Bearer eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJuYW1lIjoiT3R0ZXIgR3Jhc3MiLCJlbWFpbCI6Im90dGVyLmdyYXNzLjg3MUBleGFtcGxlLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJhdXRoX3RpbWUiOjE2MTgzMzk5MzQsInVzZXJfaWQiOiJEblo5OGZiU3hJeXNDN1o0SW1OS1ppOUhIajJUIiwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJvdHRlci5ncmFzcy44NzFAZXhhbXBsZS5jb20iXSwiZ29vZ2xlLmNvbSI6WyIxNTQ3NjE4ODcwOTQwNTgyNzYzNDQxNjMxNDQ3MjYwNTE2OTI2MTE2Il19LCJzaWduX2luX3Byb3ZpZGVyIjoiZ29vZ2xlLmNvbSJ9LCJpYXQiOjE2MTgzMzk5MzQsImV4cCI6MTYxODM0MzUzNCwiYXVkIjoiaGVzc2VkIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2hlc3NlZCIsInN1YiI6IkRuWjk4ZmJTeEl5c0M3WjRJbU5LWmk5SEhqMlQifQ.
+
+Apr 14, 2021 3:52:15 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Apr 14, 2021 3:52:15 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Apr 14, 2021 3:52:20 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Apr 14, 2021 3:52:20 AM com.google.net.webchannel.server.common.CorsFilter populateCustomHeaders
+WARNING: Invalid $httpHeaders: X-Goog-Api-Client:gl-js/ fire/8.3.2
+X-Firebase-GMPID:1:427061924743:web:efcb71917b03af383fb922
+Content-Type:text/plain
+Authorization:Bearer eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJuYW1lIjoiT3R0ZXIgR3Jhc3MiLCJlbWFpbCI6Im90dGVyLmdyYXNzLjg3MUBleGFtcGxlLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJhdXRoX3RpbWUiOjE2MTgzMzk5MzQsInVzZXJfaWQiOiJEblo5OGZiU3hJeXNDN1o0SW1OS1ppOUhIajJUIiwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJvdHRlci5ncmFzcy44NzFAZXhhbXBsZS5jb20iXSwiZ29vZ2xlLmNvbSI6WyIxNTQ3NjE4ODcwOTQwNTgyNzYzNDQxNjMxNDQ3MjYwNTE2OTI2MTE2Il19LCJzaWduX2luX3Byb3ZpZGVyIjoiZ29vZ2xlLmNvbSJ9LCJpYXQiOjE2MTgzMzk5MzQsImV4cCI6MTYxODM0MzUzNCwiYXVkIjoiaGVzc2VkIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2hlc3NlZCIsInN1YiI6IkRuWjk4ZmJTeEl5c0M3WjRJbU5LWmk5SEhqMlQifQ.
+
+Apr 14, 2021 3:52:20 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Apr 14, 2021 3:52:20 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Apr 14, 2021 3:52:21 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Apr 14, 2021 3:52:21 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Apr 14, 2021 3:52:21 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Apr 14, 2021 3:52:22 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Apr 14, 2021 3:52:50 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Apr 14, 2021 3:52:50 AM com.google.net.webchannel.server.common.CorsFilter populateCustomHeaders
+WARNING: Invalid $httpHeaders: X-Goog-Api-Client:gl-js/ fire/8.3.2
+X-Firebase-GMPID:1:427061924743:web:efcb71917b03af383fb922
+Content-Type:text/plain
+Authorization:Bearer eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJuYW1lIjoiT3R0ZXIgR3Jhc3MiLCJlbWFpbCI6Im90dGVyLmdyYXNzLjg3MUBleGFtcGxlLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJhdXRoX3RpbWUiOjE2MTgzMzk5MzQsInVzZXJfaWQiOiJEblo5OGZiU3hJeXNDN1o0SW1OS1ppOUhIajJUIiwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJvdHRlci5ncmFzcy44NzFAZXhhbXBsZS5jb20iXSwiZ29vZ2xlLmNvbSI6WyIxNTQ3NjE4ODcwOTQwNTgyNzYzNDQxNjMxNDQ3MjYwNTE2OTI2MTE2Il19LCJzaWduX2luX3Byb3ZpZGVyIjoiZ29vZ2xlLmNvbSJ9LCJpYXQiOjE2MTgzMzk5MzQsImV4cCI6MTYxODM0MzUzNCwiYXVkIjoiaGVzc2VkIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2hlc3NlZCIsInN1YiI6IkRuWjk4ZmJTeEl5c0M3WjRJbU5LWmk5SEhqMlQifQ.
+
+Apr 14, 2021 3:52:50 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Apr 14, 2021 3:52:50 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Apr 14, 2021 3:52:50 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Apr 14, 2021 3:52:51 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Apr 14, 2021 3:52:51 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Apr 14, 2021 3:52:55 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Apr 14, 2021 3:52:55 AM com.google.net.webchannel.server.common.CorsFilter populateCustomHeaders
+WARNING: Invalid $httpHeaders: X-Goog-Api-Client:gl-js/ fire/8.3.2
+X-Firebase-GMPID:1:427061924743:web:efcb71917b03af383fb922
+Content-Type:text/plain
+Authorization:Bearer eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJuYW1lIjoiT3R0ZXIgR3Jhc3MiLCJlbWFpbCI6Im90dGVyLmdyYXNzLjg3MUBleGFtcGxlLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJhdXRoX3RpbWUiOjE2MTgzMzk5MzQsInVzZXJfaWQiOiJEblo5OGZiU3hJeXNDN1o0SW1OS1ppOUhIajJUIiwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJvdHRlci5ncmFzcy44NzFAZXhhbXBsZS5jb20iXSwiZ29vZ2xlLmNvbSI6WyIxNTQ3NjE4ODcwOTQwNTgyNzYzNDQxNjMxNDQ3MjYwNTE2OTI2MTE2Il19LCJzaWduX2luX3Byb3ZpZGVyIjoiZ29vZ2xlLmNvbSJ9LCJpYXQiOjE2MTgzMzk5MzQsImV4cCI6MTYxODM0MzUzNCwiYXVkIjoiaGVzc2VkIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2hlc3NlZCIsInN1YiI6IkRuWjk4ZmJTeEl5c0M3WjRJbU5LWmk5SEhqMlQifQ.
+
+Apr 14, 2021 3:52:55 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Apr 14, 2021 3:52:56 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Apr 14, 2021 3:53:03 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Apr 14, 2021 3:53:03 AM com.google.net.webchannel.server.common.CorsFilter populateCustomHeaders
+WARNING: Invalid $httpHeaders: X-Goog-Api-Client:gl-js/ fire/8.3.2
+X-Firebase-GMPID:1:427061924743:web:efcb71917b03af383fb922
+Content-Type:text/plain
+Authorization:Bearer eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJuYW1lIjoiT3R0ZXIgR3Jhc3MiLCJlbWFpbCI6Im90dGVyLmdyYXNzLjg3MUBleGFtcGxlLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJhdXRoX3RpbWUiOjE2MTgzMzk5MzQsInVzZXJfaWQiOiJEblo5OGZiU3hJeXNDN1o0SW1OS1ppOUhIajJUIiwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJvdHRlci5ncmFzcy44NzFAZXhhbXBsZS5jb20iXSwiZ29vZ2xlLmNvbSI6WyIxNTQ3NjE4ODcwOTQwNTgyNzYzNDQxNjMxNDQ3MjYwNTE2OTI2MTE2Il19LCJzaWduX2luX3Byb3ZpZGVyIjoiZ29vZ2xlLmNvbSJ9LCJpYXQiOjE2MTgzMzk5MzQsImV4cCI6MTYxODM0MzUzNCwiYXVkIjoiaGVzc2VkIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2hlc3NlZCIsInN1YiI6IkRuWjk4ZmJTeEl5c0M3WjRJbU5LWmk5SEhqMlQifQ.
+
+Apr 14, 2021 3:53:03 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Apr 14, 2021 3:53:03 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Apr 14, 2021 3:53:03 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Apr 14, 2021 3:53:04 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Apr 14, 2021 3:53:04 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Apr 14, 2021 3:53:08 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Apr 14, 2021 3:53:09 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Apr 14, 2021 3:53:09 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Apr 14, 2021 3:53:09 AM com.google.net.webchannel.server.common.CorsFilter populateCustomHeaders
+WARNING: Invalid $httpHeaders: X-Goog-Api-Client:gl-js/ fire/8.3.2
+X-Firebase-GMPID:1:427061924743:web:efcb71917b03af383fb922
+Content-Type:text/plain
+Authorization:Bearer eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJuYW1lIjoiT3R0ZXIgR3Jhc3MiLCJlbWFpbCI6Im90dGVyLmdyYXNzLjg3MUBleGFtcGxlLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJhdXRoX3RpbWUiOjE2MTgzMzk5MzQsInVzZXJfaWQiOiJEblo5OGZiU3hJeXNDN1o0SW1OS1ppOUhIajJUIiwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJvdHRlci5ncmFzcy44NzFAZXhhbXBsZS5jb20iXSwiZ29vZ2xlLmNvbSI6WyIxNTQ3NjE4ODcwOTQwNTgyNzYzNDQxNjMxNDQ3MjYwNTE2OTI2MTE2Il19LCJzaWduX2luX3Byb3ZpZGVyIjoiZ29vZ2xlLmNvbSJ9LCJpYXQiOjE2MTgzMzk5MzQsImV4cCI6MTYxODM0MzUzNCwiYXVkIjoiaGVzc2VkIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2hlc3NlZCIsInN1YiI6IkRuWjk4ZmJTeEl5c0M3WjRJbU5LWmk5SEhqMlQifQ.
+
+Apr 14, 2021 3:53:10 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Apr 14, 2021 3:53:10 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Apr 14, 2021 3:53:17 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Apr 14, 2021 3:53:21 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Apr 14, 2021 3:53:52 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Apr 14, 2021 3:54:22 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Apr 14, 2021 3:54:22 AM com.google.cloud.datastore.emulator.firestore.webchannel.FirestoreV1WebChannelAdapter$FirestoreWriteHandler onClose
+INFO: channel closed
+Apr 14, 2021 3:54:23 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Apr 14, 2021 3:54:23 AM com.google.net.webchannel.server.common.CorsFilter populateCustomHeaders
+WARNING: Invalid $httpHeaders: X-Goog-Api-Client:gl-js/ fire/8.3.2
+X-Firebase-GMPID:1:427061924743:web:efcb71917b03af383fb922
+Content-Type:text/plain
+Authorization:Bearer eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJuYW1lIjoiT3R0ZXIgR3Jhc3MiLCJlbWFpbCI6Im90dGVyLmdyYXNzLjg3MUBleGFtcGxlLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJhdXRoX3RpbWUiOjE2MTgzMzk5MzQsInVzZXJfaWQiOiJEblo5OGZiU3hJeXNDN1o0SW1OS1ppOUhIajJUIiwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJvdHRlci5ncmFzcy44NzFAZXhhbXBsZS5jb20iXSwiZ29vZ2xlLmNvbSI6WyIxNTQ3NjE4ODcwOTQwNTgyNzYzNDQxNjMxNDQ3MjYwNTE2OTI2MTE2Il19LCJzaWduX2luX3Byb3ZpZGVyIjoiZ29vZ2xlLmNvbSJ9LCJpYXQiOjE2MTgzMzk5MzQsImV4cCI6MTYxODM0MzUzNCwiYXVkIjoiaGVzc2VkIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2hlc3NlZCIsInN1YiI6IkRuWjk4ZmJTeEl5c0M3WjRJbU5LWmk5SEhqMlQifQ.
+
+Apr 14, 2021 3:54:37 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Apr 14, 2021 3:54:37 AM com.google.net.webchannel.server.common.CorsFilter populateCustomHeaders
+WARNING: Invalid $httpHeaders: X-Goog-Api-Client:gl-js/ fire/8.3.2
+X-Firebase-GMPID:1:427061924743:web:efcb71917b03af383fb922
+Content-Type:text/plain
+Authorization:Bearer eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJuYW1lIjoiT3R0ZXIgR3Jhc3MiLCJlbWFpbCI6Im90dGVyLmdyYXNzLjg3MUBleGFtcGxlLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJhdXRoX3RpbWUiOjE2MTgzMzk5MzQsInVzZXJfaWQiOiJEblo5OGZiU3hJeXNDN1o0SW1OS1ppOUhIajJUIiwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJvdHRlci5ncmFzcy44NzFAZXhhbXBsZS5jb20iXSwiZ29vZ2xlLmNvbSI6WyIxNTQ3NjE4ODcwOTQwNTgyNzYzNDQxNjMxNDQ3MjYwNTE2OTI2MTE2Il19LCJzaWduX2luX3Byb3ZpZGVyIjoiZ29vZ2xlLmNvbSJ9LCJpYXQiOjE2MTgzMzk5MzQsImV4cCI6MTYxODM0MzUzNCwiYXVkIjoiaGVzc2VkIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2hlc3NlZCIsInN1YiI6IkRuWjk4ZmJTeEl5c0M3WjRJbU5LWmk5SEhqMlQifQ.
+
+Apr 14, 2021 3:54:37 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Apr 14, 2021 3:54:37 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Apr 14, 2021 3:54:37 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Apr 14, 2021 3:54:38 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Apr 14, 2021 3:54:38 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Apr 14, 2021 3:55:38 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Apr 14, 2021 3:55:39 AM com.google.cloud.datastore.emulator.firestore.webchannel.FirestoreV1WebChannelAdapter$FirestoreListenHandler onClose
+INFO: channel closed
+Apr 14, 2021 3:56:33 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Apr 14, 2021 3:56:33 AM com.google.net.webchannel.server.common.CorsFilter populateCustomHeaders
+WARNING: Invalid $httpHeaders: X-Goog-Api-Client:gl-js/ fire/8.3.2
+X-Firebase-GMPID:1:427061924743:web:efcb71917b03af383fb922
+Content-Type:text/plain
+Authorization:Bearer eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJuYW1lIjoiT3R0ZXIgR3Jhc3MiLCJlbWFpbCI6Im90dGVyLmdyYXNzLjg3MUBleGFtcGxlLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJhdXRoX3RpbWUiOjE2MTgzMzk5MzQsInVzZXJfaWQiOiJEblo5OGZiU3hJeXNDN1o0SW1OS1ppOUhIajJUIiwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJvdHRlci5ncmFzcy44NzFAZXhhbXBsZS5jb20iXSwiZ29vZ2xlLmNvbSI6WyIxNTQ3NjE4ODcwOTQwNTgyNzYzNDQxNjMxNDQ3MjYwNTE2OTI2MTE2Il19LCJzaWduX2luX3Byb3ZpZGVyIjoiZ29vZ2xlLmNvbSJ9LCJpYXQiOjE2MTgzMzk5MzQsImV4cCI6MTYxODM0MzUzNCwiYXVkIjoiaGVzc2VkIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2hlc3NlZCIsInN1YiI6IkRuWjk4ZmJTeEl5c0M3WjRJbU5LWmk5SEhqMlQifQ.
+
+Apr 14, 2021 3:56:33 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Apr 14, 2021 3:56:33 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Apr 14, 2021 3:56:33 AM com.google.net.webchannel.server.common.CorsFilter populateCustomHeaders
+WARNING: Invalid $httpHeaders: X-Goog-Api-Client:gl-js/ fire/8.3.2
+X-Firebase-GMPID:1:427061924743:web:efcb71917b03af383fb922
+Content-Type:text/plain
+Authorization:Bearer eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJuYW1lIjoiT3R0ZXIgR3Jhc3MiLCJlbWFpbCI6Im90dGVyLmdyYXNzLjg3MUBleGFtcGxlLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJhdXRoX3RpbWUiOjE2MTgzMzk5MzQsInVzZXJfaWQiOiJEblo5OGZiU3hJeXNDN1o0SW1OS1ppOUhIajJUIiwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJvdHRlci5ncmFzcy44NzFAZXhhbXBsZS5jb20iXSwiZ29vZ2xlLmNvbSI6WyIxNTQ3NjE4ODcwOTQwNTgyNzYzNDQxNjMxNDQ3MjYwNTE2OTI2MTE2Il19LCJzaWduX2luX3Byb3ZpZGVyIjoiZ29vZ2xlLmNvbSJ9LCJpYXQiOjE2MTgzMzk5MzQsImV4cCI6MTYxODM0MzUzNCwiYXVkIjoiaGVzc2VkIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2hlc3NlZCIsInN1YiI6IkRuWjk4ZmJTeEl5c0M3WjRJbU5LWmk5SEhqMlQifQ.
+
+Apr 14, 2021 3:56:34 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Apr 14, 2021 3:56:34 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
