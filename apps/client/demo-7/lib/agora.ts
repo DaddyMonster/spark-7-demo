@@ -136,12 +136,22 @@ export class Agora {
     });
   }
 
+  private get channelId() {
+    return this._channelId;
+  }
+
+  private get agoraClientRawUid() {
+    return this._agoraClientRawUid;
+  }
+
   private async resetToken() {
-    const { _agoraClientRawUid, _channelId } = this;
     const token = await fetchToken({
-      channelName: _channelId,
-      uid: _agoraClientRawUid,
+      channelName: this.channelId,
+      uid: this.agoraClientRawUid,
     });
+    console.warn('RESETTING TOKEN');
+    console.warn('CHANNEL ID : ', this.channelId);
+    console.warn('AGORA RAW UID : ', this.agoraClientRawUid);
     this._token = token;
     this.client.renewToken(token);
   }
