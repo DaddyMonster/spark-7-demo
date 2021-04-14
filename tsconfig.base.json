@@ -18,12 +18,12 @@
     "paths": {
       "@hessed/styles/theme": ["libs/styles/theme/src/index.ts"],
       "@hessed/apollo-next": ["libs/apollo-next/src/index.ts"],
-      "@hessed/storybook/lite": ["libs/storybook/lite/src/index.ts"],
       "@hessed/service-lib/agora": ["libs/service-lib/agora/src/index.ts"],
       "@hessed/service-lib/lemma": ["libs/service-lib/lemma/src/index.ts"],
       "@hessed/service-lib/translator": [
         "libs/service-lib/translator/src/index.ts"
-      ]
+      ],
+      "@hessed/storybook/seven": ["libs/storybook/seven/src/index.ts"]
     }
   },
   "files": ["libs/styles/theme/src/types/mui.override.d.ts"],

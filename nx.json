@@ -1,13 +1,18 @@
 {
   "implicitDependencies": {
     "workspace.json": "*",
-    "package.json": { "dependencies": "*", "devDependencies": "*" },
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
     "tsconfig.base.json": "*",
     "tslint.json": "*",
     ".eslintrc.json": "*",
     "nx.json": "*"
   },
-  "affected": { "defaultBase": "master" },
+  "affected": {
+    "defaultBase": "master"
+  },
   "npmScope": "hessed",
   "tasksRunnerOptions": {
     "default": {
@@ -20,19 +25,39 @@
     }
   },
   "projects": {
-    "mobile-spark": { "tags": [] },
-    "styles-theme": { "tags": [] },
-    "apollo-next": { "tags": [] },
-    "storybook-lite": { "tags": [] },
-    "mobile-demo-7": { "tags": [] },
-    "client-demo-7": { "tags": [] },
+    "mobile-spark": {
+      "tags": []
+    },
+    "styles-theme": {
+      "tags": []
+    },
+    "apollo-next": {
+      "tags": []
+    },
+    "mobile-demo-7": {
+      "tags": []
+    },
+    "client-demo-7": {
+      "tags": []
+    },
     "client-demo-7-e2e": {
       "tags": [],
       "implicitDependencies": ["client-demo-7"]
     },
-    "api-demo-7-srv": { "tags": [] },
-    "service-lib-agora": { "tags": [] },
-    "service-lib-lemma": { "tags": [] },
-    "service-lib-translator": { "tags": [] }
+    "api-demo-7-srv": {
+      "tags": []
+    },
+    "service-lib-agora": {
+      "tags": []
+    },
+    "service-lib-lemma": {
+      "tags": []
+    },
+    "service-lib-translator": {
+      "tags": []
+    },
+    "storybook-seven": {
+      "tags": []
+    }
   }
 }
