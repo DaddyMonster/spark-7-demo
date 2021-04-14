@@ -115,6 +115,9 @@ const Jumbo = styled.div(({ theme }) => ({
   height: '100vh',
   overflow: 'hidden',
   display: 'flex',
+  [theme.breakpoints.down('lg')]: {
+    marginTop: theme.spacing(5),
+  },
 }));
 
 const Jumbo2 = styled(Paper)(({ theme }) => ({

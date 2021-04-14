@@ -213,8 +213,8 @@ const LiveRoom: CustomPageType = () => {
                     />
                   );
                 })}
+                <div ref={bottomRef} />
               </div>
-              <div ref={bottomRef} />
             </Scrollbar>
             <div className="mt-auto">
               <Divider />
