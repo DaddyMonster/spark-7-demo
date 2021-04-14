@@ -145,13 +145,13 @@ export class Agora {
   }
 
   private async resetToken() {
-    console.warn('RESETTING TOKEN');
-    console.warn('CHANNEL ID : ', this.channelId);
-    console.warn('AGORA RAW UID : ', this.agoraClientRawUid);
     const token = await fetchToken({
       channelName: this.channelId,
       uid: this.agoraClientRawUid,
     });
+    console.warn('RESETTING TOKEN');
+    console.warn('CHANNEL ID : ', this.channelId);
+    console.warn('AGORA RAW UID : ', this.agoraClientRawUid);
     this._token = token;
     this.client.renewToken(token);
   }

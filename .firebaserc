@@ -5,11 +5,11 @@
   "targets": {
     "hessed": {
       "hosting": {
-        "demo-7-master": [
-          "spark-7"
-        ],
         "demo-7-dev": [
           "spark-7-dev"
+        ],
+        "demo-7-master": [
+          "spark-7"
         ]
       }
     }

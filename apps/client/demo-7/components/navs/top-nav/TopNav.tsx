@@ -5,7 +5,8 @@ import React, { useState } from 'react';
 import { HiMenuAlt2 } from 'react-icons/hi';
 import { useAuth } from '../../../hooks/auth';
 import {
-  LeftSidebarSizeEnum, useLeftSideStore
+  LeftSidebarSizeEnum,
+  useLeftSideStore,
 } from '../../../layout/left-side-bar/useLeftSideStore';
 import { GoogleBtn } from '../../atoms/button/GoogleBtn';
 import { NavRoute } from './NavRoute';
@@ -47,6 +48,7 @@ export const TopNav = ({ transparental = false }: TopNavProps) => {
               </Hidden>
               {/* <Spark7 width="160px" height="50px" /> */}
               <Image
+                alt="logo-7"
                 src="/spark-7.svg"
                 width="160px"
                 height="50px"

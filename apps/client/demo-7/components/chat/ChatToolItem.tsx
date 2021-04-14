@@ -42,7 +42,7 @@ const CustomIconButton = styled(IconButton)<{
   alwaysVisible: boolean;
 }>(({ theme, active, alwaysVisible }) => ({
   color: active ? theme.palette.danger.main : '',
-  [theme.breakpoints.down('lg')]: {
+  [theme.breakpoints.up('lg')]: {
     visibility: alwaysVisible ? 'visible' : 'hidden',
   },
 }));
