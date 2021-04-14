@@ -1,23 +1,14 @@
 {
   "version": 2,
-  "cli": {
-    "defaultCollection": "@nrwl/next"
-  },
+  "cli": { "defaultCollection": "@nrwl/next" },
   "defaultProject": "client-demo-7",
   "generators": {
     "@nrwl/react": {
-      "application": {
-        "babel": true
-      },
-      "lib": {
-        "style": "styled-components"
-      }
+      "application": { "babel": true },
+      "lib": { "style": "styled-components" }
     },
     "@nrwl/next": {
-      "application": {
-        "style": "styled-components",
-        "linter": "eslint"
-      }
+      "application": { "style": "styled-components", "linter": "eslint" }
     }
   },
   "projects": {
@@ -29,20 +20,13 @@
       "targets": {
         "start": {
           "executor": "@nrwl/react-native:start",
-          "options": {
-            "port": 8081
-          }
+          "options": { "port": 8081 }
         },
         "serve": {
           "executor": "@nrwl/workspace:run-commands",
-          "options": {
-            "command": "nx start spark"
-          }
+          "options": { "command": "nx start spark" }
         },
-        "run-ios": {
-          "executor": "@nrwl/react-native:run-ios",
-          "options": {}
-        },
+        "run-ios": { "executor": "@nrwl/react-native:run-ios", "options": {} },
         "bundle-ios": {
           "executor": "@nrwl/react-native:bundle",
           "outputs": ["apps/mobile/spark/build"],
@@ -158,15 +142,9 @@
           "options": {
             "uiFramework": "@storybook/react",
             "port": 4400,
-            "config": {
-              "configFolder": "libs/storybook/lite/.storybook"
-            }
+            "config": { "configFolder": "libs/storybook/lite/.storybook" }
           },
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
-          }
+          "configurations": { "ci": { "quiet": true } }
         },
         "build-storybook": {
           "executor": "@nrwl/storybook:build",
@@ -174,36 +152,9 @@
           "options": {
             "uiFramework": "@storybook/react",
             "outputPath": "dist/storybook/storybook-lite",
-            "config": {
-              "configFolder": "libs/storybook/lite/.storybook"
-            }
+            "config": { "configFolder": "libs/storybook/lite/.storybook" }
           },
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
-          }
-        }
-      }
-    },
-    "shared-assets": {
-      "root": "libs/shared/assets",
-      "sourceRoot": "libs/shared/assets/src",
-      "projectType": "library",
-      "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["libs/shared/assets/**/*.ts"]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/assets"],
-          "options": {
-            "jestConfig": "libs/shared/assets/jest.config.js",
-            "passWithNoTests": true
-          }
+          "configurations": { "ci": { "quiet": true } }
         }
       }
     },
@@ -213,14 +164,8 @@
       "projectType": "application",
       "generators": {},
       "targets": {
-        "bundle": {
-          "executor": "nx-react-native-expo:bundle",
-          "options": {}
-        },
-        "start": {
-          "executor": "nx-react-native-expo:start",
-          "options": {}
-        },
+        "bundle": { "executor": "nx-react-native-expo:bundle", "options": {} },
+        "start": { "executor": "nx-react-native-expo:start", "options": {} },
         "run-ios": {
           "executor": "nx-react-native-expo:run-ios",
           "options": {}
@@ -269,20 +214,10 @@
           "outputs": ["{options.outputPath}"],
           "options": {
             "root": "apps/client/demo-7",
-            "outputPath": "dist/apps/client/demo-7",
-            "assets": [
-              {
-                "input": "libs/shared/assets/img",
-                "glob": "*.jpg",
-                "output": "./public/static"
-              }
-            ]
+            "outputPath": "dist/apps/client/demo-7"
           },
           "configurations": {
-            "production": {
-              "generatePackageJson": true,
-              "dev": false
-            }
+            "production": { "generatePackageJson": true, "dev": false }
           }
         },
         "serve": {
@@ -301,9 +236,7 @@
         },
         "export": {
           "executor": "@nrwl/next:export",
-          "options": {
-            "buildTarget": "client-demo-7:build:production"
-          }
+          "options": { "buildTarget": "client-demo-7:build:production" }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
@@ -334,9 +267,7 @@
             "devServerTarget": "lite:serve"
           },
           "configurations": {
-            "production": {
-              "devServerTarget": "lite:serve:production"
-            }
+            "production": { "devServerTarget": "lite:serve:production" }
           }
         },
         "lint": {
@@ -385,15 +316,11 @@
         },
         "serve": {
           "executor": "@nrwl/node:execute",
-          "options": {
-            "buildTarget": "api-demo-7-srv:build"
-          }
+          "options": { "buildTarget": "api-demo-7-srv:build" }
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["apps/api/demo-7-srv/**/*.ts"]
-          }
+          "options": { "lintFilePatterns": ["apps/api/demo-7-srv/**/*.ts"] }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
@@ -412,9 +339,7 @@
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["libs/service-lib/agora/**/*.ts"]
-          }
+          "options": { "lintFilePatterns": ["libs/service-lib/agora/**/*.ts"] }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
@@ -433,9 +358,7 @@
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["libs/service-lib/lemma/**/*.ts"]
-          }
+          "options": { "lintFilePatterns": ["libs/service-lib/lemma/**/*.ts"] }
         },
         "test": {
           "executor": "@nrwl/jest:jest",

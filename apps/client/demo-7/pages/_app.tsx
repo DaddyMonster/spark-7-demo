@@ -10,6 +10,7 @@ import { CustomPageType } from '../types/custom-page';
 import { useRouter } from 'next/router';
 import { useInitAuth } from '../hooks/initAuth';
 import { useInitChat } from '../hooks/initChat';
+import wb from '../lib/workbox';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 /* ;
 import { useCollectionData } from 'react-firebase-hooks/firestore'; */
@@ -28,6 +29,7 @@ function CustomApp({ Component, pageProps }: CustomAppProps) {
     const jssStyles = document.querySelector('#jss-server-side');
     if (jssStyles) {
       jssStyles.parentElement?.removeChild(jssStyles);
+      wb();
     }
   }, []);
 
@@ -37,6 +39,10 @@ function CustomApp({ Component, pageProps }: CustomAppProps) {
     <>
       <Head>
         <title>SparkLite</title>
+        <meta
+          name="viewport"
+          content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
+        />
       </Head>
       <SparkThemeProvider clientType={ClientTypes.Seven}>
         {LayoutComponent({
