@@ -23,7 +23,8 @@
       "@hessed/service-lib/translator": [
         "libs/service-lib/translator/src/index.ts"
       ],
-      "@hessed/storybook/seven": ["libs/storybook/seven/src/index.ts"]
+      "@hessed/storybook/seven": ["libs/storybook/seven/src/index.ts"],
+      "@hessed/ui/web/atom": ["libs/ui/web/atom/src/index.ts"]
     }
   },
   "files": ["libs/styles/theme/src/types/mui.override.d.ts"],
