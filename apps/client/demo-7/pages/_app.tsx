@@ -12,11 +12,13 @@ import { useInitAuth } from '../hooks/initAuth';
 import { useInitChat } from '../hooks/initChat';
 import wb from '../lib/workbox';
 import 'react-perfect-scrollbar/dist/css/styles.css';
-/* ;
-import { useCollectionData } from 'react-firebase-hooks/firestore'; */
+
 interface CustomAppProps extends AppProps {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  Component: NextComponentType<NextPageContext, any, Record<string, string>> &
+  Component: NextComponentType<
+    NextPageContext,
+    unknown,
+    Record<string, string>
+  > &
     CustomPageType;
 }
 

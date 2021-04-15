@@ -97,27 +97,6 @@
         }
       }
     },
-    "apollo-next": {
-      "root": "libs/apollo-next",
-      "sourceRoot": "libs/apollo-next/src",
-      "projectType": "library",
-      "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["libs/apollo-next/**/*.{ts,tsx,js,jsx}"]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/apollo-next"],
-          "options": {
-            "jestConfig": "libs/apollo-next/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
     "mobile-demo-7": {
       "root": "apps/mobile/demo-7",
       "sourceRoot": "apps/mobile/demo-7/src",
@@ -374,7 +353,7 @@
           "executor": "@nrwl/storybook:storybook",
           "options": {
             "uiFramework": "@storybook/react",
-            "port": 4400,
+            "port": 4500,
             "config": { "configFolder": "libs/storybook/seven/.storybook" }
           },
           "configurations": { "ci": { "quiet": true } }
@@ -407,6 +386,266 @@
           "outputs": ["coverage/libs/ui/web/atom"],
           "options": {
             "jestConfig": "libs/ui/web/atom/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "ui-web-card": {
+      "root": "libs/ui/web/card",
+      "sourceRoot": "libs/ui/web/card/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/ui/web/card/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/ui/web/card"],
+          "options": {
+            "jestConfig": "libs/ui/web/card/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "ui-web-navs": {
+      "root": "libs/ui/web/navs",
+      "sourceRoot": "libs/ui/web/navs/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/ui/web/navs/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/ui/web/navs"],
+          "options": {
+            "jestConfig": "libs/ui/web/navs/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "ui-web-chat": {
+      "root": "libs/ui/web/chat",
+      "sourceRoot": "libs/ui/web/chat/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/ui/web/chat/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/ui/web/chat"],
+          "options": {
+            "jestConfig": "libs/ui/web/chat/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "ui-web-carousel": {
+      "root": "libs/ui/web/carousel",
+      "sourceRoot": "libs/ui/web/carousel/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/ui/web/carousel/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/ui/web/carousel"],
+          "options": {
+            "jestConfig": "libs/ui/web/carousel/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "hook-voice": {
+      "root": "libs/hook/voice",
+      "sourceRoot": "libs/hook/voice/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/hook/voice/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/hook/voice"],
+          "options": {
+            "jestConfig": "libs/hook/voice/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "hook-recog": {
+      "root": "libs/hook/recog",
+      "sourceRoot": "libs/hook/recog/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/hook/recog/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/hook/recog"],
+          "options": {
+            "jestConfig": "libs/hook/recog/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "client-lib-agora": {
+      "root": "libs/client-lib/agora",
+      "sourceRoot": "libs/client-lib/agora/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/client-lib/agora/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/client-lib/agora"],
+          "options": {
+            "jestConfig": "libs/client-lib/agora/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "client-lib-apollo-next": {
+      "root": "libs/client-lib/apollo-next",
+      "sourceRoot": "libs/client-lib/apollo-next/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/client-lib/apollo-next/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/client-lib/apollo-next"],
+          "options": {
+            "jestConfig": "libs/client-lib/apollo-next/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "hook-store": {
+      "root": "libs/hook/store",
+      "sourceRoot": "libs/hook/store/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/hook/store/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/hook/store"],
+          "options": {
+            "jestConfig": "libs/hook/store/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "client-module-seven-auth": {
+      "root": "libs/client-module/seven-auth",
+      "sourceRoot": "libs/client-module/seven-auth/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/client-module/seven-auth/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/client-module/seven-auth"],
+          "options": {
+            "jestConfig": "libs/client-module/seven-auth/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "client-module-seven-chat": {
+      "root": "libs/client-module/seven-chat",
+      "sourceRoot": "libs/client-module/seven-chat/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/client-module/seven-chat/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/client-module/seven-chat"],
+          "options": {
+            "jestConfig": "libs/client-module/seven-chat/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "client-lib-firebase": {
+      "root": "libs/client-lib/firebase",
+      "sourceRoot": "libs/client-lib/firebase/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/client-lib/firebase/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/client-lib/firebase"],
+          "options": {
+            "jestConfig": "libs/client-lib/firebase/jest.config.js",
             "passWithNoTests": true
           }
         }

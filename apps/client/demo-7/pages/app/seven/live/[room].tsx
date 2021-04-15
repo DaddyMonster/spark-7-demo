@@ -369,27 +369,3 @@ const IconBox = styled.div(({ theme }) => ({
   alignItems: 'center',
   justifyContent: 'space-around',
 }));
-
-/* const Tool = styled(MotionAvatar)(({ theme }) => ({
-  position: 'fixed',
-  bottom: 50,
-  right: 50,
-  width: 70,
-  height: 70,
-  background: theme.palette.primary.main,
-  boxShadow: theme.shadows[7],
-  cursor: 'pointer',
-  '& svg': {
-    fill: '#fff',
-    fontSize: '2rem',
-  },
-})); */
-
-/* <Tool
-        whileHover={{
-          rotate: [-5, 0, 5, 0, 5, 0],
-          scale: 1.05,
-        }}
-      >
-        <AiTwotoneTool />
-      </Tool> */

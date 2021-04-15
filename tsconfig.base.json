@@ -17,14 +17,31 @@
     "types": ["libs/styles/theme/src/types/mui.override.d.ts"],
     "paths": {
       "@hessed/styles/theme": ["libs/styles/theme/src/index.ts"],
-      "@hessed/apollo-next": ["libs/apollo-next/src/index.ts"],
       "@hessed/service-lib/agora": ["libs/service-lib/agora/src/index.ts"],
       "@hessed/service-lib/lemma": ["libs/service-lib/lemma/src/index.ts"],
       "@hessed/service-lib/translator": [
         "libs/service-lib/translator/src/index.ts"
       ],
       "@hessed/storybook/seven": ["libs/storybook/seven/src/index.ts"],
-      "@hessed/ui/web/atom": ["libs/ui/web/atom/src/index.ts"]
+      "@hessed/ui/web/atom": ["libs/ui/web/atom/src/index.ts"],
+      "@hessed/ui/web/card": ["libs/ui/web/card/src/index.ts"],
+      "@hessed/ui/web/navs": ["libs/ui/web/navs/src/index.ts"],
+      "@hessed/ui/web/chat": ["libs/ui/web/chat/src/index.ts"],
+      "@hessed/ui/web/carousel": ["libs/ui/web/carousel/src/index.ts"],
+      "@hessed/hook/voice": ["libs/hook/voice/src/index.ts"],
+      "@hessed/hook/recog": ["libs/hook/recog/src/index.ts"],
+      "@hessed/client-lib/agora": ["libs/client-lib/agora/src/index.ts"],
+      "@hessed/client-lib/apollo-next": [
+        "libs/client-lib/apollo-next/src/index.ts"
+      ],
+      "@hessed/hook/store": ["libs/hook/store/src/index.ts"],
+      "@hessed/client-module/seven-auth": [
+        "libs/client-module/seven-auth/src/index.ts"
+      ],
+      "@hessed/client-module/seven-chat": [
+        "libs/client-module/seven-chat/src/index.ts"
+      ],
+      "@hessed/client-lib/firebase": ["libs/client-lib/firebase/src/index.ts"]
     }
   },
   "files": ["libs/styles/theme/src/types/mui.override.d.ts"],
