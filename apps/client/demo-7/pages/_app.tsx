@@ -3,7 +3,7 @@ import { AppProps } from 'next/app';
 import Head from 'next/head';
 import React from 'react';
 import 'global/css/fonts.css';
-import '../styles/tailwind.css';
+import 'global/tailwind/seven/tailwindcss-seven.css';
 import { getLayoutComponent } from '../layout/get-layout';
 import { NextComponentType, NextPageContext } from 'next';
 import { CustomPageType } from '../types/custom-page';

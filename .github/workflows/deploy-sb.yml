@@ -1,0 +1,43 @@
+name: Storybook Deployment
+on:
+  push:
+    branches:
+      - dev
+    paths:
+      - '**/*.stories.*'
+
+env:
+  CHROMATIC_STORYBOOK_TOKKEN: ${{ secrets.CHROMATIC_STORYBOOK_TOKKEN }}
+  GITHUB_TOKKEN: ${{ secrets.GITHUB_TOKEN }}
+  BUILD_DIR: dist/storybook/seven
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout dev branch
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          ref: dev
+
+      # NODE Module Cache
+      - name: Check Cached node modules
+        id: node-cache
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
+      - name: Install Dependencies
+        if: steps.node-cache.outputs.cache-hit != 'true'
+        run: yarn install
+
+        # BUILD
+      - name: Build Storybook
+        run: npx nx run storybook-seven:build-storybook
+
+      - name: Publish Storybook
+        run: npx chromatic --project-token $CHROMATIC_STORYBOOK_TOKKEN --storybook-build-dir $BUILD_DIR --auto-accept-changes storybook --exit-zero-on-changes

@@ -1,11 +1,11 @@
 {
-  "extends": "../../../.eslintrc.json",
+  "extends": ["plugin:@nrwl/nx/react", "../../../../.eslintrc.json"],
   "ignorePatterns": ["!**/*"],
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "parserOptions": {
-        "project": ["apps/client/demo-7/tsconfig(.*)?.json"]
+        "project": ["libs/ui/web/atom/tsconfig.*?.json"]
       },
       "rules": {}
     },

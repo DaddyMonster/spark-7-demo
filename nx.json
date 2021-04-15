@@ -23,7 +23,6 @@
     "mobile-spark": { "tags": [] },
     "styles-theme": { "tags": [] },
     "apollo-next": { "tags": [] },
-    "storybook-lite": { "tags": [] },
     "mobile-demo-7": { "tags": [] },
     "client-demo-7": { "tags": [] },
     "client-demo-7-e2e": {
@@ -33,6 +32,8 @@
     "api-demo-7-srv": { "tags": [] },
     "service-lib-agora": { "tags": [] },
     "service-lib-lemma": { "tags": [] },
-    "service-lib-translator": { "tags": [] }
+    "service-lib-translator": { "tags": [] },
+    "storybook-seven": { "tags": [] },
+    "ui-web-atom": { "tags": [] }
   }
 }

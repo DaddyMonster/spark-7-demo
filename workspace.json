@@ -118,46 +118,6 @@
         }
       }
     },
-    "storybook-lite": {
-      "root": "libs/storybook/lite",
-      "sourceRoot": "libs/storybook/lite/src",
-      "projectType": "library",
-      "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["libs/storybook/lite/**/*.{ts,tsx,js,jsx}"]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/storybook/lite"],
-          "options": {
-            "jestConfig": "libs/storybook/lite/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "storybook": {
-          "executor": "@nrwl/storybook:storybook",
-          "options": {
-            "uiFramework": "@storybook/react",
-            "port": 4400,
-            "config": { "configFolder": "libs/storybook/lite/.storybook" }
-          },
-          "configurations": { "ci": { "quiet": true } }
-        },
-        "build-storybook": {
-          "executor": "@nrwl/storybook:build",
-          "outputs": ["{options.outputPath}"],
-          "options": {
-            "uiFramework": "@storybook/react",
-            "outputPath": "dist/storybook/storybook-lite",
-            "config": { "configFolder": "libs/storybook/lite/.storybook" }
-          },
-          "configurations": { "ci": { "quiet": true } }
-        }
-      }
-    },
     "mobile-demo-7": {
       "root": "apps/mobile/demo-7",
       "sourceRoot": "apps/mobile/demo-7/src",
@@ -386,6 +346,67 @@
           "outputs": ["coverage/libs/service-lib/translator"],
           "options": {
             "jestConfig": "libs/service-lib/translator/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "storybook-seven": {
+      "root": "libs/storybook/seven",
+      "sourceRoot": "libs/storybook/seven/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/storybook/seven/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/storybook/seven"],
+          "options": {
+            "jestConfig": "libs/storybook/seven/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "storybook": {
+          "executor": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/react",
+            "port": 4400,
+            "config": { "configFolder": "libs/storybook/seven/.storybook" }
+          },
+          "configurations": { "ci": { "quiet": true } }
+        },
+        "build-storybook": {
+          "executor": "@nrwl/storybook:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "uiFramework": "@storybook/react",
+            "outputPath": "dist/storybook/seven",
+            "config": { "configFolder": "libs/storybook/seven/.storybook" }
+          },
+          "configurations": { "ci": { "quiet": true } }
+        }
+      }
+    },
+    "ui-web-atom": {
+      "root": "libs/ui/web/atom",
+      "sourceRoot": "libs/ui/web/atom/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/ui/web/atom/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/ui/web/atom"],
+          "options": {
+            "jestConfig": "libs/ui/web/atom/jest.config.js",
             "passWithNoTests": true
           }
         }

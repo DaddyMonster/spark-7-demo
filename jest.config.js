@@ -11,5 +11,7 @@ module.exports = {
     '<rootDir>/libs/service-lib/agora',
     '<rootDir>/libs/service-lib/lemma',
     '<rootDir>/libs/service-lib/translator',
+    '<rootDir>/libs/storybook/seven',
+    '<rootDir>/libs/ui/web/atom',
   ],
 };

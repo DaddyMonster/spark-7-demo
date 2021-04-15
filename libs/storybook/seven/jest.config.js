@@ -1,9 +1,9 @@
 module.exports = {
-  displayName: 'storybook-lite',
+  displayName: 'storybook-seven',
   preset: '../../../jest.preset.js',
   transform: {
     '^.+\\.[tj]sx?$': 'babel-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../../coverage/libs/storybook/lite',
+  coverageDirectory: '../../../coverage/libs/storybook/seven',
 };

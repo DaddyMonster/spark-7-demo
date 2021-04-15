@@ -1,0 +1,11 @@
+{
+  "migrations": [
+    {
+      "version": "11.5.3-beta.1",
+      "description": "Update react storybook lint config",
+      "factory": "./src/migrations/update-11-5-3/update-lint-ignores",
+      "package": "@nrwl/storybook",
+      "name": "update-11-5-3"
+    }
+  ]
+}

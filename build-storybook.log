@@ -1,0 +1,47 @@
+
+> nx run storybook-seven:build-storybook --output-dir=C:\Users\sec\AppData\Local\Temp\chromatic--21684-3TNCTLHDSfmd --outputDir=C:\Users\sec\AppData\Local\Temp\chromatic--21684-3TNCTLHDSfmd 
+
+>  NX  ui framework: @storybook/react
+
+
+>  NX  Storybook builder starting ...
+
+info => Cleaning outputDir C:\Users\sec\spark-7-demo\dist\storybook\storybook-seven
+info => Loading custom manager config
+info => Building manager..
+info => Loading manager config..
+info => Loading presets
+info => Loading custom manager config
+info => Compiling manager..
+info => Manager built (17 s)
+info => Building preview..
+info => Loading preview config..
+info => Loading presets
+info => Loading 1 config file in "libs/storybook/seven/.storybook"
+info => Loading 7 other files in "libs/storybook/seven/.storybook"
+info => Adding stories defined in "libs\storybook\seven\.storybook\main.js"
+info => Loading custom Webpack config (full-control mode).
+info => Compiling preview..
+info => Preview built (43 s)
+WARN asset size limit: The following asset(s) exceed the recommended size limit (244 KiB).
+WARN This can impact web performance.
+WARN Assets: 
+WARN   main.00f688e395a88543bc85.bundle.js (4.27 MiB)
+WARN   vendors~main.00f688e395a88543bc85.bundle.js (2.72 MiB)
+WARN entrypoint size limit: The following entrypoint(s) combined asset size exceeds the recommended limit (244 KiB). This can impact web performance.
+WARN Entrypoints:
+WARN   main (6.98 MiB)
+WARN       runtime~main.00f688e395a88543bc85.bundle.js
+WARN       vendors~main.00f688e395a88543bc85.bundle.js
+WARN       main.00f688e395a88543bc85.bundle.js
+WARN 
+WARN webpack performance recommendations: 
+WARN You can limit the size of your bundles by using import() or require.ensure to lazy load some parts of your application.
+WARN For more info visit https://webpack.js.org/guides/code-splitting/
+info => Output directory: C:\Users\sec\spark-7-demo\dist\storybook\storybook-seven
+
+>  NX  Storybook builder finished ...
+
+
+>  NX  Storybook files available in dist/storybook/storybook-seven
+
