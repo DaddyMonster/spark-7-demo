@@ -1,1 +1,1 @@
-export * from './lib/hooks-auth';
+export * from './lib/seven-auth';

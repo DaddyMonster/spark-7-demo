@@ -24,5 +24,11 @@ module.exports = {
     '<rootDir>/libs/client-lib/agora',
     '<rootDir>/libs/hook/store',
     '<rootDir>/libs/client-lib/firebase',
+    '<rootDir>/libs/client-module/seven-shared',
+    '<rootDir>/libs/client-module/chat-tag',
+    '<rootDir>/libs/client-module/seven-recog',
+    '<rootDir>/libs/client-module/seven-rtc',
+    '<rootDir>/libs/ui/web/layout',
+    '<rootDir>/libs/client-lib/next-custom-page',
   ],
 };

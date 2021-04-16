@@ -41,7 +41,23 @@
       "@hessed/client-module/seven-chat": [
         "libs/client-module/seven-chat/src/index.ts"
       ],
-      "@hessed/client-lib/firebase": ["libs/client-lib/firebase/src/index.ts"]
+      "@hessed/client-lib/firebase": ["libs/client-lib/firebase/src/index.ts"],
+      "@hessed/client-module/seven-shared": [
+        "libs/client-module/seven-shared/src/index.ts"
+      ],
+      "@hessed/client-module/chat-tag": [
+        "libs/client-module/chat-tag/src/index.ts"
+      ],
+      "@hessed/client-module/seven-recog": [
+        "libs/client-module/seven-recog/src/index.ts"
+      ],
+      "@hessed/client-module/seven-rtc": [
+        "libs/client-module/seven-rtc/src/index.ts"
+      ],
+      "@hessed/ui/web/layout": ["libs/ui/web/layout/src/index.ts"],
+      "@hessed/client-lib/custom-types": [
+        "libs/client-lib/custom-types/src/index.ts"
+      ]
     }
   },
   "files": ["libs/styles/theme/src/types/mui.override.d.ts"],

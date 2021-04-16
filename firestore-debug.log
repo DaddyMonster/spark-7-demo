@@ -5,3 +5,15 @@ If you are using a library that supports the FIRESTORE_EMULATOR_HOST environment
 
 Dev App Server is now running.
 
+Apr 16, 2021 4:28:57 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Apr 16, 2021 4:28:58 PM com.google.net.webchannel.server.common.CorsFilter populateCustomHeaders
+WARNING: Invalid $httpHeaders: X-Goog-Api-Client:gl-js/ fire/8.3.2
+X-Firebase-GMPID:1:427061924743:web:efcb71917b03af383fb922
+Content-Type:text/plain
+Authorization:Bearer eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJuYW1lIjoiQ2hpY2tlbiBPcmFuZ2UiLCJlbWFpbCI6ImNoaWNrZW4ub3JhbmdlLjkyMkBleGFtcGxlLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJhdXRoX3RpbWUiOjE2MTg1NTgxMzcsInVzZXJfaWQiOiJKSWtjM2tEb3pMSFNwSDlVeVpBRlpyVnBFMjFhIiwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJjaGlja2VuLm9yYW5nZS45MjJAZXhhbXBsZS5jb20iXSwiZ29vZ2xlLmNvbSI6WyI4NTkxMjA0NjQxMDA0MDcxNDUxNDM0MTM3MDYwMjA0MjE3NTg2NzA3Il19LCJzaWduX2luX3Byb3ZpZGVyIjoiZ29vZ2xlLmNvbSJ9LCJpYXQiOjE2MTg1NTgxMzcsImV4cCI6MTYxODU2MTczNywiYXVkIjoiaGVzc2VkIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2hlc3NlZCIsInN1YiI6IkpJa2Mza0RvekxIU3BIOVV5WkFGWnJWcEUyMWEifQ.
+
+Apr 16, 2021 4:28:59 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
+Apr 16, 2021 4:28:59 PM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected non-HTTP/2 connection.
