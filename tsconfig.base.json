@@ -24,7 +24,6 @@
       ],
       "@hessed/storybook/seven": ["libs/storybook/seven/src/index.ts"],
       "@hessed/ui/web/atom": ["libs/ui/web/atom/src/index.ts"],
-      "@hessed/ui/web/card": ["libs/ui/web/card/src/index.ts"],
       "@hessed/ui/web/navs": ["libs/ui/web/navs/src/index.ts"],
       "@hessed/ui/web/chat": ["libs/ui/web/chat/src/index.ts"],
       "@hessed/ui/web/carousel": ["libs/ui/web/carousel/src/index.ts"],
@@ -57,7 +56,11 @@
       "@hessed/ui/web/layout": ["libs/ui/web/layout/src/index.ts"],
       "@hessed/client-lib/custom-types": [
         "libs/client-lib/custom-types/src/index.ts"
-      ]
+      ],
+      "@hessed/ui/web/list": ["libs/ui/web/list/src/index.ts"],
+      "@hessed/ui/shared": ["libs/ui/shared/src/index.ts"],
+      "@hessed/ui/web/form": ["libs/ui/web/form/src/index.ts"],
+      "@hessed/ui/web/modal": ["libs/ui/web/modal/src/index.ts"]
     }
   },
   "files": ["libs/styles/theme/src/types/mui.override.d.ts"],

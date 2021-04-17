@@ -30,5 +30,8 @@ module.exports = {
     '<rootDir>/libs/client-module/seven-rtc',
     '<rootDir>/libs/ui/web/layout',
     '<rootDir>/libs/client-lib/next-custom-page',
+    '<rootDir>/libs/ui/shared',
+    '<rootDir>/libs/ui/web/form',
+    '<rootDir>/libs/ui/web/modal',
   ],
 };

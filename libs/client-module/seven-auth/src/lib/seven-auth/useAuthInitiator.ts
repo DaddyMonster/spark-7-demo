@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import firebase from 'firebase/app';
 import { useSevenAuthStore } from './useSevenAuthStore';
-import { RouterType, REGISTER_PATH } from './useAuthAction';
+import { RouterType, REGISTER_PATH } from './useSevenAuth';
 import { SevenUser } from './seven-user.collection';
 import { SevenUserInfo } from './model';
 

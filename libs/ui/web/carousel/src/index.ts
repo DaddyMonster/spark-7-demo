@@ -1,1 +1,1 @@
-export * from './lib/ui-web-carousel';
+export * from './lib/templates';
