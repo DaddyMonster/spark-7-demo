@@ -1,4 +1,4 @@
-import { Workbox } from 'workbox-window';
+/* import { Workbox } from 'workbox-window';
 
 export default () => {
   if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
@@ -35,3 +35,4 @@ export default () => {
     });
   }
 };
+ */

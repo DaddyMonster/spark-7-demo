@@ -19,8 +19,9 @@ if (!firebase.apps.length) {
 
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
+firestore.settings({ experimentalForceLongPolling: true });
 
-if (process.env.NODE_ENV !== 'production') {
+/* if (process.env.NODE_ENV !== 'production') {
   auth.useEmulator('http://localhost:9099');
   firestore.useEmulator('localhost', 8888);
-}
+} */

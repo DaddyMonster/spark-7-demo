@@ -8,7 +8,7 @@ import { LayoutWithSidebar } from './with-sidebar';
 
 const AppLayouts = {
   NO_LAYOUT: NoLayout,
-  INDEX_PAGE: ({ children, ...props }: any) => (
+/*   INDEX_PAGE: ({ children, ...props }: any) => (
     <IndexPageLayout {...props}>{children}</IndexPageLayout>
   ),
   APP_LAYOUT: ({ children, ...props }: any) => (
@@ -21,7 +21,7 @@ const AppLayouts = {
   ),
   LIVE_ROOM_LAYOUT: ({ children, ...props }: any) => (
     <LiveRoomLayout {...props}>{children}</LiveRoomLayout>
-  ),
+  ), */
 };
 
 export type AppLayoutType = typeof AppLayouts;
