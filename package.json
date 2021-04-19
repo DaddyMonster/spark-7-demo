@@ -24,6 +24,7 @@
     "workspace-generator": "nx workspace-generator",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
+    "start:seven": "nx run-many --target=serve --projects=client-demo-7,api-demo-7-srv --parallel",
     "start:demo": "concurrently \"firebase emulators:start\"  \"nx run-many --target=serve --projects=client-demo-7,api-demo-7-srv --parallel\"",
     "sb-seven": "nx run storybook-seven:storybook"
   },

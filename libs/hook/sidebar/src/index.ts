@@ -1,1 +1,1 @@
-export * from './lib/hook-sidebar';
+export * from './lib';

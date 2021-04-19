@@ -1,11 +1,8 @@
 /* eslint-disable react-hooks/rules-of-hooks */
+import { Theme, useMediaQuery } from '@material-ui/core';
 import { useEffect, useMemo } from 'react';
 import { SidebarStatus } from './sidebar-preset';
 import { useSideStore } from './useSideStore';
-
-export interface UseSideBarProps {
-  isMini?: boolean;
-}
 
 export interface UseSidebarReturn {
   sideStatus: SidebarStatus;
@@ -13,13 +10,12 @@ export interface UseSidebarReturn {
   width: number;
 }
 
-export function useSidebar({
-  isMini = false,
-}: UseSideBarProps): UseSidebarReturn {
+export function useSidebar(): UseSidebarReturn {
   const {
     setSideStatus,
     sideStatus,
     sideProperty,
+    isMini,
     toggleMini,
   } = useSideStore();
 
@@ -32,14 +28,18 @@ export function useSidebar({
     toggleMini(isMini);
     return () => {
       if (isMini) toggleMini(false);
+      const normalStatus = useMediaQuery((theme: Theme) =>
+        theme.breakpoints.down('md')
+      )
+        ? 'hidden'
+        : 'full';
+      setSideStatus(normalStatus);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isMini]);
 
   const toggleSidebar = () => {
-    const shouldMini = sideStatus !== 'full' && isMini;
-    const newSize =
-      sideStatus === 'full' ? 'hidden' : shouldMini ? 'mini' : 'full';
+    const newSize = sideStatus === 'full' ? 'hidden' : isMini ? 'mini' : 'full';
     setSideStatus(newSize);
   };
 

@@ -1,7 +1,13 @@
 import { Tab, Tabs } from '@material-ui/core';
 import React, { useMemo } from 'react';
+import { IconType } from 'react-icons/lib';
 import styled from 'styled-components';
-import { TopNavMenuListItem } from './top-nav-menu-list-type';
+
+export interface TopNavMenuListItem {
+  href: string;
+  label: string;
+  Icon: IconType;
+}
 
 export interface NavRouteProps {
   topMenuList: TopNavMenuListItem[];
