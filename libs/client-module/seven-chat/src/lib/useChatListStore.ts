@@ -47,6 +47,7 @@ export const useChatListStore = createStore<ChatListStore>((set, get) => ({
     set((store) => {
       store.cache.get(key).list.filter((x, i) => i !== idx);
     });
+    return true;
   },
   getCache: (key): ChatCacheValue | null => {
     const cached = get().cache.get(key);

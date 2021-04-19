@@ -1,5 +1,5 @@
 import { Dialog, Typography } from '@material-ui/core';
-import { UidMap } from '@hessed/client-module/seven-rtc';
+import { UidMap } from '@hessed/hook/rtc';
 import { ChatUserListCard } from '@hessed/ui/web/list';
 import { ChatLiveUser } from '@hessed/client-module/seven-chat';
 import React from 'react';

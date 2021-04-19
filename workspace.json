@@ -454,48 +454,6 @@
         }
       }
     },
-    "hook-voice": {
-      "root": "libs/hook/voice",
-      "sourceRoot": "libs/hook/voice/src",
-      "projectType": "library",
-      "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["libs/hook/voice/**/*.{ts,tsx,js,jsx}"]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/hook/voice"],
-          "options": {
-            "jestConfig": "libs/hook/voice/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
-    "hook-recog": {
-      "root": "libs/hook/recog",
-      "sourceRoot": "libs/hook/recog/src",
-      "projectType": "library",
-      "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["libs/hook/recog/**/*.{ts,tsx,js,jsx}"]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/hook/recog"],
-          "options": {
-            "jestConfig": "libs/hook/recog/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
     "client-lib-agora": {
       "root": "libs/client-lib/agora",
       "sourceRoot": "libs/client-lib/agora/src",
@@ -674,52 +632,6 @@
         }
       }
     },
-    "client-module-seven-recog": {
-      "root": "libs/client-module/seven-recog",
-      "sourceRoot": "libs/client-module/seven-recog/src",
-      "projectType": "library",
-      "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/client-module/seven-recog/**/*.{ts,tsx,js,jsx}"
-            ]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/client-module/seven-recog"],
-          "options": {
-            "jestConfig": "libs/client-module/seven-recog/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
-    "client-module-seven-rtc": {
-      "root": "libs/client-module/seven-rtc",
-      "sourceRoot": "libs/client-module/seven-rtc/src",
-      "projectType": "library",
-      "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/client-module/seven-rtc/**/*.{ts,tsx,js,jsx}"
-            ]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/client-module/seven-rtc"],
-          "options": {
-            "jestConfig": "libs/client-module/seven-rtc/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
     "ui-web-layout": {
       "root": "libs/ui/web/layout",
       "sourceRoot": "libs/ui/web/layout/src",
@@ -843,6 +755,90 @@
           "outputs": ["coverage/libs/ui/web/modal"],
           "options": {
             "jestConfig": "libs/ui/web/modal/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "hook-rtc": {
+      "root": "libs/hook/rtc",
+      "sourceRoot": "libs/hook/rtc/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/hook/rtc/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/hook/rtc"],
+          "options": {
+            "jestConfig": "libs/hook/rtc/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "hook-recognition": {
+      "root": "libs/hook/recognition",
+      "sourceRoot": "libs/hook/recognition/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/hook/recognition/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/hook/recognition"],
+          "options": {
+            "jestConfig": "libs/hook/recognition/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "hook-time-worker": {
+      "root": "libs/hook/time-worker",
+      "sourceRoot": "libs/hook/time-worker/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/hook/time-worker/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/hook/time-worker"],
+          "options": {
+            "jestConfig": "libs/hook/time-worker/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "hook-sidebar": {
+      "root": "libs/hook/sidebar",
+      "sourceRoot": "libs/hook/sidebar/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/hook/sidebar/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/hook/sidebar"],
+          "options": {
+            "jestConfig": "libs/hook/sidebar/jest.config.js",
             "passWithNoTests": true
           }
         }

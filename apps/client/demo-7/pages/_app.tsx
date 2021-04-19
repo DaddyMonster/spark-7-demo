@@ -4,14 +4,12 @@ import Head from 'next/head';
 import React from 'react';
 import 'global/css/fonts.css';
 import 'global/tailwind/seven/tailwindcss-seven.css';
-/* import { getLayoutComponent } from '../layout/get-layout'; */
 import { NextComponentType, NextPageContext } from 'next';
-import { CustomPageType } from '../types/custom-page';
 import { useRouter } from 'next/router';
-import { useInitAuth } from '../hooks/initAuth';
-import { useInitChat } from '../hooks/initChat';
 /* import wb from '../lib/workbox'; */
 import 'react-perfect-scrollbar/dist/css/styles.css';
+import { getLayoutComponent } from '../layout/get-layout';
+import { SevenPageType } from '../types';
 
 interface CustomAppProps extends AppProps {
   Component: NextComponentType<
@@ -19,13 +17,11 @@ interface CustomAppProps extends AppProps {
     unknown,
     Record<string, string>
   > &
-    CustomPageType;
+    SevenPageType;
 }
 
 function CustomApp({ Component, pageProps }: CustomAppProps) {
   const router = useRouter();
-  const [user] = useInitAuth({ router });
-  useInitChat(user);
 
   React.useEffect(() => {
     const jssStyles = document.querySelector('#jss-server-side');
@@ -35,7 +31,7 @@ function CustomApp({ Component, pageProps }: CustomAppProps) {
     }
   }, []);
 
-/*   const LayoutComponent = getLayoutComponent(Component.layout); */
+  const LayoutComponent = getLayoutComponent(Component.layout);
 
   return (
     <>
@@ -47,11 +43,10 @@ function CustomApp({ Component, pageProps }: CustomAppProps) {
         />
       </Head>
       <SparkThemeProvider clientType={ClientTypes.Seven}>
-        <Component {...pageProps} key={router.asPath} />
-        {/* {LayoutComponent({
+        {LayoutComponent({
           children: <Component {...pageProps} key={router.asPath} />,
           router,
-        })} */}
+        })}
       </SparkThemeProvider>
     </>
   );

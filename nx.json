@@ -37,8 +37,6 @@
     "ui-web-navs": { "tags": [] },
     "ui-web-chat": { "tags": [] },
     "ui-web-carousel": { "tags": [] },
-    "hook-voice": { "tags": [] },
-    "hook-recog": { "tags": [] },
     "client-lib-agora": { "tags": [] },
     "client-lib-apollo-next": { "tags": [] },
     "hook-store": { "tags": [] },
@@ -47,13 +45,15 @@
     "client-lib-firebase": { "tags": [] },
     "client-module-seven-shared": { "tags": [] },
     "client-module-chat-tag": { "tags": [] },
-    "client-module-seven-recog": { "tags": [] },
-    "client-module-seven-rtc": { "tags": [] },
     "ui-web-layout": { "tags": [] },
     "client-lib-custom-types": { "tags": [] },
     "ui-web-list": { "tags": [] },
     "ui-shared": { "tags": [] },
     "ui-web-form": { "tags": [] },
-    "ui-web-modal": { "tags": [] }
+    "ui-web-modal": { "tags": [] },
+    "hook-rtc": { "tags": [] },
+    "hook-recognition": { "tags": [] },
+    "hook-time-worker": { "tags": [] },
+    "hook-sidebar": { "tags": [] }
   }
 }
