@@ -6,7 +6,7 @@ import { useSideStore } from './useSideStore';
 
 export interface UseSidebarReturn {
   sideStatus: SidebarStatus;
-  toggleSidebar: () => void;
+  toggleSidebar: (close?: boolean) => void;
   width: number;
 }
 
@@ -38,9 +38,9 @@ export function useSidebar(): UseSidebarReturn {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isMini]);
 
-  const toggleSidebar = () => {
+  const toggleSidebar = (close = false) => {
     const newSize = sideStatus === 'full' ? 'hidden' : isMini ? 'mini' : 'full';
-    setSideStatus(newSize);
+    setSideStatus(close ? 'hidden' : newSize);
   };
 
   return { toggleSidebar, sideStatus, width: currentProperty.width };

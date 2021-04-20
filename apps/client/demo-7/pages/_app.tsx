@@ -10,6 +10,8 @@ import { useRouter } from 'next/router';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import { getLayoutComponent } from '../layout/get-layout';
 import { SevenPageType } from '../types';
+import { useAuthInitiator } from '@hessed/client-module/seven-auth';
+import { auth } from '@hessed/client-lib/firebase';
 
 interface CustomAppProps extends AppProps {
   Component: NextComponentType<
@@ -22,7 +24,10 @@ interface CustomAppProps extends AppProps {
 
 function CustomApp({ Component, pageProps }: CustomAppProps) {
   const router = useRouter();
-
+  const authinit = useAuthInitiator({
+    auth,
+    router,
+  });
   React.useEffect(() => {
     const jssStyles = document.querySelector('#jss-server-side');
     if (jssStyles) {

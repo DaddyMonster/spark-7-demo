@@ -14,21 +14,24 @@ export interface NavRouteProps {
   hidden: boolean;
   routeAsPath: string;
   onRouteClick: (path: string) => void;
+  __active_test__?: boolean;
 }
 export const NavRoute = ({
   hidden = false,
   topMenuList,
   routeAsPath,
   onRouteClick,
+  __active_test__,
 }: NavRouteProps) => {
   const active = useMemo(() => {
     return topMenuList.find((x) => routeAsPath.match(new RegExp(x.href)));
   }, [routeAsPath, topMenuList]);
 
   return (
-    <div className="h-full flex justify-center items-center">
-      {active && !hidden && (
+    <div className="h-full w-full flex justify-center items-center">
+      {(active || __active_test__) && !hidden && (
         <TabParent
+          centered
           value={active?.href ?? '/'}
           onChange={(_, val) => onRouteClick(val)}
         >

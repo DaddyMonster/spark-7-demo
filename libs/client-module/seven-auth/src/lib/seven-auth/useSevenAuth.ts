@@ -3,6 +3,7 @@ import firebase from 'firebase/app';
 import { auth, FbTimestamp } from '@hessed/client-lib/firebase';
 import { SevenUser } from './seven-user.collection';
 import { SevenUserInfo, SevenUserRegisterInput } from './model';
+import { useEffect } from 'react';
 
 export interface RouterType {
   push: (path: string) => void;
@@ -26,18 +27,26 @@ export function useSevenAuth<T extends RouterType>(
   const { setUser, user } = useSevenAuthStore();
 
   const login = async () => {
+    console.log('LOGGING IN');
     const provider = new firebase.auth.GoogleAuthProvider();
     const { user } = await auth.signInWithPopup(provider);
     if (!user) {
       throw new Error('Auth Failed');
     }
     const exist = await new SevenUser(user.uid).userInfoRef.get();
-    if (!exist) {
+    if (!exist.data()) {
+      console.log('USER NOT EXIST');
       router.push(REGISTER_PATH);
     }
+    console.log('USER EXIST PUSHING TO APP');
+    console.log(exist.data());
     setUser(exist.data() as SevenUserInfo);
     router.push(APP_PATH);
   };
+
+  useEffect(() => {
+    console.log('USER INFO CHANGED!', user);
+  }, [user]);
 
   const logout = async () => {
     await auth.signOut();
@@ -60,6 +69,7 @@ export function useSevenAuth<T extends RouterType>(
       photoURL,
       registered: true,
       uid,
+      reputation: 'new',
     };
     await new SevenUser(uid).userInfoRef.set(newUserInfo);
     setUser(newUserInfo);

@@ -3,7 +3,7 @@ import Image from 'next/image';
 import React from 'react';
 import { HiMenuAlt2 } from 'react-icons/hi';
 
-interface LogoBoxProps {
+export interface LogoBoxProps {
   logoPath: string;
   onSideToggle: () => void;
   showSideToggle: boolean;
@@ -25,7 +25,7 @@ export const LogoBox = ({
           </IconButton>
         )}
       </Hidden>
-      <Image
+      <img
         alt="logo-7"
         src={logoPath}
         width="160px"

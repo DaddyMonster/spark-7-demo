@@ -55,8 +55,6 @@ export const Index: SevenPageType = () => {
   );
 };
 
-Index.layout = 'INDEX_PAGE';
-
 export default Index;
 
 const Jumbo = styled.div(({ theme }) => ({

@@ -353,7 +353,7 @@
           "executor": "@nrwl/storybook:storybook",
           "options": {
             "uiFramework": "@storybook/react",
-            "port": 4500,
+            "port": 6100,
             "config": { "configFolder": "libs/storybook/seven/.storybook" }
           },
           "configurations": { "ci": { "quiet": true } }
