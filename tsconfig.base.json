@@ -56,7 +56,9 @@
       "@hessed/hook/rtc": ["libs/hook/rtc/src/index.ts"],
       "@hessed/hook/recognition": ["libs/hook/recognition/src/index.ts"],
       "@hessed/hook/time-worker": ["libs/hook/time-worker/src/index.ts"],
-      "@hessed/hook/sidebar": ["libs/hook/sidebar/src/index.ts"]
+      "@hessed/hook/sidebar": ["libs/hook/sidebar/src/index.ts"],
+      "@hessed/hook/create-auth": ["libs/hook/create-auth/src/index.ts"],
+      "@hessed/ui/web/util": ["libs/ui/web/util/src/index.ts"]
     }
   },
   "files": ["libs/styles/theme/src/types/mui.override.d.ts"],

@@ -1,10 +1,12 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const withNx = require('@nrwl/next/plugins/with-nx');
-/* const withPlugins = require('next-compose-plugins');
-const withPWA = require('next-pwa'); */
+const withPlugins = require('next-compose-plugins');
+const nextTranslate = require('next-translate');
+/* const withPWA = require('next-pwa'); */
 /* const WorkboxPlugin = require('workbox-webpack-plugin');
-const path = require('path'); */
-module.exports = withNx({});
+ */
+
+module.exports = withPlugins([withNx, nextTranslate]);
 
 /* [
   [withPWA, { pwa: { dest: 'public' } }],

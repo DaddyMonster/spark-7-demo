@@ -41,7 +41,7 @@ export function useSevenAuth<T extends RouterType>(
     console.log('USER EXIST PUSHING TO APP');
     console.log(exist.data());
     setUser(exist.data() as SevenUserInfo);
-    router.push(APP_PATH);
+    /* router.push(APP_PATH); */
   };
 
   useEffect(() => {
@@ -51,7 +51,7 @@ export function useSevenAuth<T extends RouterType>(
   const logout = async () => {
     await auth.signOut();
     setUser(null);
-    router.push(LOGOUT_PATH);
+    /* router.push(LOGOUT_PATH); */
   };
 
   const register = async (
@@ -73,7 +73,7 @@ export function useSevenAuth<T extends RouterType>(
     };
     await new SevenUser(uid).userInfoRef.set(newUserInfo);
     setUser(newUserInfo);
-    router.push(APP_PATH);
+    /* router.push(APP_PATH); */
   };
   return { login, logout, register, user };
 }

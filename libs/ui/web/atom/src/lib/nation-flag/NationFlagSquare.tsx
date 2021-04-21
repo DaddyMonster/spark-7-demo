@@ -9,6 +9,7 @@ export interface NationFlagSquareProps {
   onClick?: (lang: Nation) => void;
   shadow?: boolean;
   disabled?: boolean;
+  className?: string;
 }
 
 type FlagMap = {
@@ -25,6 +26,7 @@ export const NationFlagSquare = ({
   onClick = () => void {},
   shadow,
   disabled = false,
+  className = '',
 }: NationFlagSquareProps) => {
   return (
     <FlagAvatar
@@ -33,6 +35,7 @@ export const NationFlagSquare = ({
       onClick={() => onClick(nation)}
       $shadow={shadow}
       $disabled={disabled}
+      className={className}
     />
   );
 };

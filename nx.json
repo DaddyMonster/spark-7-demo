@@ -54,6 +54,8 @@
     "hook-rtc": { "tags": [] },
     "hook-recognition": { "tags": [] },
     "hook-time-worker": { "tags": [] },
-    "hook-sidebar": { "tags": [] }
+    "hook-sidebar": { "tags": [] },
+    "hook-create-auth": { "tags": [] },
+    "ui-web-util": { "tags": [] }
   }
 }

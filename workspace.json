@@ -843,6 +843,48 @@
           }
         }
       }
+    },
+    "hook-create-auth": {
+      "root": "libs/hook/create-auth",
+      "sourceRoot": "libs/hook/create-auth/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/hook/create-auth/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/hook/create-auth"],
+          "options": {
+            "jestConfig": "libs/hook/create-auth/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "ui-web-util": {
+      "root": "libs/ui/web/util",
+      "sourceRoot": "libs/ui/web/util/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/ui/web/util/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/ui/web/util"],
+          "options": {
+            "jestConfig": "libs/ui/web/util/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   }
 }

@@ -1,0 +1,8 @@
+{
+  "h1": "예제 타이틀",
+  "change-locale": "언어 바꾸기",
+  "to-second-page": "다음 페이지로",
+  "error-with-status": "흠... {{statusCode}} 에러",
+  "error-without-status": "흠... 서버 에러",
+  "title": "집 | 언어 | 학습"
+}

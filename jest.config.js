@@ -33,5 +33,7 @@ module.exports = {
     '<rootDir>/libs/hook/time-worker',
     '<rootDir>/libs/ui/web/nav',
     '<rootDir>/libs/hook/sidebar',
+    '<rootDir>/libs/hook/create-auth',
+    '<rootDir>/libs/ui/web/util',
   ],
 };
