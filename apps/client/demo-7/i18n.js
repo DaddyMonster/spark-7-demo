@@ -1,7 +1,7 @@
 module.exports = {
   locales: ['en', 'ko'],
   defaultLocale: 'ko',
-  loader: false,
+  /* loader: false, */
   pages: {
     '/': ['home'],
     '/more-info': ['more-info'],

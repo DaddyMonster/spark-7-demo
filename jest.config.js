@@ -35,5 +35,6 @@ module.exports = {
     '<rootDir>/libs/hook/sidebar',
     '<rootDir>/libs/hook/create-auth',
     '<rootDir>/libs/ui/web/util',
+    '<rootDir>/libs/client-lib/types',
   ],
 };

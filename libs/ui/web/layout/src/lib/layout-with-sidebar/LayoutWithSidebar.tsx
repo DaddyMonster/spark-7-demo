@@ -4,27 +4,29 @@ import styled from 'styled-components';
 import { AppRoot } from '../layout-root';
 import { LeftSidebarRoot } from './LeftSidebarRoot';
 
-export interface LayoutWithSidebarProps<T> {
+export interface LayoutWithSidebarProps<T, P> {
   TopNavComponent: React.ComponentType<T>;
-  SidebarContent: React.ComponentType;
+  SidebarContent: React.ComponentType<P>;
+  sideContentProps?: P;
   topNavProps: T;
   topNavHeight: number;
   children: React.ReactNode;
 }
 
-export function LayoutWithSidebar<T>({
+export function LayoutWithSidebar<T, P>({
   SidebarContent,
   TopNavComponent,
   children,
   topNavHeight,
   topNavProps,
-}: LayoutWithSidebarProps<T>) {
+  sideContentProps,
+}: LayoutWithSidebarProps<T, P>) {
   const { toggleSidebar, width } = useSidebar();
   return (
     <AppRoot>
       <TopNavComponent {...topNavProps} />
       <LeftSidebarRoot paddingTop={topNavHeight} width={width}>
-        <SidebarContent />
+        <SidebarContent {...sideContentProps} />
       </LeftSidebarRoot>
       <ContentWrapperRoot
         currentWidth={width}

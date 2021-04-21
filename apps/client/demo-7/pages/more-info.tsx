@@ -20,7 +20,7 @@ import PickInterests from '../components/more-info-components/PickInterests';
 import PickNation, {
   CurrentKey,
 } from '../components/more-info-components/PickNation';
-import loadNamespaces from 'next-translate/loadNamespaces';
+/* import loadNamespaces from 'next-translate/loadNamespaces'; */
 
 enableMapSet();
 
@@ -44,7 +44,7 @@ const MoreInfo = () => {
   const [stepValues, setstepValues] = useState(stepValue);
   const [que, setque] = useState(0);
 
-  console.log(t('more-info-msg-local-lang'));
+  /* console.log(t('more-info-msg-local-lang')); */
 
   const stepKey = useMemo(() => stepKeys[que], [que]);
   const message = useMemo(() => TR_MoreInfoMessage[stepKey], [stepKey]);
@@ -138,13 +138,13 @@ const MoreInfo = () => {
 };
 export default MoreInfo;
 
-export async function getServerSideProps({ locale }) {
+/* export async function getServerSideProps({ locale }) {
   const loaded = await loadNamespaces({ locale, pathname: '/more-info' });
   console.log('LOADED', loaded);
   return {
     props: {},
   };
-}
+} */
 
 const Root = styled.div(({ theme }) => ({
   width: '100%',

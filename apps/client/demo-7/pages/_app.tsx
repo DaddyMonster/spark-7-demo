@@ -4,7 +4,7 @@ import Head from 'next/head';
 import React from 'react';
 import 'global/css/fonts.css';
 import 'global/tailwind/seven/tailwindcss-seven.css';
-import { NextComponentType, NextPageContext } from 'next';
+import { GetStaticProps, NextComponentType, NextPageContext } from 'next';
 import { useRouter } from 'next/router';
 /* import wb from '../lib/workbox'; */
 import 'react-perfect-scrollbar/dist/css/styles.css';
@@ -39,8 +39,10 @@ function CustomApp({ Component, pageProps }: CustomAppProps) {
       /*  wb(); */
     }
   }, []);
-
-  const LayoutComponent = getLayoutComponent(Component.layout);
+ // THIS IS CURRENTLY A TAKEAWAY WHEN USING I18N...
+  const LayoutComponent = getLayoutComponent(
+    Component.layout ?? pageProps.layout
+  );
 
   return (
     <>
@@ -68,8 +70,4 @@ function CustomApp({ Component, pageProps }: CustomAppProps) {
   );
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default appWithI18n(CustomApp as any, {
-  ...i18nConfig,
-  skipInitialProps: true,
-});
+export default CustomApp;
