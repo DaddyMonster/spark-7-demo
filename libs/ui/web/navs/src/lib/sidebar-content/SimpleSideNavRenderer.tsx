@@ -1,36 +1,34 @@
-import { useSidebar, useSideStore } from '@hessed/hook/sidebar';
-import React, { useEffect } from 'react';
-import styled from 'styled-components';
-import Scrollbar from 'react-perfect-scrollbar';
+import { SidebarStatus } from '@hessed/hook/sidebar';
 import { NavRenderItemBase } from '@hessed/ui/shared';
+import React from 'react';
+import Scrollbar from 'react-perfect-scrollbar';
+import styled from 'styled-components';
 import SimpleSideNavItem from './SimpleSideNavItem';
 
 interface SimpleSideNavRendererProps {
   topNavHeight: number;
-  isMini: boolean;
   navItems: NavRenderItemBase[];
   asPath: string;
   onLinkClick: (route: string) => void;
+  sideStatus: SidebarStatus;
+  toggleSidebar: () => void;
+  isMiniPage: boolean;
 }
 
 export function SimpleSideNavRenderer({
   topNavHeight,
-  isMini,
   navItems,
   asPath,
   onLinkClick,
+  sideStatus,
+  toggleSidebar,
+  isMiniPage,
 }: SimpleSideNavRendererProps) {
-  const toggleMini = useSideStore((state) => state.toggleMini);
-  const { toggleSidebar, sideStatus } = useSidebar();
-  useEffect(() => {
-    toggleMini(isMini);
-  }, [isMini, toggleMini]);
-
   return (
     <SideRendererRoot topNavHeight={topNavHeight}>
       <div
-        onMouseOver={() => isMini && toggleSidebar()}
-        onMouseLeave={() => isMini && toggleSidebar(true)}
+        onMouseEnter={() => isMiniPage && toggleSidebar()}
+        onMouseLeave={() => isMiniPage && toggleSidebar()}
       >
         <Scrollbar>
           {navItems.map((x) => (
@@ -48,11 +46,11 @@ export function SimpleSideNavRenderer({
   );
 }
 
-const SideRendererRoot = styled.div<{ topNavHeight: number }>(
-  ({ theme, topNavHeight }) => ({
-    width: '100%',
-    height: `calc(100vh - ${topNavHeight}px)`,
-    padding: theme.spacing(6, 0, 2, 1),
-    boxShadow: theme.shadows[3],
-  })
-);
+const SideRendererRoot = styled.div<{
+  topNavHeight: number;
+}>(({ theme, topNavHeight }) => ({
+  width: '100%',
+  height: `calc(100vh - ${topNavHeight}px)`,
+  padding: theme.spacing(6, 0, 2, 1),
+  boxShadow: theme.shadows[3],
+}));

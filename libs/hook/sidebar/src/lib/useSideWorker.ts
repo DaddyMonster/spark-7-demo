@@ -1,54 +1,56 @@
-/* eslint-disable react-hooks/rules-of-hooks */
-import { Breakpoint, useMediaQuery, useTheme } from '@material-ui/core';
-import { useCallback, useEffect, useMemo } from 'react';
-import { SidebarPreset, SidebarStatus } from './sidebar-preset';
+import { Theme, useMediaQuery } from '@material-ui/core';
+import { useEffect } from 'react';
+import { SidebarProperty } from './sidebar-preset';
 import { useSideStore } from './useSideStore';
 
-interface UseSideWorkerProps {
-  sideProperties?: SidebarPreset;
-}
+export function useSideWorker() {
+  const {
+    setSideStatus,
+    sideProperty,
+    miniPage,
+    forceMiniOnHide,
+    sideStatus,
+  } = useSideStore();
 
-// PUT THIS ON WHERE SIDEBAR IS!
-
-export function useSideWorker({ sideProperties }: UseSideWorkerProps) {
-  const theme = useTheme();
-  const { setSideStatus, sideStatus, setSideProp, isMini } = useSideStore();
-
+  const fullSideCondition = useShouldKickIn(sideProperty.full, !miniPage);
   useEffect(() => {
-    if (!sideProperties) return;
-    setSideProp(sideProperties);
-  }, [sideProperties, setSideProp]);
-
-  const currentWidthKey = useMemo(() => {
-    const keys = [...theme.breakpoints.keys].reverse();
-    return keys.reduce((output: Breakpoint | null, key: Breakpoint) => {
-      const matches = useMediaQuery(theme.breakpoints.up(key));
-      return !output && matches ? key : output;
-    }, null || 'xs');
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    const { kickIn, upDown } = sideProperties['mini'];
-    if (isMini && useMediaQuery(theme.breakpoints[upDown][kickIn])) {
-      sideSetter('mini');
-      return;
+    if (fullSideCondition) {
+      console.log('SIDE FULL KICKING IN');
+      setSideStatus('full');
     }
-    Object.keys(sideProperties).forEach((x: SidebarStatus) => {
-      const { kickIn, upDown } = sideProperties[x];
-      if (useMediaQuery(theme.breakpoints[upDown][kickIn])) {
-        sideSetter(x);
-      }
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentWidthKey, isMini]);
+  }, [fullSideCondition, setSideStatus]);
 
-  const sideSetter = useCallback(
-    (newStatus: SidebarStatus) => {
-      if (sideStatus !== newStatus) {
-        setSideStatus(newStatus);
-      }
-    },
-    [sideStatus, setSideStatus]
+  const forceMini = sideStatus !== 'full' && forceMiniOnHide;
+  const miniSideCondition =
+    useShouldKickIn(sideProperty.mini, miniPage) || forceMini;
+  useEffect(() => {
+    if (miniSideCondition) {
+      console.log('SIDE MINI KICKING IN');
+      setSideStatus('mini');
+    }
+  }, [miniSideCondition, setSideStatus]);
+
+  const hideSideCondition = useShouldKickIn(
+    sideProperty.hidden,
+    !forceMiniOnHide
   );
+  useEffect(() => {
+    if (hideSideCondition) {
+      console.log('SIDE HIDDEN KICKING IN');
+      setSideStatus('hidden');
+    }
+  }, [hideSideCondition, setSideStatus]);
+
+  return null;
 }
+
+export const useShouldKickIn = (
+  prop: SidebarProperty,
+  extraCondition?: boolean
+) => {
+  const { kickIn, upDown } = prop;
+  const condition = useMediaQuery((theme: Theme) =>
+    theme.breakpoints[upDown](kickIn)
+  );
+  return condition && extraCondition;
+};

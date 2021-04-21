@@ -6,7 +6,6 @@ export interface SidebarProperty {
   width: number;
   kickIn: Breakpoint;
   upDown: 'up' | 'down';
-  isMini?: boolean;
 }
 
 export type SidebarPreset = {
@@ -15,19 +14,18 @@ export type SidebarPreset = {
 
 export const DEFAULT_SIDE_PRESET: SidebarPreset = {
   full: {
-    kickIn: 'lg',
+    kickIn: 'md',
     upDown: 'up',
-    width: 320,
+    width: 280,
   },
   hidden: {
-    kickIn: 'sm',
+    kickIn: 'md',
     upDown: 'down',
     width: 3,
   },
   mini: {
-    kickIn: 'lg',
+    kickIn: 'md',
     upDown: 'up',
     width: 50,
-    isMini: true,
   },
 };

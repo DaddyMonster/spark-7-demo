@@ -33,7 +33,7 @@ const Root = styled.div<{ active: boolean; sideSize: SidebarStatus }>(
     width: '100%',
     display: 'flex',
     alignItems: 'center',
-    padding: sideSize === 'full' ? theme.spacing(1.5, 0, 1.5, 2) : 0,
+    padding: theme.spacing(1.5, 0, 1.5, sideSize === 'full' ? 2 : 0),
     marginBottom: theme.spacing(2),
     background: active ? theme.palette.primary.main : 'none',
     boxShadow: active ? '3px 3px 0px 0px rgba(0,0,0,0.71)' : 'none',
@@ -42,7 +42,10 @@ const Root = styled.div<{ active: boolean; sideSize: SidebarStatus }>(
     '& svg': {
       fontSize: '1.7rem',
       fill: active ? '#fff' : theme.palette.grey[600],
-      marginRight: theme.spacing(2),
+      marginRight: sideSize !== 'mini' ? theme.spacing(2) : 0,
+      marginLeft: sideSize === 'mini' ? theme.spacing(1) : 0,
+      borderRadius: '50%',
+      transition: 'all 300ms ease',
     },
     '& p': {
       fontSize: '1rem',

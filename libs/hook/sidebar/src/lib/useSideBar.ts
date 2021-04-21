@@ -1,13 +1,14 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { Theme, useMediaQuery } from '@material-ui/core';
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import { SidebarStatus } from './sidebar-preset';
 import { useSideStore } from './useSideStore';
+import { useShouldKickIn } from './useSideWorker';
 
 export interface UseSidebarReturn {
   sideStatus: SidebarStatus;
-  toggleSidebar: (close?: boolean) => void;
+  toggleSidebar: () => void;
   width: number;
+  isMiniPage: boolean;
 }
 
 export function useSidebar(): UseSidebarReturn {
@@ -15,33 +16,35 @@ export function useSidebar(): UseSidebarReturn {
     setSideStatus,
     sideStatus,
     sideProperty,
-    isMini,
-    toggleMini,
+    miniPage,
+    forceMiniOnHide,
   } = useSideStore();
+
+  const miniSideConditionForToggle = useShouldKickIn(
+    sideProperty.mini,
+    miniPage
+  );
 
   const currentProperty = useMemo(() => sideProperty[sideStatus], [
     sideStatus,
     sideProperty,
   ]);
 
-  useEffect(() => {
-    toggleMini(isMini);
-    return () => {
-      if (isMini) toggleMini(false);
-      const normalStatus = useMediaQuery((theme: Theme) =>
-        theme.breakpoints.down('md')
-      )
-        ? 'hidden'
-        : 'full';
-      setSideStatus(normalStatus);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isMini]);
+  const isMiniNow = useMemo(
+    () => forceMiniOnHide || miniSideConditionForToggle,
+    [forceMiniOnHide, miniSideConditionForToggle]
+  );
 
-  const toggleSidebar = (close = false) => {
-    const newSize = sideStatus === 'full' ? 'hidden' : isMini ? 'mini' : 'full';
-    setSideStatus(close ? 'hidden' : newSize);
+  const toggleSidebar = () => {
+    const closedStatus = isMiniNow ? 'mini' : 'hidden';
+    console.log('TOGGLING', closedStatus);
+    setSideStatus(sideStatus === 'full' ? closedStatus : 'full');
   };
 
-  return { toggleSidebar, sideStatus, width: currentProperty.width };
+  return {
+    toggleSidebar,
+    sideStatus,
+    width: currentProperty.width,
+    isMiniPage: miniPage,
+  };
 }

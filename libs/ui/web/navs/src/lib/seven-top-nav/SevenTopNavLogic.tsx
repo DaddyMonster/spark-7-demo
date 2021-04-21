@@ -15,6 +15,7 @@ const SevenTopNavLogic = ({
   const logoPath = '/spark-7.svg';
   const { login, logout, user } = useSevenAuth(router);
   const { toggleSidebar } = useSidebar();
+
   const props: SimpleTopNavProps = useMemo(
     () => ({
       user,

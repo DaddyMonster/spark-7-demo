@@ -10,8 +10,10 @@ export type SideStore = {
   sideStatus: SidebarStatus;
   setSideStatus: (status: SidebarStatus) => void;
   setSideProp: (prop: SidebarPreset) => void;
-  isMini: boolean;
-  toggleMini: (bool: boolean) => void;
+  miniPage: boolean;
+  setMiniPage: (bool: boolean) => void;
+  forceMiniOnHide: boolean;
+  setForceMiniOnHide: (bool: boolean) => void;
 };
 
 export const useSideStore = createStore<SideStore>((set) => ({
@@ -19,6 +21,9 @@ export const useSideStore = createStore<SideStore>((set) => ({
   setSideProp: (prop) => set((store) => void (store.sideProperty = prop)),
   sideStatus: 'full',
   setSideStatus: (status) => set((store) => void (store.sideStatus = status)),
-  isMini: false,
-  toggleMini: (bool) => set((store) => void (store.isMini = bool)),
+  miniPage: false,
+  setMiniPage: (bool) => set((store) => void (store.miniPage = bool)),
+  forceMiniOnHide: false,
+  setForceMiniOnHide: (bool) =>
+    set((store) => void (store.forceMiniOnHide = bool)),
 }));

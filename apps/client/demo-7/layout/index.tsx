@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { CustomAppLayoutType } from '@hessed/client-lib/custom-types';
+import { SEVEN_TOP_NAV_HEIGHT } from '@hessed/client-module/seven-shared';
 import { LayoutWithSidebar } from '@hessed/ui/web/layout';
 import { SevenTopNav } from '@hessed/ui/web/navs';
-import { SEVEN_TOP_NAV_HEIGHT } from '@hessed/client-module/seven-shared';
 import SevenSideRenderer from '../components/side-bar-contents/SevenSideRenderer';
 const SevenLayout = {
   NO_LAYOUT: ({ children, ...props }: any) => <>{children}</>,
@@ -25,7 +24,6 @@ const SevenLayout = {
         SidebarContent={SevenSideRenderer}
         TopNavComponent={SevenTopNav}
         topNavHeight={SEVEN_TOP_NAV_HEIGHT}
-        sideContentProps={{ isMini: true }}
         topNavProps={{}}
       >
         {children}

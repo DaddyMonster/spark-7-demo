@@ -1,12 +1,24 @@
-import { useSidebar } from '@hessed/hook/sidebar';
+import {
+  SidebarStatus,
+  useShouldKickIn,
+  useSidebar,
+  useSideStore,
+  useSideWorker,
+} from '@hessed/hook/sidebar';
 import React from 'react';
 import styled from 'styled-components';
 import { AppRoot } from '../layout-root';
 import { LeftSidebarRoot } from './LeftSidebarRoot';
 
+export interface SideContentProps {
+  sideStatus: SidebarStatus;
+  toggleSidebar: () => void;
+  isMiniPage: boolean;
+}
+
 export interface LayoutWithSidebarProps<T, P> {
   TopNavComponent: React.ComponentType<T>;
-  SidebarContent: React.ComponentType<P>;
+  SidebarContent: React.ComponentType<P & SideContentProps>;
   sideContentProps?: P;
   topNavProps: T;
   topNavHeight: number;
@@ -21,17 +33,33 @@ export function LayoutWithSidebar<T, P>({
   topNavProps,
   sideContentProps,
 }: LayoutWithSidebarProps<T, P>) {
-  const { toggleSidebar, width } = useSidebar();
+  const { toggleSidebar, width, sideStatus, isMiniPage } = useSidebar();
+  const { sideProperty } = useSideStore();
+  useSideWorker();
+
+  const fullCondition = useShouldKickIn(sideProperty.full);
+  const handleContentClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (!fullCondition) {
+      toggleSidebar();
+    }
+  };
+
   return (
     <AppRoot>
       <TopNavComponent {...topNavProps} />
       <LeftSidebarRoot paddingTop={topNavHeight} width={width}>
-        <SidebarContent {...sideContentProps} />
+        <SidebarContent
+          {...sideContentProps}
+          sideStatus={sideStatus}
+          toggleSidebar={toggleSidebar}
+          isMiniPage={isMiniPage}
+        />
       </LeftSidebarRoot>
       <ContentWrapperRoot
         currentWidth={width}
         subtractHeight={topNavHeight}
-        onClick={() => toggleSidebar(true)}
+        onClick={handleContentClick}
       >
         {children}
       </ContentWrapperRoot>
