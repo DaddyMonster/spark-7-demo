@@ -8,13 +8,17 @@ import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import Carousel from 'nuka-carousel';
 import { GrPrevious, GrNext } from 'react-icons/gr';
-interface Props {
+interface CarouselTemplateProps {
   title: string;
-  children: React.ReactNode | React.ReactNode[];
-  noList?: string;
+  children: JSX.Element | JSX.Element[];
+  noListMessage: string;
 }
 
-function CarouselTemplate({ title, children, noList }: Props) {
+export function CarouselTemplate({
+  title,
+  children,
+  noListMessage,
+}: CarouselTemplateProps) {
   const childrenCount = useRef(0);
   const smDown = useMediaQuery((theme: Theme) => theme.breakpoints.down('sm'));
   const mdDown = useMediaQuery((theme: Theme) =>
@@ -23,6 +27,7 @@ function CarouselTemplate({ title, children, noList }: Props) {
 
   // FORCE RERENDER
   const [rerenderKey, setrerenderKey] = useState(0);
+
   useEffect(() => {
     if (Array.isArray(children) && children.length !== childrenCount.current) {
       childrenCount.current = children.length;
@@ -33,9 +38,9 @@ function CarouselTemplate({ title, children, noList }: Props) {
   return (
     <Root>
       <Title>{title}</Title>
-      {noList ? (
+      {!Array.isArray(children) || children.length === 0 ? (
         <div className="flex justify-center items-center h-40">
-          <Typography>{noList}</Typography>
+          <Typography>{noListMessage}</Typography>
         </div>
       ) : (
         <Carousel
@@ -66,8 +71,6 @@ function CarouselTemplate({ title, children, noList }: Props) {
     </Root>
   );
 }
-
-export default CarouselTemplate;
 
 const Root = styled.div(({ theme }) => ({
   padding: theme.spacing(2),

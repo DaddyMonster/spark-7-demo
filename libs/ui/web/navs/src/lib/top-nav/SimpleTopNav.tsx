@@ -94,6 +94,7 @@ export const SimpleTopNav = ({
         keepMounted
         open={Boolean(anchor)}
         onClose={() => setanchor(null)}
+        getContentAnchorEl={null}
         anchorOrigin={{
           horizontal: 'left',
           vertical: 'bottom',

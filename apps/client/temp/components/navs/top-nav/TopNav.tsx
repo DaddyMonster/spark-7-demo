@@ -89,9 +89,9 @@ export const TopNav = ({ transparental = false }: TopNavProps) => {
         style={{ zIndex: 3000 }}
         id="simple-menu"
         anchorEl={menuAnchor}
-        keepMounted
         open={Boolean(menuAnchor)}
         onClose={() => setmenuAnchor(null)}
+        getContentAnchorEl={null}
         anchorOrigin={{
           horizontal: 'left',
           vertical: 'bottom',

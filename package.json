@@ -25,8 +25,10 @@
     "dep-graph": "nx dep-graph",
     "help": "nx help",
     "start:seven": "concurrently \"yarn start:seven-client\" \"nx run api-demo-7-srv:serve\"",
-    "start:demo": "concurrently \"firebase emulators:start\"  \"nx run-many --target=serve --projects=client-demo-7,api-demo-7-srv --parallel\"",
+    "start:seven-e": "concurrently \"yarn start:seven-client\" \"yarn start:seven-api\" \"yarn start:emul\"",
     "start:seven-client": "npx cross-env NEXT_TRANSLATE_PATH=apps/client/demo-7 nx serve client-demo-7",
+    "start:seven-api": "nx serve api-demo-7-srv",
+    "start:emul": "firebase emulators:start",
     "sb-seven": "nx run storybook-seven:storybook"
   },
   "private": true,

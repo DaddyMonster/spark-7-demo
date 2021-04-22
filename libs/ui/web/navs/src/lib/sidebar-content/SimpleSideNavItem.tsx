@@ -19,7 +19,7 @@ const SimpleSideNavItem = ({
   sideSize,
 }: SimpleSideNavItemProps) => {
   return (
-    <Root active={active} sideSize={sideSize}>
+    <Root active={active} sideSize={sideSize} onClick={() => onClick(route)}>
       <Icon />
       {sideSize === 'full' && <Typography>{label}</Typography>}
     </Root>
@@ -39,6 +39,7 @@ const Root = styled.div<{ active: boolean; sideSize: SidebarStatus }>(
     boxShadow: active ? '3px 3px 0px 0px rgba(0,0,0,0.71)' : 'none',
     borderRadius: 5,
     zIndex: 500,
+    cursor: 'pointer',
     '& svg': {
       fontSize: '1.7rem',
       fill: active ? '#fff' : theme.palette.grey[600],

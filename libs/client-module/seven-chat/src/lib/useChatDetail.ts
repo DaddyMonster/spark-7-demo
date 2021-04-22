@@ -4,8 +4,8 @@ import { useMemo } from 'react';
 import { ChatRoom, ChatUser } from './model';
 import { ChatRoomCacheKey, useChatListStore } from './useChatListStore';
 import shallow from 'zustand/shallow';
-interface UseReserveActionProps {
-  cacheKey: ChatRoomCacheKey;
+export interface UserChatDetailProps {
+  cacheKey: ChatRoomCacheKey | null;
   selectedIdx: number;
   userInfo: SevenUserInfo;
 }
@@ -15,11 +15,14 @@ interface UseReserveActionReturn {
   roomDetail: ChatRoom;
 }
 
-export function useChatDetail({
-  cacheKey,
-  selectedIdx,
-  userInfo,
-}: UseReserveActionProps): UseReserveActionReturn {
+export function useChatDetail(
+  { cacheKey, selectedIdx, userInfo }: UserChatDetailProps,
+  dep = true
+): UseReserveActionReturn {
+  if (!dep) {
+    return null;
+  }
+
   const { cache, updateRef } = useChatListStore(
     (store) => ({
       cache: store.cache,
@@ -28,13 +31,15 @@ export function useChatDetail({
     shallow
   );
 
-  const docRef = useMemo(() => cache.get(cacheKey).list[selectedIdx], [
-    cache,
-    cacheKey,
-    selectedIdx,
-  ]);
+  const docRef = useMemo(
+    () => (cacheKey ? cache.get(cacheKey).list[selectedIdx] : null),
+    [cache, cacheKey, selectedIdx]
+  );
 
-  const roomDetail = useMemo(() => docRef.data() as ChatRoom, [docRef]);
+  const roomDetail = useMemo(
+    () => (docRef ? (docRef.data() as ChatRoom) : null),
+    [docRef]
+  );
 
   const meAsChatUser: ChatUser = useMemo(() => {
     if (!userInfo) return null;

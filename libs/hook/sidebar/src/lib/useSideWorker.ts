@@ -46,7 +46,7 @@ export function useSideWorker() {
 
 export const useShouldKickIn = (
   prop: SidebarProperty,
-  extraCondition?: boolean
+  extraCondition = true
 ) => {
   const { kickIn, upDown } = prop;
   const condition = useMediaQuery((theme: Theme) =>

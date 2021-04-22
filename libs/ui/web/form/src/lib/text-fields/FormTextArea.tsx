@@ -5,7 +5,8 @@ import { FormFieldRoot } from './FormTextField';
 import styled from 'styled-components';
 import { useField } from 'formik';
 import { FormTypoLabel } from './FormTypoLabel';
-import { FormErrorWrap } from './FormErrorWrap';
+import { FormErrorLabel } from './FormErrorLabel';
+
 interface Props {
   label: string;
   rows?: number;
@@ -51,17 +52,10 @@ export const FormTextArea = ({
           placeholder={placeholder}
         />
       </Box>
-      <FormErrorWrap>
-        {meta.touched && meta.error && (
-          <Typography
-            fontSize="0.7rem"
-            className="font-pretty"
-            color={red[400]}
-          >
-            {meta.error}
-          </Typography>
-        )}
-      </FormErrorWrap>
+      <FormErrorLabel
+        message={meta.error}
+        show={Boolean(meta.touched && meta.error)}
+      />
     </FormFieldRoot>
   );
 };

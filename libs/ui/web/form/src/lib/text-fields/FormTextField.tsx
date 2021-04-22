@@ -4,7 +4,7 @@ import { useField } from 'formik';
 import styled from 'styled-components';
 import { red } from '@material-ui/core/colors';
 import BaseFormTextField from './BaseFormTextField';
-import { FormErrorWrap } from './FormErrorWrap';
+import { FormErrorLabel } from './FormErrorLabel';
 
 interface FormTextFieldProps {
   name: string;
@@ -55,17 +55,10 @@ export const FormTextField = ({
         type={type}
         className={textFieldClass}
       />
-      <FormErrorWrap>
-        {meta.touched && meta.error && (
-          <Typography
-            fontSize="0.7rem"
-            className="font-pretty"
-            color={red[400]}
-          >
-            {meta.error}
-          </Typography>
-        )}
-      </FormErrorWrap>
+      <FormErrorLabel
+        message={meta.error}
+        show={Boolean(meta.touched && meta.error)}
+      />
     </FormFieldRoot>
   );
 };
@@ -73,6 +66,6 @@ export const FormTextField = ({
 export const FormFieldRoot = styled.div(({ theme }) => ({
   width: '100%',
   padding: theme.spacing(0, 1.5),
-  marginBottom: theme.spacing(2.2),
+  marginBottom: theme.spacing(0.5),
   position: 'relative',
 }));

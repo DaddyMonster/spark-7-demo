@@ -45,7 +45,12 @@ export type ChatTagUnion =
   | typeof life[number]
   | typeof interests[number];
 
-const merged: ChatTagUnion[] = [].concat(profession, business, life, interests);
+export const mergedChatTags: ChatTagUnion[] = [].concat(
+  profession,
+  business,
+  life,
+  interests
+);
 
 export interface TagChatSelection {
   id: ChatTagUnion;
@@ -53,7 +58,7 @@ export interface TagChatSelection {
   translation: string;
 }
 
-export const tagMap = merged.map(
+export const tagMap = mergedChatTags.map(
   (x): TagChatSelection => {
     return {
       id: x,

@@ -5,16 +5,11 @@ import {
   useSideStore,
   useSideWorker,
 } from '@hessed/hook/sidebar';
-import React from 'react';
+import React, { useMemo } from 'react';
 import styled from 'styled-components';
 import { AppRoot } from '../layout-root';
 import { LeftSidebarRoot } from './LeftSidebarRoot';
-
-export interface SideContentProps {
-  sideStatus: SidebarStatus;
-  toggleSidebar: () => void;
-  isMiniPage: boolean;
-}
+import { SideContentProps } from '@hessed/ui/web/navs';
 
 export interface LayoutWithSidebarProps<T, P> {
   TopNavComponent: React.ComponentType<T>;
@@ -40,21 +35,30 @@ export function LayoutWithSidebar<T, P>({
   const fullCondition = useShouldKickIn(sideProperty.full);
   const handleContentClick = (e: React.MouseEvent) => {
     e.stopPropagation();
+    e.preventDefault();
     if (!fullCondition) {
       toggleSidebar();
     }
   };
 
+  const shouldTriggerHoverEvent = useMemo(() => isMiniPage && fullCondition, [
+    isMiniPage,
+    fullCondition,
+  ]);
+  console.log('isMiniPage', isMiniPage);
+  console.log('ShouldTriggerHoverEvent', shouldTriggerHoverEvent);
+  console.log('FullCondition', fullCondition);
+
   return (
     <AppRoot>
       <TopNavComponent {...topNavProps} />
-      <LeftSidebarRoot paddingTop={topNavHeight} width={width}>
-        <SidebarContent
-          {...sideContentProps}
-          sideStatus={sideStatus}
-          toggleSidebar={toggleSidebar}
-          isMiniPage={isMiniPage}
-        />
+      <LeftSidebarRoot
+        paddingTop={topNavHeight}
+        width={width}
+        onMouseEnter={() => shouldTriggerHoverEvent && toggleSidebar()}
+        onMouseLeave={() => shouldTriggerHoverEvent && toggleSidebar()}
+      >
+        <SidebarContent {...sideContentProps} sideStatus={sideStatus} />
       </LeftSidebarRoot>
       <ContentWrapperRoot
         currentWidth={width}
@@ -73,6 +77,7 @@ const ContentWrapperRoot = styled.div<{
 }>(({ currentWidth, subtractHeight, theme }) => ({
   paddingLeft: currentWidth,
   width: '100%',
+  minHeight: `calc(100vh - ${subtractHeight}px)`,
   paddingTop: subtractHeight,
   flex: '1 0 auto',
   transition: 'all 300ms ease',

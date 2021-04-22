@@ -21,6 +21,7 @@ export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
 /* if (process.env.NODE_ENV !== 'production') {
-  auth.useEmulator('http://localhost:6400');
-  firestore.useEmulator('localhost', 6300);
-} */
+  auth.useEmulator('http://localhost:9099');
+  firestore.useEmulator('localhost', 8080);
+}
+ */

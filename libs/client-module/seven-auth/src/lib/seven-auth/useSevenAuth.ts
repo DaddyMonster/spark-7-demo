@@ -4,7 +4,7 @@ import { auth, FbTimestamp } from '@hessed/client-lib/firebase';
 import { SevenUser } from './seven-user.collection';
 import { SevenUserInfo, SevenUserRegisterInput } from './model';
 import { useEffect } from 'react';
-
+import { useRouter } from 'next/router';
 export interface RouterType {
   push: (path: string) => void;
   asPath: string;
@@ -21,9 +21,8 @@ export const REGISTER_PATH = '/more-info';
 export const APP_PATH = '/app/seven/home';
 export const LOGOUT_PATH = '/';
 
-export function useSevenAuth<T extends RouterType>(
-  router: T
-): UseAuthActionReturn {
+export function useSevenAuth(): UseAuthActionReturn {
+  const router = useRouter();
   const { setUser, user } = useSevenAuthStore();
 
   const login = async () => {

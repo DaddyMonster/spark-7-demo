@@ -1,15 +1,16 @@
 import { useSevenAuth } from '@hessed/client-module/seven-auth';
 import { GoogleButton } from '@hessed/ui/web/atom';
 import { Container, Grid, Typography } from '@material-ui/core';
+import useTranslation from 'next-translate/useTranslation';
+import Trans from 'next-translate/Trans';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
 import React from 'react';
 import styled from 'styled-components';
 import { SevenPageType } from '../types';
 
 export const Index: SevenPageType = () => {
-  const router = useRouter();
-  const { login, logout, user } = useSevenAuth(router);
+  const { login, logout, user } = useSevenAuth();
+  const { t } = useTranslation('index');
   return (
     <Jumbo>
       <Container maxWidth="lg" sx={{ display: 'flex' }}>
@@ -34,9 +35,7 @@ export const Index: SevenPageType = () => {
                   lineHeight: '3rem',
                 }}
               >
-                전 세계의 사람들과 7분간의 편안한 대화
-                <br />
-                지금 시작하세요
+                <Trans i18nKey="index:heading" components={{ s: <br /> }} />
               </Typography>
 
               <div className="w-full py-5 lg:ml-auto">

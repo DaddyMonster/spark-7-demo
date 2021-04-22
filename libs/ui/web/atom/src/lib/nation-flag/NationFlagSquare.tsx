@@ -4,7 +4,8 @@ import { Avatar } from '@material-ui/core';
 import styled from 'styled-components';
 
 export interface NationFlagSquareProps {
-  nation: Nation;
+  nation?: Nation;
+  src?: string;
   size?: number;
   onClick?: (lang: Nation) => void;
   shadow?: boolean;
@@ -16,8 +17,8 @@ type FlagMap = {
   [key in Nation]: string;
 };
 const flagMap: FlagMap = {
-  en: '/flags/us-flag.svg',
-  ko: '/flags/korea-flag.svg',
+  en: '/flags/us.svg',
+  ko: '/flags/kr.svg',
 };
 
 export const NationFlagSquare = ({
@@ -27,10 +28,13 @@ export const NationFlagSquare = ({
   shadow,
   disabled = false,
   className = '',
+  src,
 }: NationFlagSquareProps) => {
+  const url = nation ? flagMap[nation] : src;
+
   return (
     <FlagAvatar
-      src={flagMap[nation]}
+      src={url}
       $size={size}
       onClick={() => onClick(nation)}
       $shadow={shadow}

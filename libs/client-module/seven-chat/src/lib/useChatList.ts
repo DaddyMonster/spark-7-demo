@@ -20,11 +20,14 @@ interface UseChatListReturn {
   loading: boolean;
 }
 
-export function useChatList({
-  listQuery,
-  paging = 5,
-  queryCacheKey,
-}: UseChatListProps): UseChatListReturn {
+export function useChatList(
+  { listQuery, paging = 5, queryCacheKey }: UseChatListProps,
+  dep = true
+): UseChatListReturn {
+  if (!dep) {
+    return null;
+  }
+
   const [cursor, setcursor] = useState(1);
   const { addCache, cache, getCache } = useChatListStore();
   const [loading, setloading] = useState(true);

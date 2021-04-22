@@ -9,7 +9,7 @@ interface Props extends InputBaseProps {
 
 const BaseFormTextField = ({ label, ...props }: Props) => {
   return (
-    <div className="flex-1 mb-4">
+    <div className="flex-1 mb-1">
       <FormTypoLabel>{label}</FormTypoLabel>
       <Root>
         <Input {...props} />

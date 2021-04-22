@@ -15,3 +15,4 @@ export interface ChatRoom {
   id: string;
   tags: ChatTagUnion[];
 }
+  

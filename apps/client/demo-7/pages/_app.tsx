@@ -1,21 +1,22 @@
+import { auth } from '@hessed/client-lib/firebase';
+import { useAuthInitiator } from '@hessed/client-module/seven-auth';
 import { ClientTypes, SparkThemeProvider } from '@hessed/styles/theme';
-import { AppProps } from 'next/app';
-import Head from 'next/head';
-import React from 'react';
+import { CircularProgress } from '@material-ui/core';
 import 'global/css/fonts.css';
 import 'global/tailwind/seven/tailwindcss-seven.css';
-import { GetStaticProps, NextComponentType, NextPageContext } from 'next';
+import { NextComponentType, NextPageContext } from 'next';
+import { AppProps } from 'next/app';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
+import React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 /* import wb from '../lib/workbox'; */
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import { getLayoutComponent } from '../layout/get-layout';
 import { SevenPageType } from '../types';
-import { useAuthInitiator } from '@hessed/client-module/seven-auth';
-import { auth } from '@hessed/client-lib/firebase';
-import { CircularProgress } from '@material-ui/core';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import appWithI18n from 'next-translate/appWithI18n';
-import i18nConfig from '../i18n';
+import { enableMapSet } from 'immer';
+enableMapSet();
+
 interface CustomAppProps extends AppProps {
   Component: NextComponentType<
     NextPageContext,
@@ -39,7 +40,7 @@ function CustomApp({ Component, pageProps }: CustomAppProps) {
       /*  wb(); */
     }
   }, []);
- // THIS IS CURRENTLY A TAKEAWAY WHEN USING I18N...
+  // THIS IS CURRENTLY A TAKEAWAY WHEN USING I18N...
   const LayoutComponent = getLayoutComponent(
     Component.layout ?? pageProps.layout
   );

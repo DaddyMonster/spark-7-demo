@@ -5,15 +5,24 @@ export interface LeftSidebarRootProps {
   children: React.ReactNode;
   paddingTop: number;
   width: number;
+  onMouseEnter: () => void;
+  onMouseLeave: () => void;
 }
 
 export const LeftSidebarRoot = ({
   children,
   paddingTop,
   width,
+  onMouseEnter,
+  onMouseLeave,
 }: LeftSidebarRootProps) => {
   return (
-    <Root width={width} paddingTop={paddingTop}>
+    <Root
+      width={width}
+      paddingTop={paddingTop}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
       {children}
     </Root>
   );

@@ -1,0 +1,10 @@
+{
+  "page-title": "토픽 생성하기",
+  "page-subtitle": "대화 주제를 예약하고 생성하세요!",
+  "new-topic": "새로운 토픽",
+  "form-topic": "토픽 제목",
+  "form-description": "토픽 설명 (생략 가능)",
+  "form-lang": "언어",
+  "form-tags": "토픽 카테고리",
+  "form-start-time": "시작 시간?"
+}

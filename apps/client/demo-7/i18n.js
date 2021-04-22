@@ -3,8 +3,10 @@ module.exports = {
   defaultLocale: 'ko',
   /* loader: false, */
   pages: {
-    '/': ['home'],
+    '/': ['index'],
     '/more-info': ['more-info'],
+    '/app/seven/home': ['seven-home'],
+    '/app/seven/create-topic': ['seven-create-topic', 'validation'],
   },
   loadLocaleFrom: async (lang, ns) => {
     const isGlobal = /global/.test(ns);

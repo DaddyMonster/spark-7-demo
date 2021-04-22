@@ -5,14 +5,15 @@ import Scrollbar from 'react-perfect-scrollbar';
 import styled from 'styled-components';
 import SimpleSideNavItem from './SimpleSideNavItem';
 
-interface SimpleSideNavRendererProps {
+export interface SideContentProps {
+  sideStatus: SidebarStatus;
+}
+
+interface SimpleSideNavRendererProps extends SideContentProps {
   topNavHeight: number;
   navItems: NavRenderItemBase[];
   asPath: string;
   onLinkClick: (route: string) => void;
-  sideStatus: SidebarStatus;
-  toggleSidebar: () => void;
-  isMiniPage: boolean;
 }
 
 export function SimpleSideNavRenderer({
@@ -21,15 +22,10 @@ export function SimpleSideNavRenderer({
   asPath,
   onLinkClick,
   sideStatus,
-  toggleSidebar,
-  isMiniPage,
 }: SimpleSideNavRendererProps) {
   return (
     <SideRendererRoot topNavHeight={topNavHeight}>
-      <div
-        onMouseEnter={() => isMiniPage && toggleSidebar()}
-        onMouseLeave={() => isMiniPage && toggleSidebar()}
-      >
+      <div>
         <Scrollbar>
           {navItems.map((x) => (
             <SimpleSideNavItem

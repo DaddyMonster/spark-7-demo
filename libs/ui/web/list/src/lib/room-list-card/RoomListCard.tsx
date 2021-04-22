@@ -13,8 +13,15 @@ import styled from 'styled-components';
 
 dy.extend(rl);
 
-interface Props extends ChatRoom {
-  onClick: (id: string) => void;
+interface OnClickArgs {
+  id: string;
+  idx: number;
+  event: React.MouseEvent;
+}
+
+export interface RoomListCardProps extends ChatRoom {
+  onClick: (args: OnClickArgs) => void;
+  idx: number;
 }
 
 export const RoomListCard = ({
@@ -27,13 +34,13 @@ export const RoomListCard = ({
   lang,
   onClick,
   reserved,
-}: /* startTime,
-  tags, */
-Props) => {
+  tags,
+  idx,
+}: RoomListCardProps) => {
   const userURLs = useMemo(() => reserved.map((x) => x.photoURL), [reserved]);
 
   return (
-    <Root onClick={() => onClick(id)}>
+    <Root onClick={(event) => onClick({ id, idx, event })}>
       <div className="w-full flex" style={{ height: 80 }}>
         <Typography
           fontSize="1rem"

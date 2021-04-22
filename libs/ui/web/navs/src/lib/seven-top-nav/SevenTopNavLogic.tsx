@@ -13,7 +13,7 @@ const SevenTopNavLogic = ({
 }: SimpleTopNavLogicProps) => {
   const router = useRouter();
   const logoPath = '/spark-7.svg';
-  const { login, logout, user } = useSevenAuth(router);
+  const { login, logout, user } = useSevenAuth();
   const { toggleSidebar } = useSidebar();
 
   const props: SimpleTopNavProps = useMemo(

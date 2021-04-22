@@ -39,12 +39,10 @@ const stepValue: StepValue = {
 const MoreInfo = () => {
   const [user] = useAuthState(auth);
   const { t } = useTranslation('more-info');
-  const router = useRouter();
-  const { register } = useSevenAuth(router);
+  const { register } = useSevenAuth();
   const [stepValues, setstepValues] = useState(stepValue);
   const [que, setque] = useState(0);
-
-  /* console.log(t('more-info-msg-local-lang')); */
+  const router = useRouter();
 
   const stepKey = useMemo(() => stepKeys[que], [que]);
   const message = useMemo(() => TR_MoreInfoMessage[stepKey], [stepKey]);
