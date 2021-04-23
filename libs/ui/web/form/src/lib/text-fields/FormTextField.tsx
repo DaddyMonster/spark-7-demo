@@ -1,8 +1,7 @@
-import { InputBaseProps, Typography } from '@material-ui/core';
-import React, { useEffect, useRef } from 'react';
+import { InputBaseProps } from '@material-ui/core';
 import { useField } from 'formik';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { red } from '@material-ui/core/colors';
 import BaseFormTextField from './BaseFormTextField';
 import { FormErrorLabel } from './FormErrorLabel';
 
@@ -25,10 +24,10 @@ export const FormTextField = ({
   rootClass,
   textFieldClass,
   textFieldProps,
-  type,
+  type = 'text',
 }: FormTextFieldProps) => {
-  const [{ onChange, ...props }, meta, { setError }] = useField(name);
-
+  const [{ onChange, onBlur, ...props }, meta, { setError }] = useField(name);
+  const [focus, setfocus] = useState(false);
   const removeErrRef = useRef(false);
   useEffect(() => {
     if (meta.error === removeErrorIf) {
@@ -43,11 +42,19 @@ export const FormTextField = ({
     onChange(e);
   };
 
+  const blurHandler = (e: React.FocusEvent) => {
+    setfocus(false);
+    onBlur(e);
+  };
+
   return (
     <FormFieldRoot className={rootClass ?? ''}>
       <BaseFormTextField
+        isFocused={focus}
         {...textFieldProps}
         {...props}
+        onBlur={blurHandler}
+        onFocus={() => setfocus(true)}
         onChange={handleChange}
         error={Boolean(meta.error)}
         label={label}
@@ -65,7 +72,7 @@ export const FormTextField = ({
 
 export const FormFieldRoot = styled.div(({ theme }) => ({
   width: '100%',
-  padding: theme.spacing(0, 1.5),
-  marginBottom: theme.spacing(0.5),
+  padding: theme.spacing(0, 3),
+  marginBottom: theme.spacing(1.5),
   position: 'relative',
 }));

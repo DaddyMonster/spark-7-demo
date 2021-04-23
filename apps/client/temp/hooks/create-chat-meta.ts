@@ -49,7 +49,6 @@ export function useCreateChatMeta() {
   }: CreateChatMetaInput) => {
     /* const startTime = dy().utc().add(_startTime, 'minute').toDate(); */
     const id = nanoid();
-    console.log(user);
     const meta: ChatMeta = {
       createdAt: firebase.firestore.Timestamp.fromDate(dy().utc().toDate()),
       description,

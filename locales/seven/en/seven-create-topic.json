@@ -6,5 +6,7 @@
   "form-description": "Topic Description",
   "form-lang": "Choose langauge",
   "form-tags": "Choose Topic Categories",
-  "form-start-time": "When will it start?"
+  "form-start-time": "When will it start?",
+  "form-max-date-msg": "You can't set the time after 7days.",
+  "form-create": "Create Topic"
 }

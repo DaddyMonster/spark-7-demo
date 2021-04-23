@@ -3,16 +3,27 @@ import { grey } from '@material-ui/core/colors';
 import React from 'react';
 import styled from 'styled-components';
 import { FormTypoLabel } from './FormTypoLabel';
+import { TextFieldBase } from '@hessed/ui/web/atom';
+import { ColorOptionUnion } from '@hessed/styles/theme';
 interface Props extends InputBaseProps {
   label: string;
+  isFocused: boolean;
+  labelColorUnion?: ColorOptionUnion;
 }
 
-const BaseFormTextField = ({ label, ...props }: Props) => {
+const BaseFormTextField = ({
+  label,
+  isFocused,
+  labelColorUnion = 'info',
+  ...props
+}: Props) => {
   return (
-    <div className="flex-1 mb-1">
-      <FormTypoLabel>{label}</FormTypoLabel>
+    <div className="flex-1 mb-2">
+      <FormTypoLabel isFocused={isFocused} labelColorUnion={labelColorUnion}>
+        {label}
+      </FormTypoLabel>
       <Root>
-        <Input {...props} />
+        <TextFieldBase {...props} />
       </Root>
     </div>
   );
@@ -23,15 +34,4 @@ export default BaseFormTextField;
 const Root = styled.div(({ theme }) => ({
   padding: theme.spacing(0.5, 0),
   display: 'flex',
-}));
-
-const Input = styled(InputBase)(({ theme }) => ({
-  flex: '1 0 auto',
-  height: '100%',
-  padding: theme.spacing(0.5, 1),
-  border: `2px solid ${theme.palette.grey[600]}`,
-  borderRadius: 5,
-  '&:focus': {
-    border: `2px solid ${theme.palette.primary.main}`,
-  },
 }));

@@ -30,7 +30,7 @@ interface StepValue {
   interests: Set<ChatTagUnion>;
 }
 
-const stepValue: StepValue = {
+const _INIT_STEP_VALUE_: StepValue = {
   localLang: null,
   learningLang: null,
   interests: new Set<ChatTagUnion>(),
@@ -40,7 +40,7 @@ const MoreInfo = () => {
   const [user] = useAuthState(auth);
   const { t } = useTranslation('more-info');
   const { register } = useSevenAuth();
-  const [stepValues, setstepValues] = useState(stepValue);
+  const [stepValues, setstepValues] = useState(_INIT_STEP_VALUE_);
   const [que, setque] = useState(0);
   const router = useRouter();
 
@@ -65,7 +65,7 @@ const MoreInfo = () => {
 
   const onPickNation = (stepKey: StepKey, nation: Nation) => {
     setstepValues({
-      ...stepValue,
+      ...stepValues,
       [stepKey]: nation,
     });
     onNext();
@@ -111,7 +111,7 @@ const MoreInfo = () => {
           {(stepKey === 'learningLang' || stepKey === 'localLang') && (
             <PickNation
               currentKey={stepKey as CurrentKey}
-              localLang={stepValue.localLang}
+              localLang={stepValues.localLang}
               onPick={onPickNation}
             />
           )}
@@ -135,14 +135,6 @@ const MoreInfo = () => {
   );
 };
 export default MoreInfo;
-
-/* export async function getServerSideProps({ locale }) {
-  const loaded = await loadNamespaces({ locale, pathname: '/more-info' });
-  console.log('LOADED', loaded);
-  return {
-    props: {},
-  };
-} */
 
 const Root = styled.div(({ theme }) => ({
   width: '100%',

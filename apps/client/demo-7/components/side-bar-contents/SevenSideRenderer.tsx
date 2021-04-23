@@ -11,7 +11,6 @@ const SevenSideRenderer = ({ sideStatus }: SideContentProps) => {
     <SimpleSideNavRenderer
       asPath={router.asPath}
       onLinkClick={(route) => {
-        console.log('ROUTE', route);
         router.push(route);
       }}
       topNavHeight={SEVEN_TOP_NAV_HEIGHT}

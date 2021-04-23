@@ -13,6 +13,8 @@ const PickNation = ({ currentKey, onPick, localLang }: PickNationProps) => {
   const handlePick = (nation: Nation) => {
     if (currentKey === 'learningLang' && nation === localLang) {
       // PROMPT
+      alert("You can't have same lanauge for both");
+      return;
     }
     onPick(currentKey, nation);
   };

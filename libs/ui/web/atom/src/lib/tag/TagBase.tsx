@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 import { ColorOptionUnion } from '@hessed/styles/theme';
 
@@ -15,3 +16,10 @@ export const TagBase = styled.span<TagBaseProps>(
     margin: theme.spacing(0, 0.7, 0.7, 0),
   })
 );
+
+export function TagBaseWithLabel<T>({
+  id,
+  ...props
+}: TagBaseProps & { id: T }) {
+  return <TagBase {...props}>{id}</TagBase>;
+}

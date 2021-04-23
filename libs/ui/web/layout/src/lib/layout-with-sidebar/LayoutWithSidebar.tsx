@@ -1,15 +1,14 @@
 import {
-  SidebarStatus,
   useShouldKickIn,
   useSidebar,
   useSideStore,
   useSideWorker,
 } from '@hessed/hook/sidebar';
+import { SideContentProps } from '@hessed/ui/web/navs';
 import React, { useMemo } from 'react';
 import styled from 'styled-components';
 import { AppRoot } from '../layout-root';
 import { LeftSidebarRoot } from './LeftSidebarRoot';
-import { SideContentProps } from '@hessed/ui/web/navs';
 
 export interface LayoutWithSidebarProps<T, P> {
   TopNavComponent: React.ComponentType<T>;
@@ -36,7 +35,7 @@ export function LayoutWithSidebar<T, P>({
   const handleContentClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     e.preventDefault();
-    if (!fullCondition) {
+    if (!fullCondition && sideStatus === 'full') {
       toggleSidebar();
     }
   };

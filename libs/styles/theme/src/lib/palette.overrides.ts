@@ -50,7 +50,7 @@ export const sevenPalette: PaletteColors = {
   danger: { main: '#d84339' },
   default: { main: '#f4f2f0' },
   black: { main: '#2B2728' },
-  info: { main: '#96C9DC' },
+  info: { main: '#7DAF9C' },
 };
 /* 373234 */
 const paletteClientMap: PlatteClientMap = {

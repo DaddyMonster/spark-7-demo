@@ -1,7 +1,7 @@
 import { Typography } from '@material-ui/core';
 import { red } from '@material-ui/core/colors';
 import React from 'react';
-
+import styled from 'styled-components';
 interface FormErrorLabelProps {
   message: string;
   show: boolean;
@@ -9,7 +9,7 @@ interface FormErrorLabelProps {
 
 export const FormErrorLabel = ({ message, show }: FormErrorLabelProps) => {
   return (
-    <div className="w-full flex justify-center items-center">
+    <Root>
       <Typography
         sx={{
           height: 20,
@@ -20,6 +20,17 @@ export const FormErrorLabel = ({ message, show }: FormErrorLabelProps) => {
       >
         {message ?? ' '}
       </Typography>
-    </div>
+    </Root>
   );
 };
+
+const Root = styled.div(({ theme }) => ({
+  width: '100%',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  position: 'absolute',
+  top: '100%',
+  left: 0,
+  right: 0,
+}));

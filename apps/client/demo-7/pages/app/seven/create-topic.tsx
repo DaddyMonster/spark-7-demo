@@ -1,18 +1,26 @@
+import { tagMap } from '@hessed/client-module/chat-tag';
+import { useSevenAuth } from '@hessed/client-module/seven-auth';
+import {
+  nationMapList,
+  SEVEN_TOP_NAV_HEIGHT,
+} from '@hessed/client-module/seven-shared';
 import { FormProvider } from '@hessed/ui/shared';
 import { BoxedTypo, NationFlagSquare } from '@hessed/ui/web/atom';
 import {
+  DateTimePickerForm,
   FormSimpleAutoComplete,
   FormTextArea,
   FormTextField,
+  MultiSelectTagForm,
 } from '@hessed/ui/web/form';
 import { AppBaseContainer } from '@hessed/ui/web/layout';
-import { Paper, Typography } from '@material-ui/core';
+import { Button, Paper, TextField, Typography } from '@material-ui/core';
+import dy from 'dayjs';
+import { Form, Formik } from 'formik';
 import useTranslation from 'next-translate/useTranslation';
 import { Container } from 'next/app';
 import React from 'react';
 import styled from 'styled-components';
-import { useSevenAuth } from '../../../../../../libs/client-module/seven-auth/src';
-import { nationMapList } from '../../../../../../libs/client-module/seven-shared/src';
 import { INIT_VALUE, useCreateTopic } from '../../../hooks/useCreateTopic';
 
 const CreateTopic = () => {
@@ -31,34 +39,66 @@ const CreateTopic = () => {
           <NewTopic>{t('new-topic')}</NewTopic>
           <FormProvider
             validationSchema={validationSchema}
-            onSubmit={onSubmit}
+            onSubmit={() => console.log('TRIGGERED...')}
             initialValues={INIT_VALUE}
           >
-            <FormBox>
-              <FormTextField label={t('form-topic')} name="topic" />
-              <FormTextArea label={t('form-description')} name="description" />
-              <FormSimpleAutoComplete
-                label={t('form-lang')}
-                name="lang"
-                getValue={({ code }) => code}
-                acProps={{
-                  options: nationMapList,
-                  getOptionLabel: ({ label }) => label,
-                }}
-                renderer={({ code, label, iconPath }) => (
-                  <div className="flex items-center w-full" key={code}>
-                    <NationFlagSquare
-                      src={iconPath}
-                      size={15}
-                      className="mr-2"
-                    />
-                    <Typography>
-                      {label} ({code})
-                    </Typography>
-                  </div>
-                )}
-              />
-            </FormBox>
+            {({ values }) => (
+              <FormBox>
+                <FormTextField label={t('form-topic')} name="topic" />
+                <FormTextArea
+                  label={t('form-description')}
+                  name="description"
+                />
+                <FormSimpleAutoComplete
+                  label={t('form-lang')}
+                  name="lang"
+                  options={nationMapList}
+                  getValue={(val) => val.code}
+                  getLabel={(val) => val.label}
+                  defaultVal={nationMapList[0]}
+                  optionRenderer={({ code, iconPath, label }) => (
+                    <div className="flex items-center w-full" key={code}>
+                      <NationFlagSquare
+                        src={iconPath}
+                        size={15}
+                        className="mr-2"
+                      />
+                      <Typography>
+                        {label} ({code})
+                      </Typography>
+                    </div>
+                  )}
+                />
+                <DateTimePickerForm
+                  label={t('form-start-time')}
+                  name="startTime"
+                  openTo="hours"
+                  defaultValue={dy()
+                    .add(5, 'minutes')
+                    .add(5, 'seconds')
+                    .toDate()}
+                  minDate={dy().add(5, 'minutes').toDate()}
+                  maxDate={dy().add(8, 'days').toDate()}
+                />
+                <MultiSelectTagForm
+                  label={t('form-tags')}
+                  modalHead={t('form-tags')}
+                  name="tags"
+                  tagItems={tagMap}
+                  cancelLabel={t('common:cancel')}
+                  submitLabel={t('common:submit')}
+                />
+                <div className="w-full flex justify-center py-3">
+                  <Button
+                    className="px-6"
+                    variant="contained"
+                    onClick={() => onSubmit(values)}
+                  >
+                    {t('form-create')}
+                  </Button>
+                </div>
+              </FormBox>
+            )}
           </FormProvider>
         </RootCard>
       </Root>
@@ -90,11 +130,13 @@ const RootCard = styled(Paper)(({ theme }) => ({
   position: 'relative',
   [theme.breakpoints.down('sm')]: {
     width: '100vw',
+    height: `calc(100vh - ${SEVEN_TOP_NAV_HEIGHT}px)`,
   },
 }));
 
 const NewTopic = styled(BoxedTypo)(({ theme }) => ({
   transform: 'rotate(-2deg) translate(-10px , -5px)',
+  marginBottom: theme.spacing(2),
   [theme.breakpoints.down('md')]: {
     transform: 'none',
   },

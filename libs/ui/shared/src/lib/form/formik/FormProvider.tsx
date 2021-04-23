@@ -11,22 +11,28 @@ export type CustomError<T> = CustomErrorBase<T> | null;
 export interface FormProviderProps<_Shape_> extends FormikConfig<_Shape_> {
   customError?: CustomError<_Shape_>;
 }
-
+type RenderPropChildren<T> = (props: FormikProps<T>) => React.ReactNode;
 export function FormProvider<_Shape_ = Record<string, unknown>>({
   children,
   customError = null,
+
   ...props
 }: FormProviderProps<_Shape_>) {
   return (
     <Formik {...props}>
-      {(formikProps) => (
-        <Form>
-          {customError && (
-            <CustomErrorHandler {...formikProps} customError={customError} />
-          )}
-          {children}
-        </Form>
-      )}
+      {(formikProps) => {
+        console.log(formikProps.errors);
+        console.log(formikProps.values);
+        console.log('IS VALID', formikProps.isValid);
+        return (
+          <Form>
+            {/* {customError && (
+              <CustomErrorHandler {...formikProps} customError={customError} />
+            )} */}
+            {typeof children === 'function' ? children(formikProps) : children}
+          </Form>
+        );
+      }}
     </Formik>
   );
 }

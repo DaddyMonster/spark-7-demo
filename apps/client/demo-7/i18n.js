@@ -3,6 +3,7 @@ module.exports = {
   defaultLocale: 'ko',
   /* loader: false, */
   pages: {
+    '*': ['common'],
     '/': ['index'],
     '/more-info': ['more-info'],
     '/app/seven/home': ['seven-home'],

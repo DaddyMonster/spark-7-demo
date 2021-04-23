@@ -6,3 +6,4 @@ export * from './lib/progress';
 export * from './lib/tag';
 export * from './lib/bread-crumb';
 export * from './lib/typo';
+export * from './lib/text-fields';

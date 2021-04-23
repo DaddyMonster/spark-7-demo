@@ -1,6 +1,6 @@
 import React from 'react';
 import { CrumbProps, Crumb } from '@hessed/ui/web/atom';
-import { Breakpoint, Container, Hidden } from '@material-ui/core';
+import { Container, Hidden } from '@material-ui/core';
 import styled from 'styled-components';
 
 interface AppBaseContainer extends CrumbProps {
@@ -20,7 +20,7 @@ export const AppBaseContainer = ({
       <Hidden smDown={hideCrumbOnDownSm}>
         <Crumb appName={appName} subTitle={subTitle} title={title} />
       </Hidden>
-      {children}
+      <Container maxWidth="lg">{children}</Container>
     </Root>
   );
 };

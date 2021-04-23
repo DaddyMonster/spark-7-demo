@@ -7,31 +7,27 @@ import { useRouter } from 'next/router';
 import { FbTimestamp } from '@hessed/client-lib/firebase';
 import { SevenUserInfo } from '@hessed/client-module/seven-auth';
 import { Chat, ChatRoom } from '@hessed/client-module/seven-chat';
-import { mergedChatTags } from '@hessed/client-module/chat-tag';
 import * as yup from 'yup';
 import useTranslation from 'next-translate/useTranslation';
 
 interface CreateTopicInput {
   topic: string;
   description: string;
-  lang: Nation | null;
-  tags: ChatTagUnion[];
+  lang: Nation;
+  tags: Set<ChatTagUnion>;
   startTime: Dayjs;
 }
 
 export const INIT_VALUE: CreateTopicInput = {
   topic: '',
   description: '',
-  lang: null,
+  lang: 'en',
   startTime: dy(),
-  tags: [],
+  tags: new Set(),
 };
 
 interface UseCreaetTopicReturn {
-  onSubmit: (
-    val: CreateTopicInput,
-    helper: FormikHelpers<CreateTopicInput>
-  ) => void;
+  onSubmit: (val: CreateTopicInput) => void;
   // eslint-disable-next-line @typescript-eslint/ban-types
   validationSchema: yup.ObjectSchema<{}>;
 }
@@ -45,17 +41,20 @@ export function useCreateTopic({
 }: UseCreateTopicProps): UseCreaetTopicReturn {
   const { t } = useTranslation('validation');
   const onSubmit = async (
-    _val: CreateTopicInput,
+    _val: CreateTopicInput
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    _: FormikHelpers<CreateTopicInput>
   ) => {
     const router = useRouter();
+
     if (!userInfo) {
       return; // WILL NEVER HAPPEN!
     }
+    console.log(_val, userInfo);
+
     const id = nanoid();
     const values: ChatRoom = {
       ..._val,
+      tags: [..._val.tags],
       startTime: FbTimestamp.fromDate(_val.startTime.toDate()),
       createdAt: FbTimestamp.fromDate(new Date()),
       host: userInfo,
@@ -85,13 +84,22 @@ export function useCreateTopic({
       .required(t('required')),
     startTime: yup
       .date()
-      .transform(function (currentValue: Dayjs) {
-        if (this.isType(currentValue) && 'toDate' in currentValue) {
-          return currentValue.toDate();
-        }
-      })
-      .required(),
-    tags: yup.string().oneOf(mergedChatTags).required(t('required')),
+      .min(new Date(), t('min-date', { count: 5, unit: 'minutes' }))
+      .max(
+        dy().add(1, 'months').toDate(),
+        t('max-date', { count: 1, unit: 'month' })
+      )
+      .required(t('required')),
+    tags: yup
+      .array()
+      .of(yup.string())
+      .min(1, t('list-min', { count: 1, fieldName: 'Tag' }))
+      .max(5, t('list-max', { count: 5, fieldName: 'Tag' }))
+      .required(t('required'))
+      .transform(function (_, original) {
+        console.log([...original]);
+        return [...original];
+      }),
   });
 
   return { onSubmit, validationSchema };

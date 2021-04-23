@@ -91,10 +91,6 @@ const LiveRoom: CustomPageType = () => {
     }
   };
 
-  useEffect(() => {
-    console.log(userVolumeMap);
-  }, [userVolumeMap]);
-
   const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

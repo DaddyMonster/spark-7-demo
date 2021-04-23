@@ -2,6 +2,7 @@
 const withNx = require('@nrwl/next/plugins/with-nx');
 const withPlugins = require('next-compose-plugins');
 const nextTranslate = require('next-translate');
+const path = require('path');
 /* const withPWA = require('next-pwa'); */
 /* const WorkboxPlugin = require('workbox-webpack-plugin');
  */

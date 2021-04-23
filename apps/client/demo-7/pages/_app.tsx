@@ -15,6 +15,11 @@ import 'react-perfect-scrollbar/dist/css/styles.css';
 import { getLayoutComponent } from '../layout/get-layout';
 import { SevenPageType } from '../types';
 import { enableMapSet } from 'immer';
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import dyUtil from '@date-io/dayjs';
+import dy from 'dayjs';
+import locale from 'dayjs/locale/*';
+
 enableMapSet();
 
 interface CustomAppProps extends AppProps {
@@ -45,6 +50,9 @@ function CustomApp({ Component, pageProps }: CustomAppProps) {
     Component.layout ?? pageProps.layout
   );
 
+  const { __locale } = pageProps;
+  dy.locale(__locale);
+
   return (
     <>
       <Head>
@@ -56,16 +64,18 @@ function CustomApp({ Component, pageProps }: CustomAppProps) {
       </Head>
 
       <SparkThemeProvider clientType={ClientTypes.Seven}>
-        {loading ? (
-          <div className="w-full h-screen flex justify-center items-center">
-            <CircularProgress />
-          </div>
-        ) : (
-          LayoutComponent({
-            children: <Component {...pageProps} key={router.asPath} />,
-            router,
-          })
-        )}
+        <MuiPickersUtilsProvider utils={dyUtil}>
+          {loading ? (
+            <div className="w-full h-screen flex justify-center items-center">
+              <CircularProgress />
+            </div>
+          ) : (
+            LayoutComponent({
+              children: <Component {...pageProps} key={router.asPath} />,
+              router,
+            })
+          )}
+        </MuiPickersUtilsProvider>
       </SparkThemeProvider>
     </>
   );
