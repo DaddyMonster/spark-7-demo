@@ -23,7 +23,7 @@ export class Chat {
     return Chat.collection
       .where('lang', '==', lang)
       .where('startTime', '>', ts)
-      .where('tags', 'array-contains-any', interests); // Hmm... this should be optional?
+      /* .where('tags', 'array-contains-any', interests); */ // Hmm... this should be optional?
   }
 
   public docRef: firebase.firestore.DocumentReference;

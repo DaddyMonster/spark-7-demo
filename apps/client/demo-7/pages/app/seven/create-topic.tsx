@@ -14,11 +14,9 @@ import {
   MultiSelectTagForm,
 } from '@hessed/ui/web/form';
 import { AppBaseContainer } from '@hessed/ui/web/layout';
-import { Button, Paper, TextField, Typography } from '@material-ui/core';
+import { Button, Paper, Typography } from '@material-ui/core';
 import dy from 'dayjs';
-import { Form, Formik } from 'formik';
 import useTranslation from 'next-translate/useTranslation';
-import { Container } from 'next/app';
 import React from 'react';
 import styled from 'styled-components';
 import { INIT_VALUE, useCreateTopic } from '../../../hooks/useCreateTopic';
@@ -39,10 +37,10 @@ const CreateTopic = () => {
           <NewTopic>{t('new-topic')}</NewTopic>
           <FormProvider
             validationSchema={validationSchema}
-            onSubmit={() => console.log('TRIGGERED...')}
+            onSubmit={onSubmit}
             initialValues={INIT_VALUE}
           >
-            {({ values }) => (
+            {({ submitForm }) => (
               <FormBox>
                 <FormTextField label={t('form-topic')} name="topic" />
                 <FormTextArea
@@ -92,7 +90,8 @@ const CreateTopic = () => {
                   <Button
                     className="px-6"
                     variant="contained"
-                    onClick={() => onSubmit(values)}
+                    type="submit"
+                    onClick={() => submitForm()}
                   >
                     {t('form-create')}
                   </Button>
@@ -128,9 +127,12 @@ const RootCard = styled(Paper)(({ theme }) => ({
   minWidth: 500,
   maxWidth: 500,
   position: 'relative',
+  marginBottom: theme.spacing(2.5),
+  boxShadow: theme.shadows[3],
   [theme.breakpoints.down('sm')]: {
     width: '100vw',
     height: `calc(100vh - ${SEVEN_TOP_NAV_HEIGHT}px)`,
+    marginBottom: 0,
   },
 }));
 
@@ -142,6 +144,6 @@ const NewTopic = styled(BoxedTypo)(({ theme }) => ({
   },
 }));
 
-const FormBox = styled(Container).attrs({ maxWidth: 'xs' })(({ theme }) => ({
+const FormBox = styled.div(({ theme }) => ({
   padding: theme.spacing(1.5, 2.5),
 }));

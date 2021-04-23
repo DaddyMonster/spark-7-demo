@@ -6,7 +6,7 @@ dy.extend(isToday);
 
 export interface UseTimerProps extends Pick<UseIntervalProps, 'targetTime'> {
   onDue?: () => void;
-  endDue: number;
+  endDue: number; // miliseconds;
 }
 
 interface TimeMessage {
@@ -42,18 +42,22 @@ export function useSevenTimeMsg({ onDue, targetTime, endDue }: UseTimerProps) {
 
   const handleMessage = () => {
     // 한시간보다 클때
+    console.log(diff * -1);
+    console.log(ONE_HOUR);
+
     if (diff * -1 > ONE_HOUR) {
       if (intervalMs !== TEN_SECOND) {
         setintervalMs(TEN_SECOND);
       }
       const date = dy().add(diff);
       const isToday = date.isToday();
-      const formatString = isToday ? 'hh : mm' : 'DD/MMM - hh:mm';
+      const formatString = isToday ? 'hh : mm' : 'MMM/DD hh:mm A';
       setTimeInfo({
         message: `Live at ${dy().add(diff).format(formatString)}`,
         diffInfo: diff,
         status: 'waiting',
       });
+      return;
     }
 
     // 1시간 이내
@@ -69,6 +73,7 @@ export function useSevenTimeMsg({ onDue, targetTime, endDue }: UseTimerProps) {
         diffInfo: diff,
         status: 'waiting',
       });
+      return;
     }
 
     // 라이브 중
@@ -82,7 +87,7 @@ export function useSevenTimeMsg({ onDue, targetTime, endDue }: UseTimerProps) {
       const min = endDiff / (1000 * 60);
       const sec = endDiff / 1000;
       setTimeInfo({
-        message: `Live ends in  ${min} : ${sec}`,
+        message: `Live ends in  ${min.toFixed(0)} : ${sec.toFixed(0)}`,
         diffInfo: endDiff,
         status: 'live',
       });

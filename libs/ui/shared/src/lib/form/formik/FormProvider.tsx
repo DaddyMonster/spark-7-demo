@@ -26,9 +26,9 @@ export function FormProvider<_Shape_ = Record<string, unknown>>({
         console.log('IS VALID', formikProps.isValid);
         return (
           <Form>
-            {/* {customError && (
+            {customError && (
               <CustomErrorHandler {...formikProps} customError={customError} />
-            )} */}
+            )}
             {typeof children === 'function' ? children(formikProps) : children}
           </Form>
         );

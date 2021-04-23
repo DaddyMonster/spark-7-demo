@@ -40,12 +40,11 @@ export function useCreateTopic({
   userInfo,
 }: UseCreateTopicProps): UseCreaetTopicReturn {
   const { t } = useTranslation('validation');
+  const router = useRouter();
   const onSubmit = async (
     _val: CreateTopicInput
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
   ) => {
-    const router = useRouter();
-
     if (!userInfo) {
       return; // WILL NEVER HAPPEN!
     }
