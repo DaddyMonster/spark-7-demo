@@ -15,14 +15,11 @@ interface UseReserveActionReturn {
   roomDetail: ChatRoom;
 }
 
-export function useChatDetail(
-  { cacheKey, selectedIdx, userInfo }: UserChatDetailProps,
-  dep = true
-): UseReserveActionReturn {
-  if (!dep) {
-    return null;
-  }
-
+export function useChatDetail({
+  cacheKey,
+  selectedIdx,
+  userInfo,
+}: UserChatDetailProps): UseReserveActionReturn {
   const { cache, updateRef } = useChatListStore(
     (store) => ({
       cache: store.cache,

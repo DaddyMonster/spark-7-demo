@@ -36,5 +36,6 @@ module.exports = {
     '<rootDir>/libs/hook/create-auth',
     '<rootDir>/libs/ui/web/util',
     '<rootDir>/libs/client-lib/types',
+    '<rootDir>/libs/hook/fb-snapshot',
   ],
 };

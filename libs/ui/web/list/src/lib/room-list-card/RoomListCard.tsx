@@ -8,6 +8,7 @@ import 'dayjs/locale/ko';
 import rl from 'dayjs/plugin/relativeTime';
 import React, { useMemo } from 'react';
 import styled from 'styled-components';
+import { AvatarWithFlag } from '@hessed/ui/web/atom';
 
 // 추가 필요 작업 내역
 // - 높이 사이즈 조절 (Responsive)
@@ -44,7 +45,7 @@ export const RoomListCard = ({
   const userURLs = useMemo(() => reserved.map((x) => x.photoURL), [reserved]);
   const ca = dy(startTime.toDate());
   const { message } = useSevenTimeMsg({
-    endDue: 7 * 1000 * 1000,
+    endDue: 7 * 1000 * 60,
     targetTime: dy(startTime.toDate()),
     onDue: () => console.log('DUE'),
   });
@@ -69,20 +70,25 @@ export const RoomListCard = ({
             </Typography>
           </div>
           <div className="px-2 flex items-center mt-auto">
+            <NationFlagSquare
+              nation={host.localLang}
+              size={35}
+              className="mr-3"
+            />
             <Typography fontSize="1.1rem" className="mr-3">
               {ca.fromNow()}
             </Typography>
             <Typography color={grey[600]} fontSize="0.9rem">
-              {ca.format('MMM D dd hh:MM')}
+              {ca.format('MMM D dd A hh:MM')}
             </Typography>
           </div>
           <div className="flex items-center pb-2 px-2 mt-auto ml-auto relative justify-between">
-            <div className="relative mr-3">
-              <Avatar src={host.photoURL} />
-              <FlagWrap>
-                <NationFlagSquare nation={host.localLang} size={15} />
-              </FlagWrap>
-            </div>
+            <AvatarWithFlag
+              className="mr-3"
+              nation={host.localLang}
+              photoURL={host.photoURL}
+            />
+
             <div className="flex flex-col justify-center pt-1 px-2">
               <Typography fontSize="0.8rem">{host.displayName}</Typography>
               <Typography fontSize="0.7rem" color={grey[600]}>
@@ -116,12 +122,6 @@ const RootCard = styled(Paper)(({ theme }) => ({
   position: 'relative',
   overflow: 'hidden',
   paddingBottom: theme.spacing(1.5),
-}));
-
-const FlagWrap = styled.div(({ theme }) => ({
-  position: 'absolute',
-  bottom: -7,
-  right: -7,
 }));
 
 const StackedBox = styled.div(({ theme }) => ({

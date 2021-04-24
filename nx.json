@@ -57,6 +57,7 @@
     "hook-sidebar": { "tags": [] },
     "hook-create-auth": { "tags": [] },
     "ui-web-util": { "tags": [] },
-    "client-lib-types": { "tags": [] }
+    "client-lib-types": { "tags": [] },
+    "hook-fb-snapshot": { "tags": [] }
   }
 }

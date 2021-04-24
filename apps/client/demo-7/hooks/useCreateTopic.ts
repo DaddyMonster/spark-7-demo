@@ -1,14 +1,13 @@
-import { ChatTagUnion } from '@hessed/client-module/chat-tag';
-import { Nation, nationList } from '@hessed/client-module/seven-shared';
-import dy, { Dayjs } from 'dayjs';
-import { FormikHelpers } from 'formik';
-import { nanoid } from 'nanoid';
-import { useRouter } from 'next/router';
 import { FbTimestamp } from '@hessed/client-lib/firebase';
+import { ChatTagUnion } from '@hessed/client-module/chat-tag';
 import { SevenUserInfo } from '@hessed/client-module/seven-auth';
 import { Chat, ChatRoom } from '@hessed/client-module/seven-chat';
-import * as yup from 'yup';
+import { Nation, nationList } from '@hessed/client-module/seven-shared';
+import dy, { Dayjs } from 'dayjs';
+import { nanoid } from 'nanoid';
 import useTranslation from 'next-translate/useTranslation';
+import { useRouter } from 'next/router';
+import * as yup from 'yup';
 
 interface CreateTopicInput {
   topic: string;
@@ -69,12 +68,12 @@ export function useCreateTopic({
     topic: yup
       .string()
       .min(8, t('min-string', { count: 8 }))
-      .max(32, t('max-string', { count: 32 }))
+      .max(128, t('max-string', { count: 128 }))
       .required(t('required')),
     description: yup
       .string()
       .min(0, t('min-string', { count: 8 }))
-      .max(64, t('max-string', { count: 32 })),
+      .max(256, t('max-string', { count: 256 })),
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     lang: yup
       .string()

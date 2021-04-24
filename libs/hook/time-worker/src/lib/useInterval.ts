@@ -1,26 +1,31 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import dy, { Dayjs } from 'dayjs';
 
 export interface UseIntervalProps {
   intervalMs?: number;
-  targetTime: Dayjs;
+  targetTime?: Dayjs;
 }
 
 export function useInterval({
   intervalMs = 500,
-  targetTime,
+  targetTime = dy().add(1, 'minutes'),
 }: UseIntervalProps) {
   const [diff, setdiff] = useState(0);
+  const intervalRef = useRef(null);
 
   useEffect(() => {
-    if (!targetTime) {
+    if (!targetTime || intervalRef.current) {
       return;
     }
-    const interval = setInterval(() => {
+    intervalRef.current = setInterval(() => {
+      console.log('INTERVAL', intervalMs);
       setdiff(dy().diff(targetTime, 'milliseconds'));
     }, intervalMs);
 
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    };
   }, [intervalMs, targetTime]);
 
   return diff;

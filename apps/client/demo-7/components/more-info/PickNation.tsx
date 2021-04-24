@@ -9,7 +9,11 @@ interface PickNationProps {
   localLang: Nation | null;
 }
 
-const PickNation = ({ currentKey, onPick, localLang }: PickNationProps) => {
+export const PickNation = ({
+  currentKey,
+  onPick,
+  localLang,
+}: PickNationProps) => {
   const handlePick = (nation: Nation) => {
     if (currentKey === 'learningLang' && nation === localLang) {
       // PROMPT
@@ -36,5 +40,3 @@ const PickNation = ({ currentKey, onPick, localLang }: PickNationProps) => {
     </div>
   );
 };
-
-export default PickNation;

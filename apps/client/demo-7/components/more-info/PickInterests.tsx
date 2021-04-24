@@ -10,7 +10,11 @@ interface PickInterestsProps {
   onSubmit: () => void;
 }
 
-const PickInterests = ({ picked, onPick, onSubmit }: PickInterestsProps) => {
+export const PickInterests = ({
+  picked,
+  onPick,
+  onSubmit,
+}: PickInterestsProps) => {
   const { t } = useTranslation('more-info');
   return (
     <Container maxWidth="md">
@@ -35,5 +39,3 @@ const PickInterests = ({ picked, onPick, onSubmit }: PickInterestsProps) => {
     </Container>
   );
 };
-
-export default PickInterests;

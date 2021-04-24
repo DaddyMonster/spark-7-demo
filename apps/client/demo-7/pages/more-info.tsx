@@ -16,10 +16,8 @@ import React, { useMemo, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { GrPrevious } from 'react-icons/gr';
 import styled from 'styled-components';
-import PickInterests from '../components/more-info-components/PickInterests';
-import PickNation, {
-  CurrentKey,
-} from '../components/more-info-components/PickNation';
+import { PickInterests, PickNation, CurrentKey } from '../components/more-info';
+
 /* import loadNamespaces from 'next-translate/loadNamespaces'; */
 
 enableMapSet();

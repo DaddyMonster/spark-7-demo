@@ -7,3 +7,5 @@ export * from './lib/tag';
 export * from './lib/bread-crumb';
 export * from './lib/typo';
 export * from './lib/text-fields';
+export * from './lib/modal';
+export * from './lib/loading';

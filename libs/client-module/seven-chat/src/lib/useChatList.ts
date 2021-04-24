@@ -20,14 +20,11 @@ interface UseChatListReturn {
   loading: boolean;
 }
 
-export function useChatList(
-  { listQuery, paging = 5, queryCacheKey }: UseChatListProps,
-  dep = true
-): UseChatListReturn {
-  if (!dep) {
-    return null;
-  }
-
+export function useChatList({
+  listQuery,
+  paging = 5,
+  queryCacheKey,
+}: UseChatListProps): UseChatListReturn {
   const [cursor, setcursor] = useState(1);
   const { addCache, cache, getCache } = useChatListStore();
   const [loading, setloading] = useState(true);
@@ -50,11 +47,11 @@ export function useChatList(
   }, [cache, cursor, paging]);
 
   useEffect(() => {
-    if (!listQuery) return;
+    if (!listQuery || !queryCacheKey) return;
     const fbNow = FbTimestamp.fromDate(new Date());
     queryRef.current = listQuery(fbNow);
     initFetch();
-  }, [listQuery]);
+  }, [listQuery, !queryCacheKey]);
 
   const initFetch = async () => {
     const cached = getCache(queryCacheKey);

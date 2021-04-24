@@ -1,109 +1,98 @@
 import dy from 'dayjs';
+import dr from 'dayjs/plugin/duration';
 import isToday from 'dayjs/plugin/isToday';
-import { useEffect, useRef, useState } from 'react';
+import { Translate } from 'next-translate';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { liveEndsInMessage, liveInMessage } from '../util/msg-format';
 import { useInterval, UseIntervalProps } from './useInterval';
 dy.extend(isToday);
+dy.extend(dr);
 
 export interface UseTimerProps extends Pick<UseIntervalProps, 'targetTime'> {
   onDue?: () => void;
   endDue: number; // miliseconds;
+  t?: Translate;
 }
 
-interface TimeMessage {
-  message: string;
-  diffInfo: number;
-  status: 'live' | 'waiting' | 'terminated';
-}
+type LiveStatus = 'live' | 'waiting' | 'terminated';
 
 const ONE_HOUR = 1000 * 60 * 60;
 const TEN_SECOND = 1000 * 10;
 const HALF_SECOND = 500;
 
-export function useSevenTimeMsg({ onDue, targetTime, endDue }: UseTimerProps) {
+export function useSevenTimeMsg({
+  onDue,
+  targetTime,
+  endDue,
+  t,
+}: UseTimerProps) {
   const [intervalMs, setintervalMs] = useState(TEN_SECOND); // 10초
-
-  const [timeInfo, setTimeInfo] = useState<TimeMessage>({
-    message: '',
-    diffInfo: 0,
-    status: 'waiting',
-  });
+  const [message, setMessage] = useState('');
 
   const diff = useInterval({ intervalMs, targetTime });
-
   const cbRef = useRef<typeof onDue>(null);
 
   useEffect(() => {
+    handleInterval();
     handleMessage();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    console.log(diff);
   }, [diff]);
 
   useEffect(() => {
     cbRef.current = onDue ?? null;
   }, [onDue]);
 
+  const status = useMemo((): LiveStatus => {
+    if (diff > 0 && diff < endDue) {
+      return 'live';
+    }
+    if (diff > endDue) {
+      return 'terminated';
+    }
+    return 'waiting';
+  }, [diff, endDue]);
+
+  const handleInterval = useCallback(() => {
+    // TERMINATED
+    if (status === 'terminated' && intervalMs !== TEN_SECOND) {
+      return setintervalMs(TEN_SECOND);
+    }
+
+    const halfSecCondition = status === 'live' || diff * -1 < ONE_HOUR;
+    if (halfSecCondition && intervalMs !== HALF_SECOND) {
+      return setintervalMs(HALF_SECOND);
+    }
+
+    if (status === 'waiting' && diff * -1 > ONE_HOUR) {
+      return setintervalMs(TEN_SECOND);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [diff, status]);
+
   const handleMessage = () => {
-    // 한시간보다 클때
-    console.log(diff * -1);
-    console.log(ONE_HOUR);
-
-    if (diff * -1 > ONE_HOUR) {
-      if (intervalMs !== TEN_SECOND) {
-        setintervalMs(TEN_SECOND);
-      }
-      const date = dy().add(diff);
-      const isToday = date.isToday();
-      const formatString = isToday ? 'hh : mm' : 'MMM/DD hh:mm A';
-      setTimeInfo({
-        message: `Live at ${dy().add(diff).format(formatString)}`,
-        diffInfo: diff,
-        status: 'waiting',
-      });
-      return;
+    if (status === 'terminated') {
+      return setMessage(t ? t('live-terminated') : 'Terminated');
     }
 
-    // 1시간 이내
-
-    if (diff > 0 && diff * -1 < ONE_HOUR) {
-      if (intervalMs !== HALF_SECOND) {
-        setintervalMs(HALF_SECOND);
-      }
-      const min = diff / (1000 * 60);
-      const sec = diff / 1000;
-      setTimeInfo({
-        message: `Live in ${min} : ${sec}`,
-        diffInfo: diff,
-        status: 'waiting',
-      });
-      return;
+    if (status === 'waiting') {
+      const dr = dy.duration(diff * -1);
+      const hour = Math.floor(dr.asHours());
+      const _min = Math.floor(dr.asMinutes());
+      const min = _min % 60;
+      const sec = Math.floor(dr.asSeconds() - _min * 60);
+      return setMessage(liveInMessage(t, { hour, min, sec }));
     }
 
-    // 라이브 중
-
-    if (diff < 0 && diff < endDue) {
-      if (intervalMs !== HALF_SECOND) {
-        setintervalMs(HALF_SECOND);
-      }
-
-      const endDiff = endDue - diff;
-      const min = endDiff / (1000 * 60);
-      const sec = endDiff / 1000;
-      setTimeInfo({
-        message: `Live ends in  ${min.toFixed(0)} : ${sec.toFixed(0)}`,
-        diffInfo: endDiff,
-        status: 'live',
-      });
-    } else {
-      // 세션 종료
-
-      if (intervalMs !== TEN_SECOND) {
-        setintervalMs(TEN_SECOND);
-      }
-
-      setTimeInfo({
-        message: 'Terminated',
-        diffInfo: diff,
-        status: 'terminated',
-      });
+    if (status === 'live') {
+      const endTime = dy(targetTime).add(endDue);
+      const endDiff = dy().diff(endTime, 'milliseconds');
+      const dr = dy.duration(endDiff * -1);
+      const _min = Math.floor(dr.asMinutes());
+      const min = _min % 60;
+      const sec = Math.floor(dr.asSeconds() - _min * 60);
+      return setMessage(liveEndsInMessage(t, { min, sec }));
     }
   };
-  return timeInfo;
+  return { message, status };
 }
