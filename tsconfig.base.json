@@ -60,7 +60,9 @@
       "@hessed/hook/create-auth": ["libs/hook/create-auth/src/index.ts"],
       "@hessed/ui/web/util": ["libs/ui/web/util/src/index.ts"],
       "@hessed/client-lib/types": ["libs/client-lib/types/src/index.ts"],
-      "@hessed/hook/fb-snapshot": ["libs/hook/fb-snapshot/src/index.ts"]
+      "@hessed/hook/fb-snapshot": ["libs/hook/fb-snapshot/src/index.ts"],
+      "@hessed/storybook/spark": ["libs/storybook/spark/src/index.ts"],
+      "@hessed/storybook/spark-log": ["libs/storybook/spark-log/src/index.ts"]
     }
   },
   "files": ["libs/styles/theme/src/types/mui.override.d.ts"],
