@@ -1,5 +1,10 @@
 import React, { ReactElement, useEffect, useRef, useState } from 'react';
-import { QueryRef, QuerySnap, FbError } from '@hessed/client-lib/firebase';
+import {
+  QueryRef,
+  QuerySnap,
+  FbError,
+  CollectionRef,
+} from '@hessed/client-lib/firebase';
 
 export type Snap<T> = (
   onNext: (snapshot: QuerySnap<T>) => void,
@@ -8,7 +13,7 @@ export type Snap<T> = (
 ) => () => void;
 
 interface UseFbSnapListsProps<T> {
-  queryRef: QueryRef<T>;
+  queryRef: QueryRef<T> | CollectionRef<T>;
   limit?: number;
   toLast?: boolean;
 }

@@ -19,13 +19,13 @@ export const ChatLayout = ({
     <Root height={APP_HEIGHT_STRING}>
       <Grid container spacing={0} sx={{ height: '100%' }}>
         <Hidden mdDown>
-          <Grid item md={4} lg={3} sx={{ height: APP_HEIGHT_STRING }}>
+          <Grid item md={3} sx={{ height: APP_HEIGHT_STRING }}>
             <div className="w-full h-full">
               <LeftSideContent />
             </div>
           </Grid>
         </Hidden>
-        <Grid item xs={12} md={8} lg={5} sx={{ height: APP_HEIGHT_STRING }}>
+        <Grid item xs={12} md={9} lg={5} sx={{ height: APP_HEIGHT_STRING }}>
           {children}
         </Grid>
         <Hidden smDown>

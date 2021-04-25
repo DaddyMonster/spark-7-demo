@@ -42,9 +42,9 @@ const Root = styled.div<{ active: boolean; sideSize: SidebarStatus }>(
     cursor: 'pointer',
     '& svg': {
       fontSize: '1.7rem',
-      fill: active ? '#fff' : theme.palette.grey[600],
-      marginRight: sideSize !== 'mini' ? theme.spacing(2) : 0,
-      marginLeft: sideSize === 'mini' ? theme.spacing(1) : 0,
+      fill: active || sideSize === 'mini' ? '#fff' : theme.palette.grey[600],
+      marginRight: sideSize !== 'mini' ? theme.spacing(1.5) : 0,
+      marginLeft: sideSize === 'mini' ? theme.spacing(0.5) : 0,
       borderRadius: '50%',
       transition: 'all 300ms ease',
     },

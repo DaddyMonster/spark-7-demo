@@ -24,7 +24,10 @@ export function SimpleSideNavRenderer({
   sideStatus,
 }: SimpleSideNavRendererProps) {
   return (
-    <SideRendererRoot topNavHeight={topNavHeight}>
+    <SideRendererRoot
+      topNavHeight={topNavHeight}
+      isMini={sideStatus === 'mini'}
+    >
       <div>
         <Scrollbar>
           {navItems.map((x) => (
@@ -44,9 +47,12 @@ export function SimpleSideNavRenderer({
 
 const SideRendererRoot = styled.div<{
   topNavHeight: number;
-}>(({ theme, topNavHeight }) => ({
+  isMini: boolean;
+}>(({ theme, topNavHeight, isMini }) => ({
   width: '100%',
   height: `calc(100vh - ${topNavHeight}px)`,
   padding: theme.spacing(6, 0, 2, 1),
   boxShadow: theme.shadows[3],
+  background: isMini ? theme.palette.primary.main : 'none',
+  transition: '300ms background ease',
 }));
