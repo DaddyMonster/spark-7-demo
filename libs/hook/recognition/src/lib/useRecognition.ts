@@ -5,40 +5,52 @@ interface UseRecognitionArgs {
   lang: Nation;
   onResult: (transcript: string) => void;
   onSpeechStart: () => void;
-  continuous?: boolean;
 }
 
 interface UseRecogChatReturn {
   recogOn: boolean;
   initRecognition: () => void;
-  stopRecognition: () => void;
+  terminateRecognition: () => void;
 }
 
 export function useRecognition({
   lang,
   onResult,
   onSpeechStart,
-  continuous,
 }: UseRecognitionArgs): UseRecogChatReturn {
   const [recogOn, setrecogOn] = useState(false);
 
   const recogRef = useRef<Recognition>(null);
 
   const initRecognition = () => {
-    recogRef.current = new Recognition({
-      lang,
-      onResult,
-      onSpeechStart,
-      continuous,
-    });
-    recogRef.current.start();
-    setrecogOn(true);
+    recogRef.current = new Recognition(lang);
+    const recog = recogRef.current.recognizer;
+    recog.onspeechstart = onSpeechStart;
+    recog.onstart = () => {
+      console.log('Speech Started');
+      setrecogOn(true);
+    };
+    recog.onspeechend = () => {
+      console.log('Speech Ended');
+      setrecogOn(false);
+    };
+    recog.onend = () => {
+      console.log('RECOGNITION ON END CALLED');
+      onResult(recogRef.current.currentTranscript);
+      recogRef.current.resetTranscript();
+      recog.start();
+    };
+    recog.start();
   };
-  const stopRecognition = () => {
+
+  const terminateRecognition = () => {
+    if (!recogRef.current) {
+      return;
+    }
     recogRef.current.terminate();
     recogRef.current = null;
     setrecogOn(false);
   };
 
-  return { initRecognition, stopRecognition, recogOn };
+  return { initRecognition, terminateRecognition, recogOn };
 }

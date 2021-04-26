@@ -1,0 +1,13 @@
+{
+  "show-user-on": "참가자 보기",
+  "ask-for-voice-on": "발언 요청",
+  "ask-for-voice-off": "발언 요청 취소",
+  "auto-trans-on": "자동 번역 켜기",
+  "auto-trans-off": "자동 번역 끄기",
+  "hide-chat-on": "채팅 보지않기",
+  "hide-chat-off": "채팅 보기",
+  "chat-alert-on": "챗 알람",
+  "chat-volume": "볼륨",
+  "show-detail-on": "우측 창 열기",
+  "show-detail-off": "우측 창 닫기"
+}

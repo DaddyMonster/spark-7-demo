@@ -1,19 +1,15 @@
+import { UidMap } from '@hessed/hook/rtc';
 import { createStore } from '@hessed/hook/store';
-import { AudIndicator, UidMap } from '@hessed/hook/rtc';
 import React from 'react';
 
 type UseLiveVolumeStore = {
   volMap: UidMap;
-  updateVolMap: (indicator: AudIndicator[]) => void;
+  updateVolMap: (uidMap: UidMap) => void;
 };
 
 export const useLiveVolumeStore = createStore<UseLiveVolumeStore>((set) => ({
   volMap: new Map(),
-  updateVolMap: (indicator: AudIndicator[]) => {
-    const map = new Map();
-    indicator.forEach((x) => map.set(x.uid, x.level));
-    set((store) => void (store.volMap = map));
-  },
+  updateVolMap: (uidMap) => set((store) => void (store.volMap = uidMap)),
 }));
 
 type UseLocalVolumeControl = {

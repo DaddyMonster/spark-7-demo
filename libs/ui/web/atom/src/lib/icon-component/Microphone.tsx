@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { IconButton } from '@material-ui/core';
+import { BsMic, BsMicMute } from 'react-icons/bs';
 
 export const MicAvatar = styled(IconButton).attrs({ variant: 'rounded' })<{
   $micOn: boolean;

@@ -5,7 +5,6 @@ import { ChatRoom } from '@hessed/client-module/seven-chat';
 import { SimpleLoading } from '@hessed/ui/web/atom';
 import { ChatRightInfoView } from './ChatRightInfoView';
 import { ChatRightLearnView } from './ChatRightLearnView';
-import useTranslation from 'next-translate/useTranslation';
 export type ChatRightViewMode = 'default' | 'learn';
 
 export const CHAT_ROOT_HEADER_HEIGHT = 48;
@@ -24,7 +23,7 @@ export const ChatRightSideContent = ({
   if (!roomInfo) {
     return <SimpleLoading />;
   }
-  const { t } = useTranslation('chat-room-info');
+
   return (
     <Root>
       <Tabs
@@ -38,9 +37,7 @@ export const ChatRightSideContent = ({
         <Tab label="Learn mode" value="learn" />
       </Tabs>
       <ContentWrap>
-        {viewMode === 'default' && (
-          <ChatRightInfoView roomInfo={roomInfo} t={t} />
-        )}
+        {viewMode === 'default' && <ChatRightInfoView roomInfo={roomInfo} />}
         {viewMode === 'learn' && <ChatRightLearnView />}
       </ContentWrap>
     </Root>

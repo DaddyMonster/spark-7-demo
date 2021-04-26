@@ -1,21 +1,63 @@
+import { FbTimestamp } from '@hessed/client-lib/firebase';
 import { SevenUserInfo } from '@hessed/client-module/seven-auth';
-import firebase from 'firebase/app';
-import { useEffect, useMemo, useRef } from 'react';
-import { ChatLiveUser, ChatRoom } from '@hessed/client-module/seven-chat';
-import { useRTC } from '@hessed/hook/rtc';
+import {
+  ChatLiveUser,
+  ChatMessage,
+  ChatRoom,
+  defaultTranslated,
+  getChatUserFromInfo,
+} from '@hessed/client-module/seven-chat';
 import { useRecognition } from '@hessed/hook/recognition';
+import { useRTC } from '@hessed/hook/rtc';
+import { ClientRole } from 'agora-rtc-sdk-ng';
+import firebase from 'firebase/app';
+import { nanoid } from 'nanoid';
+import { useEffect, useMemo, useRef } from 'react';
+import { useLiveVolumeStore } from './useVolumeStore';
+
+type FbLivUserRef = firebase.firestore.CollectionReference<ChatLiveUser>;
+type FbChatMsgRef = firebase.firestore.CollectionReference<ChatMessage>;
+type FbChatMsgDocRef = firebase.firestore.DocumentReference<ChatMessage>;
 interface UseInitChat {
   userInfo: SevenUserInfo;
   roomInfo: ChatRoom;
-  liveUserRef: firebase.firestore.CollectionReference<ChatLiveUser>;
+  liveUserRef: FbLivUserRef;
+  chatMsgRef: FbChatMsgRef;
+  me: ChatLiveUser | null;
 }
 
-export function useChat({ userInfo, liveUserRef, roomInfo }: UseInitChat) {
-  const isReady = userInfo?.uid && liveUserRef && Boolean(roomInfo?.id);
+interface UseChatState {
+  recogOn: boolean;
+}
+
+type UseChatReturn = [UseChatState];
+export function useChat({
+  userInfo,
+  liveUserRef,
+  roomInfo,
+  me,
+  chatMsgRef,
+}: UseInitChat): UseChatReturn {
+  const isReady = useMemo(
+    () => userInfo?.uid && liveUserRef && Boolean(roomInfo?.id),
+    [userInfo?.uid, liveUserRef, roomInfo?.id]
+  );
   const liveUid = useMemo(
     () => parseInt((Math.random() * Math.pow(10, 5)).toString()),
     []
   );
+  const myRoleRef = useRef<ClientRole>(null);
+  useEffect(() => {
+    if (!isReady || !me) {
+      return;
+    }
+    if (myRoleRef.current !== me?.role) {
+      switchRole(me.role);
+      if (me.role === 'audience') terminateRecognition();
+      myRoleRef.current = me?.role;
+    }
+  }, [me?.role, isReady]);
+
   useEffect(() => {
     if (!isReady) {
       return;
@@ -23,23 +65,78 @@ export function useChat({ userInfo, liveUserRef, roomInfo }: UseInitChat) {
     initUserEnter();
   }, [userInfo?.uid, liveUserRef, roomInfo?.id]);
 
-  const currentMsgRef = useRef(null);
-  const modifyMessage = async (transcript: string) => {};
-  const onSpeechStart = async () => {};
-  const { setVolume, switchRole, userVolumeMap } = useRTC({
+  const currentMsgRef = useRef<FbChatMsgDocRef | null>(null);
+  const modifyMessage = async (transcript: string) => {
+    if (!currentMsgRef.current) {
+      return;
+    }
+
+    if (!transcript) {
+      await currentMsgRef.current.delete();
+      currentMsgRef.current = null;
+      return;
+    }
+
+    await currentMsgRef.current.update({
+      message: transcript,
+    });
+  };
+
+  const onSpeechStart = async () => {
+    const newId = nanoid();
+    console.log('SPEECH STARTED!', newId);
+    currentMsgRef.current = chatMsgRef.doc(newId);
+    await currentMsgRef.current.set({
+      cloudVoiceURL: '',
+      createdAt: FbTimestamp.fromDate(new Date()),
+      id: newId,
+      message: '...',
+      roomId: roomInfo.id,
+      translations: defaultTranslated,
+      user: getChatUserFromInfo(userInfo),
+      type: 'voice',
+    });
+  };
+
+  const updateVolMap = useLiveVolumeStore((store) => store.updateVolMap);
+  const { switchRole } = useRTC({
     liveUid,
     chatId: roomInfo?.hostId,
     isHost: userInfo?.uid === roomInfo?.hostId,
     ready: isReady,
+    useGlobalSetter: updateVolMap,
   });
-  const { initRecognition, recogOn, stopRecognition } = useRecognition({
+
+  const { initRecognition, recogOn, terminateRecognition } = useRecognition({
     lang: roomInfo?.lang,
     onResult: modifyMessage,
     onSpeechStart,
   });
 
+  const registerUserToChat = async () => {
+    const { displayName, uid, photoURL, localLang } = userInfo;
+    await liveUserRef.doc(uid).set({
+      liveUid,
+      photoURL,
+      handUp: false,
+      displayName,
+      joinedAt: FbTimestamp.fromDate(new Date()),
+      nation: localLang,
+      role: userInfo.uid === roomInfo.hostId ? 'host' : 'audience',
+      uid,
+    });
+  };
+
+  const initUserReference = () => {
+    myRoleRef.current = userInfo.uid === roomInfo.hostId ? 'host' : 'audience';
+  };
   const initUserEnter = async () => {
     initRecognition();
+    initUserReference();
+    await registerUserToChat();
   };
-  return [recogOn];
+
+  const ReturnState = useMemo(() => ({ recogOn }), [recogOn]);
+
+  return [ReturnState];
 }

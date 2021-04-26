@@ -2,6 +2,7 @@ import { ActivableIconButton, VolumeIcon } from '@hessed/ui/web/atom';
 import { Paper, Theme, useMediaQuery } from '@material-ui/core';
 import Color from 'color';
 import { Translate } from 'next-translate';
+import useTranslation from 'next-translate/useTranslation';
 import React from 'react';
 import { AiOutlineAlert, AiOutlineTranslation } from 'react-icons/ai';
 import { BiMessageMinus } from 'react-icons/bi';
@@ -15,11 +16,8 @@ import { useHideChatStore } from '../../hooks/chat/useHideChatStore';
 import { useTranslationStore } from '../../hooks/chat/useTranslationStore';
 import { useLocalVolumeStore } from '../../hooks/chat/useVolumeStore';
 
-interface ChatToolsProps {
-  t: Translate;
-}
 export const CHAT_TOOL_HEIGHT = 80;
-export const ChatTools = ({ t }: ChatToolsProps) => {
+export const ChatTools = () => {
   const lgDown = useMediaQuery((theme: Theme) => theme.breakpoints.down('lg'));
   const mdDown = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
   const { detailSide, setSide, userSide } = useChatSideStore();
@@ -28,6 +26,7 @@ export const ChatTools = ({ t }: ChatToolsProps) => {
   const { setTransOn, transOn } = useTranslationStore();
   const { hideChat, setHideChat } = useHideChatStore();
   const { onAlert } = useAlert();
+  const { t } = useTranslation('live-chat-tool');
   return (
     <ToolBoxWrap>
       <ToolBox>
@@ -39,7 +38,7 @@ export const ChatTools = ({ t }: ChatToolsProps) => {
             defaultColor="#fff"
             onClick={() => setSide('userSide')}
             active={userSide}
-            tooltipLabel={t(`show-user-${'on'}`)}
+            tooltipLabel={t('show-user')}
           />
         )}
         <ActivableIconButton
@@ -49,7 +48,7 @@ export const ChatTools = ({ t }: ChatToolsProps) => {
           defaultColor="#fff"
           active={handUp}
           onClick={() => setHandUp('uid')}
-          tooltipLabel={t(`ask-for-voice-${'on'}`)}
+          tooltipLabel={t(`ask-for-voice-${handUp ? 'on' : 'off'}`)}
         />
         <ActivableIconButton
           Icon={AiOutlineTranslation}
@@ -58,7 +57,7 @@ export const ChatTools = ({ t }: ChatToolsProps) => {
           active={transOn}
           defaultColor="#fff"
           onClick={setTransOn}
-          tooltipLabel={t(`auto-trans-${'on'}`)}
+          tooltipLabel={t(`auto-trans-${transOn ? 'on' : 'off'}`)}
         />
         <ActivableIconButton
           Icon={BiMessageMinus}
@@ -95,7 +94,7 @@ export const ChatTools = ({ t }: ChatToolsProps) => {
             activeColUni="danger"
             defaultColor="#fff"
             onClick={() => setSide('detailSide')}
-            tooltipLabel={t(`show-detail-${'on'}`)}
+            tooltipLabel={t(`show-detail-${detailSide ? 'on' : 'off'}`)}
           />
         )}
       </ToolBox>

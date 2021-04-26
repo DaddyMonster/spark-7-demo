@@ -1,3 +1,5 @@
+import { FbTimestamp } from '@hessed/client-lib/firebase';
+import { useSevenAuth } from '@hessed/client-module/seven-auth';
 import {
   Chat,
   ChatLiveUser,
@@ -7,16 +9,17 @@ import {
 import { SEVEN_TOP_NAV_HEIGHT } from '@hessed/client-module/seven-shared';
 import { useFbSnapItem, useFbSnapLists } from '@hessed/hook/fb-snapshot';
 import { useMiniSidebar, useSidebar } from '@hessed/hook/sidebar';
-import { SimpleLoading, SimpleChatMessage } from '@hessed/ui/web/atom';
+import { useSevenTimeMsg } from '@hessed/hook/time-worker';
+import { SimpleChatMessage, SimpleLoading } from '@hessed/ui/web/atom';
 import { ChatLayout } from '@hessed/ui/web/layout';
 import { alpha, Hidden, Typography } from '@material-ui/core';
+import { grey } from '@material-ui/core/colors';
+import dy from 'dayjs';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import React, { useMemo, useState } from 'react';
 import Scroll from 'react-perfect-scrollbar';
 import styled from 'styled-components';
-import { useSevenTimeMsg } from '@hessed/hook/time-worker';
-import dy from 'dayjs';
 import {
   ChatLeftSideContent,
   ChatRightSideContent,
@@ -28,7 +31,7 @@ import {
   CHAT_TOOL_HEIGHT,
 } from '../../../../components/chat/ChatTools';
 import { useChatSideStore, useChatSideWorker } from '../../../../hooks/chat';
-import { grey } from '@material-ui/core/colors';
+import { useChat } from '../../../../hooks/chat/useChat';
 
 const LiveRoom = () => {
   useMiniSidebar();
@@ -36,7 +39,8 @@ const LiveRoom = () => {
   const router = useRouter();
   const { query } = router;
   const [viewMode, setviewMode] = useState<ChatRightViewMode>('default');
-  const { t } = useTranslation('chat');
+  const { t } = useTranslation('live-chat');
+  const { user } = useSevenAuth();
   const chatModel = useMemo(() => {
     if (!query.roomId) {
       return null;
@@ -52,10 +56,10 @@ const LiveRoom = () => {
     () => liveUserRef?.orderBy('joinedAt') || null,
     [liveUserRef]
   );
-  const chatMsgQuery = useMemo(
-    () => chatModel?.msgRef.orderBy('createdAt') || null,
-    [chatModel]
-  );
+  const chatMsgRef = useMemo(() => chatModel?.msgRef || null, [chatModel]);
+  const chatMsgQuery = useMemo(() => chatMsgRef.orderBy('createdAt') || null, [
+    chatMsgRef,
+  ]);
 
   const [roomInfo, roomInfoErr] = useFbSnapItem<ChatRoom>({ docRef: fbQuery });
   const [users, userErr] = useFbSnapLists<ChatLiveUser>({
@@ -69,13 +73,22 @@ const LiveRoom = () => {
 
   const { detailSide, userSide, setSide } = useChatSideStore();
   const { toggleSidebar, sideStatus } = useSidebar();
-  const { message } = useSevenTimeMsg({
-    targetTime: dy(roomInfo?.startTime.toDate()),
-  });
 
   const handleClickMsg = (uid: string) => {
     console.log('Message ' + uid + ' has Clicked');
   };
+  const me = useMemo(() => {
+    if (!users || !user) return null;
+    return users.find((x) => x.uid === user.uid);
+  }, [users, user]);
+
+  useChat({
+    userInfo: user,
+    chatMsgRef,
+    liveUserRef,
+    roomInfo,
+    me,
+  });
 
   if (!roomInfo) {
     return <SimpleLoading />;
@@ -96,16 +109,7 @@ const LiveRoom = () => {
       subtractHeight={SEVEN_TOP_NAV_HEIGHT}
     >
       <Root>
-        <Header>
-          <Typography
-            fontSize="0.8rem"
-            textAlign="right"
-            sx={{ color: grey[600] }}
-          >
-            {message}
-          </Typography>
-        </Header>
-
+        <ChatHeader startTime={roomInfo.startTime} />
         <Content>
           <Scroll
             onClick={(e) => {
@@ -117,7 +121,7 @@ const LiveRoom = () => {
           >
             {chatMsg.map((x, i) => (
               <SimpleChatMessage
-                clientUid={x.user.clientUid}
+                clientUid={x.user.uid}
                 displayName={x.user.displayName}
                 message={x.message}
                 messageId={x.id}
@@ -130,7 +134,7 @@ const LiveRoom = () => {
           </Scroll>
         </Content>
         <Hidden lgUp>
-          <ChatTools t={t} />
+          <ChatTools />
         </Hidden>
       </Root>
     </ChatLayout>
@@ -146,6 +150,22 @@ export const getServerSideProps = async () => {
 };
 
 export default LiveRoom;
+
+interface ChatHeaderProps {
+  startTime: FbTimestamp | null;
+}
+const ChatHeader = ({ startTime }: ChatHeaderProps) => {
+  const { message } = useSevenTimeMsg({
+    targetTime: dy(startTime?.toDate() ?? new Date()),
+  });
+  return (
+    <Header>
+      <Typography fontSize="0.8rem" textAlign="right" sx={{ color: grey[600] }}>
+        {message}
+      </Typography>
+    </Header>
+  );
+};
 
 const Header = styled.div(({ theme }) => ({
   width: '100%',

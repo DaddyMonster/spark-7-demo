@@ -5,6 +5,7 @@ import { RtcRole, RtcTokenBuilder } from 'agora-access-token';
 export class AgoraTokenService {
   async generateToken({ uid, channelName }: AgoraTokenGenDto) {
     try {
+      console.log(uid, channelName);
       const role = RtcRole.PUBLISHER;
       const appId = process.env.AGORA_APP_ID;
       const certificate = process.env.AGORA_APP_CERTIFICATE;

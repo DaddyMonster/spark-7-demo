@@ -1,5 +1,5 @@
 import { ChatLiveUser } from '@hessed/client-module/seven-chat';
-import { ChatUserListCard } from '@hessed/ui/web/list';
+import { UserListCard } from '@hessed/ui/web/list';
 import { Divider, Typography } from '@material-ui/core';
 import React, { useMemo } from 'react';
 import styled from 'styled-components';
@@ -26,28 +26,30 @@ export const ChatLeftSideContent = ({ users }: ChatLeftSideContentProps) => {
     <Root>
       <UserLabel>Speakers</UserLabel>
       {speakerInfos.speakers.map((x) => (
-        <ChatUserListCard
-          photoURL={x.photoURL}
-          displayName={x.displayName}
-          liveUid={x.liveUid}
-          nation={x.nation}
-          role={x.role}
-          uid={x.uid}
-          volume={50}
-        />
+        <div className="" key={x.uid}>
+          <UserListCard
+            uid={x.uid}
+            photoURL={x.photoURL}
+            displayName={x.displayName}
+            timeStampInfo={x.joinedAt.toDate()}
+            onClick={() => console.log('Hello')}
+            userSubtitle={x.role}
+          />
+        </div>
       ))}
       <Divider />
       <UserLabel>Listeners</UserLabel>
       {speakerInfos.listeners.map((x) => (
-        <ChatUserListCard
-          photoURL={x.photoURL}
-          displayName={x.displayName}
-          liveUid={x.liveUid}
-          nation={x.nation}
-          role={x.role}
-          uid={x.uid}
-          volume={50}
-        />
+        <div key={x.uid} className="">
+          <UserListCard
+            uid={x.uid}
+            photoURL={x.photoURL}
+            displayName={x.displayName}
+            timeStampInfo={x.joinedAt.toDate()}
+            onClick={() => console.log('Hello')}
+            userSubtitle={x.role}
+          />
+        </div>
       ))}
     </Root>
   );

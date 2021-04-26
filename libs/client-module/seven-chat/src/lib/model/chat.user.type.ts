@@ -1,3 +1,4 @@
+import { FbTimestamp } from '@hessed/client-lib/firebase';
 import { SevenUserInfo } from '@hessed/client-module/seven-auth';
 import { Nation } from '@hessed/client-module/seven-shared';
 import { ClientRole } from 'agora-rtc-sdk-ng';
@@ -10,6 +11,7 @@ export interface ChatLiveUser {
   role: ClientRole;
   liveUid: number;
   handUp: boolean;
+  joinedAt: FbTimestamp;
 }
 
 export type ChatUser = Pick<

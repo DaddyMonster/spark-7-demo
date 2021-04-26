@@ -1,5 +1,5 @@
 import { ClientRole, UID } from 'agora-rtc-sdk-ng';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Agora, AudIndicator } from './agora-audio-rtc';
 
 interface UseRTCProps {
@@ -7,6 +7,7 @@ interface UseRTCProps {
   isHost: boolean;
   ready: boolean;
   liveUid: number;
+  useGlobalSetter?: (arg: UidMap) => void;
 }
 
 export type UidMap = Map<UID, number>;
@@ -22,6 +23,7 @@ export function useRTC({
   chatId,
   isHost,
   ready,
+  useGlobalSetter,
 }: UseRTCProps): UseLiveAudioReturn {
   const [userVolumeMap, setvolumeMap] = useState<UidMap>(new Map());
   const rtcRef = useRef<Agora>(null);
@@ -30,6 +32,7 @@ export function useRTC({
     if (!ready) {
       return;
     }
+    console.log('READY, CHAT ID', ready, chatId, liveUid);
     initRTC(chatId);
     return () => {
       if (rtcRef.current) {
@@ -46,12 +49,16 @@ export function useRTC({
         newMap.set(uid, level);
       }
     });
+    useGlobalSetter && useGlobalSetter(newMap);
     setvolumeMap(newMap);
   };
 
-  const setVolume = (val: number) => {
-    rtcRef.current.setVolume(val);
-  };
+  const setVolume = useCallback(
+    (val: number) => {
+      rtcRef.current.setVolume(val);
+    },
+    [rtcRef.current]
+  );
 
   const initRTC = async (channelId: string) => {
     rtcRef.current = await Agora.initClient(
@@ -64,6 +71,12 @@ export function useRTC({
     );
   };
 
-  const switchRole = (role: ClientRole) => rtcRef.current.switchRole(role);
-  return { setVolume, switchRole, userVolumeMap };
+  const switchRole = useCallback(
+    (role: ClientRole) => rtcRef.current.switchRole(role),
+    [rtcRef.current]
+  );
+
+  const memoized = useMemo(() => ({ userVolumeMap }), [userVolumeMap]);
+  console.log('SPEECH VOL MAP', memoized.userVolumeMap);
+  return { setVolume, switchRole, ...memoized };
 }

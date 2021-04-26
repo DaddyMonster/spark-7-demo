@@ -9,10 +9,9 @@ import { ChatTools, CHAT_TOOL_HEIGHT } from './ChatTools';
 
 interface ChatRightInfoViewProps {
   roomInfo: ChatRoom;
-  t: Translate;
 }
 
-export const ChatRightInfoView = ({ roomInfo, t }: ChatRightInfoViewProps) => {
+export const ChatRightInfoView = ({ roomInfo }: ChatRightInfoViewProps) => {
   const upLg = useMediaQuery((theme: Theme) => theme.breakpoints.up('lg'));
   return (
     <>
@@ -49,7 +48,7 @@ export const ChatRightInfoView = ({ roomInfo, t }: ChatRightInfoViewProps) => {
           </Typography>
         </Scrollbar>
       </InfoWrap>
-      {upLg && <ChatTools t={t} />}
+      {upLg && <ChatTools />}
     </>
   );
 };

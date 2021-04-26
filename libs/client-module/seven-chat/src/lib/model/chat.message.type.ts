@@ -12,12 +12,15 @@ export const defaultTranslated: TranslatedMessage = nationList.reduce(
   {} as TranslatedMessage
 );
 
+export type ChatMessageType = 'voice' | 'alert';
+
 export interface ChatMessage {
   message: string;
-  user: ChatUser & { clientUid: string };
+  user: ChatUser;
   createdAt: FbTimestamp;
   roomId: string;
   id: string;
   cloudVoiceURL: string;
-  translations: TranslatedMessage;
+  translations: TranslatedMessage | null;
+  type: ChatMessageType;
 }

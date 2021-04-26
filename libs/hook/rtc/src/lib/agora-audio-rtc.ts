@@ -109,6 +109,7 @@ export class Agora {
   public async terminate() {
     await this.client.leave();
     this.localAud.close();
+    this.localAud.getMediaStreamTrack().stop();
     this.localAud = null;
   }
 
