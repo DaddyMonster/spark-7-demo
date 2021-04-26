@@ -21,6 +21,7 @@ export function useFbSnapItem<T>({ docRef }: UseFbSnapItemProps): [T, FbError] {
     if (!docRef) {
       return;
     }
+    console.log('FETCHING ITEM ....')
     currentDocRef.current = docRef.onSnapshot(
       (item) => setdoc(item.data()),
       (err) => seterr(err)

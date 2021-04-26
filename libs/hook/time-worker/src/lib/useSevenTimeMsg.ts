@@ -14,7 +14,7 @@ export interface UseTimerProps extends Pick<UseIntervalProps, 'targetTime'> {
   t?: Translate;
 }
 
-type LiveStatus = 'live' | 'waiting' | 'terminated';
+export type LiveStatus = 'live' | 'waiting' | 'terminated';
 
 const ONE_HOUR = 1000 * 60 * 60;
 const TEN_SECOND = 1000 * 10;
@@ -85,7 +85,7 @@ export function useSevenTimeMsg({
     }
 
     if (status === 'live') {
-      const endTime = dy(targetTime).add(endDue);
+      const endTime = dy(targetTime).add(endDue, 'milliseconds');
       const endDiff = dy().diff(endTime, 'milliseconds');
       const dr = dy.duration(endDiff * -1);
       const _min = Math.floor(dr.asMinutes());

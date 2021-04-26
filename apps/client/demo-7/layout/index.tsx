@@ -18,18 +18,6 @@ const SevenLayout = {
       </LayoutWithSidebar>
     );
   },
-  SEVEN_MINI_SIDE_LAYOUT: ({ children, ...props }: any) => {
-    return (
-      <LayoutWithSidebar
-        SidebarContent={SevenSideRenderer}
-        TopNavComponent={SevenTopNav}
-        topNavHeight={SEVEN_TOP_NAV_HEIGHT}
-        topNavProps={{}}
-      >
-        {children}
-      </LayoutWithSidebar>
-    );
-  },
 } as const;
 
 export default SevenLayout;

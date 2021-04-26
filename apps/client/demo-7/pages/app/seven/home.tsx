@@ -4,40 +4,27 @@ import {
   ChatRoom,
   useChatDetail,
   useChatList,
-  UserChatDetailProps,
 } from '@hessed/client-module/seven-chat';
-import { Nation } from '@hessed/client-module/seven-shared';
 import { CarouselTemplate } from '@hessed/ui/web/carousel';
 import { AppBaseContainer } from '@hessed/ui/web/layout';
 import { RoomListCard } from '@hessed/ui/web/list';
 import { GetServerSideProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
-import React, { useMemo, useState } from 'react';
+import React from 'react';
 import SevenRoomDetailModal from '../../../components/room-detail-modal/SevenRoomDetailModal';
+import { useChatRoomSelect } from '../../../hooks/useChatRoomSelect';
 import { SevenPageType } from '../../../types';
-
-type DetailInfoArgs = Omit<UserChatDetailProps, 'userInfo'>;
-
-const DEFAULT_DETAIL = { cacheKey: null, selectedIdx: -1 };
 
 const SevenHome: SevenPageType = () => {
   const { user } = useSevenAuth();
 
-  const [detailInfos, setdetailInfos] = useState<DetailInfoArgs>(
-    DEFAULT_DETAIL
-  );
+  const { detailInfos, handleRoomClick, resetDetail } = useChatRoomSelect();
 
-  const detailOpen = useMemo(
-    () => detailInfos.cacheKey && detailInfos.selectedIdx > -1,
-    [detailInfos]
-  );
-  const chatDetail = useChatDetail({
+  const { roomDetail, onReserveClick } = useChatDetail({
     cacheKey: detailInfos.cacheKey,
     selectedIdx: detailInfos.selectedIdx,
     userInfo: user,
   });
-
-  console.log('CHAT_DETAIL', chatDetail);
 
   const RoomsForLearning = useChatList({
     queryCacheKey: user?.learningLang,
@@ -59,11 +46,6 @@ const SevenHome: SevenPageType = () => {
       }),
   });
 
-  const handleRoomClick = (lang: Nation, idx: number) => {
-    console.log(lang, idx);
-    setdetailInfos({ cacheKey: lang, selectedIdx: idx });
-  };
-
   const { t } = useTranslation('seven-home');
 
   return (
@@ -73,10 +55,11 @@ const SevenHome: SevenPageType = () => {
       appName="Seven"
       hideCrumbOnDownSm={false}
     >
-      {detailOpen && (
+      {Boolean(roomDetail) && (
         <SevenRoomDetailModal
-          onClose={() => setdetailInfos(DEFAULT_DETAIL)}
-          roomInfo={chatDetail?.roomDetail}
+          onClose={resetDetail}
+          roomInfo={roomDetail}
+          onActionClick={(args) => console.log(args)}
           t={t}
         />
       )}

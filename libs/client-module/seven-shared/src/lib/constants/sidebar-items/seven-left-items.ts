@@ -28,11 +28,11 @@ export const SevenSideItems: RenderItem[] = [
   {
     label: 'Reservation List',
     Icon: IoPeopleCircleOutline,
-    route: '/app/seven/my-reservations',
+    route: '/app/seven/my-reservation',
   },
   {
     label: 'History',
     Icon: AiOutlineHistory,
-    route: '/app/seven/history',
+    route: '/app/seven/seven-history',
   },
 ];

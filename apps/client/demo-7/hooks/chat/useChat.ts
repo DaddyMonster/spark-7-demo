@@ -18,12 +18,13 @@ import { useLiveVolumeStore } from './useVolumeStore';
 type FbLivUserRef = firebase.firestore.CollectionReference<ChatLiveUser>;
 type FbChatMsgRef = firebase.firestore.CollectionReference<ChatMessage>;
 type FbChatMsgDocRef = firebase.firestore.DocumentReference<ChatMessage>;
-interface UseInitChat {
+interface UseInitChatProps {
   userInfo: SevenUserInfo;
   roomInfo: ChatRoom;
   liveUserRef: FbLivUserRef;
   chatMsgRef: FbChatMsgRef;
   me: ChatLiveUser | null;
+  onItemAdded: () => void;
 }
 
 interface UseChatState {
@@ -37,7 +38,8 @@ export function useChat({
   roomInfo,
   me,
   chatMsgRef,
-}: UseInitChat): UseChatReturn {
+  onItemAdded,
+}: UseInitChatProps): UseChatReturn {
   const isReady = useMemo(
     () => userInfo?.uid && liveUserRef && Boolean(roomInfo?.id),
     [userInfo?.uid, liveUserRef, roomInfo?.id]
@@ -96,6 +98,7 @@ export function useChat({
       user: getChatUserFromInfo(userInfo),
       type: 'voice',
     });
+    onItemAdded();
   };
 
   const updateVolMap = useLiveVolumeStore((store) => store.updateVolMap);

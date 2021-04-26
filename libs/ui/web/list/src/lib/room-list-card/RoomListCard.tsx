@@ -1,14 +1,17 @@
 import { ChatRoom } from '@hessed/client-module/seven-chat';
-import { useSevenTimeMsg } from '@hessed/hook/time-worker';
-import { NationFlagSquare, StackedAvatars } from '@hessed/ui/web/atom';
-import { Avatar, Button, Paper, Typography } from '@material-ui/core';
+import { useSevenTimeMsg, LiveStatus } from '@hessed/hook/time-worker';
+import {
+  AvatarWithFlag,
+  NationFlagSquare,
+  StackedAvatars,
+} from '@hessed/ui/web/atom';
+import { Button, Paper, Typography } from '@material-ui/core';
 import { grey } from '@material-ui/core/colors';
 import dy from 'dayjs';
 import 'dayjs/locale/ko';
 import rl from 'dayjs/plugin/relativeTime';
 import React, { useMemo } from 'react';
 import styled from 'styled-components';
-import { AvatarWithFlag } from '@hessed/ui/web/atom';
 
 // 추가 필요 작업 내역
 // - 높이 사이즈 조절 (Responsive)
@@ -20,6 +23,7 @@ interface OnClickArgs {
   id: string;
   idx: number;
   event: React.MouseEvent;
+  status: LiveStatus;
 }
 
 export interface RoomListCardProps extends ChatRoom {
@@ -44,7 +48,7 @@ export const RoomListCard = ({
 }: RoomListCardProps) => {
   const userURLs = useMemo(() => reserved.map((x) => x.photoURL), [reserved]);
   const ca = dy(startTime.toDate());
-  const { message } = useSevenTimeMsg({
+  const { message, status } = useSevenTimeMsg({
     endDue: 7 * 1000 * 60,
     targetTime: dy(startTime.toDate()),
     onDue: () => console.log('DUE'),
@@ -52,7 +56,7 @@ export const RoomListCard = ({
 
   return (
     <Root>
-      <RootCard onClick={(event) => onClick({ id, idx, event })}>
+      <RootCard onClick={(event) => onClick({ id, idx, event, status })}>
         <div className="w-full flex flex-col py-3 px-3" style={{ height: 240 }}>
           <div
             style={{ height: 100 }}

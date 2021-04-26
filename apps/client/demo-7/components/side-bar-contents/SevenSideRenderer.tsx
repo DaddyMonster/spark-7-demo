@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { SEVEN_TOP_NAV_HEIGHT } from '@hessed/client-module/seven-shared';
 import { SevenSideItems } from '@hessed/client-module/seven-shared';
 import { SideContentProps } from '@hessed/ui/web/navs';
-import { useTheme } from '@material-ui/core';
+import { alpha, useTheme } from '@material-ui/core';
 
 const SevenSideRenderer = ({ sideStatus }: SideContentProps) => {
   const router = useRouter();
@@ -12,7 +12,20 @@ const SevenSideRenderer = ({ sideStatus }: SideContentProps) => {
   return (
     <SimpleSideNavRenderer
       rootStyle={{
-        background: theme.palette.black.main,
+        position: 'relative',
+        background: 'url(/img/flare.jpg)',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center center',
+        '&:before': {
+          background: alpha(theme.palette.black.main, 0.95),
+          content: "''",
+          position: 'absolute',
+          top: 0,
+          bottom: 0,
+          left: 0,
+          right: 0,
+        },
       }}
       asPath={router.asPath}
       onLinkClick={(route) => {

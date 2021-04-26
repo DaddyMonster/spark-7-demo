@@ -32,10 +32,11 @@ const Root = styled.div<{ width: number; paddingTop: number }>(
   ({ width, paddingTop, theme }) => ({
     height: '100vh',
     position: 'fixed',
-    width,
+    width: width - 2,
+    boxShadow: theme.shadows[3],
     paddingTop,
     transition: 'all 300ms ease',
-    background: theme.palette.default.main,
+    /* background: theme.palette.default.main, */
     zIndex: 800,
   })
 );

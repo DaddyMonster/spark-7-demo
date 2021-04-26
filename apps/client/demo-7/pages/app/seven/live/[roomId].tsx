@@ -17,7 +17,7 @@ import { grey } from '@material-ui/core/colors';
 import dy from 'dayjs';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import Scroll from 'react-perfect-scrollbar';
 import styled from 'styled-components';
 import {
@@ -32,6 +32,7 @@ import {
 } from '../../../../components/chat/ChatTools';
 import { useChatSideStore, useChatSideWorker } from '../../../../hooks/chat';
 import { useChat } from '../../../../hooks/chat/useChat';
+import ScrollIntoView from 'scroll-into-view-if-needed';
 
 const LiveRoom = () => {
   useMiniSidebar();
@@ -70,7 +71,10 @@ const LiveRoom = () => {
     queryRef: chatMsgQuery,
     limit: 30,
   });
-
+  console.log(roomInfo);
+  console.log(users);
+  console.log(chatMsg);
+  console.log('ERROR', roomInfoErr, msgErr, userErr);
   const { detailSide, userSide, setSide } = useChatSideStore();
   const { toggleSidebar, sideStatus } = useSidebar();
 
@@ -82,12 +86,15 @@ const LiveRoom = () => {
     return users.find((x) => x.uid === user.uid);
   }, [users, user]);
 
+  const msgScrollRef = useRef<HTMLDivElement>(null);
   useChat({
     userInfo: user,
     chatMsgRef,
     liveUserRef,
     roomInfo,
     me,
+    onItemAdded: () =>
+      ScrollIntoView(msgScrollRef.current, { behavior: 'smooth' }),
   });
 
   if (!roomInfo) {
@@ -98,7 +105,9 @@ const LiveRoom = () => {
     <ChatLayout
       leftShowCondition={userSide}
       rightShowCondition={detailSide}
-      LeftSideContent={() => <ChatLeftSideContent users={users} />}
+      LeftSideContent={() => (
+        <ChatLeftSideContent users={users} hostId={roomInfo.hostId} />
+      )}
       RightSideContent={() => (
         <ChatRightSideContent
           viewMode={viewMode}
@@ -131,6 +140,7 @@ const LiveRoom = () => {
                 uid={x.user.uid}
               />
             ))}
+            <div ref={msgScrollRef} />
           </Scroll>
         </Content>
         <Hidden lgUp>
@@ -187,6 +197,7 @@ const Root = styled.div(({ theme }) => ({
 const Content = styled.div(({ theme }) => ({
   paddingTop: CHAT_ROOT_HEADER_HEIGHT,
   height: '100%',
+  paddingBottom: theme.spacing(2),
   [theme.breakpoints.down('lg')]: {
     height: `calc(100% - ${CHAT_TOOL_HEIGHT}px)`,
   },

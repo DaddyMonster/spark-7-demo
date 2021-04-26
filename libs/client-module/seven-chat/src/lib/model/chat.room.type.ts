@@ -12,6 +12,7 @@ export interface ChatRoom {
   createdAt: FbTimestamp;
   startTime: FbTimestamp;
   reserved: ChatUser[];
+  reserversId: string[];
   host: SevenUserInfo;
   id: string;
   tags: ChatTagUnion[];

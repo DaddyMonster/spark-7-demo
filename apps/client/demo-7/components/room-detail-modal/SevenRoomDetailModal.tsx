@@ -3,14 +3,23 @@ import { AvatarWithFlag, DetailInfoModal } from '@hessed/ui/web/atom';
 import { ChatRoom } from '@hessed/client-module/seven-chat';
 import dy from 'dayjs';
 import { ROOM_TIME_FORMAT } from '@hessed/client-module/seven-shared';
-import { Button, Typography } from '@material-ui/core';
+import { Button, Typography, alpha } from '@material-ui/core';
 import { grey } from '@material-ui/core/colors';
-import { useSevenTimeMsg } from '@hessed/hook/time-worker';
+import { LiveStatus, useSevenTimeMsg } from '@hessed/hook/time-worker';
 import { Translate } from 'next-translate';
+import styled from 'styled-components';
+
+interface OnRoomModalActionArgs {
+  status: LiveStatus;
+}
+
+type OnRoomModalAction = (args: OnRoomModalActionArgs) => void;
+
 interface RoomDetailModalProps {
   roomInfo: ChatRoom;
   onClose: () => void;
   t: Translate;
+  onActionClick: OnRoomModalAction;
 }
 
 const SevenRoomDetailModal = ({
@@ -21,7 +30,7 @@ const SevenRoomDetailModal = ({
   const { topic, startTime, host, description } = roomInfo;
 
   const { message, status } = useSevenTimeMsg({
-    endDue: 7 * 1000 * 1000,
+    endDue: 7 * 1000 * 60,
     targetTime: dy(startTime.toDate()),
     onDue: () => console.log('DUE'),
   });
@@ -49,16 +58,20 @@ const SevenRoomDetailModal = ({
         </div>
       )}
       FooterRenderer={() => (
-        <Button className="w-full h-full flex items-center bg-primary flex-col">
+        <ActionButton>
           <p>
-            <Typography sx={{ color: '#fff' }} fontSize="0.6rem" className="mb-1">
+            <Typography
+              sx={{ color: '#fff' }}
+              fontSize="0.6rem"
+              className="mb-1"
+            >
               {message}
             </Typography>
             <Typography sx={{ color: '#fff' }}>
               {t('status-' + status)}
             </Typography>
           </p>
-        </Button>
+        </ActionButton>
       )}
     >
       <div className="px-3 py-5">
@@ -69,3 +82,15 @@ const SevenRoomDetailModal = ({
 };
 
 export default SevenRoomDetailModal;
+
+const ActionButton = styled(Button)(({ theme }) => ({
+  width: '100%',
+  height: '100%',
+  display: 'flex',
+  alignItems: 'center',
+  flexDirection: 'column',
+  background: theme.palette.black.main,
+  '&:hover': {
+    background: alpha(theme.palette.black.main, 0.7),
+  },
+}));

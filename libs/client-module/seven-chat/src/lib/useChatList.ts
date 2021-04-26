@@ -1,13 +1,14 @@
 import { FbTimestamp, QueryRef } from '@hessed/client-lib/firebase';
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { ChatRoom } from './model';
 import {
   DocSnapshot,
   useChatListStore,
   ChatRoomCacheKey,
 } from './useChatListStore';
-
+import dy from 'dayjs';
 interface UseChatListProps {
-  listQuery: ((startTime: FbTimestamp) => QueryRef) | null;
+  listQuery: ((startTime: FbTimestamp) => QueryRef<ChatRoom>) | null;
   paging?: number;
   queryCacheKey: ChatRoomCacheKey;
 }
@@ -29,7 +30,7 @@ export function useChatList({
   const { addCache, cache, getCache } = useChatListStore();
   const [loading, setloading] = useState(true);
   const maxReached = useRef(-1);
-  const queryRef = useRef<QueryRef>(null);
+  const queryRef = useRef<QueryRef<ChatRoom>>(null);
 
   const cachedItems = useMemo(() => cache.get(queryCacheKey), [
     queryCacheKey,
@@ -48,8 +49,10 @@ export function useChatList({
 
   useEffect(() => {
     if (!listQuery || !queryCacheKey) return;
-    const fbNow = FbTimestamp.fromDate(new Date());
-    queryRef.current = listQuery(fbNow);
+    const fbNow = FbTimestamp.fromDate(dy().subtract(7, 'minutes').toDate());
+    const query = listQuery(fbNow);
+    if (!query) return;
+    queryRef.current = query;
     initFetch();
   }, [listQuery, !queryCacheKey]);
 

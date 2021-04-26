@@ -4,7 +4,10 @@ import React, { useMemo } from 'react';
 import { SimpleTopNavProps } from '../top-nav/SimpleTopNav';
 import { useSidebar } from '@hessed/hook/sidebar';
 import { SimpleTopNavLogicProps } from '../top-nav/app-top-nav-basic-props';
-
+import {
+  TopNavMenuList,
+  SEVEN_TOP_NAV_HEIGHT,
+} from '@hessed/client-module/seven-shared';
 const SevenTopNavLogic = ({
   hideRoutes,
   transparental,
@@ -27,6 +30,8 @@ const SevenTopNavLogic = ({
       hideRoutes,
       transparental,
       showSideToggle,
+      topMenuList: TopNavMenuList,
+      topNavHeight: SEVEN_TOP_NAV_HEIGHT,
     }),
     [
       user,

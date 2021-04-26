@@ -1,37 +1,40 @@
-import { Avatar, Box, Button, Dialog, Typography } from '@material-ui/core';
+import {
+  alpha,
+  Avatar,
+  Box,
+  Button,
+  Dialog,
+  Typography,
+} from '@material-ui/core';
 import dy from 'dayjs';
 import 'dayjs/plugin/relativeTime';
 import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import {
-  CacheKey,
   ChatRoom,
   getChatUserFromInfo,
-  useReserveAction,
 } from '@hessed/client-module/seven-chat';
 import { SevenUserInfo } from '@hessed/client-module/seven-auth';
 import { NationFlagSquare, StackedAvatars } from '@hessed/ui/web/atom';
+import { useSevenTimeMsg } from '@hessed/hook/time-worker';
+import { Translate } from 'next-translate';
+
+
+/* DEPRESCATED???? */
+
 
 export interface DetailViewModalProps {
   chatRoom: ChatRoom | null;
   onClose: () => void;
   userInfo: SevenUserInfo;
-  cacheKey: CacheKey;
-  listIdx: number;
 }
-
-type LiveStatus = 'live' | 'not-started' | 'hasPast';
 
 export const RoomDetailModal = ({
   chatRoom,
   onClose,
   userInfo,
-  cacheKey,
-  listIdx,
 }: DetailViewModalProps) => {
-  const [liveStatus, setliveStatus] = useState<LiveStatus>('not-started');
-
   const router = useRouter();
 
   const meAsChatUser = useMemo(() => {
@@ -43,43 +46,11 @@ export const RoomDetailModal = ({
     return reserved.includes(meAsChatUser);
   }, [chatRoom, meAsChatUser]);
 
-  const { onReserveClick } = useReserveAction({
-    cacheKey,
-    isReserved,
-    listIdx,
-    meAsChatUser,
+  const { status, message } = useSevenTimeMsg({
+    endDue: 1000 * 60 * 7,
+    onDue: () => console.log('DUE!'),
+    targetTime: dy(chatRoom.startTime.toDate()),
   });
-
-  const getLiveStatus = useCallback((): LiveStatus => {
-    const { startTime } = chatRoom;
-    const diff = dy().diff(startTime.toDate(), 'seconds');
-    const min = diff / 60;
-    if (min < 0) return 'not-started';
-    else if (min > 0 && min < 7) return 'live';
-    return 'hasPast';
-  }, [chatRoom]);
-
-  useEffect(() => {
-    const secToLive = dy().diff(chatRoom.startTime.toDate(), 'minutes');
-    setliveStatus(getLiveStatus);
-    const liveTimeout =
-      secToLive < 0
-        ? setTimeout(() => {
-            setliveStatus(getLiveStatus);
-          }, secToLive * 60 * -1000)
-        : null;
-    const pastTimeout =
-      secToLive < 0
-        ? setTimeout(() => {
-            setliveStatus(getLiveStatus);
-          }, (secToLive - 7) * 60 * -1000)
-        : null;
-
-    return () => {
-      liveTimeout && clearTimeout(liveTimeout);
-      pastTimeout && clearTimeout(pastTimeout);
-    };
-  }, [chatRoom, getLiveStatus]);
 
   return (
     <Dialog open={Boolean(chatRoom)} onClose={onClose}>
@@ -127,23 +98,21 @@ export const RoomDetailModal = ({
             </LookForwardList>
           )}
           <ActionBox>
-            {liveStatus === 'live' && (
+            {status === 'live' && (
               <ActionBtn
                 onClick={() => router.push(`/app/seven/live/${chatRoom.id}`)}
               >
                 JOIN
               </ActionBtn>
             )}
-            {liveStatus === 'hasPast' && (
+            {status === 'terminated' && (
               <ActionBtn>Session Terminated</ActionBtn>
             )}
-            {liveStatus === 'not-started' && (
+            {status === 'waiting' && (
               <>
-                <span className="text-white text-center">
-                  {dy(chatRoom.startTime.toDate()).fromNow()}
-                </span>
+                <span className="text-white text-center">{message}</span>
                 <div className="flex justify-center items-center w-full">
-                  <ActionBtn onClick={onReserveClick}>
+                  <ActionBtn /* onClick={onReserveClick} */>
                     {isReserved ? 'Cancel' : 'Reserve'}
                   </ActionBtn>
                 </div>
@@ -202,4 +171,7 @@ const ActionBtn = styled(Button)(({ theme }) => ({
   border: '2px solid #fff',
   boxShadow: '2px 2px 0px 0px rgba(255,255,255,0.71)',
   color: '#fff',
+  '&:hover': {
+    background: alpha(theme.palette.primary.main, 0.7),
+  },
 }));

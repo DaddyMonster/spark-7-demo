@@ -48,10 +48,14 @@ export function useChatDetail({
     if (roomDetail.reserved.includes(meAsChatUser)) {
       docRef.ref.update({
         reserved: firebase.firestore.FieldValue.arrayRemove(meAsChatUser),
+        reserversId: firebase.firestore.FieldValue.arrayRemove(
+          meAsChatUser.uid
+        ),
       });
     } else {
       docRef.ref.update({
         reserved: firebase.firestore.FieldValue.arrayUnion(meAsChatUser),
+        reserversId: firebase.firestore.FieldValue.arrayUnion(meAsChatUser.uid),
       });
     }
     updateRef(cacheKey, selectedIdx, await docRef.ref.get());

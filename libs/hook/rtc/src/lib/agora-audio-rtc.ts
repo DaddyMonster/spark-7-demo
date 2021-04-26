@@ -36,8 +36,6 @@ const appId = process.env.NEXT_PUBLIC_AGORA_APP_ID;
 
 export class Agora {
   private client: IAgoraRTCClient;
-  private liveUid: number;
-  private channelId: string;
   private localAud: IMicrophoneAudioTrack | null;
   private remoteAud: IRemoteAudioTrack;
   private onVolumeUpdate: OnVolumeUpdate;
@@ -70,21 +68,25 @@ export class Agora {
     initialRole,
     onVolumeUpdate,
   }: AgoraConstructor) {
-    this.channelId = channelId;
     this.client = client;
     this.client.enableAudioVolumeIndicator();
-    this.liveUid = liveUid;
     this.onVolumeUpdate = onVolumeUpdate.bind(this);
-    this.initConnection(initialRole);
+    this.initConnection(initialRole, channelId, liveUid);
   }
 
-  private initConnection(initRole: ClientRole) {
+  private initConnection(
+    initRole: ClientRole,
+    channelId: string,
+    liveUid: number
+  ) {
     this.client.on('user-joined', async (remote) => {
       this.remoteAud = remote.audioTrack;
       await this.client.subscribe(remote, 'audio');
     });
     this.client.on('volume-indicator', this.onVolumeUpdate);
-    this.client.on('token-privilege-will-expire', this.resetToken);
+    this.client.on('token-privilege-will-expire', () =>
+      this.resetToken(channelId, liveUid)
+    );
     this.switchRole(initRole);
   }
 
@@ -129,13 +131,13 @@ export class Agora {
     await this.client.setClientRole('audience');
   }
 
-  private async resetToken() {
+  private async resetToken(channelName: string, liveUid: number) {
     console.warn('RESETTING TOKEN');
-    console.warn('CHANNEL ID : ', this.channelId);
-    console.warn('AGORA RAW UID : ', this.liveUid);
+    console.warn('CHANNEL ID : ', channelName);
+    console.warn('AGORA RAW UID : ', liveUid);
     const token = await fetchToken({
-      channelName: this.channelId,
-      uid: this.liveUid,
+      channelName,
+      uid: liveUid,
     });
     console.warn('RENEWED TOKEN : ', token);
     await this.client.renewToken(token);

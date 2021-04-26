@@ -32,7 +32,7 @@ export function SimpleSideNavRenderer({
       topNavHeight={topNavHeight}
       isMini={sideStatus === 'mini'}
       className={rootClassName}
-      style={rootStyle}
+      rootStyle={rootStyle}
     >
       <div>
         <Scrollbar>
@@ -54,11 +54,13 @@ export function SimpleSideNavRenderer({
 const SideRendererRoot = styled.div<{
   topNavHeight: number;
   isMini: boolean;
-}>(({ theme, topNavHeight, isMini }) => ({
+  rootStyle: Record<string, unknown>;
+}>(({ theme, topNavHeight, isMini, rootStyle }) => ({
   width: '100%',
   height: `calc(100vh - ${topNavHeight}px)`,
   padding: theme.spacing(6, 0, 2, 1),
   boxShadow: theme.shadows[3],
   background: isMini ? theme.palette.primary.main : 'none',
   transition: '300ms background ease',
+  ...rootStyle,
 }));

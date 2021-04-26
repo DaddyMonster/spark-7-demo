@@ -1,14 +1,12 @@
 import { SevenUserInfo } from '@hessed/client-module/seven-auth';
-import {
-  SEVEN_TOP_NAV_HEIGHT,
-  TopNavMenuList,
-} from '@hessed/client-module/seven-shared';
+
 import { GoogleButton } from '@hessed/ui/web/atom';
 import { alpha, Grid, Hidden, Menu, MenuItem } from '@material-ui/core';
 import { NextRouter } from 'next/router';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { LogoBox, NavRoute, UserProfileBox } from '../top-nav';
+import { TopNavMenuListItem } from './nav-box';
 
 export interface SimpleTopNavProps {
   hideRoutes?: boolean;
@@ -21,6 +19,8 @@ export interface SimpleTopNavProps {
   logoPath: string;
   showSideToggle?: boolean;
   __active_test__?: boolean;
+  topMenuList: TopNavMenuListItem[];
+  topNavHeight: number;
 }
 
 export const SimpleTopNav = ({
@@ -34,6 +34,8 @@ export const SimpleTopNav = ({
   logoPath,
   showSideToggle = true,
   __active_test__,
+  topMenuList,
+  topNavHeight,
 }: SimpleTopNavProps) => {
   const [anchor, setanchor] = useState<HTMLElement | null>(null);
   const onThumbClick = (e: HTMLElement) => {
@@ -41,7 +43,7 @@ export const SimpleTopNav = ({
   };
   return (
     <>
-      <Root transparental={transparental}>
+      <Root transparental={transparental} topNavHeight={topNavHeight}>
         <Grid container spacing={0}>
           <Grid item xs={6} md={3}>
             <LogoBox
@@ -57,7 +59,7 @@ export const SimpleTopNav = ({
                 <div className="w-full h-full">
                   <NavRoute
                     hidden={!user}
-                    topMenuList={TopNavMenuList}
+                    topMenuList={topMenuList}
                     onRouteClick={(path) => router.push(path)}
                     routeAsPath={router.asPath}
                     __active_test__={__active_test__}
@@ -70,7 +72,7 @@ export const SimpleTopNav = ({
             {user && router.asPath !== '/' ? (
               <UserProfileBox
                 displayName={user.displayName}
-                navHeight={SEVEN_TOP_NAV_HEIGHT}
+                navHeight={topNavHeight}
                 onThumbClick={onThumbClick}
                 subDisplay={user.reputation.toUpperCase() + 'user'}
               />
@@ -94,7 +96,6 @@ export const SimpleTopNav = ({
         keepMounted
         open={Boolean(anchor)}
         onClose={() => setanchor(null)}
-        getContentAnchorEl={null}
         anchorOrigin={{
           horizontal: 'left',
           vertical: 'bottom',
@@ -118,17 +119,18 @@ export const SimpleTopNav = ({
   );
 };
 
-export const Root = styled.div<{ transparental?: boolean }>(
-  ({ theme, transparental = false }) => ({
-    display: 'flex',
-    padding: theme.spacing(0, 3),
-    boxShadow: theme.shadows[transparental ? 0 : 2],
-    height: SEVEN_TOP_NAV_HEIGHT,
-    background: alpha('#ffffff', transparental ? 0 : 1),
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    width: '100%',
-    zIndex: 1000,
-  })
-);
+export const Root = styled.div<{
+  transparental?: boolean;
+  topNavHeight: number;
+}>(({ theme, transparental = false, topNavHeight }) => ({
+  display: 'flex',
+  padding: theme.spacing(0, 3),
+  boxShadow: theme.shadows[transparental ? 0 : 2],
+  height: topNavHeight,
+  background: alpha('#ffffff', transparental ? 0 : 1),
+  position: 'fixed',
+  top: 0,
+  left: 0,
+  width: '100%',
+  zIndex: 1000,
+}));

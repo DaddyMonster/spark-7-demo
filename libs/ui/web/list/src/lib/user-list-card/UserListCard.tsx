@@ -58,8 +58,8 @@ export const UserListCard = ({
 };
 
 const Root = styled(Paper)(({ theme }) => ({
-  margin: theme.spacing(0.5),
-  marginBottom: theme.spacing(0.25),
+  margin: theme.spacing(0.5, 0.5, 0.25),
+  boxSizing: 'border-box',
   width: '100%',
   height: USER_LIST_CARD_HEIGHT,
   boxShadow: theme.shadows[3],

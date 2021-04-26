@@ -7,6 +7,7 @@ export interface TopNavMenuListItem {
   href: string;
   label: string;
   Icon: IconType;
+  regex: RegExp;
 }
 
 export interface NavRouteProps {
@@ -24,7 +25,7 @@ export const NavRoute = ({
   __active_test__,
 }: NavRouteProps) => {
   const active = useMemo(() => {
-    return topMenuList.find((x) => routeAsPath.match(new RegExp(x.href)));
+    return topMenuList.find((x) => x.regex.test(routeAsPath));
   }, [routeAsPath, topMenuList]);
 
   return (
