@@ -2,7 +2,7 @@ import React from 'react';
 import { NavRenderItemBase } from '@hessed/ui/shared';
 import { SidebarStatus } from '@hessed/hook/sidebar';
 import styled from 'styled-components';
-import { Typography } from '@material-ui/core';
+import { alpha, Typography } from '@material-ui/core';
 
 export interface SimpleSideNavItemProps extends NavRenderItemBase {
   active: boolean;
@@ -36,7 +36,9 @@ const Root = styled.div<{ active: boolean; sideSize: SidebarStatus }>(
     padding: theme.spacing(1.5, 0, 1.5, sideSize === 'full' ? 2 : 0),
     marginBottom: theme.spacing(2),
     background: active ? theme.palette.primary.main : 'none',
-    boxShadow: active ? '3px 3px 0px 0px rgba(0,0,0,0.71)' : 'none',
+    boxShadow: active
+      ? `3px 3px 0px 0px ${alpha(theme.palette.grey[700], 0.5)}`
+      : 'none',
     borderRadius: 5,
     zIndex: 500,
     cursor: 'pointer',

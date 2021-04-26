@@ -9,6 +9,6 @@ export const LinedTypo = styled.p(({ theme }) => ({
   display: 'block',
   lineHeight: '2rem',
   fontSize: '1.7rem',
-  fontFamily: theme.typography.fontFam.guide,
+  fontFamily: theme.typography.fontFam.pretty,
   marginBottom: theme.spacing(1),
 }));

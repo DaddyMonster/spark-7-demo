@@ -59,6 +59,7 @@ export function useCreateTopic({
       hostId: userInfo.uid,
       id,
       reserved: [],
+      userLangs: [],
     };
     await Chat.collection.doc(id).set(values);
     router.push('/app/seven/my-reservation');

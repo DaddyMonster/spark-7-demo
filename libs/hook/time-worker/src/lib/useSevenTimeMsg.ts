@@ -10,7 +10,7 @@ dy.extend(dr);
 
 export interface UseTimerProps extends Pick<UseIntervalProps, 'targetTime'> {
   onDue?: () => void;
-  endDue: number; // miliseconds;
+  endDue?: number; // miliseconds;
   t?: Translate;
 }
 
@@ -23,7 +23,7 @@ const HALF_SECOND = 500;
 export function useSevenTimeMsg({
   onDue,
   targetTime,
-  endDue,
+  endDue = 1000 * 7 * 60,
   t,
 }: UseTimerProps) {
   const [intervalMs, setintervalMs] = useState(TEN_SECOND); // 10초

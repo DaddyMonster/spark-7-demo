@@ -1,2 +1,2 @@
-export * from './agora-rtc';
+export * from './agora-audio-rtc';
 export * from './useRTC';

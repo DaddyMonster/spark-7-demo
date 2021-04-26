@@ -5,6 +5,7 @@ interface UseRecognitionArgs {
   lang: Nation;
   onResult: (transcript: string) => void;
   onSpeechStart: () => void;
+  continuous?: boolean;
 }
 
 interface UseRecogChatReturn {
@@ -17,13 +18,19 @@ export function useRecognition({
   lang,
   onResult,
   onSpeechStart,
+  continuous,
 }: UseRecognitionArgs): UseRecogChatReturn {
   const [recogOn, setrecogOn] = useState(false);
 
   const recogRef = useRef<Recognition>(null);
 
   const initRecognition = () => {
-    recogRef.current = new Recognition({ lang, onResult, onSpeechStart });
+    recogRef.current = new Recognition({
+      lang,
+      onResult,
+      onSpeechStart,
+      continuous,
+    });
     recogRef.current.start();
     setrecogOn(true);
   };

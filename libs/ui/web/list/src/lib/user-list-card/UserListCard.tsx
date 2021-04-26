@@ -13,6 +13,7 @@ export interface UserListCardProps {
   timeStampInfo: Date;
   AvatarMisc?: React.ComponentType;
   RootMisc?: React.ComponentType;
+  PreAvatar?: React.ComponentType;
   idx?: number;
   onClick: (id: string, idx: number) => void;
 }
@@ -28,12 +29,14 @@ export const UserListCard = ({
   AvatarMisc,
   RootMisc,
   idx = -1,
+  PreAvatar,
   onClick,
 }: UserListCardProps) => {
   return (
     <Root onClick={() => onClick(uid, idx)}>
       {RootMisc && <RootMisc />}
       <Wrapper>
+        {PreAvatar && <PreAvatar />}
         <AvatarWrap>
           {AvatarMisc && <AvatarMisc />}
           <Avatar src={photoURL}>
@@ -41,8 +44,12 @@ export const UserListCard = ({
           </Avatar>
         </AvatarWrap>
         <div className="h-full w-full flex flex-col justify-center relative">
-          <Typography fontSize="0.85rem" className="pt-1">{displayName}</Typography>
-          <Typography fontSize="0.65rem" sx={{ color: grey[500] }}>{userSubtitle}</Typography>
+          <Typography fontSize="0.85rem" className="pt-1">
+            {displayName}
+          </Typography>
+          <Typography fontSize="0.65rem" sx={{ color: grey[500] }}>
+            {userSubtitle}
+          </Typography>
           <TimeStamper>{dy(timeStampInfo).format('HH:MM')}</TimeStamper>
         </div>
       </Wrapper>

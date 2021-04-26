@@ -9,3 +9,4 @@ export * from './lib/typo';
 export * from './lib/text-fields';
 export * from './lib/modal';
 export * from './lib/loading';
+export * from './lib/chat-message';

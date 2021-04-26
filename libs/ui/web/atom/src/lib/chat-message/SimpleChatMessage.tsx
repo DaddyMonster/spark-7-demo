@@ -12,7 +12,7 @@ export interface SimpleChatMsgProps {
   /* isSpeaking: boolean; */ onClick: (msgId: string) => void;
 }
 
-const SimpleChatMessage = ({
+export const SimpleChatMessage = ({
   displayName,
   message,
   photoURL,
@@ -58,8 +58,6 @@ SimpleChatMsgProps) => {
     </Root>
   );
 };
-
-export default SimpleChatMessage;
 
 interface MsgCompProps {
   $isMine: boolean;

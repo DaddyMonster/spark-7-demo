@@ -2,7 +2,7 @@ import { SidebarStatus } from '@hessed/hook/sidebar';
 import { NavRenderItemBase } from '@hessed/ui/shared';
 import React from 'react';
 import Scrollbar from 'react-perfect-scrollbar';
-import styled from 'styled-components';
+import styled, { CSSObject } from 'styled-components';
 import SimpleSideNavItem from './SimpleSideNavItem';
 
 export interface SideContentProps {
@@ -14,6 +14,8 @@ interface SimpleSideNavRendererProps extends SideContentProps {
   navItems: NavRenderItemBase[];
   asPath: string;
   onLinkClick: (route: string) => void;
+  rootStyle?: CSSObject;
+  rootClassName?: string;
 }
 
 export function SimpleSideNavRenderer({
@@ -22,11 +24,15 @@ export function SimpleSideNavRenderer({
   asPath,
   onLinkClick,
   sideStatus,
+  rootStyle = {},
+  rootClassName = '',
 }: SimpleSideNavRendererProps) {
   return (
     <SideRendererRoot
       topNavHeight={topNavHeight}
       isMini={sideStatus === 'mini'}
+      className={rootClassName}
+      style={rootStyle}
     >
       <div>
         <Scrollbar>

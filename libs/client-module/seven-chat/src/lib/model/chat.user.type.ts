@@ -1,7 +1,6 @@
 import { SevenUserInfo } from '@hessed/client-module/seven-auth';
 import { Nation } from '@hessed/client-module/seven-shared';
 import { ClientRole } from 'agora-rtc-sdk-ng';
-import { pick } from 'ramda';
 
 export interface ChatLiveUser {
   displayName: string;
@@ -10,6 +9,7 @@ export interface ChatLiveUser {
   nation: Nation;
   role: ClientRole;
   liveUid: number;
+  handUp: boolean;
 }
 
 export type ChatUser = Pick<

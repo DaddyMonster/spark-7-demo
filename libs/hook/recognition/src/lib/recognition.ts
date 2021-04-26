@@ -6,6 +6,7 @@ interface RecognitionArgs {
   onResult: OnResult;
   onSpeechStart: () => void;
   lang: Nation;
+  continuous?: boolean;
 }
 
 export class Recognition {
@@ -13,15 +14,16 @@ export class Recognition {
   private transcript: string = null;
   private onResult: OnResult;
   private onSpeechStart: () => void;
-  constructor({ lang, onResult }: RecognitionArgs) {
+  constructor({ lang, onResult, onSpeechStart, continuous }: RecognitionArgs) {
     const SpeechRecognition =
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       window.SpeechRecognition || (window as any).webkitSpeechRecognition;
     this.recognizer = new SpeechRecognition();
     this.recognizer.lang = lang === 'en' ? 'en-US' : 'ko-KR';
     this.recognizer.maxAlternatives = 5;
+    /* this. */
     this.onResult = onResult.bind(this);
-    this.onSpeechStart = this.onSpeechStart.bind(this);
+    this.onSpeechStart = onSpeechStart.bind(this);
     this.initCallbacks();
   }
 
