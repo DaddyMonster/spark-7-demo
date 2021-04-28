@@ -25,12 +25,12 @@ interface NationMapItem {
 export const nationMapList: NationMapItem[] = [
   {
     code: 'en',
-    iconPath: '/flags/us.svg',
+    iconPath: '/flags/en.svg',
     label: 'English',
   },
   {
     code: 'ko',
-    iconPath: '/flags/kr.svg',
+    iconPath: '/flags/ko.svg',
     label: 'Korea',
   },
 ];

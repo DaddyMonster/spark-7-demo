@@ -1,13 +1,12 @@
 import {
   CollectionRef,
   FbTimestamp,
-  firestore,
+  firestore
 } from '@hessed/client-lib/firebase';
 import { ChatTagUnion } from '@hessed/client-module/chat-tag';
 import { Nation } from '@hessed/client-module/seven-shared';
 import firebase from 'firebase/app';
 import { ChatLiveUser, ChatMessage, ChatRoom } from './model';
-import dy from 'dayjs';
 const CHAT = 'seven-chat';
 const SEVEN_CHAT_MESSAGE = 'chat-message';
 const CHAT_LIVE_USER = 'chat-live-user';
@@ -19,7 +18,7 @@ interface LanguageQueryArgs {
 }
 
 export class Chat {
-  static get collection() {
+  public static get collection() {
     return firestore.collection(CHAT) as CollectionRef<ChatRoom>;
   }
 

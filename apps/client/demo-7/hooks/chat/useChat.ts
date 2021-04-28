@@ -1,4 +1,9 @@
-import { FbTimestamp } from '@hessed/client-lib/firebase';
+import {
+  DocRef,
+  FbTimestamp,
+  ArrayUnion,
+  Increment,
+} from '@hessed/client-lib/firebase';
 import { SevenUserInfo } from '@hessed/client-module/seven-auth';
 import {
   ChatLiveUser,
@@ -13,6 +18,7 @@ import { ClientRole } from 'agora-rtc-sdk-ng';
 import firebase from 'firebase/app';
 import { nanoid } from 'nanoid';
 import { useEffect, useMemo, useRef } from 'react';
+import { SevenUser } from '@hessed/client-module/seven-auth';
 import { useLiveVolumeStore } from './useVolumeStore';
 
 type FbLivUserRef = firebase.firestore.CollectionReference<ChatLiveUser>;
@@ -25,6 +31,7 @@ interface UseInitChatProps {
   chatMsgRef: FbChatMsgRef;
   me: ChatLiveUser | null;
   onItemAdded: () => void;
+  docRef: DocRef<ChatRoom>;
 }
 
 interface UseChatState {
@@ -39,6 +46,7 @@ export function useChat({
   me,
   chatMsgRef,
   onItemAdded,
+  docRef,
 }: UseInitChatProps): UseChatReturn {
   const isReady = useMemo(
     () => userInfo?.uid && liveUserRef && Boolean(roomInfo?.id),
@@ -118,6 +126,7 @@ export function useChat({
 
   const registerUserToChat = async () => {
     const { displayName, uid, photoURL, localLang } = userInfo;
+    const isHost = userInfo.uid === roomInfo.hostId;
     await liveUserRef.doc(uid).set({
       hasLeft: false,
       liveUid,
@@ -126,9 +135,17 @@ export function useChat({
       displayName,
       joinedAt: FbTimestamp.fromDate(new Date()),
       nation: localLang,
-      role: userInfo.uid === roomInfo.hostId ? 'host' : 'audience',
+      role: isHost ? 'host' : 'audience',
       uid,
     });
+    await docRef.update({
+      joinedUserIdRecord: ArrayUnion(me.uid),
+    });
+    if (isHost) {
+      await SevenUser.collection.doc(userInfo.uid).update({
+        hostedCount: Increment(1),
+      });
+    }
   };
 
   const initUserReference = () => {

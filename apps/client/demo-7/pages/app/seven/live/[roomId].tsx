@@ -62,7 +62,10 @@ const LiveRoom = () => {
     chatMsgRef,
   ]);
 
-  const [roomInfo, roomInfoErr] = useFbSnapItem<ChatRoom>({ docRef: fbQuery });
+  const [roomInfo, roomInfoErr] = useFbSnapItem<ChatRoom>({
+    docRef: fbQuery,
+    once: true,
+  });
   const [users, userErr] = useFbSnapLists<ChatLiveUser>({
     queryRef: liveUsersQuery,
     limit: 1000,
@@ -93,6 +96,7 @@ const LiveRoom = () => {
     liveUserRef,
     roomInfo,
     me,
+    docRef : fbQuery,
     onItemAdded: () =>
       ScrollIntoView(msgScrollRef.current, { behavior: 'smooth' }),
   });

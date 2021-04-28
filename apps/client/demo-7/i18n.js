@@ -10,6 +10,7 @@ module.exports = {
     '/app/seven/learn-and-teach': ['learn-and-teach', 'chat-detail-modal'],
     '/app/seven/create-topic': ['seven-create-topic', 'validation'],
     '/app/seven/live/[roomId]': ['live-chat', 'live-chat-tool'],
+    '/app/seven/activity-log': ['activity-log'],
   },
   loadLocaleFrom: async (lang, ns) => {
     const isGlobal = /global/.test(ns);

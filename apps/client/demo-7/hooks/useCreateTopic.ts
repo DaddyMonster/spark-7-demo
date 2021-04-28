@@ -62,6 +62,7 @@ export function useCreateTopic({
       reserved: [],
       userLangs: [],
       reserversId: [],
+      joinedUserIdRecord: [],
     };
     await Chat.collection.doc(id).set(values);
     router.push('/app/seven/activity-log');

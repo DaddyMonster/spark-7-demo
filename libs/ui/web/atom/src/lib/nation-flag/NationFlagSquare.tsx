@@ -17,8 +17,8 @@ type FlagMap = {
   [key in Nation]: string;
 };
 const flagMap: FlagMap = {
-  en: '/flags/us.svg',
-  ko: '/flags/kr.svg',
+  en: '/flags/en.svg',
+  ko: '/flags/ko.svg',
 };
 
 export const NationFlagSquare = ({

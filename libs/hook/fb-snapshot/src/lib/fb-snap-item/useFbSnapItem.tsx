@@ -10,9 +10,13 @@ type Snap<T> = (
 
 export interface UseFbSnapItemProps {
   docRef: DocRef | null;
+  once?: boolean;
 }
 
-export function useFbSnapItem<T>({ docRef }: UseFbSnapItemProps): [T, FbError] {
+export function useFbSnapItem<T>({
+  docRef,
+  once = false,
+}: UseFbSnapItemProps): [T, FbError] {
   const [doc, setdoc] = useState(null);
   const [err, seterr] = useState<Fb.firestore.FirestoreError | null>(null);
   const currentDocRef = useRef<ReturnType<Snap<T>>>(null);
@@ -21,7 +25,12 @@ export function useFbSnapItem<T>({ docRef }: UseFbSnapItemProps): [T, FbError] {
     if (!docRef) {
       return;
     }
-    console.log('FETCHING ITEM ....')
+    console.log('FETCHING ITEM ....');
+    if (once) {
+      docRef.get().then((x) => setdoc(x.data()));
+      return;
+    }
+
     currentDocRef.current = docRef.onSnapshot(
       (item) => setdoc(item.data()),
       (err) => seterr(err)

@@ -16,6 +16,7 @@ export interface SevenUserInfo {
   createdAt: FbTimestamp;
   interests: ChatTagUnion[];
   reputation: Reputation;
+  hostedCount: number;
 }
 
 export type SevenUserRegisterInput = Pick<

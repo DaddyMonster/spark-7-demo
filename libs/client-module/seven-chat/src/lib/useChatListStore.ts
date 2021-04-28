@@ -3,23 +3,26 @@ import { createStore } from '@hessed/hook/store';
 import { Dayjs } from 'dayjs';
 import firebase from 'firebase/app';
 import { Nation } from '@hessed/client-module/seven-shared';
+import { DocData } from '@hessed/client-lib/firebase';
+import { ChatRoom } from './model';
 
+export type DocSnapshot<T = DocData> = firebase.firestore.DocumentSnapshot<T>;
+export type ChatSnapShot = DocSnapshot<ChatRoom>;
 export interface ChatCacheValue {
   createdAt: Dayjs;
-  list: DocSnapshot[];
+  list: ChatSnapShot[];
 }
-export type DocSnapshot = firebase.firestore.DocumentSnapshot;
 export type ChatCache = Map<string, ChatCacheValue>;
 
-export type ChatRoomCacheKey = 'reserve' | 'host' | Nation;
+export type ChatRoomCacheKey = 'reserve' | 'host' | Nation | 'history';
 
 type ChatListStore = {
   cache: ChatCache;
-  addCache: (key: ChatRoomCacheKey, snaps: DocSnapshot[]) => void;
-  appendItem: (key: ChatRoomCacheKey, snap: DocSnapshot) => boolean;
+  addCache: (key: ChatRoomCacheKey, snaps: ChatSnapShot[]) => void;
+  appendItem: (key: ChatRoomCacheKey, snap: ChatSnapShot) => boolean;
   filterItem: (key: ChatRoomCacheKey, idx: number) => boolean;
   getCache: (key: ChatRoomCacheKey) => ChatCacheValue | null;
-  updateRef: (key: ChatRoomCacheKey, idx: number, snap: DocSnapshot) => void;
+  updateRef: (key: ChatRoomCacheKey, idx: number, snap: ChatSnapShot) => void;
 };
 
 export const useChatListStore = createStore<ChatListStore>((set, get) => ({

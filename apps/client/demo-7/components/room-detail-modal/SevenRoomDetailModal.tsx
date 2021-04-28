@@ -18,11 +18,14 @@ type OnRoomModalAction = (args: OnRoomModalActionArgs) => void;
 interface RoomDetailModalProps {
   roomInfo: ChatRoom;
   onClose: () => void;
-
   onActionClick: OnRoomModalAction;
 }
 
-const SevenRoomDetailModal = ({ roomInfo, onClose }: RoomDetailModalProps) => {
+const SevenRoomDetailModal = ({
+  roomInfo,
+  onClose,
+  onActionClick,
+}: RoomDetailModalProps) => {
   const { topic, startTime, host, description } = roomInfo;
 
   const { message, status } = useSevenTimeMsg({
@@ -56,7 +59,7 @@ const SevenRoomDetailModal = ({ roomInfo, onClose }: RoomDetailModalProps) => {
         </div>
       )}
       FooterRenderer={() => (
-        <ActionButton>
+        <ActionButton onClick={() => onActionClick({ status })}>
           <p>
             <Typography
               sx={{ color: '#fff' }}

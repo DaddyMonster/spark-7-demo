@@ -69,6 +69,7 @@ export function useSevenAuth(): UseAuthActionReturn {
       registered: true,
       uid,
       reputation: 'new',
+      hostedCount: 0,
     };
     await new SevenUser(uid).userInfoRef.set(newUserInfo);
     setUser(newUserInfo);

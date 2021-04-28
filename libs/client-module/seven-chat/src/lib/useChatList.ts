@@ -7,14 +7,17 @@ import {
   ChatRoomCacheKey,
 } from './useChatListStore';
 import dy from 'dayjs';
+
+type ListQuery = (startTime: FbTimestamp) => QueryRef<ChatRoom> | null;
+
 interface UseChatListProps {
-  listQuery: ((startTime: FbTimestamp) => QueryRef<ChatRoom>) | null;
+  listQuery: ListQuery;
   paging?: number;
   queryCacheKey: ChatRoomCacheKey;
 }
 
 interface UseChatListReturn {
-  refList: DocSnapshot[];
+  refList: DocSnapshot<ChatRoom>[];
   cursor: number;
   next: () => void;
   prev: () => void;

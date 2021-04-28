@@ -4,22 +4,27 @@ import { useMemo } from 'react';
 import { ChatRoom, ChatUser } from './model';
 import { ChatRoomCacheKey, useChatListStore } from './useChatListStore';
 import shallow from 'zustand/shallow';
+import { LiveStatus } from '@hessed/hook/time-worker';
 export interface UserChatDetailProps {
   cacheKey: ChatRoomCacheKey | null;
   selectedIdx: number;
   userInfo: SevenUserInfo;
 }
 
-interface UseReserveActionReturn {
-  onReserveClick: () => void;
+interface OnReserveClickArgBase {
+  status: LiveStatus;
+}
+
+interface UseReserveActionReturn<T extends OnReserveClickArgBase> {
+  onReserveClick: (args: T) => void;
   roomDetail: ChatRoom;
 }
 
-export function useChatDetail({
+export function useChatDetail<T extends OnReserveClickArgBase>({
   cacheKey,
   selectedIdx,
   userInfo,
-}: UserChatDetailProps): UseReserveActionReturn {
+}: UserChatDetailProps): UseReserveActionReturn<T> {
   const { cache, updateRef } = useChatListStore(
     (store) => ({
       cache: store.cache,
@@ -29,7 +34,10 @@ export function useChatDetail({
   );
 
   const docRef = useMemo(
-    () => (cacheKey ? cache.get(cacheKey).list[selectedIdx] : null),
+    () =>
+      cacheKey && cache.has(cacheKey)
+        ? cache.get(cacheKey).list[selectedIdx]
+        : null,
     [cache, cacheKey, selectedIdx]
   );
 
@@ -44,7 +52,11 @@ export function useChatDetail({
     return { uid, photoURL, nation: localLang, displayName };
   }, [userInfo]);
 
-  const onReserveClick = async () => {
+  const onReserveClick = async ({ status }: T) => {
+    if (status !== 'waiting') {
+      return;
+    }
+
     if (roomDetail.reserved.includes(meAsChatUser)) {
       docRef.ref.update({
         reserved: firebase.firestore.FieldValue.arrayRemove(meAsChatUser),

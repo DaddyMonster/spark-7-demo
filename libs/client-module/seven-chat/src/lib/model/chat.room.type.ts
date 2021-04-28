@@ -17,4 +17,5 @@ export interface ChatRoom {
   id: string;
   tags: ChatTagUnion[];
   userLangs: Nation[];
+  joinedUserIdRecord: string[];
 }
