@@ -119,6 +119,7 @@ export function useChat({
   const registerUserToChat = async () => {
     const { displayName, uid, photoURL, localLang } = userInfo;
     await liveUserRef.doc(uid).set({
+      hasLeft: false,
       liveUid,
       photoURL,
       handUp: false,

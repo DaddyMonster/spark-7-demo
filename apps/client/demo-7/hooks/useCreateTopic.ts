@@ -7,6 +7,7 @@ import dy, { Dayjs } from 'dayjs';
 import { nanoid } from 'nanoid';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
+import { useMemo } from 'react';
 import * as yup from 'yup';
 
 interface CreateTopicInput {
@@ -63,9 +64,9 @@ export function useCreateTopic({
       reserversId: [],
     };
     await Chat.collection.doc(id).set(values);
-    router.push('/app/seven/my-reservation');
+    router.push('/app/seven/activity-log');
   };
-
+  const mountTime = useMemo(() => dy(), []);
   const validationSchema = yup.object().shape({
     topic: yup
       .string()
@@ -84,12 +85,18 @@ export function useCreateTopic({
       .required(t('required')),
     startTime: yup
       .date()
-      .min(new Date(), t('min-date', { count: 5, unit: 'minutes' }))
+      .min(
+        mountTime.add(5, 'minutes').toDate(),
+        t('min-date', { count: 5, unit: 'minutes' })
+      )
       .max(
-        dy().add(1, 'months').toDate(),
+        mountTime.add(1, 'months').toDate(),
         t('max-date', { count: 1, unit: 'month' })
       )
-      .required(t('required')),
+      .required(t('required'))
+      .transform(function (_, original: Dayjs) {
+        return original.toDate();
+      }),
     tags: yup
       .array()
       .of(yup.string())

@@ -12,6 +12,7 @@ export interface ChatLiveUser {
   liveUid: number;
   handUp: boolean;
   joinedAt: FbTimestamp;
+  hasLeft: boolean;
 }
 
 export type ChatUser = Pick<

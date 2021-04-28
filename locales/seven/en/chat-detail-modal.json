@@ -1,0 +1,6 @@
+{
+  "status-waiting": "Reserve",
+  "status-live": "Join Now",
+  "status-terminated": "Terminated Session",
+  "noDescriptionMsg": "No Description for this topic..."
+}

@@ -8,6 +8,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import Carousel from 'nuka-carousel';
 import { GrPrevious, GrNext } from 'react-icons/gr';
+import { SectionRootWithTitle } from '@hessed/ui/web/layout';
 interface CarouselTemplateProps {
   title: string;
   children: JSX.Element | JSX.Element[];
@@ -36,8 +37,7 @@ export function CarouselTemplate({
   }, [children]);
 
   return (
-    <Root>
-      <Title>{title}</Title>
+    <SectionRootWithTitle title={title}>
       {!Array.isArray(children) || children.length === 0 ? (
         <div className="flex justify-center items-center h-40">
           <Typography>{noListMessage}</Typography>
@@ -68,22 +68,6 @@ export function CarouselTemplate({
           {children}
         </Carousel>
       )}
-    </Root>
+    </SectionRootWithTitle>
   );
 }
-
-const Root = styled.div(({ theme }) => ({
-  padding: theme.spacing(2),
-  marginBottom: theme.spacing(2),
-}));
-
-const Title = styled.span(({ theme }) => ({
-  display: 'inline-block',
-  fontSize: '0.9rem',
-  transform: 'rotate(-3deg) translateX(-30px)',
-  background: theme.palette.primary.main,
-  boxShadow: '5px 5px 0px 0px rgba(0,0,0,0.71)',
-  color: '#fff',
-  padding: theme.spacing(1, 2),
-  margin: theme.spacing(2, 0.5),
-}));

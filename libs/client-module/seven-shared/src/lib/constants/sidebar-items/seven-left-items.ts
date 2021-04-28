@@ -1,12 +1,13 @@
 import { IconType } from 'react-icons';
-import { AiOutlineSchedule, AiOutlineHistory } from 'react-icons/ai';
-import { IoPeopleCircleOutline } from 'react-icons/io5';
-import { BsFilePlus } from 'react-icons/bs';
+import { AiOutlineHistory, AiOutlineSchedule } from 'react-icons/ai';
 import { BiHome } from 'react-icons/bi';
+import { BsFilePlus } from 'react-icons/bs';
+import { IoIosPeople } from 'react-icons/io';
 export interface RenderItem {
   label: string;
   route: string;
   Icon: IconType;
+  regex?: RegExp;
 }
 
 export const SevenSideItems: RenderItem[] = [
@@ -16,23 +17,23 @@ export const SevenSideItems: RenderItem[] = [
     route: '/app/seven/home',
   },
   {
-    label: 'Search Topics ',
-    Icon: AiOutlineSchedule,
-    route: '/app/seven/search-topic',
+    label: 'Social',
+    Icon: IoIosPeople,
+    route: '/app/seven/social',
   },
   {
-    label: 'Throw a Topic ',
+    label: 'Learn & Teach',
+    Icon: AiOutlineSchedule,
+    route: '/app/seven/learn-and-teach',
+  },
+  {
+    label: 'Throw a Topic',
     Icon: BsFilePlus,
     route: '/app/seven/create-topic',
   },
   {
-    label: 'Reservation List',
-    Icon: IoPeopleCircleOutline,
-    route: '/app/seven/my-reservation',
-  },
-  {
-    label: 'History',
+    label: 'My Activity',
     Icon: AiOutlineHistory,
-    route: '/app/seven/seven-history',
+    route: '/app/seven/activity-log',
   },
 ];

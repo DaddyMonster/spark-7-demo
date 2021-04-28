@@ -1,12 +1,12 @@
-import React from 'react';
-import { AvatarWithFlag, DetailInfoModal } from '@hessed/ui/web/atom';
 import { ChatRoom } from '@hessed/client-module/seven-chat';
-import dy from 'dayjs';
 import { ROOM_TIME_FORMAT } from '@hessed/client-module/seven-shared';
-import { Button, Typography, alpha } from '@material-ui/core';
-import { grey } from '@material-ui/core/colors';
 import { LiveStatus, useSevenTimeMsg } from '@hessed/hook/time-worker';
-import { Translate } from 'next-translate';
+import { AvatarWithFlag, DetailInfoModal } from '@hessed/ui/web/atom';
+import { alpha, Button, Typography } from '@material-ui/core';
+import { grey } from '@material-ui/core/colors';
+import dy from 'dayjs';
+import useTranslation from 'next-translate/useTranslation';
+import React from 'react';
 import styled from 'styled-components';
 
 interface OnRoomModalActionArgs {
@@ -18,15 +18,11 @@ type OnRoomModalAction = (args: OnRoomModalActionArgs) => void;
 interface RoomDetailModalProps {
   roomInfo: ChatRoom;
   onClose: () => void;
-  t: Translate;
+
   onActionClick: OnRoomModalAction;
 }
 
-const SevenRoomDetailModal = ({
-  roomInfo,
-  onClose,
-  t,
-}: RoomDetailModalProps) => {
+const SevenRoomDetailModal = ({ roomInfo, onClose }: RoomDetailModalProps) => {
   const { topic, startTime, host, description } = roomInfo;
 
   const { message, status } = useSevenTimeMsg({
@@ -34,6 +30,8 @@ const SevenRoomDetailModal = ({
     targetTime: dy(startTime.toDate()),
     onDue: () => console.log('DUE'),
   });
+
+  const { t } = useTranslation('chat-detail-modal');
 
   return (
     <DetailInfoModal
