@@ -1,6 +1,6 @@
 import React from 'react';
 import { Nation, nationCodeMap } from '@hessed/client-module/seven-shared';
-import { NationFlagSquare } from '@hessed/ui/web/atom';
+import { NationFlag } from '@hessed/ui/web/atom';
 export type CurrentKey = 'learningLang' | 'localLang';
 
 interface PickNationProps {
@@ -28,7 +28,7 @@ export const PickNation = ({
   return (
     <div className="flex items-center justify-center">
       {nationKeys.map((x: Nation) => (
-        <NationFlagSquare
+        <NationFlag
           key={x}
           nation={x}
           shadow

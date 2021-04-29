@@ -14,7 +14,12 @@ export interface ChatCacheValue {
 }
 export type ChatCache = Map<string, ChatCacheValue>;
 
-export type ChatRoomCacheKey = 'reserve' | 'host' | Nation | 'history';
+export type ChatRoomCacheKey =
+  | 'reserve'
+  | 'host'
+  | Nation
+  | 'history'
+  | 'live-now';
 
 type ChatListStore = {
   cache: ChatCache;

@@ -1,8 +1,15 @@
 import React from 'react';
-import { MuiThemeProvider, StyledEngineProvider } from '@material-ui/core';
+import {
+  MuiThemeProvider,
+  jssPreset,
+  StyledEngineProvider,
+} from '@material-ui/core';
+import { StylesProvider } from '@material-ui/styles';
+import { create } from 'jss';
 import { ThemeProvider as StyledThemeProvider } from 'styled-components';
-import { ClientTypes } from '../types'
+import { ClientTypes } from '../types';
 import { createSparkTheme } from './create-theme';
+const jss = create({ plugins: [...jssPreset().plugins] });
 
 interface Props {
   clientType: ClientTypes;
@@ -16,9 +23,11 @@ export const SparkThemeProvider: React.FC<Props> = ({
 
   return (
     <StyledEngineProvider injectFirst>
-      <MuiThemeProvider theme={theme}>
-        <StyledThemeProvider theme={theme}>{children}</StyledThemeProvider>
-      </MuiThemeProvider>
+      <StylesProvider jss={jss}>
+        <MuiThemeProvider theme={theme}>
+          <StyledThemeProvider theme={theme}>{children}</StyledThemeProvider>
+        </MuiThemeProvider>
+      </StylesProvider>
     </StyledEngineProvider>
   );
 };

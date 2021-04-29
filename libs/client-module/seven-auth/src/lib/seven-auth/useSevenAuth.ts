@@ -40,6 +40,9 @@ export function useSevenAuth(): UseAuthActionReturn {
     console.log('USER EXIST PUSHING TO APP');
     console.log(exist.data());
     setUser(exist.data() as SevenUserInfo);
+    exist.ref.update({
+      lastLogged: FbTimestamp.fromDate(new Date()),
+    });
     /* router.push(APP_PATH); */
   };
 
@@ -61,7 +64,7 @@ export function useSevenAuth(): UseAuthActionReturn {
       createdAt: FbTimestamp.fromDate(new Date()),
       displayName,
       email,
-      followers: [],
+      follows: [],
       interests,
       learningLang,
       localLang,
@@ -70,6 +73,8 @@ export function useSevenAuth(): UseAuthActionReturn {
       uid,
       reputation: 'new',
       hostedCount: 0,
+      followerCount: 0,
+      lastLogged: FbTimestamp.fromDate(new Date()),
     };
     await new SevenUser(uid).userInfoRef.set(newUserInfo);
     setUser(newUserInfo);

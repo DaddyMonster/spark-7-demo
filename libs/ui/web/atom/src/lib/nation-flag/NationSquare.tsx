@@ -3,7 +3,9 @@ import { Nation } from '@hessed/client-module/seven-shared';
 import { Avatar } from '@material-ui/core';
 import styled from 'styled-components';
 
-export interface NationFlagSquareProps {
+type FlagShape = 'rounded' | 'circular';
+
+export interface NationFlagProps {
   nation?: Nation;
   src?: string;
   size?: number;
@@ -11,6 +13,7 @@ export interface NationFlagSquareProps {
   shadow?: boolean;
   disabled?: boolean;
   className?: string;
+  type?: FlagShape;
 }
 
 type FlagMap = {
@@ -21,7 +24,7 @@ const flagMap: FlagMap = {
   ko: '/flags/ko.svg',
 };
 
-export const NationFlagSquare = ({
+export const NationFlag = ({
   nation,
   size = 35,
   onClick = () => void {},
@@ -29,27 +32,34 @@ export const NationFlagSquare = ({
   disabled = false,
   className = '',
   src,
-}: NationFlagSquareProps) => {
+  type = 'rounded',
+}: NationFlagProps) => {
   const url = nation ? flagMap[nation] : src;
+  if (!url) {
+    throw new Error('No Src or Nation Provided for NationFlag Component');
+  }
 
   return (
     <FlagAvatar
       src={url}
       $size={size}
+      $type={type}
       onClick={() => onClick(nation)}
       $shadow={shadow}
       $disabled={disabled}
       className={className}
+      variant={type}
     />
   );
 };
 
-const FlagAvatar = styled(Avatar).attrs({ variant: 'rounded' })<{
+const FlagAvatar = styled(Avatar)<{
   $size: number;
   $shadow: boolean;
   $disabled: boolean;
-}>(({ theme, $size, $shadow, $disabled }) => ({
-  width: $size * 1.2,
+  $type: FlagShape;
+}>(({ theme, $size, $shadow, $disabled, $type }) => ({
+  width: $type === 'circular' ? $size : $size * 1.2,
   height: $size,
   border: `2px solid ${theme.palette.secondary.main}`,
   opacity: $disabled ? 0.5 : 1,

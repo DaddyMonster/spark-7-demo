@@ -1,2 +1,2 @@
-export * from './NationFlagSquare';
+export * from './NationSquare';
 export * from './AvatarWithFlag';

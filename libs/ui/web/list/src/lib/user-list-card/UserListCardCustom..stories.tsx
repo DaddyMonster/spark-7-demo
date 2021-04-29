@@ -2,7 +2,10 @@
 import { createTemplate } from '@hessed/storybook/seven';
 import { Story } from '@storybook/react';
 import React from 'react';
-import { UserListCardCustom, UserListCardCustomProps } from './UserListCardCustom';
+import {
+  UserListCardCustom,
+  UserListCardCustomProps,
+} from './UserListCardCustom';
 export default {
   title: 'List/User-Profile-Card-Custom',
   component: UserListCardCustom,

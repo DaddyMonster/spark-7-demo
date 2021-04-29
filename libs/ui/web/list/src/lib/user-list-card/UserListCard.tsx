@@ -1,14 +1,19 @@
-import { Avatar, Paper, Typography } from '@material-ui/core';
+import { Avatar, Paper, Theme, Typography } from '@material-ui/core';
 import React from 'react';
 import styled from 'styled-components';
 import { grey } from '@material-ui/core/colors';
 import dy from 'dayjs';
 import rel from 'dayjs/plugin/relativeTime';
 dy.extend(rel);
+
+type RootStyle =
+  | Record<string, unknown>
+  | ((theme: Theme) => Record<string, unknown>);
 export interface UserListCardProps {
   uid: string;
   displayName: string;
   photoURL?: string;
+  $rootStyle?: RootStyle;
   userSubtitle: string;
   timeStampInfo: Date;
   AvatarMisc?: React.ComponentType;
@@ -16,6 +21,7 @@ export interface UserListCardProps {
   PreAvatar?: React.ComponentType;
   idx?: number;
   onClick: (id: string, idx: number) => void;
+  className?: string;
 }
 
 export const USER_LIST_CARD_HEIGHT = 70;
@@ -31,9 +37,15 @@ export const UserListCard = ({
   idx = -1,
   PreAvatar,
   onClick,
+  $rootStyle = {},
+  className = '',
 }: UserListCardProps) => {
   return (
-    <Root onClick={() => onClick(uid, idx)}>
+    <Root
+      className={className}
+      onClick={() => onClick(uid, idx)}
+      $rootStyle={$rootStyle}
+    >
       {RootMisc && <RootMisc />}
       <Wrapper>
         {PreAvatar && <PreAvatar />}
@@ -57,15 +69,22 @@ export const UserListCard = ({
   );
 };
 
-const Root = styled(Paper)(({ theme }) => ({
-  margin: theme.spacing(0.5, 0.5, 0.25),
-  boxSizing: 'border-box',
-  width: '100%',
-  height: USER_LIST_CARD_HEIGHT,
-  boxShadow: theme.shadows[3],
-  position: 'relative',
-  borderRadius: 10,
-}));
+const Root = styled(Paper)<{ $rootStyle: RootStyle }>(
+  ({ theme, $rootStyle }) => {
+    const style =
+      typeof $rootStyle === 'function' ? $rootStyle(theme) : $rootStyle;
+    return {
+      margin: theme.spacing(0.5, 0.5, 0.25),
+      boxSizing: 'border-box',
+      width: '100%',
+      height: USER_LIST_CARD_HEIGHT,
+      boxShadow: theme.shadows[3],
+      position: 'relative',
+      borderRadius: 10,
+      ...style,
+    };
+  }
+);
 
 const Wrapper = styled.div(({ theme }) => ({
   width: '100%',

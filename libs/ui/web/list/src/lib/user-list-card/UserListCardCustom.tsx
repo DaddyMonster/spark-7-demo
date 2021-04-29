@@ -1,12 +1,12 @@
 import { Avatar, Paper, Typography } from '@material-ui/core';
 import React from 'react';
 import styled from 'styled-components';
-import { ColorOptionUnion } from '../../../../../../styles/theme/src';
+import { ColorOptionUnion } from '@hessed/styles/theme';
 
 interface RootPaperProps {
   active: boolean;
   activeColUni: ColorOptionUnion;
-  height: number;
+  height: number | string;
   rootStyle: Record<string, unknown>;
 }
 
@@ -33,8 +33,8 @@ export const UserListCardCustom = ({
   AvatarMisc,
   PreAvatar,
   children,
-  height = 120,
-  avatarSize = 80,
+  height = 80,
+  avatarSize = 65,
   active = false,
   activeColUni = 'secondary',
   rootStyle = {},
@@ -66,7 +66,7 @@ export const UserListCardCustom = ({
 };
 
 const RootPaper = styled(Paper)<RootPaperProps>(
-  ({ height, theme, active, activeColUni, rootStyle }) => ({
+  ({ height, theme, active, activeColUni, rootStyle = {} }) => ({
     width: '100%',
     flex: '1 0 auto',
     height,

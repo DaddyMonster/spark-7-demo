@@ -5,7 +5,7 @@ import {
   SEVEN_TOP_NAV_HEIGHT,
 } from '@hessed/client-module/seven-shared';
 import { FormProvider } from '@hessed/ui/shared';
-import { BoxedTypo, NationFlagSquare } from '@hessed/ui/web/atom';
+import { BoxedTypo, NationFlag } from '@hessed/ui/web/atom';
 import {
   DateTimePickerForm,
   FormSimpleAutoComplete,
@@ -56,7 +56,7 @@ const CreateTopic = () => {
                   defaultVal={nationMapList[0]}
                   optionRenderer={({ code, iconPath, label }) => (
                     <div className="flex items-center w-full" key={code}>
-                      <NationFlagSquare
+                      <NationFlag
                         src={iconPath}
                         size={15}
                         className="mr-2"

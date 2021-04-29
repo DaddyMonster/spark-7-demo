@@ -1,4 +1,9 @@
 {
   "page-title": "홈",
-  "page-subtitle": "나와 비슷한 관심사를 가진 사람과 함께하세요."
+  "page-subtitle": "나와 비슷한 관심사를 가진 사람과 함께하세요.",
+  "recommand-user": "관심사가 비슷한 유저",
+  "see-more-user": "더 찾아보기",
+  "no-recommand-user-msg": "비슷한 관심사의 유저가 없습니다... 너란 아싸",
+  "live-list": "진행중인 라이브!",
+  "no-live-list": "진행중인 라이브가 없습니다..."
 }

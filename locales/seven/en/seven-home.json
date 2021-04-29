@@ -1,4 +1,9 @@
 {
   "page-title": "Home",
-  "page-subtitle": "Find person in common interest!"
+  "page-subtitle": "Find person in common interest!",
+  "recommand-user": "User Recommandation",
+  "see-more-user": "Find more user",
+  "no-recommand-user-msg": "No Recommaded Friend found",
+  "live-list": "Now Live!",
+  "no-live-list": "There is no live session on going..."
 }

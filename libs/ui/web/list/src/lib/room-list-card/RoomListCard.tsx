@@ -2,7 +2,7 @@ import { ChatRoom } from '@hessed/client-module/seven-chat';
 import { useSevenTimeMsg, LiveStatus } from '@hessed/hook/time-worker';
 import {
   AvatarWithFlag,
-  NationFlagSquare,
+  NationFlag,
   StackedAvatars,
 } from '@hessed/ui/web/atom';
 import { Button, Paper, Typography } from '@material-ui/core';
@@ -74,7 +74,7 @@ export const RoomListCard = ({
             </Typography>
           </div>
           <div className="px-2 flex items-center mt-auto">
-            <NationFlagSquare
+            <NationFlag
               nation={host.localLang}
               size={35}
               className="mr-3"

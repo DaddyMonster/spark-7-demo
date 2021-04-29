@@ -1,7 +1,7 @@
 import React from 'react';
 import { Nation } from '@hessed/client-module/seven-shared';
 import styled from 'styled-components';
-import { NationFlagSquare } from '@hessed/ui/web/atom';
+import { NationFlag } from '@hessed/ui/web/atom';
 import { Avatar } from '@material-ui/core';
 interface AvatarWithFlagProps {
   className?: string;
@@ -18,7 +18,7 @@ export const AvatarWithFlag = ({
     <div className={`relative ${className}`}>
       <Avatar src={photoURL} />
       <FlagWrap>
-        <NationFlagSquare nation={nation} size={15} />
+        <NationFlag nation={nation} size={15} />
       </FlagWrap>
     </div>
   );

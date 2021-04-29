@@ -12,11 +12,13 @@ export interface SevenUserInfo {
   displayName: string;
   email: string;
   photoURL: string | null | undefined;
-  followers: string[];
+  follows: string[];
   createdAt: FbTimestamp;
   interests: ChatTagUnion[];
   reputation: Reputation;
   hostedCount: number;
+  followerCount: number;
+  lastLogged: FbTimestamp;
 }
 
 export type SevenUserRegisterInput = Pick<

@@ -1,17 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
-export interface SectionRootWithTitle {
+export interface SectionRootWithTitleProps {
   title: string;
   children: React.ReactNode;
+  TitleMisc?: React.ComponentType;
 }
 
 export const SectionRootWithTitle = ({
   children,
   title,
-}: SectionRootWithTitle) => {
+  TitleMisc,
+}: SectionRootWithTitleProps) => {
   return (
     <Root>
-      <Title>{title}</Title>
+      <div className="flex items-center">
+        <Title>{title}</Title>
+        {TitleMisc && <TitleMisc />}
+      </div>
       {children}
     </Root>
   );
