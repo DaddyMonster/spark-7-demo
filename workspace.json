@@ -927,6 +927,324 @@
           }
         }
       }
+    },
+    "client-spark-log": {
+      "root": "apps/client/spark-log",
+      "sourceRoot": "apps/client/spark-log",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/next:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "root": "apps/client/spark-log",
+            "outputPath": "dist/apps/client/spark-log"
+          },
+          "configurations": { "production": {} }
+        },
+        "serve": {
+          "executor": "@nrwl/next:server",
+          "options": {
+            "buildTarget": "client-spark-log:build",
+            "dev": true,
+            "proxyConfig": "apps/client/spark-log/proxy.conf.json"
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "client-spark-log:build:production",
+              "dev": false
+            }
+          }
+        },
+        "export": {
+          "executor": "@nrwl/next:export",
+          "options": { "buildTarget": "client-spark-log:build:production" }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/client/spark-log"],
+          "options": {
+            "jestConfig": "apps/client/spark-log/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/client/spark-log/**/*.{ts,tsx,js,jsx}"]
+          }
+        }
+      }
+    },
+    "client-spark-log-e2e": {
+      "root": "apps/client/spark-log-e2e",
+      "sourceRoot": "apps/client/spark-log-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/client/spark-log-e2e/cypress.json",
+            "tsConfig": "apps/client/spark-log-e2e/tsconfig.e2e.json",
+            "devServerTarget": "spark-log:serve"
+          },
+          "configurations": {
+            "production": { "devServerTarget": "spark-log:serve:production" }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/client/spark-log-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
+    "api-spark-log-srv": {
+      "root": "apps/api/spark-log-srv",
+      "sourceRoot": "apps/api/spark-log-srv/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/api/spark-log-srv",
+            "main": "apps/api/spark-log-srv/src/main.ts",
+            "tsConfig": "apps/api/spark-log-srv/tsconfig.app.json",
+            "assets": ["apps/api/spark-log-srv/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/api/spark-log-srv/src/environments/environment.ts",
+                  "with": "apps/api/spark-log-srv/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/node:execute",
+          "options": { "buildTarget": "api-spark-log-srv:build" }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": { "lintFilePatterns": ["apps/api/spark-log-srv/**/*.ts"] }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/api/spark-log-srv"],
+          "options": {
+            "jestConfig": "apps/api/spark-log-srv/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "client-spark": {
+      "root": "apps/client/spark",
+      "sourceRoot": "apps/client/spark",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/next:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "root": "apps/client/spark",
+            "outputPath": "dist/apps/client/spark"
+          },
+          "configurations": { "production": {} }
+        },
+        "serve": {
+          "executor": "@nrwl/next:server",
+          "options": {
+            "buildTarget": "client-spark:build",
+            "dev": true,
+            "proxyConfig": "apps/client/spark/proxy.conf.json"
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "client-spark:build:production",
+              "dev": false
+            }
+          }
+        },
+        "export": {
+          "executor": "@nrwl/next:export",
+          "options": { "buildTarget": "client-spark:build:production" }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/client/spark"],
+          "options": {
+            "jestConfig": "apps/client/spark/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/client/spark/**/*.{ts,tsx,js,jsx}"]
+          }
+        }
+      }
+    },
+    "client-spark-e2e": {
+      "root": "apps/client/spark-e2e",
+      "sourceRoot": "apps/client/spark-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/client/spark-e2e/cypress.json",
+            "tsConfig": "apps/client/spark-e2e/tsconfig.e2e.json",
+            "devServerTarget": "spark:serve"
+          },
+          "configurations": {
+            "production": { "devServerTarget": "spark:serve:production" }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/client/spark-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    },
+    "api-spark-srv": {
+      "root": "apps/api/spark-srv",
+      "sourceRoot": "apps/api/spark-srv/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/api/spark-srv",
+            "main": "apps/api/spark-srv/src/main.ts",
+            "tsConfig": "apps/api/spark-srv/tsconfig.app.json",
+            "assets": ["apps/api/spark-srv/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/api/spark-srv/src/environments/environment.ts",
+                  "with": "apps/api/spark-srv/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/node:execute",
+          "options": { "buildTarget": "api-spark-srv:build" }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": { "lintFilePatterns": ["apps/api/spark-srv/**/*.ts"] }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/api/spark-srv"],
+          "options": {
+            "jestConfig": "apps/api/spark-srv/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "storybook-spark": {
+      "root": "libs/storybook/spark",
+      "sourceRoot": "libs/storybook/spark/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/storybook/spark/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/storybook/spark"],
+          "options": {
+            "jestConfig": "libs/storybook/spark/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "storybook": {
+          "executor": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/react",
+            "port": 4400,
+            "config": { "configFolder": "libs/storybook/spark/.storybook" }
+          },
+          "configurations": { "ci": { "quiet": true } }
+        },
+        "build-storybook": {
+          "executor": "@nrwl/storybook:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "uiFramework": "@storybook/react",
+            "outputPath": "dist/storybook/storybook-spark",
+            "config": { "configFolder": "libs/storybook/spark/.storybook" }
+          },
+          "configurations": { "ci": { "quiet": true } }
+        }
+      }
+    },
+    "storybook-spark-log": {
+      "root": "libs/storybook/spark-log",
+      "sourceRoot": "libs/storybook/spark-log/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/storybook/spark-log/**/*.{ts,tsx,js,jsx}"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/storybook/spark-log"],
+          "options": {
+            "jestConfig": "libs/storybook/spark-log/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "storybook": {
+          "executor": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/react",
+            "port": 4400,
+            "config": { "configFolder": "libs/storybook/spark-log/.storybook" }
+          },
+          "configurations": { "ci": { "quiet": true } }
+        },
+        "build-storybook": {
+          "executor": "@nrwl/storybook:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "uiFramework": "@storybook/react",
+            "outputPath": "dist/storybook/storybook-spark-log",
+            "config": { "configFolder": "libs/storybook/spark-log/.storybook" }
+          },
+          "configurations": { "ci": { "quiet": true } }
+        }
+      }
     }
   }
 }

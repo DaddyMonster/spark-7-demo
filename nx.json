@@ -58,6 +58,17 @@
     "hook-create-auth": { "tags": [] },
     "ui-web-util": { "tags": [] },
     "client-lib-types": { "tags": [] },
-    "hook-fb-snapshot": { "tags": [] }
+    "hook-fb-snapshot": { "tags": [] },
+    "client-spark-log": { "tags": [] },
+    "client-spark-log-e2e": {
+      "tags": [],
+      "implicitDependencies": ["spark-log"]
+    },
+    "api-spark-log-srv": { "tags": [] },
+    "client-spark": { "tags": [] },
+    "client-spark-e2e": { "tags": [], "implicitDependencies": ["spark"] },
+    "api-spark-srv": { "tags": [] },
+    "storybook-spark": { "tags": [] },
+    "storybook-spark-log": { "tags": [] }
   }
 }

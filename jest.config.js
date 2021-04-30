@@ -37,5 +37,11 @@ module.exports = {
     '<rootDir>/libs/ui/web/util',
     '<rootDir>/libs/client-lib/types',
     '<rootDir>/libs/hook/fb-snapshot',
+    '<rootDir>/apps/client/spark-log',
+    '<rootDir>/apps/api/spark-log-srv',
+    '<rootDir>/apps/client/spark',
+    '<rootDir>/apps/api/spark-srv',
+    '<rootDir>/libs/storybook/spark',
+    '<rootDir>/libs/storybook/spark-log',
   ],
 };
