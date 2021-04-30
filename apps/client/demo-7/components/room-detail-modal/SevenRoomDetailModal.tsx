@@ -61,13 +61,6 @@ const SevenRoomDetailModal = ({
       FooterRenderer={() => (
         <ActionButton onClick={() => onActionClick({ status })}>
           <p>
-            <Typography
-              sx={{ color: '#fff' }}
-              fontSize="0.6rem"
-              className="mb-1"
-            >
-              {message}
-            </Typography>
             <Typography sx={{ color: '#fff' }}>
               {t('status-' + status)}
             </Typography>
@@ -78,6 +71,9 @@ const SevenRoomDetailModal = ({
       <div className="px-3 py-5">
         <p>{description || t('noDescriptionMsg')}</p>
       </div>
+      <Typography sx={{ color: '#fff' }} fontSize="0.6rem" className="mb-1">
+        {message}
+      </Typography>
     </DetailInfoModal>
   );
 };

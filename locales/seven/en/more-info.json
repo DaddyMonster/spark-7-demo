@@ -4,6 +4,7 @@
   "interests": "Choose what interests you!",
   "go-app": "Start talking global!",
   "submit-interest": "All Picked!",
-  "less-ten": "Please select more than 10 interests",
-  "start-btn": "Go to App!"
+  "start-btn": "Go to App!",
+  "too-many-tags": "You can select up to 10 tags",
+  "need-more-tags": "Please select more than 5 tags"
 }

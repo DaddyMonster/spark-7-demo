@@ -48,25 +48,28 @@ export function useChat({
   onItemAdded,
   docRef,
 }: UseInitChatProps): UseChatReturn {
-  const isReady = useMemo(
-    () => userInfo?.uid && liveUserRef && Boolean(roomInfo?.id),
-    [userInfo?.uid, liveUserRef, roomInfo?.id]
-  );
+  const isReady = useMemo(() => {
+    if (userInfo?.uid && liveUserRef && roomInfo?.id) {
+      return true;
+    }
+    return false;
+  }, [userInfo?.uid, liveUserRef, roomInfo?.id]);
+
   const liveUid = useMemo(
     () => parseInt((Math.random() * Math.pow(10, 5)).toString()),
     []
   );
   const myRoleRef = useRef<ClientRole>(null);
   useEffect(() => {
-    if (!isReady || !me) {
+    if (!me?.role) {
       return;
     }
     if (myRoleRef.current !== me?.role) {
-      switchRole(me.role);
+      /* switchRole(me.role); */
       if (me.role === 'audience') terminateRecognition();
       myRoleRef.current = me?.role;
     }
-  }, [me?.role, isReady]);
+  }, [me?.role]);
 
   useEffect(() => {
     if (!isReady) {
@@ -120,7 +123,7 @@ export function useChat({
 
   const { initRecognition, recogOn, terminateRecognition } = useRecognition({
     lang: roomInfo?.lang,
-    onResult: modifyMessage,
+    onResult: (transcript) => modifyMessage(transcript),
     onSpeechStart,
   });
 
@@ -128,18 +131,17 @@ export function useChat({
     const { displayName, uid, photoURL, localLang } = userInfo;
     const isHost = userInfo.uid === roomInfo.hostId;
     await liveUserRef.doc(uid).set({
-      hasLeft: false,
       liveUid,
       photoURL,
       handUp: false,
       displayName,
       joinedAt: FbTimestamp.fromDate(new Date()),
       nation: localLang,
-      role: isHost ? 'host' : 'audience',
+      role: /* isHost ? 'host' : 'audience' */ 'host',
       uid,
     });
     await docRef.update({
-      joinedUserIdRecord: ArrayUnion(me.uid),
+      joinedUserIdRecord: ArrayUnion(userInfo.uid),
     });
     if (isHost) {
       await SevenUser.collection.doc(userInfo.uid).update({

@@ -24,6 +24,7 @@ export class Recognition {
   }
 
   public terminate() {
+    this.recognizer.stop();
     this.recognizer.abort();
   }
 

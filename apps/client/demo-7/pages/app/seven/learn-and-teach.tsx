@@ -19,7 +19,7 @@ const LearnAndTeach = () => {
 
   const { detailInfos, handleRoomClick, resetDetail } = useChatRoomSelect();
 
-  const { roomDetail, onReserveClick } = useChatDetail({
+  const { roomDetail, onRoomModalAction } = useChatDetail({
     cacheKey: detailInfos.cacheKey,
     selectedIdx: detailInfos.selectedIdx,
     userInfo: user,
@@ -58,7 +58,7 @@ const LearnAndTeach = () => {
         <SevenRoomDetailModal
           onClose={resetDetail}
           roomInfo={roomDetail}
-          onActionClick={(args) => console.log(args)}
+          onActionClick={onRoomModalAction}
         />
       )}
       <CarouselTemplate

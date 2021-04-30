@@ -1,13 +1,14 @@
 import { useSevenAuth } from '@hessed/client-module/seven-auth';
 import { GoogleButton } from '@hessed/ui/web/atom';
-import { Container, Grid, Typography } from '@material-ui/core';
+import { Button, Container, Grid, Typography } from '@material-ui/core';
 import useTranslation from 'next-translate/useTranslation';
 import Trans from 'next-translate/Trans';
 import Image from 'next/image';
 import React from 'react';
 import styled from 'styled-components';
 import { SevenPageType } from '../types';
-
+import { IoIosPaperPlane } from 'react-icons/io';
+import Link from 'next/link';
 export const Index: SevenPageType = () => {
   const { login, logout, user } = useSevenAuth();
   const { t } = useTranslation('index');
@@ -39,11 +40,23 @@ export const Index: SevenPageType = () => {
               </Typography>
 
               <div className="w-full py-5 lg:ml-auto">
+                {user && (
+                  <Link href="/app/seven/home">
+                    <Button
+                      className="mr-2 px-6"
+                      startIcon={<IoIosPaperPlane />}
+                      variant="contained"
+                    >
+                      Start
+                    </Button>
+                  </Link>
+                )}
                 <GoogleButton
                   onLogin={login}
                   isLogged={Boolean(user)}
                   onLogout={logout}
                   className="px-4"
+                  variant={user ? 'text' : 'contained'}
                 />
               </div>
             </div>
@@ -55,6 +68,12 @@ export const Index: SevenPageType = () => {
 };
 
 export default Index;
+
+export const getStaticProps = async () => {
+  return {
+    props: {},
+  };
+};
 
 const Jumbo = styled.div(({ theme }) => ({
   background: theme.palette.black.main,

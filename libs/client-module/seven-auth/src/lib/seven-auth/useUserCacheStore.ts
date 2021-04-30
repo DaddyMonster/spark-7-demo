@@ -1,7 +1,7 @@
 import { DocSnap } from '@hessed/client-lib/firebase';
 import { CacheStoreFactory } from '@hessed/hook/store';
 import { SevenUserInfo } from './model';
-import { SevenUser } from './seven-user.collection';
+import { RecommadedUserArgs, SevenUser } from './seven-user.collection';
 
 export const UserQueryType = ['recommaded', 'top-rated'] as const;
 export type UserQuery = typeof UserQueryType[number];
@@ -10,12 +10,7 @@ const userQueryFetcher = (key: UserQuery, args: unknown, limit: number) => {
   switch (key) {
     case 'recommaded':
       return async () =>
-        await SevenUser.collection
-          .where('interests', 'array-contains-any', args)
-          .orderBy('lastLogged')
-          .limitToLast(limit)
-          .get()
-          .then((x) => x.docs);
+        await SevenUser.recommaded(args as RecommadedUserArgs, limit, null);
     case 'top-rated':
       return async () =>
         await SevenUser.collection

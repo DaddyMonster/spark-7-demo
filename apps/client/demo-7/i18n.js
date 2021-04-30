@@ -7,11 +7,15 @@ module.exports = {
     '/': ['index'],
     '/more-info': ['more-info'],
     '/app/seven/home': ['seven-home', 'chat-detail-modal', 'recommanded-user'],
-    '/app/seven/social': ['seven-social', 'recommanded-user'],
+    '/app/seven/social': [
+      'seven-social',
+      'recommanded-user',
+      'search-user-form',
+    ],
     '/app/seven/learn-and-teach': ['learn-and-teach', 'chat-detail-modal'],
     '/app/seven/create-topic': ['seven-create-topic', 'validation'],
     '/app/seven/live/[roomId]': ['live-chat', 'live-chat-tool'],
-    '/app/seven/activity-log': ['activity-log'],
+    '/app/seven/activity-log': ['activity-log', 'chat-detail-modal'],
   },
   loadLocaleFrom: async (lang, ns) => {
     const isGlobal = /global/.test(ns);

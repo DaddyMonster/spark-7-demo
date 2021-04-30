@@ -32,7 +32,6 @@ export function useRTC({
     if (!ready) {
       return;
     }
-    console.log('READY, CHAT ID', ready, chatId, liveUid);
     initRTC(chatId);
     return () => {
       if (rtcRef.current) {
@@ -64,7 +63,7 @@ export function useRTC({
     rtcRef.current = await Agora.initClient(
       {
         channelId,
-        initialRole: isHost ? 'host' : 'audience',
+        initialRole: 'host' /* isHost ? 'host' : 'audience' */,
         liveUid,
       },
       onVolumeUpdate
@@ -77,6 +76,6 @@ export function useRTC({
   );
 
   const memoized = useMemo(() => ({ userVolumeMap }), [userVolumeMap]);
-  console.log('SPEECH VOL MAP', memoized.userVolumeMap);
+
   return { setVolume, switchRole, ...memoized };
 }

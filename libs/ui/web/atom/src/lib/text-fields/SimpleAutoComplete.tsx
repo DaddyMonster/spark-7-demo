@@ -3,7 +3,7 @@ import { grey } from '@material-ui/core/colors';
 import React, { useMemo, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { TextFieldBase } from './TextFieldBase';
-
+import { AiOutlineCloseCircle } from 'react-icons/ai';
 /* 
 
 개선 :  useReducer 로 State 관리하기!
@@ -21,6 +21,9 @@ export interface SimpleAutoCompleteProps<T, P> {
   onFocus?: (e: React.FocusEvent) => void;
   onBlur?: (e: React.FocusEvent) => void;
   name?: string;
+  removeable?: boolean;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onRemoveClick?: (selected: T) => any;
 }
 
 const matchTester = (tester: string, testis: string[]) => {
@@ -33,15 +36,17 @@ export function SimpleAutoComplete<T, P>({
   getValue,
   optionRenderer,
   options,
-  defaultVal,
+  defaultVal = null,
   onValueChange,
   fullWidth = true,
   onBlur,
   onFocus,
   name,
+  removeable = false,
+  onRemoveClick,
 }: SimpleAutoCompleteProps<T, P>) {
   const [open, setopen] = useState(false);
-  const [selected, setselected] = useState<T | null>(defaultVal ?? null);
+  const [selected, setselected] = useState<T | null>(defaultVal);
   const [_inputText, setinputText] = useState('');
   const [timeout, settimeout] = useState(false);
 
@@ -55,7 +60,7 @@ export function SimpleAutoComplete<T, P>({
   };
 
   const inputText = useMemo(() => {
-    if (timeout || _inputText) return _inputText;
+    if (timeout || _inputText || !selected) return _inputText;
     if (selected) return getLabel(selected);
     return null;
   }, [selected, _inputText, getLabel, timeout]);
@@ -84,11 +89,28 @@ export function SimpleAutoComplete<T, P>({
     onBlur && onBlur(e);
   };
 
+  const endAdornmentCondition = useMemo(() => selected && removeable, [
+    selected,
+    removeable,
+  ]);
+
+  const removeClickHandler = () => {
+    const resetVal = onRemoveClick(selected);
+    onValueChange(resetVal);
+    setselected(resetVal);
+    setinputText('');
+  };
+
   return (
     <Root fullWidth={fullWidth}>
       <TextWrapper>
         <TextFieldBase
           name={name}
+          endAdornment={
+            endAdornmentCondition ? (
+              <AiOutlineCloseCircle onClick={removeClickHandler} />
+            ) : undefined
+          }
           onFocus={focusHandler}
           onBlur={blurHandler}
           value={inputText}
@@ -133,13 +155,15 @@ const TextWrapper = styled.div(({ theme }) => ({
 
 const OpRendererRoot = styled.div(({ theme }) => ({
   width: '100%',
-  maxHeight: 300,
+  minHeight: 100,
+  maxHeight: 250,
   position: 'absolute',
   top: '100%',
   left: 0,
   right: 0,
   background: '#fff',
   zIndex: 500,
+  overflowY: 'auto',
 }));
 
 const OptionWrapper = styled.div<{ selected: boolean }>(

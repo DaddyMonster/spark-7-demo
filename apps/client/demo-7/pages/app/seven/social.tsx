@@ -1,7 +1,14 @@
 import React, { useMemo } from 'react';
 import { AppBaseContainer } from '@hessed/ui/web/layout';
 import useTranslation from 'next-translate/useTranslation';
-import { Grid, Hidden, Paper, Typography } from '@material-ui/core';
+import {
+  Box,
+  Divider,
+  Grid,
+  Hidden,
+  Paper,
+  Typography,
+} from '@material-ui/core';
 import styled from 'styled-components';
 import { useListCacheStore } from '@hessed/hook/store';
 import {
@@ -9,9 +16,12 @@ import {
   UserQuery,
   useUserCacheStore,
 } from '@hessed/client-module/seven-auth';
-import { DocSnap } from '@hessed/client-lib/firebase';
+import { DocSnap, useRefToList } from '@hessed/client-lib/firebase';
 import { UserListCard } from '@hessed/ui/web/list';
 import { BoxedTypo } from '@hessed/ui/web/atom';
+import { useSearchUser } from '../../../hooks/useSearchUser';
+import { SearchUserForm } from '../../../components/search-user-form/SearchUserForm';
+import { RecommandedUser } from '../../../components/user-card/RecommandedUser';
 
 const Social = () => {
   const { t } = useTranslation('seven-social');
@@ -32,17 +42,23 @@ const Social = () => {
     top10ListRef,
   ]);
 
+  const { onSubmit, searchResult } = useSearchUser();
+  const SearchedUsers = useRefToList({ snapList: searchResult });
   return (
     <AppBaseContainer
       title={t('page-title')}
       subTitle={t('page-subtitle')}
       appName="Seven"
-      hideCrumbOnDownSm={false}
+      hideCrumbOnDownSm
     >
-      <Grid container spacing={4}>
+      <Grid container spacing={4} className="mb-5">
         <Grid item xs={12} lg={8}>
           <SearchSectionPaper>
             <Header>{t('search-user-title')}</Header>
+            <Typography fontSize="0.8rem" className="text-gray-600 pt-1 pb-3">
+              {t('search-user-subtitle')}
+            </Typography>
+            <SearchUserForm onSubmit={onSubmit} />
           </SearchSectionPaper>
         </Grid>
         <Hidden lgDown>
@@ -65,6 +81,39 @@ const Social = () => {
           </Grid>
         </Hidden>
       </Grid>
+
+      <Divider className="py-4" />
+
+      {!searchResult && (
+        <div className="w-full flex justify-center py-7">
+          <Typography>{t('no-search-condition')}</Typography>
+        </div>
+      )}
+      <Box sx={{ py: 2.5, px: 2 }}>
+        <Grid container>
+          {SearchedUsers.map((x, i) => (
+            <Grid xs={12} md={6} lg={4}>
+              <RecommandedUser
+                idx={i}
+                rootStyle={{
+                  marginBottom: 8,
+                }}
+                {...x}
+                onFollow={(e, id) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  console.log('FOLLOW', id);
+                }}
+                onDetail={(e, id) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  console.log('DETAIL', id);
+                }}
+              />
+            </Grid>
+          ))}
+        </Grid>
+      </Box>
     </AppBaseContainer>
   );
 };
@@ -80,15 +129,18 @@ export const getServerSideProps = async () => {
 };
 const SearchSectionPaper = styled(Paper)(({ theme }) => ({
   width: '100%',
-  minHeight: 550,
+  minHeight: 300,
   padding: theme.spacing(1.5, 2),
   borderRadius: 10,
   boxShadow: theme.shadows[3],
+  [theme.breakpoints.down('sm')]: {
+    width: '100vw',
+  },
 }));
 
 const RankedPaper = styled(Paper)(({ theme }) => ({
   width: '100%',
-  minHeight: 550,
+  minHeight: 300,
   borderRadius: 10,
   boxShadow: theme.shadows[3],
   padding: theme.spacing(1.5, 2),

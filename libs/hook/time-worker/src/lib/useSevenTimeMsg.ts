@@ -36,7 +36,6 @@ export function useSevenTimeMsg({
     handleInterval();
     handleMessage();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    console.log(diff);
   }, [diff]);
 
   useEffect(() => {

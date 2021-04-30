@@ -5,6 +5,7 @@ import { ChatRoom, ChatUser } from './model';
 import { ChatRoomCacheKey, useChatListStore } from './useChatListStore';
 import shallow from 'zustand/shallow';
 import { LiveStatus } from '@hessed/hook/time-worker';
+import { useRouter } from 'next/router';
 export interface UserChatDetailProps {
   cacheKey: ChatRoomCacheKey | null;
   selectedIdx: number;
@@ -16,7 +17,7 @@ interface OnReserveClickArgBase {
 }
 
 interface UseReserveActionReturn<T extends OnReserveClickArgBase> {
-  onReserveClick: (args: T) => void;
+  onRoomModalAction: (args: T) => void;
   roomDetail: ChatRoom;
 }
 
@@ -25,6 +26,7 @@ export function useChatDetail<T extends OnReserveClickArgBase>({
   selectedIdx,
   userInfo,
 }: UserChatDetailProps): UseReserveActionReturn<T> {
+  const router = useRouter();
   const { cache, updateRef } = useChatListStore(
     (store) => ({
       cache: store.cache,
@@ -52,11 +54,11 @@ export function useChatDetail<T extends OnReserveClickArgBase>({
     return { uid, photoURL, nation: localLang, displayName };
   }, [userInfo]);
 
-  const onReserveClick = async ({ status }: T) => {
-    if (status !== 'waiting') {
-      return;
-    }
-
+  const handleJoin = () => {
+    const { id } = roomDetail;
+    router.push(`/app/seven/live/${id}`);
+  };
+  const handleReserve = async () => {
     if (roomDetail.reserved.includes(meAsChatUser)) {
       docRef.ref.update({
         reserved: firebase.firestore.FieldValue.arrayRemove(meAsChatUser),
@@ -73,5 +75,23 @@ export function useChatDetail<T extends OnReserveClickArgBase>({
     updateRef(cacheKey, selectedIdx, await docRef.ref.get());
   };
 
-  return { onReserveClick, roomDetail };
+  const onRoomModalAction = async ({ status }: T) => {
+    if (!roomDetail) {
+      // WILL NEVER HAPPEN...
+      return;
+    }
+    switch (status) {
+      case 'live':
+        return handleJoin();
+      case 'terminated':
+        return;
+      case 'waiting':
+        return await handleReserve();
+      default:
+        alert('Something went wrong... Please Report');
+        return;
+    }
+  };
+
+  return { onRoomModalAction, roomDetail };
 }

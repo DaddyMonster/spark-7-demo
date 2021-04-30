@@ -12,7 +12,7 @@ import Carousel from 'nuka-carousel';
 import React, { useEffect, useRef, useState } from 'react';
 import { GrNext, GrPrevious } from 'react-icons/gr';
 interface CarouselTemplateProps extends SectionRootWithTitleProps {
-  children: JSX.Element | JSX.Element[];
+  children: JSX.Element | JSX.Element[] | React.ReactNode | React.ReactNode[];
   noListMessage: string;
   responsiveShowArr?: [number, number, number];
 }

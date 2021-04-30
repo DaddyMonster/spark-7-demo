@@ -39,7 +39,7 @@ export function GoogleButton({
       variant={variant}
       className={className}
       sx={{ fontSize: '0.8rem', ...btnStyle }}
-      startIcon={isLogged ? <IoIosPaperPlane /> : <FcGoogle />}
+      startIcon={isLogged ? null : <FcGoogle />}
     >
       {isLogged ? goAppMsg : googleLoginMsg}
     </Button>

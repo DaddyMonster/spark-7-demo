@@ -33,6 +33,8 @@ import {
 import { useChatSideStore, useChatSideWorker } from '../../../../hooks/chat';
 import { useChat } from '../../../../hooks/chat/useChat';
 import ScrollIntoView from 'scroll-into-view-if-needed';
+import { useChatOut } from '../../../../hooks/chat/useChatOut';
+import { userInfo } from 'os';
 
 const LiveRoom = () => {
   useMiniSidebar();
@@ -54,7 +56,8 @@ const LiveRoom = () => {
     chatModel,
   ]);
   const liveUsersQuery = useMemo(
-    () => liveUserRef?.orderBy('joinedAt') || null,
+    () =>
+      liveUserRef?.orderBy('joinedAt') || null,
     [liveUserRef]
   );
   const chatMsgRef = useMemo(() => chatModel?.msgRef || null, [chatModel]);
@@ -62,33 +65,31 @@ const LiveRoom = () => {
     chatMsgRef,
   ]);
 
-  const [roomInfo, roomInfoErr] = useFbSnapItem<ChatRoom>({
+  const [roomInfo] = useFbSnapItem<ChatRoom>({
     docRef: fbQuery,
     once: true,
   });
-  const [users, userErr] = useFbSnapLists<ChatLiveUser>({
+  const [users] = useFbSnapLists<ChatLiveUser>({
     queryRef: liveUsersQuery,
     limit: 1000,
   });
-  const [chatMsg, msgErr] = useFbSnapLists<ChatMessage>({
+  const [chatMsg] = useFbSnapLists<ChatMessage>({
     queryRef: chatMsgQuery,
     limit: 30,
   });
-  console.log(roomInfo);
-  console.log(users);
-  console.log(chatMsg);
-  console.log('ERROR', roomInfoErr, msgErr, userErr);
+
   const { detailSide, userSide, setSide } = useChatSideStore();
   const { toggleSidebar, sideStatus } = useSidebar();
 
   const handleClickMsg = (uid: string) => {
     console.log('Message ' + uid + ' has Clicked');
   };
+
   const me = useMemo(() => {
     if (!users || !user) return null;
     return users.find((x) => x.uid === user.uid);
   }, [users, user]);
-
+  const contentRef = useRef<HTMLDivElement>(null);
   const msgScrollRef = useRef<HTMLDivElement>(null);
   useChat({
     userInfo: user,
@@ -96,9 +97,17 @@ const LiveRoom = () => {
     liveUserRef,
     roomInfo,
     me,
-    docRef : fbQuery,
+    docRef: fbQuery,
     onItemAdded: () =>
-      ScrollIntoView(msgScrollRef.current, { behavior: 'smooth' }),
+      ScrollIntoView(msgScrollRef.current, {
+        behavior: 'smooth',
+        boundary: contentRef.current,
+      }),
+  });
+
+  useChatOut({
+    roomId: roomInfo?.id,
+    uid: user?.uid,
   });
 
   if (!roomInfo) {
@@ -109,21 +118,19 @@ const LiveRoom = () => {
     <ChatLayout
       leftShowCondition={userSide}
       rightShowCondition={detailSide}
-      LeftSideContent={() => (
-        <ChatLeftSideContent users={users} hostId={roomInfo.hostId} />
-      )}
-      RightSideContent={() => (
-        <ChatRightSideContent
-          viewMode={viewMode}
-          onViewModeChange={(mode) => setviewMode(mode)}
-          roomInfo={roomInfo}
-        />
-      )}
+      LeftSideContent={ChatLeftSideContent}
+      leftSideProps={{ users, hostId: roomInfo.hostId }}
+      RightSideContent={ChatRightSideContent}
+      rightSideProps={{
+        viewMode,
+        onViewModeChange: setviewMode,
+        roomInfo,
+      }}
       subtractHeight={SEVEN_TOP_NAV_HEIGHT}
     >
       <Root>
         <ChatHeader startTime={roomInfo.startTime} />
-        <Content>
+        <Content ref={contentRef}>
           <Scroll
             onClick={(e) => {
               if (sideStatus === 'full') {
@@ -134,6 +141,7 @@ const LiveRoom = () => {
           >
             {chatMsg.map((x, i) => (
               <SimpleChatMessage
+                key={x.id}
                 clientUid={x.user.uid}
                 displayName={x.user.displayName}
                 message={x.message}
@@ -196,6 +204,7 @@ const Root = styled.div(({ theme }) => ({
   height: `calc(100vh - ${SEVEN_TOP_NAV_HEIGHT}px)`,
   background: '#fff',
   position: 'relative',
+  paddingTop: SEVEN_TOP_NAV_HEIGHT,
 }));
 
 const Content = styled.div(({ theme }) => ({

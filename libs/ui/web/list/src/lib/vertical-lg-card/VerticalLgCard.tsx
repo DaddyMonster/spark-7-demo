@@ -29,7 +29,7 @@ export const VerticalLgCard = ({
   children,
   displayName,
   photoType = 'avatar',
-  photoSize = 90,
+  photoSize = 100,
   photoURL,
   subDisplayName,
   $rootStyle = {},

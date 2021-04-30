@@ -71,6 +71,11 @@ const MoreInfo = () => {
 
   const PickInterest = (topic: ChatTagUnion) => {
     const { interests } = stepValues;
+    if (interests.size > 10) {
+      alert(t('too-many-tags'));
+      return;
+    }
+
     setstepValues(
       produce((state: StepValue) => {
         interests.has(topic)
@@ -82,10 +87,12 @@ const MoreInfo = () => {
 
   const onPickInterestSubmit = () => {
     const { interests } = stepValues;
-    if (interests.size < 10) {
+    if (interests.size < 5) {
       // PROMPT
+      alert(t('need-more-tags'));
       return;
     }
+
     onNext();
   };
 

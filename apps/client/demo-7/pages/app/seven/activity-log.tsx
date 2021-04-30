@@ -11,7 +11,7 @@ import { RoomListCard, SimpleSingleColumnCard } from '@hessed/ui/web/list';
 import { Typography } from '@material-ui/core';
 import { GetServerSideProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
-import React from 'react';
+import React, { useState } from 'react';
 import SevenRoomDetailModal from '../../../components/room-detail-modal/SevenRoomDetailModal';
 import { useChatRoomSelect } from '../../../hooks/useChatRoomSelect';
 const ActivityLog = () => {
@@ -55,10 +55,10 @@ const ActivityLog = () => {
   const HostedList = useRefToList({ snapList: HostedChat.refList });
   const ReservedList = useRefToList({ snapList: ReservedChats.refList });
   const HistoryList = useRefToList({ snapList: ChatHistory.refList });
-
+  const [cacheKey, setcacheKey] = useState<'host' | 'reserve'>('host');
   const { detailInfos, handleRoomClick, resetDetail } = useChatRoomSelect();
-  const { roomDetail, onReserveClick } = useChatDetail({
-    cacheKey: 'reserve',
+  const { roomDetail, onRoomModalAction } = useChatDetail({
+    cacheKey,
     selectedIdx: detailInfos.selectedIdx,
     userInfo: user,
   });
@@ -74,31 +74,35 @@ const ActivityLog = () => {
         <SevenRoomDetailModal
           onClose={resetDetail}
           roomInfo={roomDetail}
-          onActionClick={onReserveClick}
+          onActionClick={onRoomModalAction}
         />
       )}
       <CarouselTemplate
         noListMessage={t('no-reserved-message')}
         title={t('reserved-list-title')}
       >
-        <>
-          {HostedList.map((x, i) => (
-            <RoomListCard
-              {...x}
-              key={x.id}
-              idx={i}
-              onClick={({ idx }) => handleRoomClick('host', idx)}
-            />
-          ))}
-          {ReservedList.map((x, i) => (
-            <RoomListCard
-              {...x}
-              key={x.id}
-              idx={i}
-              onClick={({ idx }) => handleRoomClick('reserve', idx)}
-            />
-          ))}
-        </>
+        {HostedList.map((x, i) => (
+          <RoomListCard
+            {...x}
+            key={x.id}
+            idx={i}
+            onClick={({ idx }) => {
+              setcacheKey('host');
+              handleRoomClick('host', idx);
+            }}
+          />
+        ))}
+        {ReservedList.map((x, i) => (
+          <RoomListCard
+            {...x}
+            key={x.id}
+            idx={i}
+            onClick={({ idx }) => {
+              setcacheKey('reserve');
+              handleRoomClick('reserve', idx);
+            }}
+          />
+        ))}
       </CarouselTemplate>
       <SectionRootWithTitle title={t('activity-history')}>
         {HistoryList.map(({ startTime, description, lang, topic, id }) => (

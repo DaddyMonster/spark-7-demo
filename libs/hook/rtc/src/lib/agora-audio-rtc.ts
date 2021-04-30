@@ -20,6 +20,7 @@ interface AgoraConstructor {
   liveUid: number;
   initialRole: ClientRole;
   onVolumeUpdate: OnVolumeUpdate;
+  token: string;
 }
 
 export const fetchToken = async (args: AgoraTokenGenDto) => {
@@ -39,6 +40,7 @@ export class Agora {
   private localAud: IMicrophoneAudioTrack | null;
   private remoteAud: IRemoteAudioTrack;
   private onVolumeUpdate: OnVolumeUpdate;
+
   public static async initClient(
     { channelId, initialRole, liveUid }: ConnectionOptions,
     onVolumeUpdate: OnVolumeUpdate
@@ -50,7 +52,6 @@ export class Agora {
       uid: liveUid,
     };
     const token = await fetchToken(body);
-    await client.join(appId, channelId, token, liveUid);
 
     return new Agora({
       client,
@@ -58,6 +59,7 @@ export class Agora {
       channelId,
       initialRole,
       onVolumeUpdate,
+      token,
     });
   }
 
@@ -67,27 +69,34 @@ export class Agora {
     liveUid,
     initialRole,
     onVolumeUpdate,
+    token,
   }: AgoraConstructor) {
     this.client = client;
     this.client.enableAudioVolumeIndicator();
     this.onVolumeUpdate = onVolumeUpdate.bind(this);
-    this.initConnection(initialRole, channelId, liveUid);
+    this.initConnection(initialRole, channelId, liveUid, token);
   }
 
-  private initConnection(
+  private async initConnection(
     initRole: ClientRole,
     channelId: string,
-    liveUid: number
+    liveUid: number,
+    token: string
   ) {
-    this.client.on('user-joined', async (remote) => {
+    this.client.on('user-published', async (remote) => {
       this.remoteAud = remote.audioTrack;
       await this.client.subscribe(remote, 'audio');
+    });
+    this.client.on('user-unpublished', async (remote) => {
+      await this.client.unsubscribe(remote, 'audio');
     });
     this.client.on('volume-indicator', this.onVolumeUpdate);
     this.client.on('token-privilege-will-expire', () =>
       this.resetToken(channelId, liveUid)
     );
-    this.switchRole(initRole);
+    await this.client.setClientRole(initRole);
+    await this.client.join(appId, channelId, token, liveUid);
+    await this.publishAudio();
   }
 
   private async getLocalAud() {
@@ -100,35 +109,19 @@ export class Agora {
     return aud;
   }
 
-  public switchRole(role: ClientRole) {
-    if (role === 'host') {
-      this.initHost();
-    } else {
-      this.initAudience();
-    }
+  public async switchRole(role: ClientRole) {
+    await this.client.setClientRole(role);
   }
 
   public async terminate() {
     await this.client.leave();
-    this.localAud.close();
-    this.localAud.getMediaStreamTrack().stop();
+    this.localAud?.close();
+    this.localAud?.getMediaStreamTrack().stop();
     this.localAud = null;
   }
 
   public async setVolume(val: number) {
     this.remoteAud.setVolume(val);
-  }
-
-  private async initHost() {
-    await this.client.setClientRole('host');
-    await this.publishAudio();
-  }
-
-  private async initAudience() {
-    await this.client.unpublish(this.localAud);
-    this.localAud.close();
-    this.localAud = null;
-    await this.client.setClientRole('audience');
   }
 
   private async resetToken(channelName: string, liveUid: number) {
@@ -145,6 +138,6 @@ export class Agora {
 
   private async publishAudio() {
     const localAudio = await this.getLocalAud();
-    await this.client.publish([localAudio]);
+    await this.client.publish(localAudio);
   }
 }

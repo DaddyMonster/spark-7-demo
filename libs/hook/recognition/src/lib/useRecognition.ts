@@ -36,7 +36,8 @@ export function useRecognition({
     };
     recog.onend = () => {
       console.log('RECOGNITION ON END CALLED');
-      onResult(recogRef.current.currentTranscript);
+      const transcript = recogRef.current.currentTranscript;
+      onResult(transcript ? transcript.slice(0) : undefined);
       recogRef.current.resetTranscript();
       recog.start();
     };

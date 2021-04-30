@@ -4,50 +4,59 @@ import {
   useRefToList,
 } from '@hessed/client-lib/firebase';
 import {
+  RecommadedUserArgs,
   SevenUser,
   SevenUserInfo,
+  UserQuery,
   useSevenAuth,
+  useUserCacheStore,
 } from '@hessed/client-module/seven-auth';
+import {
+  Chat,
+  useChatDetail,
+  useChatList,
+} from '@hessed/client-module/seven-chat';
+import { useListCacheStore } from '@hessed/hook/store';
 import { CarouselTemplate } from '@hessed/ui/web/carousel';
 import { AppBaseContainer, SectionRootWithTitle } from '@hessed/ui/web/layout';
+import { RoomListCard } from '@hessed/ui/web/list';
 import { Button, Grid, Typography } from '@material-ui/core';
 import { GetServerSideProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
-import React, { useEffect, useMemo, useState } from 'react';
-import {
-  Chat,
-  useChatList,
-  useChatDetail,
-} from '@hessed/client-module/seven-chat';
-import { RoomListCard } from '@hessed/ui/web/list';
+import React, { useMemo } from 'react';
+import SevenRoomDetailModal from '../../../components/room-detail-modal/SevenRoomDetailModal';
 import { RecommandedUser } from '../../../components/user-card/RecommandedUser';
-import { SevenPageType } from '../../../types';
 import { useChatRoomSelect } from '../../../hooks/useChatRoomSelect';
+import { SevenPageType } from '../../../types';
 
 const SevenHome: SevenPageType = () => {
   const { t } = useTranslation('seven-home');
   const { user } = useSevenAuth();
-  const [recUserDoc, setrecUserDoc] = useState<DocSnap[]>([]);
+
+  const recommadedUserArgs = useMemo(
+    () => (user ? { uid: user.uid, interests: user.interests } : null),
+    [user]
+  );
+  const { list: recommandedUserRefs } = useListCacheStore<
+    DocSnap<SevenUserInfo>,
+    UserQuery,
+    RecommadedUserArgs
+  >({
+    fetchArgs: recommadedUserArgs,
+    store: useUserCacheStore,
+    key: 'recommaded',
+    limit: 10,
+    ready: Boolean(user),
+    fetchNext: async (lastItem, paging) =>
+      await SevenUser.recommaded(recommadedUserArgs, paging, lastItem),
+  });
 
   const { detailInfos, handleRoomClick, resetDetail } = useChatRoomSelect();
-
-  const { roomDetail, onReserveClick } = useChatDetail({
+  const { roomDetail, onRoomModalAction } = useChatDetail({
     cacheKey: detailInfos.cacheKey,
     selectedIdx: detailInfos.selectedIdx,
     userInfo: user,
   });
-
-  useEffect(() => {
-    if (!user || !user.interests) return;
-    SevenUser.recommaded(user.interests.slice(0, 9), 10).then((x) =>
-      setrecUserDoc(x)
-    );
-  }, [user?.interests]);
-
-  const recUsers = useMemo(
-    () => recUserDoc.map((x) => x.data() as SevenUserInfo),
-    [recUserDoc]
-  );
 
   const LiveRefs = useChatList({
     queryCacheKey: 'live-now',
@@ -62,7 +71,7 @@ const SevenHome: SevenPageType = () => {
         : null,
   });
   const LiveList = useRefToList({ snapList: LiveRefs.refList });
-
+  const RecommandedUsers = useRefToList({ snapList: recommandedUserRefs });
   return (
     <AppBaseContainer
       title={t('page-title')}
@@ -70,6 +79,13 @@ const SevenHome: SevenPageType = () => {
       appName="Seven"
       hideCrumbOnDownSm={false}
     >
+      {Boolean(roomDetail) && (
+        <SevenRoomDetailModal
+          onClose={resetDetail}
+          roomInfo={roomDetail}
+          onActionClick={onRoomModalAction}
+        />
+      )}
       <CarouselTemplate
         title={t('recommand-user')}
         TitleMisc={() => (
@@ -79,7 +95,7 @@ const SevenHome: SevenPageType = () => {
         )}
         noListMessage={t('no-recommand-user-msg')}
       >
-        {recUsers.map((x, i) => (
+        {RecommandedUsers.map((x, i) => (
           <div className="w-full h-full p-4" key={x.uid}>
             <RecommandedUser
               idx={i}

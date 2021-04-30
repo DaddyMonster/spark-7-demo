@@ -56,11 +56,7 @@ const CreateTopic = () => {
                   defaultVal={nationMapList[0]}
                   optionRenderer={({ code, iconPath, label }) => (
                     <div className="flex items-center w-full" key={code}>
-                      <NationFlag
-                        src={iconPath}
-                        size={15}
-                        className="mr-2"
-                      />
+                      <NationFlag src={iconPath} size={15} className="mr-2" />
                       <Typography>
                         {label} ({code})
                       </Typography>
@@ -130,6 +126,7 @@ const RootCard = styled(Paper)(({ theme }) => ({
   marginBottom: theme.spacing(2.5),
   boxShadow: theme.shadows[3],
   [theme.breakpoints.down('sm')]: {
+    minWidth: 0,
     width: '100vw',
     height: `calc(100vh - ${SEVEN_TOP_NAV_HEIGHT}px)`,
     marginBottom: 0,
@@ -146,4 +143,5 @@ const NewTopic = styled(BoxedTypo)(({ theme }) => ({
 
 const FormBox = styled.div(({ theme }) => ({
   padding: theme.spacing(1.5, 2.5),
+  width: '100%',
 }));

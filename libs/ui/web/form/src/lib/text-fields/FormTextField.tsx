@@ -72,7 +72,11 @@ export const FormTextField = ({
 
 export const FormFieldRoot = styled.div(({ theme }) => ({
   width: '100%',
+  flex: '1 0 auto',
   padding: theme.spacing(0, 3),
   marginBottom: theme.spacing(1.5),
   position: 'relative',
+  [theme.breakpoints.down('sm')]: {
+    width: 'auto',
+  },
 }));

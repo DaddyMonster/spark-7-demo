@@ -2,23 +2,27 @@ import { Grid, Hidden } from '@material-ui/core';
 import React from 'react';
 import styled from 'styled-components';
 import { motion, Variants } from 'framer-motion';
-export interface ChatLayoutProps {
+export interface ChatLayoutProps<L, R> {
   subtractHeight: number;
   children: React.ReactNode;
-  LeftSideContent: React.ComponentType;
-  RightSideContent: React.ComponentType;
+  LeftSideContent: React.ComponentType<L>;
+  RightSideContent: React.ComponentType<R>;
+  leftSideProps: L;
+  rightSideProps: R;
   leftShowCondition: boolean;
   rightShowCondition: boolean;
 }
 
-export const ChatLayout = ({
+export function ChatLayout<L, R>({
   subtractHeight,
   children,
   LeftSideContent,
   RightSideContent,
   leftShowCondition,
   rightShowCondition,
-}: ChatLayoutProps) => {
+  leftSideProps,
+  rightSideProps,
+}: ChatLayoutProps<L, R>) {
   const APP_HEIGHT_STRING = `calc(100vh - ${subtractHeight}px)`;
   return (
     <>
@@ -27,7 +31,7 @@ export const ChatLayout = ({
           <Hidden mdDown>
             <Grid item md={3} sx={{ height: APP_HEIGHT_STRING }}>
               <div className="w-full h-full">
-                <LeftSideContent />
+                <LeftSideContent {...leftSideProps} />
               </div>
             </Grid>
           </Hidden>
@@ -40,7 +44,7 @@ export const ChatLayout = ({
               xs={4}
               sx={{ height: APP_HEIGHT_STRING, position: 'relative' }}
             >
-              <RightSideContent />
+              <RightSideContent {...rightSideProps} />
             </Grid>
           </Hidden>
         </Grid>
@@ -53,7 +57,7 @@ export const ChatLayout = ({
           initial="init"
           animate={leftShowCondition ? 'load' : 'init'}
         >
-          <LeftSideContent />
+          <LeftSideContent {...leftSideProps} />
         </ResponsiveSideContentWrap>
       )}
       {rightShowCondition && (
@@ -64,12 +68,12 @@ export const ChatLayout = ({
           initial="init"
           animate={rightShowCondition ? 'load' : 'init'}
         >
-          <RightSideContent />
+          <RightSideContent {...rightSideProps} />
         </ResponsiveSideContentWrap>
       )}
     </>
   );
-};
+}
 
 const Root = styled.div<{ height: string }>(({ theme, height }) => ({
   width: '100%',

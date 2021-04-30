@@ -18,7 +18,6 @@ export function useInterval({
       return;
     }
     intervalRef.current = setInterval(() => {
-      console.log('INTERVAL', intervalMs);
       setdiff(dy().diff(targetTime, 'milliseconds'));
     }, intervalMs);
 
