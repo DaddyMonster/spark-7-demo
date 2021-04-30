@@ -947,7 +947,8 @@
           "options": {
             "buildTarget": "client-spark-log:build",
             "dev": true,
-            "proxyConfig": "apps/client/spark-log/proxy.conf.json"
+            "proxyConfig": "apps/client/spark-log/proxy.conf.json",
+            "port": 4300
           },
           "configurations": {
             "production": {

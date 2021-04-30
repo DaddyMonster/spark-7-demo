@@ -62,11 +62,11 @@
     "client-spark-log": { "tags": [] },
     "client-spark-log-e2e": {
       "tags": [],
-      "implicitDependencies": ["spark-log"]
+      "implicitDependencies": ["client-spark-log"]
     },
     "api-spark-log-srv": { "tags": [] },
     "client-spark": { "tags": [] },
-    "client-spark-e2e": { "tags": [], "implicitDependencies": ["spark"] },
+    "client-spark-e2e": { "tags": [], "implicitDependencies": ["client-spark"] },
     "api-spark-srv": { "tags": [] },
     "storybook-spark": { "tags": [] },
     "storybook-spark-log": { "tags": [] }

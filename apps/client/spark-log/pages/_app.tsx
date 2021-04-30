@@ -1,24 +1,17 @@
 import React from 'react';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
-import { ReactComponent as NxLogo } from '../public/nx-logo-white.svg';
-import './styles.css';
+import { ClientTypes, SparkThemeProvider } from '@hessed/styles/theme';
 
 function CustomApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>Welcome to spark-log!</title>
+        <title>Spark-Log</title>
       </Head>
-      <div className="app">
-        <header className="flex">
-          <NxLogo width="75" height="50" />
-          <h1>Welcome to spark-log!</h1>
-        </header>
-        <main>
-          <Component {...pageProps} />
-        </main>
-      </div>
+      <SparkThemeProvider clientType={ClientTypes.Log}>
+        <Component {...pageProps} />
+      </SparkThemeProvider>
     </>
   );
 }
