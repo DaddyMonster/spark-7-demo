@@ -35,8 +35,19 @@ export function useRecognition({
     onResult(transcript);
   };
 
+  const onEnd = (transcript: string) => {
+    if (!transcript) {
+      onResult(null);
+    }
+  };
+
   const initRecognition = () => {
-    recogRef.current = new Recognition({ lang, onTranscript, onSpeechStart });
+    recogRef.current = new Recognition({
+      lang,
+      onTranscript,
+      onSpeechStart,
+      onEnd,
+    });
     recogRef.current.start();
   };
 

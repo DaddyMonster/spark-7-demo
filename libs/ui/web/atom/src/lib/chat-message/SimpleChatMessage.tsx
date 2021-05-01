@@ -28,16 +28,18 @@ SimpleChatMsgProps) => {
 
   return (
     <Root isMine={isMine} onClick={() => onClick(messageId)}>
-      <Avatar
-        variant="rounded"
-        src={photoURL}
-        className="mx-2"
-        sx={{ visibility: isSerial ? 'hidden' : 'visible' }}
-      >
-        {photoURL ? undefined : displayName[0]}
-      </Avatar>
+      {!isMine && (
+        <Avatar
+          variant="rounded"
+          src={photoURL}
+          className="mx-2"
+          sx={{ visibility: isSerial ? 'hidden' : 'visible' }}
+        >
+          {photoURL ? undefined : displayName[0]}
+        </Avatar>
+      )}
       <div className="flex flex-col">
-        {!isSerial && (
+        {!isSerial && !isMine && (
           <Typography
             fontSize="0.8rem"
             className={`my-1 ${isMine ? 'ml-auto' : 'mr-auto'}`}

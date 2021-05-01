@@ -43,18 +43,21 @@ export function useRTC({
 
   const onVolumeUpdate = (audIndicators: AudIndicator[]) => {
     const newMap = new Map(userVolumeMap);
+    console.log('CURRET VOLUME', rtcRef.current.getVol());
+    console.log('IS PLAYING', rtcRef.current.isPlaying());
     audIndicators.forEach(({ uid, level }) => {
       if (level > 5) {
         newMap.set(uid, level);
       }
     });
-    console.log(newMap)
+    console.log(newMap);
     useGlobalSetter && useGlobalSetter(newMap);
     setvolumeMap(newMap);
   };
 
   const setVolume = useCallback(
     (val: number) => {
+      console.info('SETTING VOLUME', val);
       rtcRef.current.setVolume(val);
     },
     [rtcRef.current]
