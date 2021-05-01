@@ -56,8 +56,7 @@ const LiveRoom = () => {
     chatModel,
   ]);
   const liveUsersQuery = useMemo(
-    () =>
-      liveUserRef?.orderBy('joinedAt') || null,
+    () => liveUserRef?.orderBy('joinedAt') || null,
     [liveUserRef]
   );
   const chatMsgRef = useMemo(() => chatModel?.msgRef || null, [chatModel]);
@@ -142,7 +141,7 @@ const LiveRoom = () => {
             {chatMsg.map((x, i) => (
               <SimpleChatMessage
                 key={x.id}
-                clientUid={x.user.uid}
+                clientUid={user.uid}
                 displayName={x.user.displayName}
                 message={x.message}
                 messageId={x.id}

@@ -87,6 +87,12 @@ export class Agora {
     this.client.on('token-privilege-will-expire', () =>
       this.resetToken(channelId, liveUid)
     );
+    this.client.on('user-published', async (remote, mediaType) => {
+      await this.client.subscribe(remote, mediaType);
+      this.remoteAud = remote?.audioTrack ?? null;
+      this.remoteAud?.play();
+      this.remoteAud.setVolume(100);
+    });
     await this.client.setClientRole(initRole);
 
     if (initRole === 'host') {
@@ -97,20 +103,20 @@ export class Agora {
   }
 
   private async initHost() {
-    this.client.on('user-joined', (users) =>
-      this.client.subscribe(users, 'audio')
-    );
-    this.client.on('user-published', (users) =>
-      this.client.subscribe(users, 'audio')
-    );
+    /* this.client.on('user-published', (users) => {
+      this.client.subscribe(users, 'audio');
+      users.audioTrack?.play();
+      this.localAud?.play();
+    }); */
     const localAudio = await this.getLocalAud();
     await this.client.publish(localAudio);
   }
 
   private async initAudience() {
-    this.client.on('user-joined', async (remote) => {
+    this.client.on('user-published', async (remote) => {
       this.remoteAud = remote.audioTrack;
       await this.client.subscribe(remote, 'audio');
+      remote.audioTrack.play();
     });
   }
 
@@ -121,7 +127,19 @@ export class Agora {
     const { default: AgoraRTC } = await import('agora-rtc-sdk-ng');
     const aud = await AgoraRTC.createMicrophoneAudioTrack();
     this.localAud = aud;
+    this.localAud.play();
     return aud;
+  }
+
+  public getVol() {
+    return this.localAud.getVolumeLevel();
+  }
+
+  public isPlaying() {
+    return {
+      localAud: this.localAud.isPlaying,
+      remoteAud: this.remoteAud?.isPlaying,
+    };
   }
 
   public async switchRole(role: ClientRole) {

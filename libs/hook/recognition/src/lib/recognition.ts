@@ -48,10 +48,11 @@ export class Recognition {
       this.onStart && this.onStart();
     };
     this.recognizer.onend = () => {
+      onEnd && onEnd(this._transcript);
       if (continuse) {
         this.recognizer.start();
       }
-      onEnd && onEnd(this._transcript);
+      this.resetTranscript();
     };
     this.recognizer.onresult = (e) => {
       if (e.results.item(0).isFinal) {
@@ -77,5 +78,9 @@ export class Recognition {
   public terminate() {
     this.recognizer.stop();
     this.recognizer.abort();
+  }
+
+  public resetTranscript() {
+    this._transcript = null;
   }
 }
