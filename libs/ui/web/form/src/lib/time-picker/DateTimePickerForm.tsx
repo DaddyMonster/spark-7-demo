@@ -27,10 +27,12 @@ const ColorSwapedTheme = (theme: Theme) =>
   createMuiTheme({
     ...theme,
     palette: {
+      ...theme.palette,
       primary: { main: theme.palette.secondary.main },
       secondary: { main: theme.palette.primary.main },
     },
     typography: {
+      ...theme.typography,
       h4: {
         ...theme.typography.h4,
         fontSize: '1.7rem',

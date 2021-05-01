@@ -1,6 +1,6 @@
 module.exports = {
   purge: {
-    enabled: false /* process.env.NODE_ENV === 'production' */,
+    enabled: true /* process.env.NODE_ENV === 'production' */,
     content: [
       `${__dirname}/pages/**/*.{js,ts,jsx,tsx}`,
       `${__dirname}/../../../libs/**/*.{js,ts,jsx,tsx}`,

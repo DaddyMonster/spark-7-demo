@@ -66,9 +66,15 @@
     },
     "api-spark-log-srv": { "tags": [] },
     "client-spark": { "tags": [] },
-    "client-spark-e2e": { "tags": [], "implicitDependencies": ["client-spark"] },
+    "client-spark-e2e": {
+      "tags": [],
+      "implicitDependencies": ["client-spark"]
+    },
     "api-spark-srv": { "tags": [] },
     "storybook-spark": { "tags": [] },
-    "storybook-spark-log": { "tags": [] }
+    "storybook-spark-log": { "tags": [] },
+    "service-module-log-auth": { "tags": [] },
+    "service-module-log-post": { "tags": [] },
+    "service-module-log-comment": { "tags": [] }
   }
 }
