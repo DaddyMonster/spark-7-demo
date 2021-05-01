@@ -47,5 +47,6 @@ module.exports = {
     '<rootDir>/libs/service-module/log-auth',
     '<rootDir>/libs/service-module/log-post',
     '<rootDir>/libs/service-module/log-comment',
+    '<rootDir>/libs/client-module/gql-log',
   ],
 };

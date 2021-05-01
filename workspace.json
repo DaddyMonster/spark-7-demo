@@ -1,23 +1,14 @@
 {
   "version": 2,
-  "cli": {
-    "defaultCollection": "@nrwl/next"
-  },
+  "cli": { "defaultCollection": "@nrwl/next" },
   "defaultProject": "client-demo-7",
   "generators": {
     "@nrwl/react": {
-      "application": {
-        "babel": true
-      },
-      "lib": {
-        "style": "styled-components"
-      }
+      "application": { "babel": true },
+      "lib": { "style": "styled-components" }
     },
     "@nrwl/next": {
-      "application": {
-        "style": "styled-components",
-        "linter": "eslint"
-      }
+      "application": { "style": "styled-components", "linter": "eslint" }
     }
   },
   "projects": {
@@ -29,25 +20,16 @@
       "targets": {
         "start": {
           "executor": "@nrwl/react-native:start",
-          "options": {
-            "port": 8081
-          }
+          "options": { "port": 8081 }
         },
         "serve": {
           "executor": "@nrwl/workspace:run-commands",
-          "options": {
-            "command": "nx start spark"
-          }
+          "options": { "command": "nx start spark" }
         },
-        "run-ios": {
-          "executor": "@nrwl/react-native:run-ios",
-          "options": {}
-        },
+        "run-ios": { "executor": "@nrwl/react-native:run-ios", "options": {} },
         "bundle-ios": {
           "executor": "@nrwl/react-native:bundle",
-          "outputs": [
-            "apps/mobile/spark/build"
-          ],
+          "outputs": ["apps/mobile/spark/build"],
           "options": {
             "entryFile": "apps/mobile/spark/src/main.tsx",
             "platform": "ios",
@@ -77,9 +59,7 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/mobile/spark/**/*.{js,ts,tsx}"
-            ]
+            "lintFilePatterns": ["apps/mobile/spark/**/*.{js,ts,tsx}"]
           }
         },
         "sync-deps": {
@@ -88,9 +68,7 @@
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/apps/mobile/spark"
-          ],
+          "outputs": ["coverage/apps/mobile/spark"],
           "options": {
             "jestConfig": "apps/mobile/spark/jest.config.js",
             "passWithNoTests": true
@@ -106,16 +84,12 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/styles/theme/**/*.{ts,tsx,js,jsx}"
-            ]
+            "lintFilePatterns": ["libs/styles/theme/**/*.{ts,tsx,js,jsx}"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/styles/theme"
-          ],
+          "outputs": ["coverage/libs/styles/theme"],
           "options": {
             "jestConfig": "libs/styles/theme/jest.config.js",
             "passWithNoTests": true
@@ -129,14 +103,8 @@
       "projectType": "application",
       "generators": {},
       "targets": {
-        "bundle": {
-          "executor": "nx-react-native-expo:bundle",
-          "options": {}
-        },
-        "start": {
-          "executor": "nx-react-native-expo:start",
-          "options": {}
-        },
+        "bundle": { "executor": "nx-react-native-expo:bundle", "options": {} },
+        "start": { "executor": "nx-react-native-expo:start", "options": {} },
         "run-ios": {
           "executor": "nx-react-native-expo:run-ios",
           "options": {}
@@ -156,16 +124,12 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/mobile/demo-7/**/*.{js,ts,tsx}"
-            ]
+            "lintFilePatterns": ["apps/mobile/demo-7/**/*.{js,ts,tsx}"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/apps/mobile/demo-7"
-          ],
+          "outputs": ["coverage/apps/mobile/demo-7"],
           "options": {
             "jestConfig": "apps/mobile/demo-7/jest.config.js",
             "passWithNoTests": true
@@ -181,25 +145,18 @@
         "prod-build": {
           "executor": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": [
-              "bash ci/script/client-demo-7.ci.sh {args.dep_branch}"
-            ]
+            "commands": ["bash ci/script/client-demo-7.ci.sh {args.dep_branch}"]
           }
         },
         "build": {
           "executor": "@nrwl/next:build",
-          "outputs": [
-            "{options.outputPath}"
-          ],
+          "outputs": ["{options.outputPath}"],
           "options": {
             "root": "apps/client/demo-7",
             "outputPath": "dist/apps/client/demo-7"
           },
           "configurations": {
-            "production": {
-              "generatePackageJson": true,
-              "dev": false
-            }
+            "production": { "generatePackageJson": true, "dev": false }
           }
         },
         "serve": {
@@ -218,15 +175,11 @@
         },
         "export": {
           "executor": "@nrwl/next:export",
-          "options": {
-            "buildTarget": "client-demo-7:build:production"
-          }
+          "options": { "buildTarget": "client-demo-7:build:production" }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/apps/client/demo-7"
-          ],
+          "outputs": ["coverage/apps/client/demo-7"],
           "options": {
             "jestConfig": "apps/client/demo-7/jest.config.js",
             "passWithNoTests": true
@@ -235,9 +188,7 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/client/demo-7/**/*.{ts,tsx,js,jsx}"
-            ]
+            "lintFilePatterns": ["apps/client/demo-7/**/*.{ts,tsx,js,jsx}"]
           }
         }
       }
@@ -255,17 +206,13 @@
             "devServerTarget": "lite:serve"
           },
           "configurations": {
-            "production": {
-              "devServerTarget": "lite:serve:production"
-            }
+            "production": { "devServerTarget": "lite:serve:production" }
           }
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/client/demo-7-e2e/**/*.{js,ts}"
-            ]
+            "lintFilePatterns": ["apps/client/demo-7-e2e/**/*.{js,ts}"]
           }
         }
       }
@@ -279,23 +226,17 @@
         "prod-build": {
           "executor": "@nrwl/workspace:run-commands",
           "options": {
-            "commands": [
-              "bash ci/script/api-demo-7.ci.sh {args.dep_branch}"
-            ]
+            "commands": ["bash ci/script/api-demo-7.ci.sh {args.dep_branch}"]
           }
         },
         "build": {
           "executor": "@nrwl/node:build",
-          "outputs": [
-            "{options.outputPath}"
-          ],
+          "outputs": ["{options.outputPath}"],
           "options": {
             "outputPath": "dist/apps/api/demo-7-srv",
             "main": "apps/api/demo-7-srv/src/main.ts",
             "tsConfig": "apps/api/demo-7-srv/tsconfig.app.json",
-            "assets": [
-              "apps/api/demo-7-srv/src/assets"
-            ]
+            "assets": ["apps/api/demo-7-srv/src/assets"]
           },
           "configurations": {
             "production": {
@@ -314,23 +255,15 @@
         },
         "serve": {
           "executor": "@nrwl/node:execute",
-          "options": {
-            "buildTarget": "api-demo-7-srv:build"
-          }
+          "options": { "buildTarget": "api-demo-7-srv:build" }
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "apps/api/demo-7-srv/**/*.ts"
-            ]
-          }
+          "options": { "lintFilePatterns": ["apps/api/demo-7-srv/**/*.ts"] }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/apps/api/demo-7-srv"
-          ],
+          "outputs": ["coverage/apps/api/demo-7-srv"],
           "options": {
             "jestConfig": "apps/api/demo-7-srv/jest.config.js",
             "passWithNoTests": true
@@ -345,17 +278,11 @@
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/service-lib/agora/**/*.ts"
-            ]
-          }
+          "options": { "lintFilePatterns": ["libs/service-lib/agora/**/*.ts"] }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/service-lib/agora"
-          ],
+          "outputs": ["coverage/libs/service-lib/agora"],
           "options": {
             "jestConfig": "libs/service-lib/agora/jest.config.js",
             "passWithNoTests": true
@@ -370,17 +297,11 @@
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/service-lib/lemma/**/*.ts"
-            ]
-          }
+          "options": { "lintFilePatterns": ["libs/service-lib/lemma/**/*.ts"] }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/service-lib/lemma"
-          ],
+          "outputs": ["coverage/libs/service-lib/lemma"],
           "options": {
             "jestConfig": "libs/service-lib/lemma/jest.config.js",
             "passWithNoTests": true
@@ -396,16 +317,12 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/service-lib/translator/**/*.ts"
-            ]
+            "lintFilePatterns": ["libs/service-lib/translator/**/*.ts"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/service-lib/translator"
-          ],
+          "outputs": ["coverage/libs/service-lib/translator"],
           "options": {
             "jestConfig": "libs/service-lib/translator/jest.config.js",
             "passWithNoTests": true
@@ -421,16 +338,12 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/storybook/seven/**/*.{ts,tsx,js,jsx}"
-            ]
+            "lintFilePatterns": ["libs/storybook/seven/**/*.{ts,tsx,js,jsx}"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/storybook/seven"
-          ],
+          "outputs": ["coverage/libs/storybook/seven"],
           "options": {
             "jestConfig": "libs/storybook/seven/jest.config.js",
             "passWithNoTests": true
@@ -441,33 +354,19 @@
           "options": {
             "uiFramework": "@storybook/react",
             "port": 6100,
-            "config": {
-              "configFolder": "libs/storybook/seven/.storybook"
-            }
+            "config": { "configFolder": "libs/storybook/seven/.storybook" }
           },
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
-          }
+          "configurations": { "ci": { "quiet": true } }
         },
         "build-storybook": {
           "executor": "@nrwl/storybook:build",
-          "outputs": [
-            "{options.outputPath}"
-          ],
+          "outputs": ["{options.outputPath}"],
           "options": {
             "uiFramework": "@storybook/react",
             "outputPath": "dist/storybook/seven",
-            "config": {
-              "configFolder": "libs/storybook/seven/.storybook"
-            }
+            "config": { "configFolder": "libs/storybook/seven/.storybook" }
           },
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
-          }
+          "configurations": { "ci": { "quiet": true } }
         }
       }
     },
@@ -479,16 +378,12 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/ui/web/atom/**/*.{ts,tsx,js,jsx}"
-            ]
+            "lintFilePatterns": ["libs/ui/web/atom/**/*.{ts,tsx,js,jsx}"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/ui/web/atom"
-          ],
+          "outputs": ["coverage/libs/ui/web/atom"],
           "options": {
             "jestConfig": "libs/ui/web/atom/jest.config.js",
             "passWithNoTests": true
@@ -504,16 +399,12 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/ui/web/navs/**/*.{ts,tsx,js,jsx}"
-            ]
+            "lintFilePatterns": ["libs/ui/web/navs/**/*.{ts,tsx,js,jsx}"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/ui/web/navs"
-          ],
+          "outputs": ["coverage/libs/ui/web/navs"],
           "options": {
             "jestConfig": "libs/ui/web/navs/jest.config.js",
             "passWithNoTests": true
@@ -529,16 +420,12 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/ui/web/chat/**/*.{ts,tsx,js,jsx}"
-            ]
+            "lintFilePatterns": ["libs/ui/web/chat/**/*.{ts,tsx,js,jsx}"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/ui/web/chat"
-          ],
+          "outputs": ["coverage/libs/ui/web/chat"],
           "options": {
             "jestConfig": "libs/ui/web/chat/jest.config.js",
             "passWithNoTests": true
@@ -554,16 +441,12 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/ui/web/carousel/**/*.{ts,tsx,js,jsx}"
-            ]
+            "lintFilePatterns": ["libs/ui/web/carousel/**/*.{ts,tsx,js,jsx}"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/ui/web/carousel"
-          ],
+          "outputs": ["coverage/libs/ui/web/carousel"],
           "options": {
             "jestConfig": "libs/ui/web/carousel/jest.config.js",
             "passWithNoTests": true
@@ -579,16 +462,12 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/client-lib/agora/**/*.{ts,tsx,js,jsx}"
-            ]
+            "lintFilePatterns": ["libs/client-lib/agora/**/*.{ts,tsx,js,jsx}"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/client-lib/agora"
-          ],
+          "outputs": ["coverage/libs/client-lib/agora"],
           "options": {
             "jestConfig": "libs/client-lib/agora/jest.config.js",
             "passWithNoTests": true
@@ -611,9 +490,7 @@
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/client-lib/apollo-next"
-          ],
+          "outputs": ["coverage/libs/client-lib/apollo-next"],
           "options": {
             "jestConfig": "libs/client-lib/apollo-next/jest.config.js",
             "passWithNoTests": true
@@ -629,16 +506,12 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/hook/store/**/*.{ts,tsx,js,jsx}"
-            ]
+            "lintFilePatterns": ["libs/hook/store/**/*.{ts,tsx,js,jsx}"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/hook/store"
-          ],
+          "outputs": ["coverage/libs/hook/store"],
           "options": {
             "jestConfig": "libs/hook/store/jest.config.js",
             "passWithNoTests": true
@@ -661,9 +534,7 @@
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/client-module/seven-auth"
-          ],
+          "outputs": ["coverage/libs/client-module/seven-auth"],
           "options": {
             "jestConfig": "libs/client-module/seven-auth/jest.config.js",
             "passWithNoTests": true
@@ -686,9 +557,7 @@
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/client-module/seven-chat"
-          ],
+          "outputs": ["coverage/libs/client-module/seven-chat"],
           "options": {
             "jestConfig": "libs/client-module/seven-chat/jest.config.js",
             "passWithNoTests": true
@@ -711,9 +580,7 @@
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/client-lib/firebase"
-          ],
+          "outputs": ["coverage/libs/client-lib/firebase"],
           "options": {
             "jestConfig": "libs/client-lib/firebase/jest.config.js",
             "passWithNoTests": true
@@ -729,16 +596,12 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/client-module/seven-shared/**/*.ts"
-            ]
+            "lintFilePatterns": ["libs/client-module/seven-shared/**/*.ts"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/client-module/seven-shared"
-          ],
+          "outputs": ["coverage/libs/client-module/seven-shared"],
           "options": {
             "jestConfig": "libs/client-module/seven-shared/jest.config.js",
             "passWithNoTests": true
@@ -761,9 +624,7 @@
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/client-module/chat-tag"
-          ],
+          "outputs": ["coverage/libs/client-module/chat-tag"],
           "options": {
             "jestConfig": "libs/client-module/chat-tag/jest.config.js",
             "passWithNoTests": true
@@ -779,16 +640,12 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/ui/web/layout/**/*.{ts,tsx,js,jsx}"
-            ]
+            "lintFilePatterns": ["libs/ui/web/layout/**/*.{ts,tsx,js,jsx}"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/ui/web/layout"
-          ],
+          "outputs": ["coverage/libs/ui/web/layout"],
           "options": {
             "jestConfig": "libs/ui/web/layout/jest.config.js",
             "passWithNoTests": true
@@ -811,9 +668,7 @@
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/client-lib/custom-types"
-          ],
+          "outputs": ["coverage/libs/client-lib/custom-types"],
           "options": {
             "jestConfig": "libs/client-lib/custom-types/jest.config.js",
             "passWithNoTests": true
@@ -829,16 +684,12 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/ui/web/list/**/*.{ts,tsx,js,jsx}"
-            ]
+            "lintFilePatterns": ["libs/ui/web/list/**/*.{ts,tsx,js,jsx}"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/ui/web/list"
-          ],
+          "outputs": ["coverage/libs/ui/web/list"],
           "options": {
             "jestConfig": "libs/ui/web/list/jest.config.js",
             "passWithNoTests": true
@@ -854,16 +705,12 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/ui/shared/**/*.{ts,tsx,js,jsx}"
-            ]
+            "lintFilePatterns": ["libs/ui/shared/**/*.{ts,tsx,js,jsx}"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/ui/shared"
-          ],
+          "outputs": ["coverage/libs/ui/shared"],
           "options": {
             "jestConfig": "libs/ui/shared/jest.config.js",
             "passWithNoTests": true
@@ -879,16 +726,12 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/ui/web/form/**/*.{ts,tsx,js,jsx}"
-            ]
+            "lintFilePatterns": ["libs/ui/web/form/**/*.{ts,tsx,js,jsx}"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/ui/web/form"
-          ],
+          "outputs": ["coverage/libs/ui/web/form"],
           "options": {
             "jestConfig": "libs/ui/web/form/jest.config.js",
             "passWithNoTests": true
@@ -904,16 +747,12 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/ui/web/modal/**/*.{ts,tsx,js,jsx}"
-            ]
+            "lintFilePatterns": ["libs/ui/web/modal/**/*.{ts,tsx,js,jsx}"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/ui/web/modal"
-          ],
+          "outputs": ["coverage/libs/ui/web/modal"],
           "options": {
             "jestConfig": "libs/ui/web/modal/jest.config.js",
             "passWithNoTests": true
@@ -929,16 +768,12 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/hook/rtc/**/*.{ts,tsx,js,jsx}"
-            ]
+            "lintFilePatterns": ["libs/hook/rtc/**/*.{ts,tsx,js,jsx}"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/hook/rtc"
-          ],
+          "outputs": ["coverage/libs/hook/rtc"],
           "options": {
             "jestConfig": "libs/hook/rtc/jest.config.js",
             "passWithNoTests": true
@@ -954,16 +789,12 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/hook/recognition/**/*.{ts,tsx,js,jsx}"
-            ]
+            "lintFilePatterns": ["libs/hook/recognition/**/*.{ts,tsx,js,jsx}"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/hook/recognition"
-          ],
+          "outputs": ["coverage/libs/hook/recognition"],
           "options": {
             "jestConfig": "libs/hook/recognition/jest.config.js",
             "passWithNoTests": true
@@ -979,16 +810,12 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/hook/time-worker/**/*.{ts,tsx,js,jsx}"
-            ]
+            "lintFilePatterns": ["libs/hook/time-worker/**/*.{ts,tsx,js,jsx}"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/hook/time-worker"
-          ],
+          "outputs": ["coverage/libs/hook/time-worker"],
           "options": {
             "jestConfig": "libs/hook/time-worker/jest.config.js",
             "passWithNoTests": true
@@ -1004,16 +831,12 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/hook/sidebar/**/*.{ts,tsx,js,jsx}"
-            ]
+            "lintFilePatterns": ["libs/hook/sidebar/**/*.{ts,tsx,js,jsx}"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/hook/sidebar"
-          ],
+          "outputs": ["coverage/libs/hook/sidebar"],
           "options": {
             "jestConfig": "libs/hook/sidebar/jest.config.js",
             "passWithNoTests": true
@@ -1029,16 +852,12 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/hook/create-auth/**/*.{ts,tsx,js,jsx}"
-            ]
+            "lintFilePatterns": ["libs/hook/create-auth/**/*.{ts,tsx,js,jsx}"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/hook/create-auth"
-          ],
+          "outputs": ["coverage/libs/hook/create-auth"],
           "options": {
             "jestConfig": "libs/hook/create-auth/jest.config.js",
             "passWithNoTests": true
@@ -1054,16 +873,12 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/ui/web/util/**/*.{ts,tsx,js,jsx}"
-            ]
+            "lintFilePatterns": ["libs/ui/web/util/**/*.{ts,tsx,js,jsx}"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/ui/web/util"
-          ],
+          "outputs": ["coverage/libs/ui/web/util"],
           "options": {
             "jestConfig": "libs/ui/web/util/jest.config.js",
             "passWithNoTests": true
@@ -1079,16 +894,12 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/client-lib/types/**/*.{ts,tsx,js,jsx}"
-            ]
+            "lintFilePatterns": ["libs/client-lib/types/**/*.{ts,tsx,js,jsx}"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/client-lib/types"
-          ],
+          "outputs": ["coverage/libs/client-lib/types"],
           "options": {
             "jestConfig": "libs/client-lib/types/jest.config.js",
             "passWithNoTests": true
@@ -1104,16 +915,12 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/hook/fb-snapshot/**/*.{ts,tsx,js,jsx}"
-            ]
+            "lintFilePatterns": ["libs/hook/fb-snapshot/**/*.{ts,tsx,js,jsx}"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/hook/fb-snapshot"
-          ],
+          "outputs": ["coverage/libs/hook/fb-snapshot"],
           "options": {
             "jestConfig": "libs/hook/fb-snapshot/jest.config.js",
             "passWithNoTests": true
@@ -1128,16 +935,12 @@
       "targets": {
         "build": {
           "executor": "@nrwl/next:build",
-          "outputs": [
-            "{options.outputPath}"
-          ],
+          "outputs": ["{options.outputPath}"],
           "options": {
             "root": "apps/client/spark-log",
             "outputPath": "dist/apps/client/spark-log"
           },
-          "configurations": {
-            "production": {}
-          }
+          "configurations": { "production": {} }
         },
         "serve": {
           "executor": "@nrwl/next:server",
@@ -1156,15 +959,11 @@
         },
         "export": {
           "executor": "@nrwl/next:export",
-          "options": {
-            "buildTarget": "client-spark-log:build:production"
-          }
+          "options": { "buildTarget": "client-spark-log:build:production" }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/apps/client/spark-log"
-          ],
+          "outputs": ["coverage/apps/client/spark-log"],
           "options": {
             "jestConfig": "apps/client/spark-log/jest.config.js",
             "passWithNoTests": true
@@ -1173,9 +972,7 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/client/spark-log/**/*.{ts,tsx,js,jsx}"
-            ]
+            "lintFilePatterns": ["apps/client/spark-log/**/*.{ts,tsx,js,jsx}"]
           }
         }
       }
@@ -1193,17 +990,13 @@
             "devServerTarget": "spark-log:serve"
           },
           "configurations": {
-            "production": {
-              "devServerTarget": "spark-log:serve:production"
-            }
+            "production": { "devServerTarget": "spark-log:serve:production" }
           }
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/client/spark-log-e2e/**/*.{js,ts}"
-            ]
+            "lintFilePatterns": ["apps/client/spark-log-e2e/**/*.{js,ts}"]
           }
         }
       }
@@ -1215,16 +1008,12 @@
       "targets": {
         "build": {
           "executor": "@nrwl/node:build",
-          "outputs": [
-            "{options.outputPath}"
-          ],
+          "outputs": ["{options.outputPath}"],
           "options": {
             "outputPath": "dist/apps/api/spark-log-srv",
             "main": "apps/api/spark-log-srv/src/main.ts",
             "tsConfig": "apps/api/spark-log-srv/tsconfig.app.json",
-            "assets": [
-              "apps/api/spark-log-srv/src/assets"
-            ]
+            "assets": ["apps/api/spark-log-srv/src/assets"]
           },
           "configurations": {
             "production": {
@@ -1242,23 +1031,15 @@
         },
         "serve": {
           "executor": "@nrwl/node:execute",
-          "options": {
-            "buildTarget": "api-spark-log-srv:build"
-          }
+          "options": { "buildTarget": "api-spark-log-srv:build" }
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "apps/api/spark-log-srv/**/*.ts"
-            ]
-          }
+          "options": { "lintFilePatterns": ["apps/api/spark-log-srv/**/*.ts"] }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/apps/api/spark-log-srv"
-          ],
+          "outputs": ["coverage/apps/api/spark-log-srv"],
           "options": {
             "jestConfig": "apps/api/spark-log-srv/jest.config.js",
             "passWithNoTests": true
@@ -1273,16 +1054,12 @@
       "targets": {
         "build": {
           "executor": "@nrwl/next:build",
-          "outputs": [
-            "{options.outputPath}"
-          ],
+          "outputs": ["{options.outputPath}"],
           "options": {
             "root": "apps/client/spark",
             "outputPath": "dist/apps/client/spark"
           },
-          "configurations": {
-            "production": {}
-          }
+          "configurations": { "production": {} }
         },
         "serve": {
           "executor": "@nrwl/next:server",
@@ -1300,15 +1077,11 @@
         },
         "export": {
           "executor": "@nrwl/next:export",
-          "options": {
-            "buildTarget": "client-spark:build:production"
-          }
+          "options": { "buildTarget": "client-spark:build:production" }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/apps/client/spark"
-          ],
+          "outputs": ["coverage/apps/client/spark"],
           "options": {
             "jestConfig": "apps/client/spark/jest.config.js",
             "passWithNoTests": true
@@ -1317,9 +1090,7 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/client/spark/**/*.{ts,tsx,js,jsx}"
-            ]
+            "lintFilePatterns": ["apps/client/spark/**/*.{ts,tsx,js,jsx}"]
           }
         }
       }
@@ -1337,17 +1108,13 @@
             "devServerTarget": "spark:serve"
           },
           "configurations": {
-            "production": {
-              "devServerTarget": "spark:serve:production"
-            }
+            "production": { "devServerTarget": "spark:serve:production" }
           }
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/client/spark-e2e/**/*.{js,ts}"
-            ]
+            "lintFilePatterns": ["apps/client/spark-e2e/**/*.{js,ts}"]
           }
         }
       }
@@ -1359,16 +1126,12 @@
       "targets": {
         "build": {
           "executor": "@nrwl/node:build",
-          "outputs": [
-            "{options.outputPath}"
-          ],
+          "outputs": ["{options.outputPath}"],
           "options": {
             "outputPath": "dist/apps/api/spark-srv",
             "main": "apps/api/spark-srv/src/main.ts",
             "tsConfig": "apps/api/spark-srv/tsconfig.app.json",
-            "assets": [
-              "apps/api/spark-srv/src/assets"
-            ]
+            "assets": ["apps/api/spark-srv/src/assets"]
           },
           "configurations": {
             "production": {
@@ -1386,23 +1149,15 @@
         },
         "serve": {
           "executor": "@nrwl/node:execute",
-          "options": {
-            "buildTarget": "api-spark-srv:build"
-          }
+          "options": { "buildTarget": "api-spark-srv:build" }
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "apps/api/spark-srv/**/*.ts"
-            ]
-          }
+          "options": { "lintFilePatterns": ["apps/api/spark-srv/**/*.ts"] }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/apps/api/spark-srv"
-          ],
+          "outputs": ["coverage/apps/api/spark-srv"],
           "options": {
             "jestConfig": "apps/api/spark-srv/jest.config.js",
             "passWithNoTests": true
@@ -1418,16 +1173,12 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/storybook/spark/**/*.{ts,tsx,js,jsx}"
-            ]
+            "lintFilePatterns": ["libs/storybook/spark/**/*.{ts,tsx,js,jsx}"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/storybook/spark"
-          ],
+          "outputs": ["coverage/libs/storybook/spark"],
           "options": {
             "jestConfig": "libs/storybook/spark/jest.config.js",
             "passWithNoTests": true
@@ -1438,33 +1189,19 @@
           "options": {
             "uiFramework": "@storybook/react",
             "port": 4400,
-            "config": {
-              "configFolder": "libs/storybook/spark/.storybook"
-            }
+            "config": { "configFolder": "libs/storybook/spark/.storybook" }
           },
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
-          }
+          "configurations": { "ci": { "quiet": true } }
         },
         "build-storybook": {
           "executor": "@nrwl/storybook:build",
-          "outputs": [
-            "{options.outputPath}"
-          ],
+          "outputs": ["{options.outputPath}"],
           "options": {
             "uiFramework": "@storybook/react",
             "outputPath": "dist/storybook/storybook-spark",
-            "config": {
-              "configFolder": "libs/storybook/spark/.storybook"
-            }
+            "config": { "configFolder": "libs/storybook/spark/.storybook" }
           },
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
-          }
+          "configurations": { "ci": { "quiet": true } }
         }
       }
     },
@@ -1483,9 +1220,7 @@
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/storybook/spark-log"
-          ],
+          "outputs": ["coverage/libs/storybook/spark-log"],
           "options": {
             "jestConfig": "libs/storybook/spark-log/jest.config.js",
             "passWithNoTests": true
@@ -1496,33 +1231,19 @@
           "options": {
             "uiFramework": "@storybook/react",
             "port": 4400,
-            "config": {
-              "configFolder": "libs/storybook/spark-log/.storybook"
-            }
+            "config": { "configFolder": "libs/storybook/spark-log/.storybook" }
           },
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
-          }
+          "configurations": { "ci": { "quiet": true } }
         },
         "build-storybook": {
           "executor": "@nrwl/storybook:build",
-          "outputs": [
-            "{options.outputPath}"
-          ],
+          "outputs": ["{options.outputPath}"],
           "options": {
             "uiFramework": "@storybook/react",
             "outputPath": "dist/storybook/storybook-spark-log",
-            "config": {
-              "configFolder": "libs/storybook/spark-log/.storybook"
-            }
+            "config": { "configFolder": "libs/storybook/spark-log/.storybook" }
           },
-          "configurations": {
-            "ci": {
-              "quiet": true
-            }
-          }
+          "configurations": { "ci": { "quiet": true } }
         }
       }
     },
@@ -1534,16 +1255,12 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/service-module/log-auth/**/*.ts"
-            ]
+            "lintFilePatterns": ["libs/service-module/log-auth/**/*.ts"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/service-module/log-auth"
-          ],
+          "outputs": ["coverage/libs/service-module/log-auth"],
           "options": {
             "jestConfig": "libs/service-module/log-auth/jest.config.js",
             "passWithNoTests": true
@@ -1559,16 +1276,12 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/service-module/log-post/**/*.ts"
-            ]
+            "lintFilePatterns": ["libs/service-module/log-post/**/*.ts"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/service-module/log-post"
-          ],
+          "outputs": ["coverage/libs/service-module/log-post"],
           "options": {
             "jestConfig": "libs/service-module/log-post/jest.config.js",
             "passWithNoTests": true
@@ -1584,18 +1297,37 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
+            "lintFilePatterns": ["libs/service-module/log-comment/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/service-module/log-comment"],
+          "options": {
+            "jestConfig": "libs/service-module/log-comment/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "client-module-gql-log": {
+      "root": "libs/client-module/gql-log",
+      "sourceRoot": "libs/client-module/gql-log/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
             "lintFilePatterns": [
-              "libs/service-module/log-comment/**/*.ts"
+              "libs/client-module/gql-log/**/*.{ts,tsx,js,jsx}"
             ]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/service-module/log-comment"
-          ],
+          "outputs": ["coverage/libs/client-module/gql-log"],
           "options": {
-            "jestConfig": "libs/service-module/log-comment/jest.config.js",
+            "jestConfig": "libs/client-module/gql-log/jest.config.js",
             "passWithNoTests": true
           }
         }

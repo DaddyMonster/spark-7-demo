@@ -71,6 +71,9 @@
       ],
       "@hessed/service-module/log-comment": [
         "libs/service-module/log-comment/src/index.ts"
+      ],
+      "@hessed/client-module/gql-log": [
+        "libs/client-module/gql-log/src/index.ts"
       ]
     }
   },

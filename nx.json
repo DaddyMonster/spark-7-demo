@@ -75,6 +75,7 @@
     "storybook-spark-log": { "tags": [] },
     "service-module-log-auth": { "tags": [] },
     "service-module-log-post": { "tags": [] },
-    "service-module-log-comment": { "tags": [] }
+    "service-module-log-comment": { "tags": [] },
+    "client-module-gql-log": { "tags": [] }
   }
 }
