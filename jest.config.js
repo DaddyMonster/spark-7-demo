@@ -43,5 +43,9 @@ module.exports = {
     '<rootDir>/apps/api/spark-srv',
     '<rootDir>/libs/storybook/spark',
     '<rootDir>/libs/storybook/spark-log',
+    '<rootDir>/libs/service-lib/log/auth',
+    '<rootDir>/libs/service-module/log-auth',
+    '<rootDir>/libs/service-module/log-post',
+    '<rootDir>/libs/service-module/log-comment',
   ],
 };
