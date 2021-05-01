@@ -1,0 +1,6 @@
+{
+  "status-waiting": "참가 예약하기",
+  "status-live": "바로 입장",
+  "status-terminated": "이미 종료된 세션",
+  "noDescriptionMsg": "상세 설명이 없습니다..."
+}

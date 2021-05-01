@@ -1,4 +1,4 @@
-const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+/* const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin'); */
 const rootWebpackConfig = require('../../../../.storybook/webpack.config');
 /**
  * Export a function. Accept the base config as the only param.
@@ -8,9 +8,13 @@ const rootWebpackConfig = require('../../../../.storybook/webpack.config');
 module.exports = async ({ config, mode }) => {
   config = await rootWebpackConfig({ config, mode });
 
-  const tsPaths = new TsconfigPathsPlugin({
+/*   const tsPaths = new TsconfigPathsPlugin({
     configFile: './tsconfig.base.json',
   });
+
+  config.module.rules = config.module.rules.filter(
+    (f) => f.test.toString() !== '/\\.css$/'
+  );
 
   config.resolve.plugins
     ? config.resolve.plugins.push(tsPaths)
@@ -36,6 +40,46 @@ module.exports = async ({ config, mode }) => {
         limit: 10000, // 10kB
         name: '[name].[hash:7].[ext]',
       },
+    },
+    {
+      test: /\.(ts|tsx)$/,
+      loader: require.resolve('babel-loader'),
+      options: {
+        presets: [
+          '@babel/preset-env',
+          '@babel/preset-react',
+          '@babel/preset-typescript',
+        ],
+      },
+    },
+    {
+      test: /\.css$/,
+      exclude: [/\.module\.css$/, /@storybook/],
+      use: [
+        { loader: 'style-loader' },
+        {
+          loader: 'css-loader',
+          options: {
+            modules: true,
+            importLoaders: 1, // See: https://github.com/webpack-contrib/css-loader#importloaders
+            sourceMap: true,
+          },
+        },
+        {
+          loader: 'postcss-loader',
+
+          options: {
+            postcssOptions: {
+              plugins: [
+                require('tailwindcss')({
+                  config: './global/tailwind/seven/tailwind.config.js',
+                }),
+                require('autoprefixer'),
+              ],
+            },
+          },
+        },
+      ],
     },
     {
       test: /\.svg$/,
@@ -79,6 +123,6 @@ module.exports = async ({ config, mode }) => {
       ],
     }
   );
-
+ */
   return config;
 };

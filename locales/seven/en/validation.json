@@ -1,0 +1,15 @@
+{
+  "min-string": "You must provide at least {{count}} charactors",
+  "max-string": "You can have up to {{count}} charactors.",
+  "required": "required field.",
+  "min-count": "Minimum available value is {{count}}.",
+  "max-count": "Maximum available value is ${{count}}",
+  "non-valid-email": "Not valid E-mail address.",
+  "pw-not-match": "Password does not match.",
+  "pw-not-valid": "Password should be at least {{min}} and max {{max}} combination of charactors, numbers and special charactors",
+  "dup-id": "A user with same id already exists.",
+  "min-date": "The earliest you can set is {{count}} {{unit}}",
+  "max-date": "The latest you can set is {{count}} {{unit}}",
+  "list-min" : "You have to choose at least {{count}} {{fieldName}}",
+  "list-max" : "Maximum {{fieldName}} you can have is {{count}}"
+}

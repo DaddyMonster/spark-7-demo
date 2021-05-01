@@ -1,0 +1,12 @@
+{
+  "page-title": "Create Topic",
+  "page-subtitle": "Create a interesting topic!",
+  "new-topic": "New Topic",
+  "form-topic": "Topic Title",
+  "form-description": "Topic Description",
+  "form-lang": "Choose langauge",
+  "form-tags": "Choose Topic Categories",
+  "form-start-time": "When will it start?",
+  "form-max-date-msg": "You can't set the time after 7days.",
+  "form-create": "Create Topic"
+}

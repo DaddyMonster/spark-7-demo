@@ -1,0 +1,13 @@
+{
+  "show-user-on": "Show participants",
+  "ask-for-voice-on": "Ask for voice",
+  "ask-for-voice-off": "Cancel ask for voice",
+  "auto-trans-on": "Auto Translation ON",
+  "auto-trans-off": "Auto Translation OFF",
+  "hide-chat-on": "Hide chat",
+  "hide-chat-off": "Show chat",
+  "chat-alert-on": "Chat Alert",
+  "chat-volume": "Volume",
+  "show-detail-on": "Open Right Sidebar",
+  "show-detail-off": "Close Right Sidebar"
+}

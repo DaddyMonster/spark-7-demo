@@ -1,28 +1,23 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { SevenRenderer } from '../components/side-renderer/SevenRenderer';
-import AppLayout from './app-layout';
-import { IndexPageLayout } from './index-page-base';
-import LiveRoomLayout from './live-room-layout';
-import { NoLayout } from './NoLayout';
-import { LayoutWithSidebar } from './with-sidebar';
+import { SEVEN_TOP_NAV_HEIGHT } from '@hessed/client-module/seven-shared';
+import { LayoutWithSidebar } from '@hessed/ui/web/layout';
+import { SevenTopNav } from '@hessed/ui/web/navs';
+import SevenSideRenderer from '../components/side-bar-contents/SevenSideRenderer';
+const SevenLayout = {
+  NO_LAYOUT: ({ children, ...props }: any) => <>{children}</>,
+  SEVEN_NORMAL_LAYOUT: ({ children, ...props }: any) => {
+    return (
+      <LayoutWithSidebar
+        SidebarContent={SevenSideRenderer}
+        TopNavComponent={SevenTopNav}
+        topNavHeight={SEVEN_TOP_NAV_HEIGHT}
+        topNavProps={{}}
+        {...props}
+      >
+        {children}
+      </LayoutWithSidebar>
+    );
+  },
+} as const;
 
-const AppLayouts = {
-  NO_LAYOUT: NoLayout,
-  INDEX_PAGE: ({ children, ...props }: any) => (
-    <IndexPageLayout {...props}>{children}</IndexPageLayout>
-  ),
-  APP_LAYOUT: ({ children, ...props }: any) => (
-    <AppLayout {...props}>{children}</AppLayout>
-  ),
-  SEVEN_LAYOUT: ({ children, ...props }: any) => (
-    <LayoutWithSidebar SidebarContent={SevenRenderer} {...props}>
-      {children}
-    </LayoutWithSidebar>
-  ),
-  LIVE_ROOM_LAYOUT: ({ children, ...props }: any) => (
-    <LiveRoomLayout {...props}>{children}</LiveRoomLayout>
-  ),
-};
-
-export type AppLayoutType = typeof AppLayouts;
-export default AppLayouts;
+export default SevenLayout;

@@ -6,7 +6,7 @@ export const typoOptions: TypoOptionsType = {
   guide: "GmarketSansMedium, 'Roboto'",
   text: "GmarketSansLight, 'Roboto'",
   pen: "KyoboHand, 'Roboto'",
-  pretty: "S-CoreDream-2ExtraLight, 'Roboto'",
+  pretty: "S-CoreDream-5Medium, 'Roboto'",
   pretty2: "'Open Sans Condensed', 'sans-serif'",
 };
 

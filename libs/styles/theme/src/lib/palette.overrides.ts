@@ -50,8 +50,20 @@ export const sevenPalette: PaletteColors = {
   danger: { main: '#d84339' },
   default: { main: '#f4f2f0' },
   black: { main: '#2B2728' },
-  info: { main: '#96C9DC' },
+  info: { main: '#7DAF9C' },
 };
+
+export const logPalette: PaletteColors = {
+  primary: { main: '#0F1626' },
+  secondary: { main: '#AB987A' },
+  success: { main: '#bcd979' },
+  warning: { main: '#FCBB6D' },
+  danger: { main: '#FF533D' },
+  default: { main: '#F5F5F5' },
+  black: { main: '#2B2728' },
+  info: { main: '#7DAF9C' },
+};
+
 /* 373234 */
 const paletteClientMap: PlatteClientMap = {
   [ClientTypes.Lite]: Object.assign(sparkLitePalette, {
@@ -61,6 +73,9 @@ const paletteClientMap: PlatteClientMap = {
     gradient: createGradient,
   }),
   [ClientTypes.Seven]: Object.assign(sevenPalette, {
+    gradient: createGradient,
+  }),
+  [ClientTypes.Log]: Object.assign(logPalette, {
     gradient: createGradient,
   }),
 };

@@ -1,4 +1,4 @@
-import { PaletteColor, Theme } from '@material-ui/core';
+import { createMuiTheme, PaletteColor, Theme } from '@material-ui/core';
 import { ClientTypes } from './spark-client-types';
 
 export type ColorOptionUnion =

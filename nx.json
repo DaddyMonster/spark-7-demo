@@ -22,7 +22,6 @@
   "projects": {
     "mobile-spark": { "tags": [] },
     "styles-theme": { "tags": [] },
-    "apollo-next": { "tags": [] },
     "mobile-demo-7": { "tags": [] },
     "client-demo-7": { "tags": [] },
     "client-demo-7-e2e": {
@@ -34,6 +33,42 @@
     "service-lib-lemma": { "tags": [] },
     "service-lib-translator": { "tags": [] },
     "storybook-seven": { "tags": [] },
-    "ui-web-atom": { "tags": [] }
+    "ui-web-atom": { "tags": [] },
+    "ui-web-navs": { "tags": [] },
+    "ui-web-chat": { "tags": [] },
+    "ui-web-carousel": { "tags": [] },
+    "client-lib-agora": { "tags": [] },
+    "client-lib-apollo-next": { "tags": [] },
+    "hook-store": { "tags": [] },
+    "client-module-seven-auth": { "tags": [] },
+    "client-module-seven-chat": { "tags": [] },
+    "client-lib-firebase": { "tags": [] },
+    "client-module-seven-shared": { "tags": [] },
+    "client-module-chat-tag": { "tags": [] },
+    "ui-web-layout": { "tags": [] },
+    "client-lib-custom-types": { "tags": [] },
+    "ui-web-list": { "tags": [] },
+    "ui-shared": { "tags": [] },
+    "ui-web-form": { "tags": [] },
+    "ui-web-modal": { "tags": [] },
+    "hook-rtc": { "tags": [] },
+    "hook-recognition": { "tags": [] },
+    "hook-time-worker": { "tags": [] },
+    "hook-sidebar": { "tags": [] },
+    "hook-create-auth": { "tags": [] },
+    "ui-web-util": { "tags": [] },
+    "client-lib-types": { "tags": [] },
+    "hook-fb-snapshot": { "tags": [] },
+    "client-spark-log": { "tags": [] },
+    "client-spark-log-e2e": {
+      "tags": [],
+      "implicitDependencies": ["client-spark-log"]
+    },
+    "api-spark-log-srv": { "tags": [] },
+    "client-spark": { "tags": [] },
+    "client-spark-e2e": { "tags": [], "implicitDependencies": ["client-spark"] },
+    "api-spark-srv": { "tags": [] },
+    "storybook-spark": { "tags": [] },
+    "storybook-spark-log": { "tags": [] }
   }
 }

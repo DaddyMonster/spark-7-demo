@@ -1,14 +1,21 @@
 {
   "emulators": {
     "auth": {
-      "port": 9099
+      "port": 6400,
+      "host": "0.0.0.0"
     },
     "firestore": {
-      "port": 8888
+      "port": 6300,
+      "host": "0.0.0.0"
     },
     "ui": {
       "enabled": true,
-      "port": 8988
+      "port": 6100,
+      "host": "0.0.0.0"
+    },
+    "hosting": {
+      "port": 6200,
+      "host": "0.0.0.0"
     }
   },
   "hosting": [

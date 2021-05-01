@@ -1,7 +1,7 @@
-import React from 'react';
 import { MuiThemeProvider, StyledEngineProvider } from '@material-ui/core';
+import React from 'react';
 import { ThemeProvider as StyledThemeProvider } from 'styled-components';
-import { ClientTypes } from '../types'
+import { ClientTypes } from '../types';
 import { createSparkTheme } from './create-theme';
 
 interface Props {

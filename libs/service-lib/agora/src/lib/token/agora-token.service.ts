@@ -5,10 +5,11 @@ import { RtcRole, RtcTokenBuilder } from 'agora-access-token';
 export class AgoraTokenService {
   async generateToken({ uid, channelName }: AgoraTokenGenDto) {
     try {
+      console.log(uid, channelName);
       const role = RtcRole.PUBLISHER;
       const appId = process.env.AGORA_APP_ID;
       const certificate = process.env.AGORA_APP_CERTIFICATE;
-      // set a expiration time of 1 hour in seconds
+      // set a expiration time of 10 min in seconds
       const expireTime = 60 * 10;
       const currentTime = Math.floor(Date.now() / 1000);
       const privilegeExpireTime = currentTime + expireTime;

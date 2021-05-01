@@ -17,14 +17,52 @@
     "types": ["libs/styles/theme/src/types/mui.override.d.ts"],
     "paths": {
       "@hessed/styles/theme": ["libs/styles/theme/src/index.ts"],
-      "@hessed/apollo-next": ["libs/apollo-next/src/index.ts"],
       "@hessed/service-lib/agora": ["libs/service-lib/agora/src/index.ts"],
       "@hessed/service-lib/lemma": ["libs/service-lib/lemma/src/index.ts"],
       "@hessed/service-lib/translator": [
         "libs/service-lib/translator/src/index.ts"
       ],
       "@hessed/storybook/seven": ["libs/storybook/seven/src/index.ts"],
-      "@hessed/ui/web/atom": ["libs/ui/web/atom/src/index.ts"]
+      "@hessed/ui/web/atom": ["libs/ui/web/atom/src/index.ts"],
+      "@hessed/ui/web/navs": ["libs/ui/web/navs/src/index.ts"],
+      "@hessed/ui/web/chat": ["libs/ui/web/chat/src/index.ts"],
+      "@hessed/ui/web/carousel": ["libs/ui/web/carousel/src/index.ts"],
+      "@hessed/client-lib/agora": ["libs/client-lib/agora/src/index.ts"],
+      "@hessed/client-lib/apollo-next": [
+        "libs/client-lib/apollo-next/src/index.ts"
+      ],
+      "@hessed/hook/store": ["libs/hook/store/src/index.ts"],
+      "@hessed/client-module/seven-auth": [
+        "libs/client-module/seven-auth/src/index.ts"
+      ],
+      "@hessed/client-module/seven-chat": [
+        "libs/client-module/seven-chat/src/index.ts"
+      ],
+      "@hessed/client-lib/firebase": ["libs/client-lib/firebase/src/index.ts"],
+      "@hessed/client-module/seven-shared": [
+        "libs/client-module/seven-shared/src/index.ts"
+      ],
+      "@hessed/client-module/chat-tag": [
+        "libs/client-module/chat-tag/src/index.ts"
+      ],
+      "@hessed/ui/web/layout": ["libs/ui/web/layout/src/index.ts"],
+      "@hessed/client-lib/custom-types": [
+        "libs/client-lib/custom-types/src/index.ts"
+      ],
+      "@hessed/ui/web/list": ["libs/ui/web/list/src/index.ts"],
+      "@hessed/ui/shared": ["libs/ui/shared/src/index.ts"],
+      "@hessed/ui/web/form": ["libs/ui/web/form/src/index.ts"],
+      "@hessed/ui/web/modal": ["libs/ui/web/modal/src/index.ts"],
+      "@hessed/hook/rtc": ["libs/hook/rtc/src/index.ts"],
+      "@hessed/hook/recognition": ["libs/hook/recognition/src/index.ts"],
+      "@hessed/hook/time-worker": ["libs/hook/time-worker/src/index.ts"],
+      "@hessed/hook/sidebar": ["libs/hook/sidebar/src/index.ts"],
+      "@hessed/hook/create-auth": ["libs/hook/create-auth/src/index.ts"],
+      "@hessed/ui/web/util": ["libs/ui/web/util/src/index.ts"],
+      "@hessed/client-lib/types": ["libs/client-lib/types/src/index.ts"],
+      "@hessed/hook/fb-snapshot": ["libs/hook/fb-snapshot/src/index.ts"],
+      "@hessed/storybook/spark": ["libs/storybook/spark/src/index.ts"],
+      "@hessed/storybook/spark-log": ["libs/storybook/spark-log/src/index.ts"]
     }
   },
   "files": ["libs/styles/theme/src/types/mui.override.d.ts"],

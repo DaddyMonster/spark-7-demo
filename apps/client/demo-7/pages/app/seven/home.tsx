@@ -1,105 +1,149 @@
-import { Container } from '@material-ui/core';
-import { useChatList } from '../../../hooks/chat';
-import React, { useState } from 'react';
-import Crumb from '../../../components/atoms/crumb/Crumb';
-import ChatMetaCard from '../../../components/cards/ChatMetaCard';
-import CarouselTemplate from '../../../components/carousel/CarouselTemplate';
-import DetailViewModal from '../../../components/modal/DetailViewModal';
-import { ChatMeta } from '../../../model/chat-meta';
-import { CustomPageType } from '../../../types/custom-page';
+import {
+  DocSnap,
+  FbTimestamp,
+  useRefToList,
+} from '@hessed/client-lib/firebase';
+import {
+  RecommadedUserArgs,
+  SevenUser,
+  SevenUserInfo,
+  UserQuery,
+  useSevenAuth,
+  useUserCacheStore,
+} from '@hessed/client-module/seven-auth';
+import {
+  Chat,
+  useChatDetail,
+  useChatList,
+} from '@hessed/client-module/seven-chat';
+import { useListCacheStore } from '@hessed/hook/store';
+import { CarouselTemplate } from '@hessed/ui/web/carousel';
+import { AppBaseContainer, SectionRootWithTitle } from '@hessed/ui/web/layout';
+import { RoomListCard } from '@hessed/ui/web/list';
+import { Button, Grid, Typography } from '@material-ui/core';
+import { GetServerSideProps } from 'next';
+import useTranslation from 'next-translate/useTranslation';
+import React, { useMemo } from 'react';
+import SevenRoomDetailModal from '../../../components/room-detail-modal/SevenRoomDetailModal';
+import { RecommandedUser } from '../../../components/user-card/RecommandedUser';
+import { useChatRoomSelect } from '../../../hooks/useChatRoomSelect';
+import { SevenPageType } from '../../../types';
 
-const SevenHome: CustomPageType = () => {
-  const [selectedChatMeta, setselectedChatMeta] = useState<ChatMeta | null>(
-    null
+const SevenHome: SevenPageType = () => {
+  const { t } = useTranslation('seven-home');
+  const { user } = useSevenAuth();
+
+  const recommadedUserArgs = useMemo(
+    () => (user ? { uid: user.uid, interests: user.interests } : null),
+    [user]
   );
-  const { learningLists, localLists } = useChatList();
+  const { list: recommandedUserRefs } = useListCacheStore<
+    DocSnap<SevenUserInfo>,
+    UserQuery,
+    RecommadedUserArgs
+  >({
+    fetchArgs: recommadedUserArgs,
+    store: useUserCacheStore,
+    key: 'recommaded',
+    limit: 10,
+    ready: Boolean(user),
+    fetchNext: async (lastItem, paging) =>
+      await SevenUser.recommaded(recommadedUserArgs, paging, lastItem),
+  });
 
-  const onItemClick = (id: string, listType: 'learning' | 'local') => {
-    const list = listType === 'learning' ? learningLists : localLists;
-    const item = list.find((x) => x.id === id);
-    if (!item) return;
-    setselectedChatMeta(item);
-  };
-  const onModalClose = () => setselectedChatMeta(null);
+  const { detailInfos, handleRoomClick, resetDetail } = useChatRoomSelect();
+  const { roomDetail, onRoomModalAction } = useChatDetail({
+    cacheKey: detailInfos.cacheKey,
+    selectedIdx: detailInfos.selectedIdx,
+    userInfo: user,
+  });
 
+  const LiveRefs = useChatList({
+    queryCacheKey: 'live-now',
+    listQuery: (ts) =>
+      user
+        ? Chat.collection
+            .where('startTime', '>', ts)
+            .where('startTime', '<', FbTimestamp.fromDate(new Date()))
+            .where('lang', 'in', [user.localLang, user.learningLang])
+            .orderBy('startTime')
+            .limitToLast(10)
+        : null,
+  });
+  const LiveList = useRefToList({ snapList: LiveRefs.refList });
+  const RecommandedUsers = useRefToList({ snapList: recommandedUserRefs });
   return (
-    <div className="overflow-hidden">
-      {selectedChatMeta && (
-        <DetailViewModal onClose={onModalClose} chatMeta={selectedChatMeta} />
-      )}
-
-      <div className="px-8">
-        <Crumb
-          appName="Seven Talk"
-          title="Discover your favor"
-          subTitle="Checkout 7-min live sessions and upcommings"
+    <AppBaseContainer
+      title={t('page-title')}
+      subTitle={t('page-subtitle')}
+      appName="Seven"
+      hideCrumbOnDownSm={false}
+    >
+      {Boolean(roomDetail) && (
+        <SevenRoomDetailModal
+          onClose={resetDetail}
+          roomInfo={roomDetail}
+          onActionClick={onRoomModalAction}
         />
-        <Container maxWidth="lg">
-          <CarouselTemplate
-            title="Learn Your desired Languages"
-            noList={
-              learningLists.length > 0
-                ? null
-                : "There's no chat available in your learnign Language"
-            }
-          >
-            {learningLists.map((x, i) => (
-              <div key={i} className="p-3">
-                <ChatMetaCard
+      )}
+      <CarouselTemplate
+        title={t('recommand-user')}
+        TitleMisc={() => (
+          <div className="ml-auto px-3">
+            <Button>{t('see-more-user')}</Button>
+          </div>
+        )}
+        noListMessage={t('no-recommand-user-msg')}
+      >
+        {RecommandedUsers.map((x, i) => (
+          <div className="w-full h-full p-4" key={x.uid}>
+            <RecommandedUser
+              idx={i}
+              {...x}
+              onFollow={(e, id) => {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log('FOLLOW', id);
+              }}
+              onDetail={(e, id) => {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log('DETAIL', id);
+              }}
+            />
+          </div>
+        ))}
+      </CarouselTemplate>
+
+      <SectionRootWithTitle title={t('live-list')}>
+        {LiveList.length > 0 ? (
+          <Grid container spacing={2}>
+            {LiveList.map((x, i) => (
+              <Grid item xs={12} md={6} lg={4} key={x.id}>
+                <RoomListCard
                   {...x}
-                  onClick={(id) => onItemClick(id, 'learning')}
+                  idx={i}
+                  onClick={({ idx }) => handleRoomClick('reserve', idx)}
                 />
-              </div>
+              </Grid>
             ))}
-          </CarouselTemplate>
-          <CarouselTemplate
-            title="Help others learn your language"
-            noList={
-              localLists.length > 0
-                ? null
-                : "There's no chat available in your Language"
-            }
-          >
-            {localLists.map((x, i) => (
-              <div key={i} className="p-3">
-                <ChatMetaCard
-                  {...x}
-                  onClick={(id) => onItemClick(id, 'local')}
-                />
-              </div>
-            ))}
-          </CarouselTemplate>
-        </Container>
-      </div>
-    </div>
+          </Grid>
+        ) : (
+          <div className="p-6 flex justify-center items-center">
+            <Typography>{t('no-live-list')}</Typography>
+          </div>
+        )}
+      </SectionRootWithTitle>
+    </AppBaseContainer>
   );
 };
-SevenHome.layout = 'SEVEN_LAYOUT';
-export default SevenHome;
 
-/* const mockItem: ChatMeta = {
-  createdAt: dy().subtract(15, 'minutes').toDate(),
-  description:
-    'Cupidatat ullamco commodo eu culpa dolore sint magna nostrud enim cupidatat fugiat sunt eiusmod.',
-  host: {
-    displayName: 'Daniel',
-    email: 'tioaosi@ajfkja.com',
-    learningLang: ['ko'],
-    localLang: 'en',
-    registered: true,
-    uid: 'asdjaisdjaisjd',
-    photoURL: 'https://material-ui.com/static/images/avatar/1.jpg',
-  },
-  hostId: 'asdjaisdjaisjd',
-  id: 'sjiadjfiasjdf',
-  lang: 'en',
-  startTime: dy().add(3, 'minutes').toDate(),
-  topic: "Let's talk about some fun stuff",
-  reserved: Array(15).fill({
-    uid: 'sodajdosdj',
-    displayName: 'David',
-    photoURL: 'https://material-ui.com/static/images/avatar/1.jpg',
-  }),
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+  return {
+    props: {
+      layout: 'SEVEN_NORMAL_LAYOUT',
+    },
+  };
 };
 
-const mockList = [mockItem]; */
+export default SevenHome;
