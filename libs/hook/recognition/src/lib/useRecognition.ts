@@ -1,5 +1,5 @@
 import { Nation } from '@hessed/client-module/seven-shared';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Recognition } from './recognition';
 interface UseRecognitionArgs {
   lang: Nation;
@@ -22,26 +22,22 @@ export function useRecognition({
 
   const recogRef = useRef<Recognition>(null);
 
+  useEffect(() => {
+    return () => {
+      if (recogRef.current) {
+        recogRef.current.terminate();
+        recogRef.current = null;
+      }
+    };
+  }, []);
+
+  const onTranscript = (transcript: string) => {
+    onResult(transcript);
+  };
+
   const initRecognition = () => {
-    recogRef.current = new Recognition(lang);
-    const recog = recogRef.current.recognizer;
-    recog.onspeechstart = onSpeechStart;
-    recog.onstart = () => {
-      console.log('Speech Started');
-      setrecogOn(true);
-    };
-    recog.onspeechend = () => {
-      console.log('Speech Ended');
-      setrecogOn(false);
-    };
-    recog.onend = () => {
-      console.log('RECOGNITION ON END CALLED');
-      const transcript = recogRef.current.currentTranscript;
-      onResult(transcript ? transcript.slice(0) : undefined);
-      recogRef.current.resetTranscript();
-      recog.start();
-    };
-    recog.start();
+    recogRef.current = new Recognition({ lang, onTranscript, onSpeechStart });
+    recogRef.current.start();
   };
 
   const terminateRecognition = () => {

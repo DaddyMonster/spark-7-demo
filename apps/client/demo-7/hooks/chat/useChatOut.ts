@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Chat } from '../../../../../libs/client-module/seven-chat/src';
+import { Chat } from '@hessed/client-module/seven-chat';
 
 interface UseChatOutProps {
   uid: string;
@@ -10,11 +10,8 @@ export function useChatOut({ uid, roomId }: UseChatOutProps) {
   useEffect(() => {
     return () => {
       if (!uid || !roomId) return;
-      handleUserOut();
+      new Chat(roomId).liveUserRef.doc(uid).delete();
     };
   }, [uid, roomId]);
-
-  const handleUserOut = async () => {
-    await new Chat(roomId).liveUserRef.doc(uid).delete();
-  };
+  return null;
 }

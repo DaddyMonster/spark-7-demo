@@ -48,6 +48,7 @@ export function useRTC({
         newMap.set(uid, level);
       }
     });
+    console.log(newMap)
     useGlobalSetter && useGlobalSetter(newMap);
     setvolumeMap(newMap);
   };

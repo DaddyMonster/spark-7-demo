@@ -20,11 +20,11 @@ interface AgoraConstructor {
   liveUid: number;
   initialRole: ClientRole;
   onVolumeUpdate: OnVolumeUpdate;
-  token: string;
 }
 
 export const fetchToken = async (args: AgoraTokenGenDto) => {
   const { data } = await axios.post('/api/agora-token', args);
+  console.log('TOKEN', data);
   return data;
 };
 
@@ -52,14 +52,13 @@ export class Agora {
       uid: liveUid,
     };
     const token = await fetchToken(body);
-
+    await client.join(appId, channelId, token, liveUid);
     return new Agora({
       client,
       liveUid,
       channelId,
       initialRole,
       onVolumeUpdate,
-      token,
     });
   }
 
@@ -69,24 +68,18 @@ export class Agora {
     liveUid,
     initialRole,
     onVolumeUpdate,
-    token,
   }: AgoraConstructor) {
     this.client = client;
     this.client.enableAudioVolumeIndicator();
     this.onVolumeUpdate = onVolumeUpdate.bind(this);
-    this.initConnection(initialRole, channelId, liveUid, token);
+    this.initConnection(initialRole, channelId, liveUid);
   }
 
   private async initConnection(
     initRole: ClientRole,
     channelId: string,
-    liveUid: number,
-    token: string
+    liveUid: number
   ) {
-    this.client.on('user-published', async (remote) => {
-      this.remoteAud = remote.audioTrack;
-      await this.client.subscribe(remote, 'audio');
-    });
     this.client.on('user-unpublished', async (remote) => {
       await this.client.unsubscribe(remote, 'audio');
     });
@@ -95,8 +88,30 @@ export class Agora {
       this.resetToken(channelId, liveUid)
     );
     await this.client.setClientRole(initRole);
-    await this.client.join(appId, channelId, token, liveUid);
-    await this.publishAudio();
+
+    if (initRole === 'host') {
+      await this.initHost();
+    } else {
+      await this.initAudience();
+    }
+  }
+
+  private async initHost() {
+    this.client.on('user-joined', (users) =>
+      this.client.subscribe(users, 'audio')
+    );
+    this.client.on('user-published', (users) =>
+      this.client.subscribe(users, 'audio')
+    );
+    const localAudio = await this.getLocalAud();
+    await this.client.publish(localAudio);
+  }
+
+  private async initAudience() {
+    this.client.on('user-joined', async (remote) => {
+      this.remoteAud = remote.audioTrack;
+      await this.client.subscribe(remote, 'audio');
+    });
   }
 
   private async getLocalAud() {
@@ -134,10 +149,5 @@ export class Agora {
     });
     console.warn('RENEWED TOKEN : ', token);
     await this.client.renewToken(token);
-  }
-
-  private async publishAudio() {
-    const localAudio = await this.getLocalAud();
-    await this.client.publish(localAudio);
   }
 }

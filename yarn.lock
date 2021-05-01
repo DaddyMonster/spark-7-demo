@@ -8229,10 +8229,10 @@ agora-access-token@^2.0.4:
     crc-32 "1.2.0"
     cuint "0.2.2"
 
-agora-rtc-sdk-ng@^4.4.0:
-  version "4.4.0"
-  resolved "https://registry.yarnpkg.com/agora-rtc-sdk-ng/-/agora-rtc-sdk-ng-4.4.0.tgz#ea036cab115f8f206e654e258ffce175548048ad"
-  integrity sha512-wcXLPL9+5BwRXlALm2LYADMRALC2Q76On/BGgJgEmURnnIdJkiWito6YKrXsumkxvnzCGlkPgIt6QoLVqnAYug==
+agora-rtc-sdk-ng@^4.3.0:
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/agora-rtc-sdk-ng/-/agora-rtc-sdk-ng-4.3.0.tgz#08dba32fbf4777cffd7069f3c3e66a33b954c1c5"
+  integrity sha512-RAz+cM2bVK6Rr/H7F1XOUSL2VgMBBgqVWbKSBvSHJ6JzqsjFhU1Yt8a/HCtHrQEKpTj25JqUb9KGRtjoXxbifQ==
 
 airbnb-js-shims@^2.2.1:
   version "2.2.1"
