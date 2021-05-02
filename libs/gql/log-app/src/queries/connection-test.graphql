@@ -1,0 +1,8 @@
+query ConnectionTest($log : String!){
+    establish(input : {log : $log}){
+        connection
+        id
+        log
+        __typename
+    }
+}

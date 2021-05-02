@@ -1310,24 +1310,62 @@
         }
       }
     },
-    "client-module-gql-log": {
-      "root": "libs/client-module/gql-log",
-      "sourceRoot": "libs/client-module/gql-log/src",
+    "gql-log-app": {
+      "root": "libs/gql/log-app",
+      "sourceRoot": "libs/gql/log-app/src",
       "projectType": "library",
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "libs/client-module/gql-log/**/*.{ts,tsx,js,jsx}"
-            ]
+            "lintFilePatterns": ["libs/gql/log-app/**/*.{ts,tsx,js,jsx}"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/client-module/gql-log"],
+          "outputs": ["coverage/libs/gql/log-app"],
           "options": {
-            "jestConfig": "libs/client-module/gql-log/jest.config.js",
+            "jestConfig": "libs/gql/log-app/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "service-lib-exp-session": {
+      "root": "libs/service-lib/exp-session",
+      "sourceRoot": "libs/service-lib/exp-session/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/service-lib/exp-session/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/service-lib/exp-session"],
+          "options": {
+            "jestConfig": "libs/service-lib/exp-session/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "service-lib-redis": {
+      "root": "libs/service-lib/redis",
+      "sourceRoot": "libs/service-lib/redis/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": { "lintFilePatterns": ["libs/service-lib/redis/**/*.ts"] }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/service-lib/redis"],
+          "options": {
+            "jestConfig": "libs/service-lib/redis/jest.config.js",
             "passWithNoTests": true
           }
         }

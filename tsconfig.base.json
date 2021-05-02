@@ -72,9 +72,11 @@
       "@hessed/service-module/log-comment": [
         "libs/service-module/log-comment/src/index.ts"
       ],
-      "@hessed/client-module/gql-log": [
-        "libs/client-module/gql-log/src/index.ts"
-      ]
+      "@hessed/gql/log-app": ["libs/gql/log-app/src/index.ts"],
+      "@hessed/service-lib/exp-session": [
+        "libs/service-lib/exp-session/src/index.ts"
+      ],
+      "@hessed/service-lib/redis": ["libs/service-lib/redis/src/index.ts"]
     }
   },
   "files": ["libs/styles/theme/src/types/mui.override.d.ts"],

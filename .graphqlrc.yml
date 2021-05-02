@@ -1,35 +1,19 @@
 projects:
-  sparkLite:
-    schema: 'http://localhost:3333/api/graphql'
-    documents: 'apps/client/lite/**/*.graphql'
+  spark-log:
+    schema:
+      # SERVER SIDE
+      #- 'http://localhost:5100/api/graphql'
+      # FILE
+      - 'libs/gql/log-app/src/schema/schema.gql'
+    documents: 'libs/gql/log-app/src/queries/**/*.graphql'
     extensions:
       languageService:
         useSchemaFileDefinitions: true
       codegen:
         watch: true
         generates:
-          apps/test-next/generated/gql.tsx:
+          libs/gql/log-app/src/types/gql.tsx:
             plugins:
               - typescript
               - typescript-operations
               - typescript-react-apollo
-
-  spark:
-    schema: 'http://localhost:3334/api/graphql'
-    documents: 'apps/client/spark/**/*.graphql'
-    extensions:
-      languageService:
-        useSchemaFileDefinitions: true
-      codegen:
-        watch: true
-        generates:
-          apps/some-client/generated/gql.tsx:
-            plugins:
-              - typescript
-              - typescript-operations
-              - typescript-react-apollo
-
-
-
-
-

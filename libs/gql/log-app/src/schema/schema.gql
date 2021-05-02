@@ -1,0 +1,17 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type ConnectionTest {
+  connection: Boolean!
+  id: Float!
+  log: String!
+}
+
+input EstablishConnectionDTO {
+  log: String!
+}
+
+type Query {
+  establish(input: EstablishConnectionDTO!): ConnectionTest!
+}
