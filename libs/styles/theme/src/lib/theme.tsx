@@ -1,4 +1,8 @@
-import { MuiThemeProvider, StyledEngineProvider } from '@material-ui/core';
+import {
+  MuiThemeProvider,
+  StyledEngineProvider,
+  CssBaseline,
+} from '@material-ui/core';
 import React from 'react';
 import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 import { ClientTypes } from '../types';
@@ -17,7 +21,10 @@ export const SparkThemeProvider: React.FC<Props> = ({
   return (
     <StyledEngineProvider injectFirst>
       <MuiThemeProvider theme={theme}>
-        <StyledThemeProvider theme={theme}>{children}</StyledThemeProvider>
+        <StyledThemeProvider theme={theme}>
+          <CssBaseline />
+          {children}
+        </StyledThemeProvider>
       </MuiThemeProvider>
     </StyledEngineProvider>
   );

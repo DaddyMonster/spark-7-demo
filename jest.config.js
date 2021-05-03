@@ -50,5 +50,8 @@ module.exports = {
     '<rootDir>/libs/gql/log-app',
     '<rootDir>/libs/service-lib/exp-session',
     '<rootDir>/libs/service-lib/redis',
+    '<rootDir>/libs/service-lib/auth-util',
+    '<rootDir>/libs/client-module/logapp-shared',
+    '<rootDir>/libs/service-module/common',
   ],
 };

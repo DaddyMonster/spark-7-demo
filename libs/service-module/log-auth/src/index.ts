@@ -1,2 +1,2 @@
-export * from './lib/service-module-log-auth.module';
-export * from './lib/service-module-log-auth.service';
+export * from './lib/auth';
+export * from './lib/user';

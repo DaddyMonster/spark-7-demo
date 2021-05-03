@@ -14,7 +14,7 @@ export interface LayoutWithSidebarProps<T, P> {
   TopNavComponent: React.ComponentType<T>;
   SidebarContent: React.ComponentType<P & SideContentProps>;
   sideContentProps?: P;
-  topNavProps: T;
+  topNavProps?: T;
   topNavHeight: number;
   children: React.ReactNode;
 }

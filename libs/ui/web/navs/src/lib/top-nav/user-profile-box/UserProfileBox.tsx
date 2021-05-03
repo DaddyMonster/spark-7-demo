@@ -8,9 +8,12 @@ export type OnThumbClick = (e: HTMLElement) => void;
 export interface UserProfileBoxProps {
   photoURL?: string;
   displayName: string;
+  subDisplay: string;
+}
+
+interface Props extends UserProfileBoxProps {
   onThumbClick: OnThumbClick;
   navHeight: number;
-  subDisplay: string;
 }
 
 export function UserProfileBox({
@@ -19,7 +22,7 @@ export function UserProfileBox({
   onThumbClick,
   navHeight,
   subDisplay,
-}: UserProfileBoxProps) {
+}: Props) {
   return (
     <Root navHeight={navHeight}>
       <Avatar

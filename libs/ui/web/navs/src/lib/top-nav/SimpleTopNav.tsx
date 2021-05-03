@@ -5,7 +5,12 @@ import { alpha, Grid, Hidden, Menu, MenuItem } from '@material-ui/core';
 import { NextRouter } from 'next/router';
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { LogoBox, NavRoute, UserProfileBox } from '../top-nav';
+import {
+  LogoBox,
+  NavRoute,
+  UserProfileBox,
+  UserProfileBoxProps,
+} from '../top-nav';
 import { TopNavMenuListItem } from './nav-box';
 
 export interface SimpleTopNavProps {
@@ -14,29 +19,29 @@ export interface SimpleTopNavProps {
   router: NextRouter;
   login: () => void;
   logout: () => void;
-  toggleSidebar: () => void;
-  user: SevenUserInfo;
+  toggleSidebar?: () => void;
   logoPath: string;
   showSideToggle?: boolean;
   __active_test__?: boolean;
   topMenuList: TopNavMenuListItem[];
   topNavHeight: number;
+  profileProps?: UserProfileBoxProps;
 }
 
-export const SimpleTopNav = ({
+export function SimpleTopNav({
   hideRoutes = false,
   transparental = false,
   login,
   router,
   logout,
   toggleSidebar,
-  user,
   logoPath,
   showSideToggle = true,
   __active_test__,
   topMenuList,
   topNavHeight,
-}: SimpleTopNavProps) => {
+  profileProps,
+}: SimpleTopNavProps) {
   const [anchor, setanchor] = useState<HTMLElement | null>(null);
   const onThumbClick = (e: HTMLElement) => {
     setanchor(anchor ? null : e);
@@ -50,7 +55,7 @@ export const SimpleTopNav = ({
               logoPath={logoPath}
               showSideToggle={router.asPath !== '/' || showSideToggle}
               onLogoClick={() => router.push('/')}
-              onSideToggle={toggleSidebar}
+              onSideToggle={() => toggleSidebar && toggleSidebar()}
             />
           </Grid>
           <Hidden mdDown>
@@ -58,7 +63,7 @@ export const SimpleTopNav = ({
               {!hideRoutes && (
                 <div className="w-full h-full">
                   <NavRoute
-                    hidden={!user}
+                    hidden={!profileProps}
                     topMenuList={topMenuList}
                     onRouteClick={(path) => router.push(path)}
                     routeAsPath={router.asPath}
@@ -69,17 +74,16 @@ export const SimpleTopNav = ({
             </Grid>
           </Hidden>
           <Grid item md={3} xs={6}>
-            {user && router.asPath !== '/' ? (
+            {profileProps && router.asPath !== '/' ? (
               <UserProfileBox
-                displayName={user.displayName}
+                {...profileProps}
                 navHeight={topNavHeight}
                 onThumbClick={onThumbClick}
-                subDisplay={user.reputation.toUpperCase() + 'user'}
               />
             ) : (
               <div className="w-full h-full flex items-center justify-end">
                 <GoogleButton
-                  isLogged={Boolean(user)}
+                  isLogged={Boolean(profileProps)}
                   onLogin={login}
                   onLogout={logout}
                   className="px-3"
@@ -117,7 +121,7 @@ export const SimpleTopNav = ({
       </Menu>
     </>
   );
-};
+}
 
 export const Root = styled.div<{
   transparental?: boolean;

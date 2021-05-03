@@ -78,6 +78,9 @@
     "service-module-log-comment": { "tags": [] },
     "gql-log-app": { "tags": [] },
     "service-lib-exp-session": { "tags": [] },
-    "service-lib-redis": { "tags": [] }
+    "service-lib-redis": { "tags": [] },
+    "service-lib-auth-util": { "tags": [] },
+    "client-module-logapp-shared": { "tags": [] },
+    "service-module-common": { "tags": [] }
   }
 }

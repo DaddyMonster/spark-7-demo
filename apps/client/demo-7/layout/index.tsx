@@ -11,7 +11,6 @@ const SevenLayout = {
         SidebarContent={SevenSideRenderer}
         TopNavComponent={SevenTopNav}
         topNavHeight={SEVEN_TOP_NAV_HEIGHT}
-        topNavProps={{}}
         {...props}
       >
         {children}

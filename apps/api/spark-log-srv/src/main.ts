@@ -9,16 +9,17 @@ import { GLOBAL_PREFIX } from './environments/environment';
 import { AppModule } from './app/app.module';
 import { appSession } from '@hessed/service-lib/exp-session';
 import { CORS_ORIGINS } from './environments/cors-origins.prod';
-import * as helmet from 'helmet';
-import * as csurf from 'csurf';
+import { RoleGuard } from '@hessed/service-lib/auth-util';
+/* import * as helmet from 'helmet'; */
+/* import * as csurf from 'csurf'; */
 import * as compression from 'compression';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.setGlobalPrefix(GLOBAL_PREFIX);
-  app.use(helmet());
-  app.use(csurf());
+  /* app.use(helmet()); */
   app.use(appSession);
+  /* app.use(csurf()); */
   app.use(compression());
   app.enableCors({
     credentials: true,

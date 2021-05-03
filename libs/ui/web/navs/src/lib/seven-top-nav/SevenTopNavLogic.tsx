@@ -21,7 +21,6 @@ const SevenTopNavLogic = ({
 
   const props: SimpleTopNavProps = useMemo(
     () => ({
-      user,
       login,
       logout,
       logoPath,
@@ -32,9 +31,13 @@ const SevenTopNavLogic = ({
       showSideToggle,
       topMenuList: TopNavMenuList,
       topNavHeight: SEVEN_TOP_NAV_HEIGHT,
+      profileProps: {
+        displayName: user.displayName,
+        subDisplay: user.reputation,
+        photoURL: user.photoURL ?? '',
+      },
     }),
     [
-      user,
       login,
       logout,
       logoPath,
@@ -43,6 +46,7 @@ const SevenTopNavLogic = ({
       hideRoutes,
       transparental,
       showSideToggle,
+      user,
     ]
   );
   return <NavComponent {...props} />;

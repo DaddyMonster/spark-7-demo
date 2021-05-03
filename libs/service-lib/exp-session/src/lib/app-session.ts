@@ -1,7 +1,7 @@
+import { getRedis } from '@hessed/service-lib/redis';
 import * as connectRedis from 'connect-redis';
 import * as session from 'express-session';
-import { getRedis } from '@hessed/service-lib/redis';
-
+import * as Express from 'express';
 export const RedisStore = connectRedis(session);
 
 const sessionRedis = getRedis();
@@ -22,3 +22,5 @@ export const appSession = session({
   secret: process.env.SESSION_SECRET,
   resave: false,
 });
+
+export type AppSession<T> = Express.Request & { session: T };

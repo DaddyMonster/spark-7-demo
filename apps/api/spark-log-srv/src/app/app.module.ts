@@ -5,7 +5,8 @@ import { join } from 'path';
 import { ConnectionModule } from '../connection/connection.module';
 import { ConnectionTest } from '../connection/entity/connection.entity';
 import { ThrottlerModule } from '@nestjs/throttler';
-
+/* import {} from '@hessed/service-lib/auth-util'; */
+import { LogAppUser, LogAuthModule } from '@hessed/service-module/log-auth';
 @Module({
   imports: [
     ThrottlerModule.forRoot({
@@ -22,7 +23,7 @@ import { ThrottlerModule } from '@nestjs/throttler';
       synchronize: process.env.NODE_ENV !== 'production',
       autoLoadEntities: true,
       logging: process.env.NODE_ENV !== 'production',
-      entities: [ConnectionTest],
+      entities: [ConnectionTest, LogAppUser],
     }),
     GraphQLModule.forRoot({
       autoSchemaFile: join(
@@ -34,6 +35,7 @@ import { ThrottlerModule } from '@nestjs/throttler';
       path: `/${process.env.GLOBAL_PREFIX}/graphql`,
     }),
     ConnectionModule,
+    LogAuthModule,
   ],
 })
 export class AppModule {}

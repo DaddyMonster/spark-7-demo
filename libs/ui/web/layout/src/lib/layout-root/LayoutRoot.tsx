@@ -1,16 +1,21 @@
 import React from 'react';
-import { SevenTopNav, SevenTopNavProps } from '@hessed/ui/web/navs';
 import { AppRoot } from './AppRoot';
 
-interface LayoutRootProps extends SevenTopNavProps {
+interface LayoutRootProps<T = Record<string, unknown>> {
   children: React.ReactNode;
+  TopNavComponent: React.ComponentType<T>;
+  topNavProps?: T;
 }
 
-export const LayoutRoot = ({ children, ...props }: LayoutRootProps) => {
+export function LayoutRoot<T>({
+  children,
+  TopNavComponent,
+  topNavProps,
+}: LayoutRootProps<T>) {
   return (
     <AppRoot>
-      <SevenTopNav {...props} />
+      <TopNavComponent {...topNavProps} />
       {children}
     </AppRoot>
   );
-};
+}

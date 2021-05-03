@@ -76,9 +76,21 @@
       "@hessed/service-lib/exp-session": [
         "libs/service-lib/exp-session/src/index.ts"
       ],
-      "@hessed/service-lib/redis": ["libs/service-lib/redis/src/index.ts"]
+      "@hessed/service-lib/redis": ["libs/service-lib/redis/src/index.ts"],
+      "@hessed/service-lib/auth-util": [
+        "libs/service-lib/auth-util/src/index.ts"
+      ],
+      "@hessed/client-module/logapp-shared": [
+        "libs/client-module/logapp-shared/src/index.ts"
+      ],
+      "@hessed/service-module/common": [
+        "libs/service-module/common/src/index.ts"
+      ]
     }
   },
-  "files": ["libs/styles/theme/src/types/mui.override.d.ts"],
+  "files": [
+    "libs/styles/theme/src/types/mui.override.d.ts",
+    "libs/service-lib/exp-session/src/lib/exp.d.ts"
+  ],
   "exclude": ["node_modules", "tmp", "assets"]
 }
