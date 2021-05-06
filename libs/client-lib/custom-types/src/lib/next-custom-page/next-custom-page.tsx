@@ -1,4 +1,5 @@
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
+import { NextPage } from 'next';
 import { NextRouter } from 'next/dist/client/router';
 import React from 'react';
 
@@ -18,9 +19,14 @@ export type ComponentLayoutType<
   T extends CustomPageProps = CustomPageProps
 > = keyof N | ((props: T) => ReactJSXElement);
 
-export interface CustomPageType<
+export interface _CustomPageType<
   N extends CustomAppLayoutType,
   P = CustomPageProps
 > extends React.FC<P> {
   layout?: ComponentLayoutType<N, CustomPageProps & P>;
 }
+
+export type CustomPageType<
+  N extends CustomAppLayoutType,
+  P = CustomPageProps
+> = NextPage & _CustomPageType<N, P>;

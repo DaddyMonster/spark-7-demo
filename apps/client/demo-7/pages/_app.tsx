@@ -2,7 +2,7 @@ import { auth } from '@hessed/client-lib/firebase';
 import { useAuthInitiator } from '@hessed/client-module/seven-auth';
 import { ClientTypes, SparkThemeProvider } from '@hessed/styles/theme';
 import { CircularProgress } from '@material-ui/core';
-import 'global/css/fonts.css';
+import 'global/css/noto.sans.css';
 import 'global/tailwind/seven/tailwindcss-seven.css';
 import { NextComponentType, NextPageContext } from 'next';
 import { AppProps } from 'next/app';

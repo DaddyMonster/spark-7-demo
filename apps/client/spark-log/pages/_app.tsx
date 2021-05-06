@@ -2,13 +2,14 @@ import React from 'react';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import { ClientTypes, SparkThemeProvider } from '@hessed/styles/theme';
-import 'global/css/fonts.css';
-import 'global/tailwind/log/tailwindcss-seven.css';
+import 'global/css/noto.sans.css';
+import 'global/tailwind/log/tailwindcss-log.css';
 import { getLayoutComponent } from '../layout/get-layout';
 import { NextComponentType, NextPageContext } from 'next';
 import { LogAppPageType } from '../types';
 import { useRouter } from 'next/router';
-
+import { ApolloProvider } from '@apollo/client';
+import useApollo from '@hessed/client-lib/apollo-next';
 interface CustomAppProps extends AppProps {
   Component: NextComponentType<
     NextPageContext,
@@ -30,17 +31,20 @@ function CustomApp({ Component, pageProps }: CustomAppProps) {
     Component.layout ?? pageProps.layout
   );
   const router = useRouter();
+  const apolloClient = useApollo(pageProps);
   return (
     <>
       <Head>
         <title>Spark-Log</title>
       </Head>
-      <SparkThemeProvider clientType={ClientTypes.Log}>
-        {LayoutComponent({
-          children: <Component {...pageProps} key={router.asPath} />,
-          router,
-        })}
-      </SparkThemeProvider>
+      <ApolloProvider client={apolloClient}>
+        <SparkThemeProvider clientType={ClientTypes.Log}>
+          {LayoutComponent({
+            children: <Component {...pageProps} key={router.asPath} />,
+            router,
+          })}
+        </SparkThemeProvider>
+      </ApolloProvider>
     </>
   );
 }

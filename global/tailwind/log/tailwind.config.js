@@ -22,7 +22,7 @@ module.exports = {
       fontFamily: {
         logo: ['S-CoreDream-9Black', 'Roboto'],
         menu: ['GmarketSansBold', 'Roboto'],
-        guide: ['GmarketSansMedium', 'Roboto'],
+        guide: ['Noto Sans KR', 'sans-serif'],
         text: ['GmarketSansLight', 'Roboto'],
         pen: ['KyoboHand', 'Roboto'],
         pretty: ['S-CoreDream-5Medium', 'Roboto'],

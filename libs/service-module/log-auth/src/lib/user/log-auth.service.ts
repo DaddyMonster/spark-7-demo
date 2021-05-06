@@ -3,7 +3,7 @@ import { REQUEST } from '@nestjs/core';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as argon from 'argon2';
 import { Repository } from 'typeorm';
-import { LogAppReq } from '../auth/app-request.type';
+import { LogAppReq, LogAppUserSession } from '../auth/app-request.type';
 import { AuthResponseMsg } from './constant/auth-response-msg';
 import { AuthErrorReason, AuthResponseDAO } from './dao';
 import { LoginDTO } from './dto/login.dto';
@@ -56,6 +56,18 @@ export class LogAuthService {
     return true;
   }
 
+  public checkUser(): LogAppUserSession | null {
+    return this.req.session.user;
+  }
+
+  public async me(): Promise<AuthResponseDAO> {
+    const { user } = this.req.session;
+    this.req.session.cookie.expires;
+    if (!user) return this.buildAuthError(AuthErrorReason.Not_Auth);
+    const { uid } = user;
+    return { user: await this.user_srv.findOneOrFail(uid) };
+  }
+
   private registerUserSession(user: LogAppUser) {
     const { uid, username, email, role } = user;
     this.req.session.user = {
@@ -63,6 +75,7 @@ export class LogAuthService {
       username,
       uid,
       role,
+      expire: this.req.session.cookie.expires,
     };
   }
 

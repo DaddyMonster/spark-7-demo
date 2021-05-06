@@ -1,26 +1,20 @@
-import { AppProps } from 'next/app';
-import { NextPageContext } from 'next';
-import { useMemo } from 'react';
 import {
   ApolloClient,
   InMemoryCache,
   NormalizedCacheObject,
 } from '@apollo/client';
 import merge from 'deepmerge';
-import { createUploadLink } from 'apollo-upload-client';
-
+import { NextPageContext } from 'next';
+import { AppProps } from 'next/app';
+import { useMemo } from 'react';
+import { link } from './apollo-links';
 export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__';
 export let apolloClient: ApolloClient<NormalizedCacheObject>;
-
-const uploadLink = createUploadLink({
-  uri: process.env.NEXT_PUBLIC_GRAPHQL_URI,
-  credentials: 'include',
-});
 
 function createApolloClient(ctx?: NextPageContext) {
   return new ApolloClient({
     ssrMode: typeof window === 'undefined',
-    link: uploadLink,
+    link,
     headers: {
       cookie:
         (typeof window === 'undefined'

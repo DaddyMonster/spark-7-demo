@@ -13,9 +13,8 @@ export function AuthUserDecoratorFactory<
       >();
       const user = gqlContext['user'];
 
-      if (!user) {
-        return null;
-      }
+      if (!user) return null;
+
       return user;
     }
   );

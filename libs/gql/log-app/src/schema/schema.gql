@@ -2,17 +2,83 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type AuthError {
+  message: String!
+  reason: AuthErrorReason!
+}
+
+enum AuthErrorReason {
+  Black_Listed
+  Email_Exist
+  No_User
+  Not_Auth
+  Wrong_Pass
+}
+
+type AuthResponseDAO {
+  error: AuthError
+  user: LogAppUser
+}
+
 type ConnectionTest {
   connection: Boolean!
   id: Float!
   log: String!
 }
 
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
 input EstablishConnectionDTO {
   log: String!
 }
 
+enum LogAppRole {
+  Admin
+  Lite
+  Power
+}
+
+type LogAppUser {
+  displayName: String!
+  email: String!
+  oAuthUid: ID
+  password: String!
+  role: LogAppRole!
+  uid: ID!
+  username: String!
+}
+
+type LogAppUserSession {
+  email: String!
+  expire: DateTime!
+  role: String!
+  uid: Int!
+  username: String!
+}
+
+input LoginDTO {
+  email: String!
+  password: String!
+}
+
+type Mutation {
+  login(login_args: LoginDTO!): AuthResponseDAO!
+  logout: Boolean!
+  register(register_args: RegisterDTO!): AuthResponseDAO!
+}
+
 type Query {
+  checkUser: LogAppUserSession
   establish(input: EstablishConnectionDTO!): ConnectionTest!
-  test: String!
+  me: AuthResponseDAO!
+}
+
+input RegisterDTO {
+  displayName: String!
+  email: String!
+  password: String!
+  username: String!
 }

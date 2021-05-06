@@ -1,0 +1,22 @@
+fragment AuthError on AuthError {
+  message
+  reason
+}
+
+fragment LogAppUser on LogAppUser {
+  displayName
+  email
+  oAuthUid
+  role
+  uid
+  username
+}
+
+fragment AuthResponse on AuthResponseDAO {
+  user {
+    ...LogAppUser
+  }
+  error {
+    ...AuthError
+  }
+}

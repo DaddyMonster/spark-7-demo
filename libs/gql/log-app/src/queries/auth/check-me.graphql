@@ -1,0 +1,13 @@
+fragment AuthSession on LogAppUserSession {
+  email
+  role
+  uid
+  username
+  expire
+}
+
+query CheckMe {
+  checkUser {
+    ...AuthSession
+  }
+}

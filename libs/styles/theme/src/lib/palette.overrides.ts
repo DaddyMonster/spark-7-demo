@@ -55,7 +55,7 @@ export const sevenPalette: PaletteColors = {
 
 export const logPalette: PaletteColors = {
   primary: { main: '#382A40' },
-  secondary: { main: '#45C291' },
+  secondary: { main: '#A9F1DF' },
   success: { main: '#bcd979' },
   warning: { main: '#FCBB6D' },
   danger: { main: '#FF533D' },

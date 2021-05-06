@@ -1,0 +1,5 @@
+mutation Login($loginInput: LoginDTO!) {
+  login(login_args: $loginInput) {
+    ...AuthResponse
+  }
+}

@@ -5,6 +5,8 @@ import { join } from 'path';
 import { ConnectionModule } from '../connection/connection.module';
 import { ConnectionTest } from '../connection/entity/connection.entity';
 import { ThrottlerModule } from '@nestjs/throttler';
+import { RedisPubSub } from 'graphql-redis-subscriptions';
+import { getRedis } from '@hessed/service-lib/redis';
 /* import {} from '@hessed/service-lib/auth-util'; */
 import { LogAppUser, LogAuthModule } from '@hessed/service-module/log-auth';
 @Module({
@@ -31,11 +33,26 @@ import { LogAppUser, LogAuthModule } from '@hessed/service-module/log-auth';
         'libs/gql/log-app/src/schema/schema.gql'
       ),
       sortSchema: true,
-      context: ({ req, res }) => ({ user: req['user'], req, res }),
+      context: ({ req, res }) => ({ req, res }),
       path: `/${process.env.GLOBAL_PREFIX}/graphql`,
+      installSubscriptionHandlers: true,
+      subscriptions: {
+        path: `/${process.env.GLOBAL_PREFIX}/subscription`,
+        keepAlive: 1000,
+      },
     }),
     ConnectionModule,
     LogAuthModule,
+  ],
+  providers: [
+    {
+      provide: 'PUB_SUB',
+      useFactory: () =>
+        new RedisPubSub({
+          publisher: getRedis(),
+          subscriber: getRedis(),
+        }),
+    },
   ],
 })
 export class AppModule {}
