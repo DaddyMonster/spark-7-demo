@@ -21,7 +21,7 @@ const AuthFormBody = ({
 }: AuthFormBodyProps) => {
   const theme = useTheme();
   return (
-    <Body>
+    <Body layoutId="auth-body">
       <MotionTypo
         className="font-guide mb-2"
         fontWeight={900}
@@ -53,7 +53,7 @@ const AuthFormBody = ({
 
 export default AuthFormBody;
 
-const Body = styled.div(({ theme }) => ({
+const Body = styled(motion.div)(({ theme }) => ({
   padding: theme.spacing(6, 6, 4),
   width: '100%',
 }));

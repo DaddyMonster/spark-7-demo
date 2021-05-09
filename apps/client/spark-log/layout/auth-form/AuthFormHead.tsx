@@ -7,7 +7,7 @@ import styled from 'styled-components';
 
 const AuthFormHead = () => {
   return (
-    <Head>
+    <Head layoutId="auth-head">
       <Image
         alt="logo-7"
         src="/logo/log-app-head.svg"
@@ -29,7 +29,7 @@ const AuthFormHead = () => {
 
 export default AuthFormHead;
 
-const Head = styled.div(({ theme }) => ({
+const Head = styled(motion.div)(({ theme }) => ({
   flex: '0 0 300px',
   minHeight: 400,
   background: Color(theme.palette.secondary.main).whiten(0.05).hex(),

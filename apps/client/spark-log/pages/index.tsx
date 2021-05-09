@@ -6,14 +6,9 @@ import {
   Grid,
   Typography,
 } from '@material-ui/core';
-import {
-  motion,
-  useTransform,
-  useViewportScroll,
-  AnimatePresence,
-} from 'framer-motion';
+import { motion, useTransform, useViewportScroll } from 'framer-motion';
 import Image from 'next/image';
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import { LogAppPageType } from '../types';
 
@@ -23,6 +18,7 @@ export const Index: LogAppPageType = () => {
   const { scrollYProgress } = useViewportScroll();
   const scale = useTransform(scrollYProgress, (yProg) => {
     const scaleVal = 1 + yProg * 5;
+    console.log(scaleVal)
     return scaleVal;
   });
   const y = useTransform(scrollYProgress, (yProg) => yProg * 100 + '%');

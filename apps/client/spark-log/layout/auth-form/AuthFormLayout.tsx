@@ -11,17 +11,23 @@ export type AuthPageLabel = 'LOGIN' | 'REGISTER' | 'RESET PASSWORD';
 interface AuthFormLayoutProps extends AuthFormBodyProps {
   leftHead: boolean;
   children: React.ReactNode;
+  rootLayoutId: string;
 }
 
 const AuthFormLayout = ({
   leftHead,
   children,
+  rootLayoutId,
   ...bodyProps
 }: AuthFormLayoutProps) => {
   return (
-    <Root exit={{ opacity: 0 }}>
+    <Root
+      exit={{ opacity: 0 }}
+      initial={{ opacity: 1 }}
+      transition={{ duration: 1 }}
+    >
       <Bg layoutId="onam" animate={{ scale: 5, transition: { duration: 1 } }} />
-      <RootPaper>
+      <RootPaper leftHead={leftHead}>
         <AuthFormHead />
         <AuthFormBody {...bodyProps}>{children}</AuthFormBody>
       </RootPaper>
@@ -40,11 +46,14 @@ const Root = styled(motion.div)(({ theme }) => ({
   alignItems: 'center',
 }));
 
-const RootPaper = styled(motion(Paper))(({ theme }) => ({
-  width: 800,
-  minHeight: 400,
-  borderRadius: 15,
-  boxShadow: theme.shadows[6],
-  position: 'relative',
-  display: 'flex',
-}));
+const RootPaper = styled(motion(Paper))<{ leftHead: boolean }>(
+  ({ theme, leftHead }) => ({
+    width: 800,
+    minHeight: 400,
+    borderRadius: 15,
+    boxShadow: theme.shadows[6],
+    position: 'relative',
+    display: 'flex',
+    flexDirection: leftHead ? 'row' : 'row-reverse',
+  })
+);

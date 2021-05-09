@@ -26,7 +26,9 @@ const AuthButtonSet = ({
       >
         Login
       </MotionButton>
-      <MotionButton onClick={() => onRegister()}>Register</MotionButton>
+      <MotionButton onClick={() => onRegister()} layoutId="register-btn">
+        Register
+      </MotionButton>
     </>
   );
 };
