@@ -2,8 +2,7 @@ fragment AuthSession on LogAppUserSession {
   email
   role
   uid
-  username
-  expire
+  expires
 }
 
 query CheckMe {

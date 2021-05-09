@@ -51,11 +51,11 @@ type LogAppUser {
 }
 
 type LogAppUserSession {
+  displayName: String!
   email: String!
-  expire: DateTime!
+  expires: DateTime!
   role: String!
   uid: Int!
-  username: String!
 }
 
 input LoginDTO {

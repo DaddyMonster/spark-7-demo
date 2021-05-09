@@ -9,7 +9,6 @@ fragment LogAppUser on LogAppUser {
   oAuthUid
   role
   uid
-  username
 }
 
 fragment AuthResponse on AuthResponseDAO {

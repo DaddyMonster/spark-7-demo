@@ -9,10 +9,13 @@ import {
   initRegisterValue,
   validationSchema,
 } from '../hooks/auth/useRegister';
+import { useHiddenNav } from '../hooks/top-nav/useTopNavHiddenStore';
 import AuthFormLayout from '../layout/auth-form/AuthFormLayout';
+import OAuthButtons from '../layout/auth-form/OAuthButtons';
 import { LogAppPageType } from '../types';
 
 const Register: LogAppPageType = () => {
+  useHiddenNav(true);
   const router = useRouter();
   const { onSubmit } = useRegister();
   return (
@@ -32,8 +35,12 @@ const Register: LogAppPageType = () => {
         {({ submitForm }) => (
           <>
             <FormTextField label="E-mail" name="email" />
-            <FormTextField label="Password" name="password" />
-            <FormTextField label="Password Check" name="passCheck" />
+            <FormTextField label="Password" name="password" type="password" />
+            <FormTextField
+              label="Password Check"
+              name="passCheck"
+              type="password"
+            />
             <FormTextField label="Display Name" name="displayName" />
             {/* <SimpleAutoComplete /> */}
             <div className="flex justify-center w-full pt-1">
@@ -48,8 +55,9 @@ const Register: LogAppPageType = () => {
           </>
         )}
       </FormProvider>
+      <OAuthButtons />
     </AuthFormLayout>
   );
 };
-
+Register.layout = 'ANIMATED_LAYOUT';
 export default Register;

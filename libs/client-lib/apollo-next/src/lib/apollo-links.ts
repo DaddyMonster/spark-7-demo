@@ -8,6 +8,7 @@ import {
 } from '@apollo/client/utilities';
 import { createUploadLink } from 'apollo-upload-client';
 import apolloLogger from 'apollo-link-logger';
+
 const uploadLink = createUploadLink({
   uri: process.env.NEXT_PUBLIC_GRAPHQL_URI,
   credentials: 'include',
@@ -52,7 +53,8 @@ const directionalLink = (process as any).browser
   : uploadLink;
 
 export const link = ApolloLink.from([
-  loggerLink,
+  /* loggerLink,
   apolloLogger,
-  directionalLink,
+  directionalLink, */
+  uploadLink,
 ]);

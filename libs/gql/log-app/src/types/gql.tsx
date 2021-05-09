@@ -62,16 +62,15 @@ export type LogAppUser = {
   password: Scalars['String'];
   role: LogAppRole;
   uid: Scalars['ID'];
-  username: Scalars['String'];
 };
 
 export type LogAppUserSession = {
   __typename?: 'LogAppUserSession';
+  displayName: Scalars['String'];
   email: Scalars['String'];
-  expire: Scalars['DateTime'];
+  expires: Scalars['DateTime'];
   role: Scalars['String'];
   uid: Scalars['Int'];
-  username: Scalars['String'];
 };
 
 export type LoginDto = {
@@ -112,7 +111,6 @@ export type RegisterDto = {
   displayName: Scalars['String'];
   email: Scalars['String'];
   password: Scalars['String'];
-  username: Scalars['String'];
 };
 
 export type AuthErrorFragment = (
@@ -122,7 +120,7 @@ export type AuthErrorFragment = (
 
 export type LogAppUserFragment = (
   { __typename?: 'LogAppUser' }
-  & Pick<LogAppUser, 'displayName' | 'email' | 'oAuthUid' | 'role' | 'uid' | 'username'>
+  & Pick<LogAppUser, 'displayName' | 'email' | 'oAuthUid' | 'role' | 'uid'>
 );
 
 export type AuthResponseFragment = (
@@ -138,7 +136,7 @@ export type AuthResponseFragment = (
 
 export type AuthSessionFragment = (
   { __typename?: 'LogAppUserSession' }
-  & Pick<LogAppUserSession, 'email' | 'role' | 'uid' | 'username' | 'expire'>
+  & Pick<LogAppUserSession, 'email' | 'role' | 'uid' | 'expires'>
 );
 
 export type CheckMeQueryVariables = Exact<{ [key: string]: never; }>;
@@ -217,7 +215,6 @@ export const LogAppUserFragmentDoc = gql`
   oAuthUid
   role
   uid
-  username
 }
     `;
 export const AuthErrorFragmentDoc = gql`
@@ -242,8 +239,7 @@ export const AuthSessionFragmentDoc = gql`
   email
   role
   uid
-  username
-  expire
+  expires
 }
     `;
 export const CheckMeDocument = gql`

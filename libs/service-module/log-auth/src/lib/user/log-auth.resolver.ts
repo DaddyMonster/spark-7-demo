@@ -27,9 +27,9 @@ export class LogAuthResolver {
     return response;
   }
 
-  @Mutation(() => AuthResponseDAO)
   @UseGuards(RoleGuard)
   @Roles('NONE_USER')
+  @Mutation(() => AuthResponseDAO)
   async register(
     @Args('register_args') args: RegisterDTO
   ): Promise<AuthResponseDAO> {

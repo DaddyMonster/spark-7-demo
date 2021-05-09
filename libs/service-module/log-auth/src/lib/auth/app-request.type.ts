@@ -7,16 +7,16 @@ export class LogAppUserSession {
   uid: number;
 
   @Field()
-  username: string;
+  email: string;
 
   @Field()
-  email: string;
+  displayName: string;
 
   @Field()
   role: string;
 
   @Field()
-  expire: Date;
+  expires: Date;
 }
 
 export type LogAppReq = AppSession<{ user: LogAppUserSession }>;

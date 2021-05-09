@@ -1,7 +1,8 @@
 import { useRegisterMutation } from '@hessed/gql/log-app';
 import { FormikHelpers } from 'formik';
 import * as yup from 'yup';
-
+import { AuthErrorReason } from '@hessed/gql/log-app';
+import { useRouter } from 'next/router';
 export interface RegisterValues {
   email: string;
   password: string;
@@ -30,12 +31,25 @@ export const validationSchema = yup.object().shape({
 
 export function useRegister() {
   const [register] = useRegisterMutation();
-
+  const router = useRouter();
   const onSubmit = async (
     vals: RegisterValues,
     { setErrors }: FormikHelpers<RegisterValues>
   ) => {
-    //some logic
+    const { displayName, email, password } = vals;
+    const { data } = await register({
+      variables: { registerInput: { password, email, displayName } },
+    });
+    if (data.register.error) {
+      switch (data.register.error.reason) {
+        case AuthErrorReason.EmailExist:
+          return setErrors({ email: data.register.error.message });
+        default:
+          return alert('Unknown Error');
+      }
+    } else {
+      router.push(`/space/${data.register.user.uid}`);
+    }
   };
 
   return { onSubmit };

@@ -1,9 +1,11 @@
 import { InputType, PickType } from '@nestjs/graphql';
-import { LogAppUser } from '../entity';
+import { LogAppRole, LogAppUser } from '../entity';
 
 @InputType()
 export class RegisterDTO extends PickType(
   LogAppUser,
-  ['username', 'password', 'email', 'displayName'],
+  ['password', 'email', 'displayName'],
   InputType
-) {}
+) {
+  role?: LogAppRole;
+}
