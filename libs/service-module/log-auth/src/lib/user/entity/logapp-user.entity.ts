@@ -24,10 +24,6 @@ export class LogAppUser extends CommonEntity {
 
   @Field()
   @Column()
-  username: string;
-
-  @Field()
-  @Column()
   password: string;
 
   @Field()

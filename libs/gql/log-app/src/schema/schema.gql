@@ -48,7 +48,6 @@ type LogAppUser {
   password: String!
   role: LogAppRole!
   uid: ID!
-  username: String!
 }
 
 type LogAppUserSession {
@@ -80,5 +79,4 @@ input RegisterDTO {
   displayName: String!
   email: String!
   password: String!
-  username: String!
 }
