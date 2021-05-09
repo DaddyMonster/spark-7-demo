@@ -60,6 +60,8 @@ export type LogAppUser = {
   email: Scalars['String'];
   oAuthUid?: Maybe<Scalars['ID']>;
   password: Scalars['String'];
+  photoURL?: Maybe<Scalars['String']>;
+  profession: Scalars['String'];
   role: LogAppRole;
   uid: Scalars['ID'];
 };
@@ -120,7 +122,7 @@ export type AuthErrorFragment = (
 
 export type LogAppUserFragment = (
   { __typename?: 'LogAppUser' }
-  & Pick<LogAppUser, 'displayName' | 'email' | 'oAuthUid' | 'role' | 'uid'>
+  & Pick<LogAppUser, 'displayName' | 'email' | 'oAuthUid' | 'role' | 'uid' | 'photoURL' | 'profession'>
 );
 
 export type AuthResponseFragment = (
@@ -215,6 +217,8 @@ export const LogAppUserFragmentDoc = gql`
   oAuthUid
   role
   uid
+  photoURL
+  profession
 }
     `;
 export const AuthErrorFragmentDoc = gql`

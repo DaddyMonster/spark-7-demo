@@ -9,6 +9,8 @@ fragment LogAppUser on LogAppUser {
   oAuthUid
   role
   uid
+  photoURL
+  profession
 }
 
 fragment AuthResponse on AuthResponseDAO {

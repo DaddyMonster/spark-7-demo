@@ -46,6 +46,8 @@ type LogAppUser {
   email: String!
   oAuthUid: ID
   password: String!
+  photoURL: String
+  profession: String!
   role: LogAppRole!
   uid: ID!
 }

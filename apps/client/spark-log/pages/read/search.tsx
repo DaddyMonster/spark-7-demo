@@ -1,11 +1,10 @@
 import React from 'react';
+import { LogAppPageType } from '../../types';
 
-interface ReadSearchProps {
-  e: '';
-}
-
-const ReadSearch = (props: ReadSearchProps) => {
+const ReadSearch: LogAppPageType = () => {
   return <div></div>;
 };
+
+ReadSearch.layout = 'READ_LAYOUT';
 
 export default ReadSearch;

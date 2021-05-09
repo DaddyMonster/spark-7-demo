@@ -10,7 +10,7 @@ export interface SimpleSideNavItemProps extends NavRenderItemBase {
   sideSize: SidebarStatus;
 }
 
-const SimpleSideNavItem = ({
+export const SimpleSideNavItem = ({
   Icon,
   active,
   label,
@@ -25,8 +25,6 @@ const SimpleSideNavItem = ({
     </Root>
   );
 };
-
-export default SimpleSideNavItem;
 
 const Root = styled.div<{ active: boolean; sideSize: SidebarStatus }>(
   ({ theme, active, sideSize }) => ({

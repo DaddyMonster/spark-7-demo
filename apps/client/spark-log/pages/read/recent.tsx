@@ -1,11 +1,10 @@
 import React from 'react';
+import { LogAppPageType } from '../../types';
 
-interface ReadRecentProps {
-  d: '';
-}
-
-const ReadRecent = (props: ReadRecentProps) => {
+const ReadRecent: LogAppPageType = () => {
   return <div></div>;
 };
+
+ReadRecent.layout = 'READ_LAYOUT';
 
 export default ReadRecent;

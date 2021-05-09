@@ -24,7 +24,7 @@ const AuthFormLayout = ({
     <Root exit={{ opacity: 0.7 }} initial={{ opacity: 1 }}>
       <Bg layoutId="onam" animate={{ scale: 5, transition: { duration: 1 } }} />
       <RootPaper leftHead={leftHead}>
-        <AuthFormHead />
+        <AuthFormHead leftHead={leftHead} />
         <AuthFormBody {...bodyProps}>{children}</AuthFormBody>
       </RootPaper>
     </Root>

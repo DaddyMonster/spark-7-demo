@@ -2,20 +2,24 @@ import { SidebarStatus } from '@hessed/hook/sidebar';
 import { NavRenderItemBase } from '@hessed/ui/shared';
 import React from 'react';
 import Scrollbar from 'react-perfect-scrollbar';
-import styled, { CSSObject } from 'styled-components';
-import SimpleSideNavItem from './SimpleSideNavItem';
+import { SimpleSideNavItem } from './SimpleSideNavItem';
+import {
+  SideRendererRoot,
+  SideRendererRootProps,
+} from './SimpleSideNavRenderRoot';
 
 export interface SideContentProps {
   sideStatus: SidebarStatus;
+  topNavHeight: number;
+  rootStyle: Record<string, unknown>;
 }
 
-interface SimpleSideNavRendererProps extends SideContentProps {
-  topNavHeight: number;
+export interface SimpleSideNavRendererProps
+  extends SideContentProps,
+    SideRendererRootProps {
   navItems: NavRenderItemBase[];
   asPath: string;
   onLinkClick: (route: string) => void;
-  rootStyle?: CSSObject;
-  rootClassName?: string;
 }
 
 export function SimpleSideNavRenderer({
@@ -50,17 +54,3 @@ export function SimpleSideNavRenderer({
     </SideRendererRoot>
   );
 }
-
-const SideRendererRoot = styled.div<{
-  topNavHeight: number;
-  isMini: boolean;
-  rootStyle: Record<string, unknown>;
-}>(({ theme, topNavHeight, isMini, rootStyle }) => ({
-  width: '100%',
-  height: `calc(100vh - ${topNavHeight}px)`,
-  padding: theme.spacing(6, 0, 2, 1),
-  boxShadow: theme.shadows[3],
-  background: isMini ? theme.palette.primary.main : 'none',
-  transition: '300ms background ease',
-  ...rootStyle,
-}));

@@ -1,16 +1,10 @@
-import {
-  BadRequestException,
-  Inject,
-  Injectable,
-  Logger,
-  Scope,
-} from '@nestjs/common';
-import { REQUEST } from '@nestjs/core';
+import { BadRequestException, Inject, Injectable, Scope } from '@nestjs/common';
 import { CONTEXT } from '@nestjs/graphql';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as argon from 'argon2';
 import { Repository } from 'typeorm';
-import { LogAppReq, LogAppUserSession } from '../auth/app-request.type';
+import { LogAppUserSession } from '../auth/app-request.type';
+import { GqlContext } from '../auth/gql-context';
 import { AuthResponseMsg } from './constant/auth-response-msg';
 import { AuthErrorReason, AuthResponseDAO } from './dao';
 import { LoginDTO } from './dto/login.dto';
@@ -21,14 +15,14 @@ import { LogAppRole, LogAppUser } from './entity';
 export class LogAuthService {
   constructor(
     @InjectRepository(LogAppUser) private user_srv: Repository<LogAppUser>,
-    @Inject(CONTEXT) private ctx: LogAppReq
+    @Inject(CONTEXT) private ctx: GqlContext
   ) {}
 
   public async login({ email, password }: LoginDTO): Promise<AuthResponseDAO> {
     const user = await this.user_srv.findOne({ where: { email } });
     if (!user) return this.buildAuthError(AuthErrorReason.No_User);
 
-    const valid = argon.verify(user.password, password);
+    const valid = argon.verify(password, user.password);
     if (!valid) return this.buildAuthError(AuthErrorReason.Wrong_Pass);
 
     this.registerUserSession(user);
@@ -42,7 +36,7 @@ export class LogAuthService {
     role = LogAppRole.Lite,
   }: RegisterDTO): Promise<AuthResponseDAO> {
     /* console.log(this.ctx); */
-    console.log(this.ctx)
+    console.log(this.ctx.req);
 
     const exist = await this.user_srv.findOne({ where: { email } });
 
@@ -60,7 +54,7 @@ export class LogAuthService {
   }
 
   public async logout(): Promise<boolean> {
-    if (!this.ctx.session.user) {
+    if (!this.ctx.req.session.user) {
       throw new BadRequestException();
     }
     await this.terminateUserSession();
@@ -68,22 +62,21 @@ export class LogAuthService {
   }
 
   public checkUser(): LogAppUserSession | null {
-    return this.ctx.session.user;
+    return this.ctx.req.session.user;
   }
 
   public async me(): Promise<AuthResponseDAO> {
-    const { user } = this.ctx.session;
-    this.ctx.session.cookie.expires;
+    const { user } = this.ctx.req.session;
+    this.ctx.req.session.cookie.expires;
     if (!user) return this.buildAuthError(AuthErrorReason.Not_Auth);
     const { uid } = user;
     return { user: await this.user_srv.findOneOrFail(uid) };
   }
 
   private registerUserSession(user: LogAppUser) {
-    console.log(this.ctx);
     const { uid, email, role, displayName } = user;
-    const { expires } = this.ctx.session.cookie;
-    this.ctx.session.user = {
+    const { expires } = this.ctx.req.session.cookie;
+    this.ctx.req.session.user = {
       displayName,
       email,
       uid,
@@ -93,8 +86,8 @@ export class LogAuthService {
   }
 
   private async terminateUserSession() {
-    this.ctx.session.destroy((err) => console.log(err));
-    this.ctx.session.user = null;
+    this.ctx.req.session.destroy((err) => console.log(err));
+    this.ctx.req.session.user = null;
   }
 
   private buildAuthError(reason: AuthErrorReason): AuthResponseDAO {

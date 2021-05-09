@@ -1,10 +1,10 @@
 import React from 'react';
 import { LogAppPageType } from '../../types';
 
-const ReadHome: LogAppPageType = () => {
+const BookMark: LogAppPageType = () => {
   return <div></div>;
 };
 
-ReadHome.layout = 'READ_LAYOUT';
+BookMark.layout = 'READ_LAYOUT';
 
-export default ReadHome;
+export default BookMark;

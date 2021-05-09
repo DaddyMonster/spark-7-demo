@@ -1,5 +1,6 @@
-import { useLoginMutation } from '@hessed/gql/log-app';
+import { AuthErrorReason, useLoginMutation } from '@hessed/gql/log-app';
 import { FormikHelpers } from 'formik';
+import { useRouter } from 'next/router';
 import * as yup from 'yup';
 
 export interface LoginValue {
@@ -23,6 +24,7 @@ export const loginValidationSchema = yup.object().shape({
 
 export function useLogin() {
   const [login] = useLoginMutation();
+  const router = useRouter();
   const onSubmit = async (
     { password, email }: LoginValue,
     { setErrors }: FormikHelpers<LoginValue>
@@ -37,10 +39,15 @@ export function useLogin() {
     });
 
     if (data.login.error) {
-      const { message /* reason */ } = data.login.error;
-      alert(message); // MORE LOGICS
-      return;
+      const { message, reason } = data.login.error;
+      switch (reason) {
+        case AuthErrorReason.NoUser:
+          return setErrors({ email: message });
+        case AuthErrorReason.WrongPass:
+          return setErrors({ password: message });
+      }
     }
+    router.push(`/space/${data.login.user.uid}`);
   };
   return { onSubmit };
 }

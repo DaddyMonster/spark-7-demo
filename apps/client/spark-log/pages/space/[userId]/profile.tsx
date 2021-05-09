@@ -1,11 +1,10 @@
 import React from 'react';
+import { LogAppPageType } from '../../../types';
 
-interface SpaceProfileProps {
-  c: '';
-}
-
-const SpaceProfile = (props: SpaceProfileProps) => {
+const SpaceProfile: LogAppPageType = () => {
   return <div></div>;
 };
+
+SpaceProfile.layout = 'SPACE_LAYOUT';
 
 export default SpaceProfile;

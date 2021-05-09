@@ -38,6 +38,14 @@ export class LogAppUser extends CommonEntity {
   @Column({ type: 'enum', enum: LogAppRole })
   role: LogAppRole;
 
+  @Field({ nullable: true })
+  @Column({ nullable: true })
+  photoURL: string;
+
+  @Field()
+  @Column({ default: 'No Profession Yet' })
+  profession: string;
+
   @BeforeInsert()
   @BeforeUpdate()
   async hashPassword(): Promise<void> {
